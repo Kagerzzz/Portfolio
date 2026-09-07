@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sanvi Saya, product designer </title>
+  <meta name="description" content="Portfolio of Sanvi Saya - Product designer & artist crafting intuitive digital experiences, biotech tools, and design systems.">
+  <meta property="og:title" content="Sanvi Saya, product designer">
+  <meta property="og:description" content="0 to 1 Product Design, Design Systems, Wearables & Biotech R&D tools.">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Floating Mouse-Follower Badge -->
+  <div id="floating-badge" class="floating-cursor-badge">tap me ✦</div>
+
+  <!-- Header Navigation -->
+  <header class="header">
+    <nav class="nav-wrapper">
+      <a href="#" class="nav-brand">Sanvi Saya</a>
+
+      <ul class="nav-links">
+        <li><a href="#work" class="nav-link active">work</a></li>
+        <li><a href="#story" class="nav-link">story</a></li>
+        <li><a href="#resume" class="nav-link" onclick="copyEmailToast()">résumé</a></li>
+        <li><a href="#play" class="nav-link">play</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="theme-toggle" class="btn-icon" title="Toggle Light/Dark Theme">
+          <span id="theme-icon"></span>
+        </button>
+        <button class="btn-say-hi" onclick="copyEmailToast()">say hi ✦</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section with Interactive Question Pills -->
+    <section class="hero-section">
+      <div class="container">
+        
+        <div class="hero-tabs">
+          <button class="hero-tab-btn active" data-tab="who">WHO I AM</button>
+          <button class="hero-tab-btn" data-tab="care">WHAT I CARE ABOUT</button>
+          <button class="hero-tab-btn" data-tab="believe">WHAT I BELIEVE IN</button>
+          <button class="hero-tab-btn" data-tab="cook">WHAT I CAN COOK</button>
+          <button class="hero-tab-btn" data-tab="upto">WHAT I'M UP TO</button>
+        </div>
+
+        <h1 id="hero-dynamic-text" class="hero-headline font-serif">
+          Designer who creates meaningful experiences through visual and motion design.
+        </h1>
+
+        <div class="scroll-indicator">
+          scroll to see work ↓
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="work" class="projects-section">
+      <div class="container">
+        <div id="projects-container">
+          <!-- Rendered dynamically by js/script.js -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Signature Footer Shack -->
+  <footer class="footer-shack">
+    <div class="container">
+      <div class="shack-box">
+        <p class="shack-quote font-serif">
+          "hey there, dear internet surfer. thank you for dropping by my shack to check out my life's work. since you're reading this let me share a secret that i believe in; that humans are capable of creating out-of-the-world sublime things especially when they come together. let's chat to explore the magic we can create."
+        </p>
+        <p class="shack-copyright">
+          © sanvithi saya 2026. all rights (and wrongs) reserved ✦ human-generated work ✦ created in san francisco & bangalore
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal Overlay Case Study Popup -->
+  <div id="case-study-modal" class="modal-overlay">
+    <div class="modal-card">
+      <button id="modal-close-btn" class="modal-close" aria-label="Close modal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <div id="modal-content-target" class="modal-content-area">
+        <!-- Rendered by js/script.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">Email copied!</div>
+
+  <!-- Script -->
+  <script src="js/script.js"></script>
+</body>
+</html>
