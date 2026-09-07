@@ -4,8 +4,8 @@
  * bằng thông tin lấy từ Supabase Dashboard (Project Settings -> API).
  */
 
-const SUPABASE_URL = 'https://YOUR_SUPABASE_PROJECT_ID.supabase.co';
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+const SUPABASE_URL = 'https://pdwqctgttzmretikyhsi.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_Gdqscue4WTLnx_LKq4lWdg_HCPEck3d';
 
 // Kiểm tra và khởi tạo Supabase Client
 let supabaseClient = null;
