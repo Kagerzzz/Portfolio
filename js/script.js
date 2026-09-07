@@ -105,6 +105,8 @@ const PROJECTS_DATA = [
   }
 ];
 
+let activeProjects = [...PROJECTS_DATA];
+
 // Initialize Events
 document.addEventListener("DOMContentLoaded", () => {
   initThemeToggle();
@@ -113,7 +115,50 @@ document.addEventListener("DOMContentLoaded", () => {
   initModalEvents();
   initMouseFollowingBadge();
   init3DParallaxTilt();
+  
+  // Asynchronously fetch dynamic data from Supabase DB if available
+  fetchProjectsFromSupabase();
 });
+
+/* Fetch projects dynamically from Supabase */
+async function fetchProjectsFromSupabase() {
+  if (typeof supabaseClient === 'undefined' || !supabaseClient) return;
+
+  try {
+    const { data, error } = await supabaseClient
+      .from('projects')
+      .select('*')
+      .order('sort_order', { ascending: true });
+
+    if (error) {
+      console.warn("⚠️ Không thể tải dữ liệu từ Supabase (dùng fallback local):", error.message);
+      return;
+    }
+
+    if (data && data.length > 0) {
+      activeProjects = data.map(p => ({
+        id: p.id,
+        title: p.title || '',
+        client: p.client || '',
+        role: p.role || '',
+        year: p.year || '',
+        tags: Array.isArray(p.tags) ? p.tags : (p.tags ? p.tags.split(',').map(s=>s.trim()) : []),
+        summary: p.summary || p.title,
+        image: p.image_url || p.image || 'assets/saas.png',
+        metrics: p.metrics || [],
+        overview: p.overview || '',
+        challenge: p.challenge || '',
+        solution: p.solution || ''
+      }));
+      
+      renderProjects();
+      init3DParallaxTilt();
+      console.log('✅ Đã nạp thành công', activeProjects.length, 'dự án từ Supabase Database!');
+    }
+  } catch (err) {
+    console.warn("⚠️ Supabase error (falling back to static local data):", err);
+  }
+}
 
 /* Theme Toggle */
 function initThemeToggle() {
@@ -168,18 +213,18 @@ function renderProjects() {
   const container = document.getElementById("projects-container");
   if (!container) return;
 
-  container.innerHTML = PROJECTS_DATA.map(project => `
+  container.innerHTML = activeProjects.map(project => `
     <article class="project-item" id="${project.id}" onclick="openCaseStudyModal('${project.id}')">
       <div class="project-media">
         <img src="${project.image}" alt="${project.title}" class="project-img">
       </div>
       <div>
         <div class="project-tags">
-          ${project.tags.map(t => `<span class="tag-pill">${t}</span>`).join("")}
+          ${(project.tags || []).map(t => `<span class="tag-pill">${t}</span>`).join("")}
         </div>
         <h2 class="project-title-large">${project.summary}</h2>
         <div style="font-size: 13px; color: var(--text-dim); margin-bottom: 20px; text-transform: lowercase;">
-          ${project.tags.join(" ∙ ")}
+          ${(project.tags || []).join(" ∙ ")}
         </div>
         <button class="btn-read-case" onclick="event.stopPropagation(); openCaseStudyModal('${project.id}')">
           read case study ✦
@@ -244,7 +289,7 @@ function initMouseFollowingBadge() {
 
 /* Modal Case Study */
 function openCaseStudyModal(id) {
-  const p = PROJECTS_DATA.find(item => item.id === id);
+  const p = activeProjects.find(item => item.id === id) || PROJECTS_DATA.find(item => item.id === id);
   if (!p) return;
 
   const modal = document.getElementById("case-study-modal");
