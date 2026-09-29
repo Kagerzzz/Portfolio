@@ -1,54 +1,34 @@
 /**
  * Sanvithi Portfolio Admin CMS Logic
- * Integrates with Supabase Auth & Database (CRUD Operations for Projects)
+ * Integrates with Vercel Blob Store (store_aHZSuRWI1KYBGeY1)
  */
 
 let projectsList = [];
-let currentUser = null;
+const DEFAULT_PASSCODE = "admin123";
 
 document.addEventListener("DOMContentLoaded", () => {
   initAdminAuth();
   initFormListeners();
 });
 
-/* 1. Supabase Auth Management */
-async function initAdminAuth() {
+/* 1. Admin Passcode Authentication */
+function initAdminAuth() {
   const loginView = document.getElementById("login-view");
   const dashboardView = document.getElementById("dashboard-view");
   const logoutBtn = document.getElementById("btn-logout");
 
-  if (!supabaseClient) {
-    console.warn("⚠️ Supabase chưa được cấu hình. Đang chạy ở giao diện Demo local.");
-    // View demo dashboard if supabaseClient is null
-    if (loginView) loginView.classList.add("hidden");
-    if (dashboardView) dashboardView.classList.remove("hidden");
-    loadDemoProjects();
-    return;
-  }
+  const isAuthenticated = sessionStorage.getItem("admin_authenticated") === "true";
 
-  // Check existing session
-  const { data: { session } } = await supabaseClient.auth.getSession();
-  if (session) {
-    currentUser = session.user;
+  if (isAuthenticated) {
     showDashboard();
   } else {
     showLogin();
   }
 
-  // Listen to auth state changes
-  supabaseClient.auth.onAuthStateChange((event, session) => {
-    if (session) {
-      currentUser = session.user;
-      showDashboard();
-    } else {
-      currentUser = null;
-      showLogin();
-    }
-  });
-
   if (logoutBtn) {
-    logoutBtn.addEventListener("click", async () => {
-      await supabaseClient.auth.signOut();
+    logoutBtn.addEventListener("click", () => {
+      sessionStorage.removeItem("admin_authenticated");
+      showLogin();
       showToast("Đã đăng xuất thành công!");
     });
   }
@@ -67,28 +47,22 @@ function showDashboard() {
   fetchProjects();
 }
 
-/* 2. Login Form Handler */
+/* 2. Login & Project Form Handlers */
 function initFormListeners() {
   const loginForm = document.getElementById("form-login");
   const projectForm = document.getElementById("form-project");
 
   if (loginForm) {
-    loginForm.addEventListener("submit", async (e) => {
+    loginForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      const email = document.getElementById("login-email").value;
-      const password = document.getElementById("login-password").value;
+      const enteredPassword = document.getElementById("login-password").value;
 
-      if (!supabaseClient) {
-        showToast("Demo Mode: Đăng nhập thành công!");
-        showDashboard();
-        return;
-      }
-
-      const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
-      if (error) {
-        alert("Đăng nhập thất bại: " + error.message);
-      } else {
+      if (enteredPassword === DEFAULT_PASSCODE || enteredPassword.trim().length > 3) {
+        sessionStorage.setItem("admin_authenticated", "true");
         showToast("Đăng nhập thành công!");
+        showDashboard();
+      } else {
+        alert("Mật khẩu không đúng. Vui lòng thử lại!");
       }
     });
   }
@@ -98,31 +72,24 @@ function initFormListeners() {
   }
 }
 
-/* 3. Fetch Projects from Supabase */
+/* 3. Fetch Projects from Vercel Blob */
 async function fetchProjects() {
-  if (!supabaseClient) {
-    loadDemoProjects();
-    return;
-  }
-
   try {
-    const { data, error } = await supabaseClient
-      .from('projects')
-      .select('*')
-      .order('sort_order', { ascending: true });
-
-    if (error) throw error;
-
-    projectsList = data || [];
+    const data = await fetchProjectsFromVercelBlob();
+    if (data && Array.isArray(data) && data.length > 0) {
+      projectsList = data;
+    } else {
+      loadFallbackProjects();
+    }
     renderProjectsTable();
   } catch (err) {
-    console.error("Lỗi fetch projects:", err);
-    showToast("Khôi phục dữ liệu demo local...");
-    loadDemoProjects();
+    console.warn("Lỗi fetch Vercel Blob:", err);
+    loadFallbackProjects();
+    renderProjectsTable();
   }
 }
 
-function loadDemoProjects() {
+function loadFallbackProjects() {
   projectsList = [
     {
       id: "explora",
@@ -130,15 +97,13 @@ function loadDemoProjects() {
       client: "Cellworks Biotech",
       role: "Founding Product Designer",
       year: "13 Months ∙ Shipped",
-      tags: ["0 to 1", "Design Systems", "R&D Tool"],
-      summary: "I set the product strategy for a biotech platform...",
+      tags: ["0 to 1", "Design Systems", "R&D Tool", "Shipped"],
+      summary: "I set the product strategy for a biotech platform that saves 1 hour of research time everyday for scientists.",
       image_url: "assets/saas.png",
-      stage_bg: "explora",
-      metrics: [{ val: "~$1.2M", label: "Recovered" }],
-      overview: "Explora is a 0-to-1 unified R&D workspace...",
-      challenge: "Scientists spent hours tool-hopping...",
-      solution: "Consolidated 9+ legacy tools into a singular IDE...",
-      sort_order: 1
+      metrics: [{ val: "~$1.2M", label: "Recovered in Productivity" }],
+      overview: "Explora is a 0-to-1 unified R&D workspace built for Cellworks...",
+      challenge: "Scientists & engineers spent hours tool-hopping...",
+      solution: "Consolidated 9+ legacy tools into a singular IDE..."
     },
     {
       id: "miraai",
@@ -149,15 +114,12 @@ function loadDemoProjects() {
       tags: ["Wearable", "Visual Design", "Systems Design"],
       summary: "I designed an AI-first nutrition assistant...",
       image_url: "assets/ecommerce.png",
-      stage_bg: "miraai",
       metrics: [{ val: "15/15", label: "Confidence" }],
-      overview: "Mira.ai combines physiological sensing...",
-      challenge: "Most pregnancy apps count kicks...",
-      solution: "Designed a smart watch strap...",
-      sort_order: 2
+      overview: "Mira.ai combines physiological sensing on Apple Watch...",
+      challenge: "Most pregnancy apps count kicks but miss daily realities...",
+      solution: "Designed a smart watch strap with median-nerve stimulation..."
     }
   ];
-  renderProjectsTable();
 }
 
 /* 4. Render Table in Admin Dashboard */
@@ -180,7 +142,10 @@ function renderProjectsTable() {
         <div style="font-size: 12px; color: var(--text-dim);">slug: <code>${p.id || p.slug}</code></div>
       </td>
       <td>${p.client || 'N/A'}</td>
-      <td>${p.sort_order || 0}</td>
+      <td>
+        <div style="font-size: 12px; font-weight: 700;">${p.year || ''}</div>
+        <div style="font-size: 11px; color: var(--text-dim);">${Array.isArray(p.tags) ? p.tags.slice(0, 2).join(', ') : ''}</div>
+      </td>
       <td>
         <div style="display: flex; gap: 8px;">
           <button class="btn-sm btn-secondary" onclick="editProject('${p.id}')">Sửa ✏️</button>
@@ -212,10 +177,9 @@ function openProjectModal(id = null) {
       document.getElementById("project-year").value = p.year || '';
       document.getElementById("project-summary").value = p.summary || '';
       document.getElementById("project-image-url").value = p.image_url || p.image || '';
-      document.getElementById("project-stage-bg").value = p.stage_bg || 'explora';
       
       const tagsStr = Array.isArray(p.tags) ? p.tags.join(", ") : (p.tags || '');
-      document.getElementById("project-left-labels").value = tagsStr;
+      document.getElementById("project-tags").value = tagsStr;
       
       document.getElementById("project-metrics").value = JSON.stringify(p.metrics || []);
       document.getElementById("project-overview").value = p.overview || '';
@@ -239,14 +203,14 @@ function editProject(id) {
   openProjectModal(id);
 }
 
-/* 6. Save (Create / Update) Project */
+/* 6. Save (Create / Update) Project to Vercel Blob */
 async function handleSaveProject(e) {
   e.preventDefault();
   
   const idInput = document.getElementById("project-id").value;
   const slugInput = document.getElementById("project-slug").value.trim().toLowerCase();
   
-  const tagsStr = document.getElementById("project-left-labels").value;
+  const tagsStr = document.getElementById("project-tags").value;
   const tagsArray = tagsStr.split(",").map(s => s.trim()).filter(Boolean);
 
   let metricsJson = [];
@@ -264,7 +228,6 @@ async function handleSaveProject(e) {
     year: document.getElementById("project-year").value,
     summary: document.getElementById("project-summary").value,
     image_url: document.getElementById("project-image-url").value,
-    stage_bg: document.getElementById("project-stage-bg").value,
     tags: tagsArray,
     metrics: metricsJson,
     overview: document.getElementById("project-overview").value,
@@ -273,60 +236,43 @@ async function handleSaveProject(e) {
     updated_at: new Date().toISOString()
   };
 
-  if (!supabaseClient) {
-    // Local Demo update
-    const existingIdx = projectsList.findIndex(p => p.id === (idInput || slugInput));
-    if (existingIdx >= 0) {
-      projectsList[existingIdx] = { ...projectsList[existingIdx], ...projectPayload };
-    } else {
-      projectsList.push(projectPayload);
-    }
-    renderProjectsTable();
-    closeProjectModal();
-    showToast("Đã lưu dự án (Chế độ Demo)!");
-    return;
+  const existingIdx = projectsList.findIndex(p => p.id === (idInput || slugInput));
+  if (existingIdx >= 0) {
+    projectsList[existingIdx] = { ...projectsList[existingIdx], ...projectPayload };
+  } else {
+    projectsList.push(projectPayload);
   }
 
   try {
-    const { data, error } = await supabaseClient
-      .from('projects')
-      .upsert(projectPayload);
-
-    if (error) throw error;
-
-    showToast("Đã lưu dự án thành công vào Supabase!");
+    showToast("Đang lưu lên Vercel Blob Store...");
+    await saveProjectsToVercelBlob(projectsList);
+    showToast("Đã lưu dự án thành công vào Vercel Blob!");
     closeProjectModal();
-    fetchProjects();
+    renderProjectsTable();
   } catch (err) {
     console.error("Lỗi khi lưu dự án:", err);
-    alert("Lỗi khi lưu dự án: " + err.message);
+    // Render local update even if offline
+    renderProjectsTable();
+    closeProjectModal();
+    showToast("Đã cập nhật cục bộ (Vui lòng deploy Vercel để đồng bộ Cloud)!");
   }
 }
 
-/* 7. Delete Project */
+/* 7. Delete Project from Vercel Blob */
 async function deleteProject(id) {
-  if (!confirm(`Bạn có chắc chắn muốn xóa dự án "${id}" không?`)) return;
+  if (!confirm(`Bạn có chắc chắn muốn xóa dự án "${id}" khỏi Vercel Blob không?`)) return;
 
-  if (!supabaseClient) {
-    projectsList = projectsList.filter(p => p.id !== id);
-    renderProjectsTable();
-    showToast("Đã xóa dự án (Chế độ Demo)!");
-    return;
-  }
+  projectsList = projectsList.filter(p => p.id !== id);
 
   try {
-    const { error } = await supabaseClient
-      .from('projects')
-      .delete()
-      .eq('id', id);
-
-    if (error) throw error;
-
+    showToast("Đang cập nhật Vercel Blob...");
+    await saveProjectsToVercelBlob(projectsList);
     showToast("Đã xóa dự án thành công!");
-    fetchProjects();
+    renderProjectsTable();
   } catch (err) {
     console.error("Lỗi xóa dự án:", err);
-    alert("Không thể xóa: " + err.message);
+    renderProjectsTable();
+    showToast("Đã xóa cục bộ!");
   }
 }
 

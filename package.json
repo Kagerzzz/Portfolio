@@ -1,0 +1,12 @@
+{
+  "name": "portfolio-sanvithi",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Creative Neubrutalism Portfolio with Vercel Blob Storage",
+  "scripts": {
+    "start": "node api/server-local.js"
+  },
+  "dependencies": {
+    "@vercel/blob": "^2.8.0"
+  }
+}

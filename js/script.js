@@ -120,26 +120,17 @@ document.addEventListener("DOMContentLoaded", () => {
   init3DParallaxTilt();
   initConfettiEngine();
   
-  // Asynchronously fetch dynamic data from Supabase DB if available
-  fetchProjectsFromSupabase();
+  // Asynchronously fetch dynamic data from Vercel Blob Store
+  loadProjectsFromBlob();
 });
 
-/* Fetch projects dynamically from Supabase */
-async function fetchProjectsFromSupabase() {
-  if (typeof supabaseClient === 'undefined' || !supabaseClient) return;
+/* Fetch projects dynamically from Vercel Blob Store */
+async function loadProjectsFromBlob() {
+  if (typeof fetchProjectsFromVercelBlob !== 'function') return;
 
   try {
-    const { data, error } = await supabaseClient
-      .from('projects')
-      .select('*')
-      .order('sort_order', { ascending: true });
-
-    if (error) {
-      console.warn("⚠️ Không thể tải dữ liệu từ Supabase (dùng fallback local):", error.message);
-      return;
-    }
-
-    if (data && data.length > 0) {
+    const data = await fetchProjectsFromVercelBlob();
+    if (data && Array.isArray(data) && data.length > 0) {
       activeProjects = data.map(p => ({
         id: p.id,
         title: p.title || '',
@@ -157,10 +148,10 @@ async function fetchProjectsFromSupabase() {
       
       renderProjects();
       init3DParallaxTilt();
-      console.log('✅ Đã nạp thành công', activeProjects.length, 'dự án từ Supabase Database!');
+      console.log('✅ Đã nạp thành công', activeProjects.length, 'dự án từ Vercel Blob Store!');
     }
   } catch (err) {
-    console.warn("⚠️ Supabase error (falling back to static local data):", err);
+    console.warn("⚠️ Vercel Blob loading error (falling back to static local data):", err);
   }
 }
 

@@ -3,13 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard — Quản Trị Portfolio Sanvithi</title>
+  <title>Admin Dashboard — Quản Trị Vercel Blob Portfolio</title>
   
   <!-- CSS Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
-  
-  <!-- Supabase JS SDK CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   
   <style>
     /* Neubrutalism Admin Dashboard Styles */
@@ -178,6 +175,8 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
     }
 
     .hidden { display: none !important; }
@@ -189,11 +188,11 @@
   <header class="header">
     <nav class="nav-wrapper">
       <a href="index.html" class="nav-brand">Sanvi Saya Portfolio</a>
-      <span class="nav-link" style="font-weight: 600; color: var(--text-main);">🔒 Admin CMS Dashboard</span>
+      <span class="nav-link" style="font-weight: 700; color: var(--text-main);">📦 Vercel Blob CMS</span>
       <div class="nav-actions">
-        <a href="index.html" class="btn-say-hi">Xem Trang Portfolio ↗</a>
+        <a href="index.html" class="btn-say-hi">Xem Portfolio ↗</a>
         <button id="btn-logout" class="btn-icon hidden" title="Đăng xuất">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
         </button>
       </div>
     </nav>
@@ -203,21 +202,17 @@
     <!-- LOGIN VIEW (HIỂN THỊ KHI CHƯA ĐĂNG NHẬP) -->
     <section id="login-view" class="admin-container">
       <div class="admin-card login-box">
-        <h2 class="font-serif" style="font-size: 1.8rem; margin-bottom: 8px; text-align: center;">Đăng Nhập Admin</h2>
-        <p style="font-size: 13px; color: var(--text-dim); margin-bottom: 24px; text-align: center;">
-          Nhập tài khoản Supabase Auth để quản lý dự án
+        <h2 class="font-serif" style="font-size: 2rem; margin-bottom: 8px; text-align: center;">Đăng Nhập Quản Trị</h2>
+        <p style="font-size: 13px; color: var(--text-dim); margin-bottom: 24px; text-align: center; font-weight: 600;">
+          Nhập mật khẩu quản trị để kết nối Vercel Blob Store
         </p>
 
         <form id="form-login">
           <div class="form-group">
-            <label class="form-label">Email Admin</label>
-            <input type="email" id="login-email" class="form-input" placeholder="admin@sanvithi.com" required>
+            <label class="form-label">Mật Khẩu Quản Trị (Mặc định: <code>admin123</code>)</label>
+            <input type="password" id="login-password" class="form-input" placeholder="••••••••" required autofocus>
           </div>
-          <div class="form-group">
-            <label class="form-label">Mật Khẩu</label>
-            <input type="password" id="login-password" class="form-input" placeholder="••••••••" required>
-          </div>
-          <button type="submit" class="btn-submit">Đăng Nhập Quản Trị</button>
+          <button type="submit" class="btn-submit">Mở Bảng Điều Khiển ✦</button>
         </form>
       </div>
     </section>
@@ -228,10 +223,15 @@
         
         <div class="admin-header">
           <div>
-            <h2 class="font-serif" style="font-size: 2rem;">Danh Sách Dự Án (Case Studies)</h2>
-            <p style="font-size: 13px; color: var(--text-dim);">Dữ liệu được đồng bộ trực tiếp với Supabase Database</p>
+            <h2 class="font-serif" style="font-size: 2.2rem;">Danh Sách Dự Án (Case Studies)</h2>
+            <p style="font-size: 13px; color: var(--text-dim); font-weight: 700; margin-top: 4px;">
+              📦 Đồng bộ với Vercel Blob Store: <code>store_aHZSuRWI1KYBGeY1</code>
+            </p>
           </div>
-          <button class="btn-say-hi" onclick="openProjectModal()">+ Thêm Dự Án Mới</button>
+          <div style="display: flex; gap: 10px;">
+            <button class="btn-sm btn-secondary" onclick="fetchProjects()">🔄 Tải lại dữ liệu</button>
+            <button class="btn-say-hi" onclick="openProjectModal()">+ Thêm Dự Án Mới</button>
+          </div>
         </div>
 
         <!-- Table Projects -->
@@ -241,7 +241,7 @@
               <th>Ảnh</th>
               <th>Tiêu đề / Slug</th>
               <th>Khách hàng</th>
-              <th>Thứ tự</th>
+              <th>Năm / Tag</th>
               <th>Thao tác</th>
             </tr>
           </thead>
@@ -259,7 +259,7 @@
     <div class="modal-card">
       <button class="modal-close" onclick="closeProjectModal()">✕</button>
       <div class="modal-content-area">
-        <h2 id="modal-form-title" class="font-serif" style="font-size: 1.8rem; margin-bottom: 20px;">Thêm Dự Án Mới</h2>
+        <h2 id="modal-form-title" class="font-serif" style="font-size: 2rem; margin-bottom: 24px;">Thêm Dự Án Mới</h2>
         
         <form id="form-project">
           <input type="hidden" id="project-id">
@@ -291,40 +291,22 @@
           </div>
 
           <div class="form-group">
-            <label class="form-label">Mô tả ngắn (Summary trên trang chủ)</label>
+            <label class="form-label">Mô tả ngắn (Summary trên thẻ dự án)</label>
             <textarea id="project-summary" class="form-textarea" placeholder="I set the product strategy for a biotech platform..."></textarea>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-            <div class="form-group">
-              <label class="form-label">Đường dẫn Ảnh (Image URL hoặc assets/saas.png)</label>
-              <input type="text" id="project-image-url" class="form-input" placeholder="assets/saas.png">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Chủ đề màu Stage Background</label>
-              <select id="project-stage-bg" class="form-select">
-                <option value="explora">Sage Green (explora)</option>
-                <option value="miraai">Warm Coral (miraai)</option>
-                <option value="manage">Steel Blue (manage)</option>
-                <option value="research">Purple Haze (research)</option>
-                <option value="insurance">Warm Tan (insurance)</option>
-              </select>
-            </div>
-          </div>
-
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-            <div class="form-group">
-              <label class="form-label">Nhãn bên Trái (cách nhau bởi dấu phẩy)</label>
-              <input type="text" id="project-left-labels" class="form-input" placeholder="Design Systems, Shipped">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Nhãn bên Phải (cách nhau bởi dấu phẩy)</label>
-              <input type="text" id="project-right-labels" class="form-input" placeholder="0 to 1, R&D tool">
-            </div>
+          <div class="form-group">
+            <label class="form-label">Đường dẫn Ảnh (Image URL hoặc assets/saas.png)</label>
+            <input type="text" id="project-image-url" class="form-input" placeholder="assets/saas.png">
           </div>
 
           <div class="form-group">
-            <label class="form-label">Chỉ số Tác động Metrics (JSON format hoặc ví dụ mặc định)</label>
+            <label class="form-label">Tags / Nhãn (cách nhau bởi dấu phẩy)</label>
+            <input type="text" id="project-tags" class="form-input" placeholder="0 to 1, Design Systems, R&D Tool, Shipped">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Chỉ số Tác động Metrics (JSON format)</label>
             <input type="text" id="project-metrics" class="form-input" value='[{"val":"~$1.2M","label":"Recovered"},{"val":"100%","label":"Adoption"}]'>
           </div>
 
@@ -343,8 +325,8 @@
             <textarea id="project-solution" class="form-textarea"></textarea>
           </div>
 
-          <div style="display: flex; gap: 12px; margin-top: 24px;">
-            <button type="submit" class="btn-submit" style="flex: 2;">Lưu Dự Án Vào Database</button>
+          <div style="display: flex; gap: 14px; margin-top: 28px;">
+            <button type="submit" class="btn-submit" style="flex: 2;">Lưu Vào Vercel Blob Store ✦</button>
             <button type="button" class="btn-submit btn-secondary" onclick="closeProjectModal()" style="flex: 1;">Hủy</button>
           </div>
         </form>
@@ -357,7 +339,7 @@
   <div id="toast" class="toast">Đã cập nhật dữ liệu!</div>
 
   <!-- Scripts -->
-  <script src="js/supabase-config.js"></script>
+  <script src="js/blob-config.js"></script>
   <script src="js/admin.js"></script>
 </body>
 </html>
