@@ -143,12 +143,13 @@ async function loadProjectsFromBlob() {
         metrics: p.metrics || [],
         overview: p.overview || '',
         challenge: p.challenge || '',
-        solution: p.solution || ''
+        solution: p.solution || '',
+        content: p.content || ''
       }));
       
       renderProjects();
       init3DParallaxTilt();
-      console.log('✅ Đã nạp thành công', activeProjects.length, 'dự án từ Vercel Blob Store!');
+      console.log('✅ [Vercel Blob] Đã load thành công', activeProjects.length, 'dự án từ Database Cloud!');
     }
   } catch (err) {
     console.warn("⚠️ Vercel Blob loading error (falling back to static local data):", err);
