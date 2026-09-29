@@ -1147,8 +1147,220 @@ button {
   opacity: 1;
 }
 
+/* ==========================================================================
+   8. Free-Form Doc Canvas Editor & Rich Case Study Styling
+   ========================================================================== */
+/* Admin Doc Toolbar */
+.doc-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 10px 14px;
+  background: var(--bg-surface);
+  border: var(--border-neo);
+  border-bottom: 2px solid var(--border-color);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  user-select: none;
+}
+
+.doc-tool-btn {
+  padding: 6px 12px;
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-xs);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text-main);
+  cursor: pointer;
+  box-shadow: 2px 2px 0px var(--border-color);
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.doc-tool-btn:hover {
+  background: var(--neo-yellow);
+  color: #000000;
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px var(--border-color);
+}
+
+.doc-tool-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 0px 0px 0px var(--border-color);
+}
+
+.doc-tool-select {
+  padding: 6px 10px;
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-xs);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-main);
+  outline: none;
+  cursor: pointer;
+  box-shadow: 2px 2px 0px var(--border-color);
+}
+
+.doc-divider {
+  width: 2px;
+  height: 24px;
+  background: var(--border-color);
+  margin: 0 4px;
+}
+
+/* Admin Doc Canvas (Contenteditable) */
+.doc-canvas {
+  min-height: 380px;
+  max-height: 600px;
+  overflow-y: auto;
+  padding: 24px;
+  background: var(--bg-surface);
+  border: var(--border-neo);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  outline: none;
+  color: var(--text-main);
+  font-size: 15px;
+  line-height: 1.8;
+  box-shadow: var(--shadow-neo-xs);
+}
+
+.doc-canvas:focus {
+  box-shadow: var(--shadow-neo-sm);
+}
+
+/* Rich Case Study Document Content (Used in both Admin & Modal Popup) */
+.case-study-doc-content {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.85;
+}
+
+.case-study-doc-content h1, .doc-canvas h1 {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  color: var(--text-main);
+  margin: 32px 0 16px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.case-study-doc-content h2, .doc-canvas h2 {
+  font-family: var(--font-serif);
+  font-size: 1.7rem;
+  color: var(--text-main);
+  margin: 28px 0 12px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.case-study-doc-content h3, .doc-canvas h3 {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  color: var(--text-main);
+  margin: 24px 0 10px;
+  font-weight: 700;
+}
+
+.case-study-doc-content p, .doc-canvas p {
+  margin-bottom: 16px;
+}
+
+.case-study-doc-content ul, .case-study-doc-content ol,
+.doc-canvas ul, .doc-canvas ol {
+  margin: 16px 0 20px 28px;
+}
+
+.case-study-doc-content li, .doc-canvas li {
+  margin-bottom: 8px;
+}
+
+/* 2-Column Responsive Layout Block */
+.doc-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 28px 0;
+  align-items: center;
+}
+
+.doc-grid-col {
+  min-width: 0;
+}
+
+/* Callout Box Block */
+.doc-callout {
+  padding: 20px 24px;
+  background: var(--neo-yellow);
+  color: #000000;
+  border: var(--border-neo);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-neo-sm);
+  margin: 28px 0;
+  font-weight: 600;
+}
+
+[data-theme="dark"] .doc-callout {
+  background: var(--bg-card);
+  color: var(--text-main);
+}
+
+.doc-callout-title {
+  font-weight: 800;
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Document Images */
+.doc-img-block {
+  margin: 28px 0;
+  text-align: center;
+}
+
+.doc-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  border: var(--border-neo);
+  box-shadow: var(--shadow-neo-sm);
+  display: inline-block;
+}
+
+.doc-caption {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-dim);
+  margin-top: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Document Badges */
+.doc-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--neo-cyan);
+  color: #000000;
+  border: 2px solid #000000;
+  box-shadow: 2px 2px 0px #000000;
+  margin-right: 6px;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
+  .doc-grid-2 { grid-template-columns: 1fr; }
+
   .hero-headline { font-size: 2.6rem; min-height: auto; }
   .hero-rotating-badge { display: none; }
   .project-item, .project-item:nth-child(even) {

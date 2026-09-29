@@ -310,19 +310,42 @@
             <input type="text" id="project-metrics" class="form-input" value='[{"val":"~$1.2M","label":"Recovered"},{"val":"100%","label":"Adoption"}]'>
           </div>
 
-          <div class="form-group">
-            <label class="form-label">📌 Tổng quan (Overview)</label>
-            <textarea id="project-overview" class="form-textarea"></textarea>
-          </div>
+          <!-- Free-Form Creative Doc Canvas -->
+          <div class="form-group" style="margin-top: 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <label class="form-label" style="margin: 0;">📝 Nội Dung Chi Tiết Case Study (Free-Form Doc Canvas)</label>
+              <span style="font-size: 12px; color: var(--text-dim); font-weight: 700;">Tự do xếp ảnh, layout 2 cột & cỡ chữ</span>
+            </div>
+            
+            <!-- Doc Toolbar -->
+            <div class="doc-toolbar">
+              <button type="button" class="doc-tool-btn" onclick="execDocCmd('formatBlock', '<h1>')" title="Tiêu đề lớn">H1</button>
+              <button type="button" class="doc-tool-btn" onclick="execDocCmd('formatBlock', '<h2>')" title="Tiêu đề vừa">H2</button>
+              <button type="button" class="doc-tool-btn" onclick="execDocCmd('formatBlock', '<h3>')" title="Tiêu đề nhỏ">H3</button>
+              <button type="button" class="doc-tool-btn" onclick="execDocCmd('formatBlock', '<p>')" title="Đoạn văn">P</button>
+              <span class="doc-divider"></span>
+              <button type="button" class="doc-tool-btn" onclick="execDocCmd('bold')" title="Bôi đậm"><b>B</b></button>
+              <button type="button" class="doc-tool-btn" onclick="execDocCmd('italic')" title="In nghiêng"><i>I</i></button>
+              <button type="button" class="doc-tool-btn" onclick="execDocCmd('underline')" title="Gạch chân"><u>U</u></button>
+              <span class="doc-divider"></span>
+              <select class="doc-tool-select" onchange="changeDocFontSize(this.value); this.selectedIndex=0;" title="Đổi cỡ chữ văn bản đang chọn">
+                <option value="" disabled selected>Cỡ chữ ▾</option>
+                <option value="14px">Nhỏ (14px)</option>
+                <option value="16px">Chuẩn (16px)</option>
+                <option value="20px">Lớn (20px)</option>
+                <option value="26px">Tiêu đề (26px)</option>
+                <option value="34px">Khổng lồ (34px)</option>
+              </select>
+              <span class="doc-divider"></span>
+              <button type="button" class="doc-tool-btn" onclick="insertDocImage()" title="Chèn ảnh vào trang">🖼️ Chèn Ảnh</button>
+              <button type="button" class="doc-tool-btn" onclick="insertDocTwoColumns()" title="Tạo bố cục 2 cột song song (ảnh + chữ hoặc 2 ảnh)">🍱 Layout 2 Cột</button>
+              <button type="button" class="doc-tool-btn" onclick="insertDocCallout()" title="Tạo hộp ghi chú highlight">💬 Hộp Callout</button>
+              <button type="button" class="doc-tool-btn" onclick="insertDocBadge()" title="Chèn nhãn tag nổi bật">🏷️ Badge</button>
+              <button type="button" class="doc-tool-btn" onclick="execDocCmd('insertUnorderedList')" title="Danh sách gạch đầu dòng">• Danh sách</button>
+            </div>
 
-          <div class="form-group">
-            <label class="form-label">⚡ Thách thức (The Challenge)</label>
-            <textarea id="project-challenge" class="form-textarea"></textarea>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">💡 Giải pháp (The Solution)</label>
-            <textarea id="project-solution" class="form-textarea"></textarea>
+            <!-- Contenteditable Document Canvas -->
+            <div id="project-doc-canvas" class="doc-canvas" contenteditable="true"></div>
           </div>
 
           <div style="display: flex; gap: 14px; margin-top: 28px;">

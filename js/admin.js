@@ -182,13 +182,43 @@ function openProjectModal(id = null) {
       document.getElementById("project-tags").value = tagsStr;
       
       document.getElementById("project-metrics").value = JSON.stringify(p.metrics || []);
-      document.getElementById("project-overview").value = p.overview || '';
-      document.getElementById("project-challenge").value = p.challenge || '';
-      document.getElementById("project-solution").value = p.solution || '';
+      
+      // Populate Rich Doc Canvas
+      const docCanvas = document.getElementById("project-doc-canvas");
+      if (docCanvas) {
+        if (p.content && p.content.trim()) {
+          docCanvas.innerHTML = p.content;
+        } else {
+          // Construct rich starter document from existing structured fields
+          docCanvas.innerHTML = `
+            <h2>Overview</h2>
+            <p>${p.overview || 'Mô tả tổng quan về dự án và mục tiêu chiến lược ở đây...'}</p>
+
+            <div class="doc-callout">
+              <div class="doc-callout-title">⚡ The Core Challenge</div>
+              <div>${p.challenge || 'Vấn đề lớn nhất của người dùng cần giải quyết...'}</div>
+            </div>
+
+            <h2>The Solution & Impact</h2>
+            <p>${p.solution || 'Chi tiết các giải pháp thiết kế và tác động đo lường được...'}</p>
+          `;
+        }
+      }
     }
   } else {
     formTitle.innerText = "Thêm Dự Án Mới";
     document.getElementById("project-id").value = '';
+    const docCanvas = document.getElementById("project-doc-canvas");
+    if (docCanvas) {
+      docCanvas.innerHTML = `
+        <h2>Overview</h2>
+        <p>Mô tả tổng quan về dự án mới của bạn...</p>
+        <div class="doc-callout">
+          <div class="doc-callout-title">💡 Highlights</div>
+          <div>Ghi chú hoặc điểm nổi bật của dự án...</div>
+        </div>
+      `;
+    }
   }
 
   modal.classList.add("active");
@@ -201,6 +231,80 @@ function closeProjectModal() {
 
 function editProject(id) {
   openProjectModal(id);
+}
+
+/* Free-form Doc Canvas Toolbar Actions */
+function execDocCmd(command, value = null) {
+  const canvas = document.getElementById("project-doc-canvas");
+  if (canvas) canvas.focus();
+  document.execCommand(command, false, value);
+}
+
+function changeDocFontSize(size) {
+  if (!size) return;
+  const canvas = document.getElementById("project-doc-canvas");
+  if (canvas) canvas.focus();
+
+  const selection = window.getSelection();
+  if (selection.rangeCount > 0) {
+    const range = selection.getRangeAt(0);
+    const span = document.createElement("span");
+    span.style.fontSize = size;
+    span.appendChild(range.extractContents());
+    range.insertNode(span);
+  }
+}
+
+function insertDocImage() {
+  const url = prompt("Nhập đường dẫn ảnh (URL hoặc assets/saas.png):", "assets/saas.png");
+  if (!url) return;
+  const caption = prompt("Nhập chú thích ảnh (tùy chọn):", "Mockup Giao Diện Dự Án");
+  
+  const html = `
+    <div class="doc-img-block">
+      <img src="${url}" alt="${caption}" class="doc-img">
+      ${caption ? `<div class="doc-caption">${caption}</div>` : ''}
+    </div>
+    <p></p>
+  `;
+  execDocCmd('insertHTML', html);
+}
+
+function insertDocTwoColumns() {
+  const html = `
+    <div class="doc-grid-2">
+      <div class="doc-grid-col">
+        <h3>Cột 1: Thông tin</h3>
+        <p>Nhập mô tả hoặc chèn ảnh bên cột trái...</p>
+      </div>
+      <div class="doc-grid-col">
+        <h3>Cột 2: Minh họa</h3>
+        <p>Nhập mô tả hoặc chèn ảnh bên cột phải...</p>
+      </div>
+    </div>
+    <p></p>
+  `;
+  execDocCmd('insertHTML', html);
+}
+
+function insertDocCallout() {
+  const title = prompt("Tiêu đề hộp Callout:", "💡 Điểm Nhấn Sáng Tạo");
+  if (!title) return;
+  
+  const html = `
+    <div class="doc-callout">
+      <div class="doc-callout-title">${title}</div>
+      <div>Nhập nội dung ghi chú nổi bật ở đây...</div>
+    </div>
+    <p></p>
+  `;
+  execDocCmd('insertHTML', html);
+}
+
+function insertDocBadge() {
+  const text = prompt("Nội dung nhãn Badge:", "KEY FINDING ✦");
+  if (!text) return;
+  execDocCmd('insertHTML', `<span class="doc-badge">${text}</span> `);
 }
 
 /* 6. Save (Create / Update) Project to Vercel Blob */
@@ -220,6 +324,9 @@ async function handleSaveProject(e) {
     metricsJson = [{ val: "100%", label: "Impact" }];
   }
 
+  const docCanvas = document.getElementById("project-doc-canvas");
+  const richContent = docCanvas ? docCanvas.innerHTML : '';
+
   const projectPayload = {
     id: slugInput,
     title: document.getElementById("project-title").value,
@@ -230,9 +337,7 @@ async function handleSaveProject(e) {
     image_url: document.getElementById("project-image-url").value,
     tags: tagsArray,
     metrics: metricsJson,
-    overview: document.getElementById("project-overview").value,
-    challenge: document.getElementById("project-challenge").value,
-    solution: document.getElementById("project-solution").value,
+    content: richContent,
     updated_at: new Date().toISOString()
   };
 
@@ -251,7 +356,6 @@ async function handleSaveProject(e) {
     renderProjectsTable();
   } catch (err) {
     console.error("Lỗi khi lưu dự án:", err);
-    // Render local update even if offline
     renderProjectsTable();
     closeProjectModal();
     showToast("Đã cập nhật cục bộ (Vui lòng deploy Vercel để đồng bộ Cloud)!");

@@ -413,15 +413,17 @@ function openCaseStudyModal(id) {
       `).join("")}
     </div>
 
-    <div style="font-size: 1.05rem; color: var(--text-muted); line-height: 1.8;">
-      <h3 class="font-serif" style="font-size: 1.4rem; color: var(--text-main); margin: 28px 0 10px;">Overview</h3>
-      <p>${p.overview}</p>
+    <div class="case-study-doc-content">
+      ${p.content && p.content.trim() ? p.content : `
+        <h3 class="font-serif" style="font-size: 1.4rem; color: var(--text-main); margin: 28px 0 10px;">Overview</h3>
+        <p>${p.overview || ''}</p>
 
-      <h3 class="font-serif" style="font-size: 1.4rem; color: var(--text-main); margin: 28px 0 10px;">The Challenge</h3>
-      <p>${p.challenge}</p>
+        <h3 class="font-serif" style="font-size: 1.4rem; color: var(--text-main); margin: 28px 0 10px;">The Challenge</h3>
+        <p>${p.challenge || ''}</p>
 
-      <h3 class="font-serif" style="font-size: 1.4rem; color: var(--text-main); margin: 28px 0 10px;">The Solution & Impact</h3>
-      <p>${p.solution}</p>
+        <h3 class="font-serif" style="font-size: 1.4rem; color: var(--text-main); margin: 28px 0 10px;">The Solution & Impact</h3>
+        <p>${p.solution || ''}</p>
+      `}
     </div>
   `;
 
