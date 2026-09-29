@@ -181,26 +181,35 @@ function openProjectModal(id = null) {
       const tagsStr = Array.isArray(p.tags) ? p.tags.join(", ") : (p.tags || '');
       document.getElementById("project-tags").value = tagsStr;
       
-      document.getElementById("project-metrics").value = JSON.stringify(p.metrics || []);
-      
-      // Populate Rich Doc Canvas
+      // Populate Rich Doc Canvas (100% of modal detail view)
       const docCanvas = document.getElementById("project-doc-canvas");
       if (docCanvas) {
         if (p.content && p.content.trim()) {
           docCanvas.innerHTML = p.content;
         } else {
-          // Construct rich starter document from existing structured fields
+          // Construct rich starter document with full styling
           docCanvas.innerHTML = `
-            <h2>Overview</h2>
-            <p>${p.overview || 'Mô tả tổng quan về dự án và mục tiêu chiến lược ở đây...'}</p>
-
             <div class="doc-callout">
-              <div class="doc-callout-title">⚡ The Core Challenge</div>
-              <div>${p.challenge || 'Vấn đề lớn nhất của người dùng cần giải quyết...'}</div>
+              <span class="doc-badge">${(p.tags && p.tags[0]) || 'CASE STUDY'}</span>
+              <h1 style="margin: 12px 0 8px; font-size: 28px; line-height: 1.2;">${p.title}</h1>
+              <p style="margin: 0; font-size: 16px; color: var(--text-muted);">${p.summary || ''}</p>
             </div>
 
-            <h2>The Solution & Impact</h2>
-            <p>${p.solution || 'Chi tiết các giải pháp thiết kế và tác động đo lường được...'}</p>
+            <div class="doc-img-block">
+              <img src="${p.image_url || p.image || 'assets/saas.png'}" alt="${p.title}" class="doc-img" style="width: 100%;">
+              <div class="doc-caption">Visual Showcase ∙ ${p.client || 'Project'}</div>
+            </div>
+
+            <div class="doc-grid-2">
+              <div class="doc-grid-col">
+                <h3>The Challenge</h3>
+                <p>${p.challenge || 'Vấn đề lớn nhất của người dùng cần giải quyết...'}</p>
+              </div>
+              <div class="doc-grid-col">
+                <h3>The Solution & Impact</h3>
+                <p>${p.solution || 'Chi tiết các giải pháp thiết kế và tác động đạt được...'}</p>
+              </div>
+            </div>
           `;
         }
       }
@@ -211,11 +220,26 @@ function openProjectModal(id = null) {
     const docCanvas = document.getElementById("project-doc-canvas");
     if (docCanvas) {
       docCanvas.innerHTML = `
-        <h2>Overview</h2>
-        <p>Mô tả tổng quan về dự án mới của bạn...</p>
         <div class="doc-callout">
-          <div class="doc-callout-title">💡 Highlights</div>
-          <div>Ghi chú hoặc điểm nổi bật của dự án...</div>
+          <span class="doc-badge">NEW CASE STUDY ✦</span>
+          <h1 style="margin: 12px 0 8px; font-size: 28px;">Tiêu Đề Dự Án Của Bạn</h1>
+          <p style="margin: 0; font-size: 16px; color: var(--text-muted);">Mô tả tổng quan về dự án và kết quả đạt được...</p>
+        </div>
+
+        <div class="doc-img-block">
+          <img src="assets/saas.png" alt="Preview" class="doc-img" style="width: 100%;">
+          <div class="doc-caption">Hình ảnh đại diện dự án</div>
+        </div>
+
+        <div class="doc-grid-2">
+          <div class="doc-grid-col">
+            <h3>The Challenge</h3>
+            <p>Mô tả bài toán thách thức...</p>
+          </div>
+          <div class="doc-grid-col">
+            <h3>The Solution</h3>
+            <p>Mô tả giải pháp thiết kế...</p>
+          </div>
         </div>
       `;
     }
@@ -317,13 +341,6 @@ async function handleSaveProject(e) {
   const tagsStr = document.getElementById("project-tags").value;
   const tagsArray = tagsStr.split(",").map(s => s.trim()).filter(Boolean);
 
-  let metricsJson = [];
-  try {
-    metricsJson = JSON.parse(document.getElementById("project-metrics").value);
-  } catch (e) {
-    metricsJson = [{ val: "100%", label: "Impact" }];
-  }
-
   const docCanvas = document.getElementById("project-doc-canvas");
   const richContent = docCanvas ? docCanvas.innerHTML : '';
 
@@ -336,7 +353,6 @@ async function handleSaveProject(e) {
     summary: document.getElementById("project-summary").value,
     image_url: document.getElementById("project-image-url").value,
     tags: tagsArray,
-    metrics: metricsJson,
     content: richContent,
     updated_at: new Date().toISOString()
   };

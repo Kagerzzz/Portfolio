@@ -262,14 +262,6 @@ function renderProjects() {
     else if (tagsLower.some(t => t.includes("concept"))) statusBadge = "AI CONCEPT ✦";
     else if (tagsLower.some(t => t.includes("prototype"))) statusBadge = "B2B PROTOTYPE 💡";
 
-    // Quick Metrics
-    const metricsPills = (project.metrics || []).slice(0, 2).map(m => `
-      <div class="quick-metric-chip">
-        <span class="quick-metric-val">${m.val}</span>
-        <span>${m.label}</span>
-      </div>
-    `).join("");
-
     return `
     <article class="project-item ${themeClass}" id="${project.id}" onclick="handleCardClick('${project.id}', event)">
       
@@ -303,11 +295,6 @@ function renderProjects() {
             ${(project.tags || []).map(t => `<span class="tag-pill">${t}</span>`).join("")}
           </div>
           <h2 class="project-title-large">${project.summary}</h2>
-          
-          <!-- Hover-revealed Quick Metrics Strip -->
-          <div class="card-metrics-strip">
-            ${metricsPills}
-          </div>
 
           <button class="btn-read-case" onclick="event.stopPropagation(); handleCardClick('${project.id}', event)">
             <span>explore case study</span>
@@ -655,7 +642,37 @@ function initMagneticElements() {
   });
 }
 
-/* Modal Case Study with Counter Roll Animation */
+/* Compose starter rich doc layout if project has no custom content yet */
+function getStarterDocContent(p) {
+  const firstTag = (p.tags && p.tags[0]) || 'CASE STUDY ✦';
+  return `
+    <div class="doc-callout">
+      <span class="doc-badge">${firstTag}</span>
+      <h1 style="margin: 12px 0 8px; font-size: 28px; line-height: 1.2;">${p.title}</h1>
+      <p style="margin: 0; font-size: 16px; color: var(--text-muted);">${p.summary || ''}</p>
+    </div>
+
+    ${p.image ? `
+      <div class="doc-img-block">
+        <img src="${p.image}" alt="${p.title}" class="doc-img" style="width: 100%;">
+        <div class="doc-caption">Visual Showcase ∙ ${p.client || 'Project'}</div>
+      </div>
+    ` : ''}
+
+    <div class="doc-grid-2">
+      <div class="doc-grid-col">
+        <h3>The Challenge</h3>
+        <p>${p.challenge || p.overview || 'Mô tả thách thức và bối cảnh dự án...'}</p>
+      </div>
+      <div class="doc-grid-col">
+        <h3>The Solution & Impact</h3>
+        <p>${p.solution || 'Chi tiết các giải pháp thiết kế và tác động đạt được...'}</p>
+      </div>
+    </div>
+  `;
+}
+
+/* Modal Case Study - 100% Free-Form Custom Doc Canvas */
 function openCaseStudyModal(id) {
   const p = activeProjects.find(item => item.id === id) || PROJECTS_DATA.find(item => item.id === id);
   if (!p) return;
@@ -663,34 +680,11 @@ function openCaseStudyModal(id) {
   const modal = document.getElementById("case-study-modal");
   const content = document.getElementById("modal-content-target");
 
+  const docHtml = (p.content && p.content.trim()) ? p.content : getStarterDocContent(p);
+
   content.innerHTML = `
-    <img src="${p.image}" alt="${p.title}" class="modal-hero-banner">
-    <div class="project-tags" style="margin-bottom: 14px;">
-      ${p.tags.map(t => `<span class="tag-pill">${t}</span>`).join("")}
-      <span class="tag-pill" style="background: var(--neo-yellow); font-weight: 800;">VERIFIED CASE STUDY ✦</span>
-    </div>
-    <h2 class="font-serif" style="font-size: 2.3rem; margin-bottom: 16px; letter-spacing: -0.02em;">${p.title}</h2>
-    
-    <div class="modal-metrics-grid">
-      ${p.metrics.map(m => `
-        <div>
-          <div class="metric-num">${m.val}</div>
-          <div class="metric-label">${m.label}</div>
-        </div>
-      `).join("")}
-    </div>
-
     <div class="case-study-doc-content">
-      ${p.content && p.content.trim() ? p.content : `
-        <h3 class="font-serif" style="font-size: 1.4rem; color: var(--text-main); margin: 28px 0 10px;">Overview</h3>
-        <p>${p.overview || ''}</p>
-
-        <h3 class="font-serif" style="font-size: 1.4rem; color: var(--text-main); margin: 28px 0 10px;">The Challenge</h3>
-        <p>${p.challenge || ''}</p>
-
-        <h3 class="font-serif" style="font-size: 1.4rem; color: var(--text-main); margin: 28px 0 10px;">The Solution & Impact</h3>
-        <p>${p.solution || ''}</p>
-      `}
+      ${docHtml}
     </div>
   `;
 
