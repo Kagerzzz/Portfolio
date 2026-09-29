@@ -538,6 +538,438 @@ button {
 }
 
 /* ==========================================================================
+   3.5. Neubrutalism CV / Résumé Bento Showcase
+   ========================================================================== */
+.cv-section {
+  padding: 80px 0 100px;
+  position: relative;
+}
+
+.cv-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.cv-section-title {
+  font-size: 2.8rem;
+  margin-top: 10px;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+  line-height: 1.15;
+}
+
+.btn-cv-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: var(--neo-yellow);
+  color: #000000;
+  border: var(--border-neo);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-neo-sm);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--spring-transition);
+}
+
+.btn-cv-download:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: var(--shadow-neo-md);
+  background: var(--neo-pink);
+}
+
+.btn-cv-download .btn-arrow {
+  font-size: 16px;
+  font-weight: 900;
+  transition: transform 0.2s ease;
+}
+
+.btn-cv-download:hover .btn-arrow {
+  transform: translateY(3px);
+}
+
+/* Bento Grid */
+.cv-bento-grid {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.cv-card {
+  background: var(--bg-card);
+  border: var(--border-neo);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-neo-md);
+  overflow: hidden;
+  margin-bottom: 28px;
+  transition: var(--spring-transition);
+}
+
+.cv-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-neo-lg);
+}
+
+.cv-card-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 18px;
+  background: var(--bg-surface);
+  border-bottom: var(--border-neo);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  user-select: none;
+}
+
+.cv-window-label {
+  font-family: monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.cv-card-title {
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cv-status-tag {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 3px 8px;
+  background: var(--neo-yellow);
+  color: #000000;
+  border: 1.5px solid #000000;
+  border-radius: var(--radius-pill);
+}
+
+/* Profile Card Body */
+.cv-profile-body {
+  padding: 28px 24px;
+  text-align: center;
+}
+
+.cv-avatar-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 18px;
+}
+
+.cv-avatar-img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 12%;
+  border: 3.5px solid #000000;
+  box-shadow: var(--shadow-neo-sm);
+  background: #000000;
+  display: block;
+}
+
+.cv-avatar-badge {
+  position: absolute;
+  bottom: 0;
+  right: -10px;
+  background: var(--neo-green);
+  color: #000000;
+  border: 2px solid #000000;
+  border-radius: var(--radius-pill);
+  font-size: 10px;
+  font-weight: 800;
+  padding: 4px 10px;
+  box-shadow: 2px 2px 0px #000000;
+  transform: rotate(-3deg);
+  white-space: nowrap;
+}
+
+.cv-greeting {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 2px;
+}
+
+.cv-name {
+  font-family: var(--font-serif);
+  font-size: 2.4rem;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+
+.cv-role-pill {
+  display: inline-block;
+  padding: 6px 16px;
+  background: var(--neo-cyan);
+  color: #000000;
+  border: 2px solid #000000;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 800;
+  box-shadow: 2px 2px 0px #000000;
+  margin-bottom: 20px;
+}
+
+.cv-bio-box {
+  background: var(--bg-surface);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  text-align: left;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  box-shadow: 2px 2px 0px var(--border-color);
+}
+
+.cv-bio-box p {
+  margin: 0;
+}
+
+/* Personal Info Grid */
+.cv-info-grid {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.cv-info-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-surface);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  box-shadow: 2px 2px 0px var(--border-color);
+}
+
+.cv-info-full {
+  grid-column: span 2;
+}
+
+.cv-info-icon {
+  font-size: 18px;
+}
+
+.cv-info-label {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+}
+
+.cv-info-val {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.cv-link {
+  color: var(--text-main);
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--neo-pink);
+  transition: color 0.15s ease;
+}
+
+.cv-link:hover {
+  color: var(--neo-pink);
+}
+
+/* Education List */
+.cv-edu-list {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cv-edu-item {
+  border-left: 3.5px solid var(--neo-cyan);
+  padding-left: 14px;
+}
+
+.cv-edu-year {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.cv-edu-school {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 2px;
+}
+
+.cv-edu-major {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Tools & Expertise Grid */
+.cv-tools-grid {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cv-tool-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  background: var(--bg-surface);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-pill);
+  font-size: 12.5px;
+  font-weight: 800;
+  box-shadow: 2px 2px 0px var(--border-color);
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.cv-tool-pill:hover {
+  transform: translateY(-2px);
+  background: var(--neo-yellow);
+}
+
+.cv-tool-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1px solid #000000;
+}
+
+/* Right Column: Work Experience Timeline */
+.cv-timeline {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.cv-job-block {
+  background: var(--bg-surface);
+  border: var(--border-neo);
+  border-radius: var(--radius-md);
+  padding: 22px 24px;
+  box-shadow: var(--shadow-neo-sm);
+  position: relative;
+  transition: var(--spring-transition);
+}
+
+.cv-job-block:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: var(--shadow-neo-md);
+}
+
+.job-theme-0 { border-left: 8px solid #FFDE59; }
+.job-theme-1 { border-left: 8px solid #FF90E8; }
+.job-theme-2 { border-left: 8px solid #4CC9F0; }
+.job-theme-3 { border-left: 8px solid #70E000; }
+
+.cv-job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cv-job-period-pill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: var(--bg-card);
+  padding: 4px 10px;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-pill);
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+
+.cv-job-title {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 2px;
+}
+
+.cv-job-company {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.cv-job-stamp {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-dim);
+  opacity: 0.45;
+  user-select: none;
+}
+
+.cv-job-tasks {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+.cv-job-tasks li {
+  margin-bottom: 8px;
+}
+
+.cv-job-tasks li:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive CV Grid */
+@media (max-width: 900px) {
+  .cv-bento-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .cv-section-title {
+    font-size: 2.1rem;
+  }
+  .cv-job-title {
+    font-size: 1.35rem;
+  }
+}
+
+/* ==========================================================================
    4. Projects Showcase (Hyper-Unique Retro OS Windows & HUD Brackets)
    ========================================================================== */
 .projects-section {
