@@ -252,34 +252,84 @@ function initHeroTabs() {
   });
 }
 
-/* Render Projects Grid with Retro Number Stamps & Asymmetric Layout */
+/* Render Projects Grid with Retro Window OS, HUD Brackets, & Quick-Metrics */
 function renderProjects() {
   const container = document.getElementById("projects-container");
   if (!container) return;
 
   container.innerHTML = activeProjects.map((project, index) => {
     const numStamp = (index + 1).toString().padStart(2, "0");
+    const themeClass = `card-theme-${index % 5}`;
+    
+    // Status text mapping
+    let statusBadge = "FEATURED ✦";
+    const tagsLower = (project.tags || []).map(t => t.toLowerCase());
+    if (tagsLower.some(t => t.includes("shipped"))) statusBadge = "LIVE SHIPPED 🚀";
+    else if (tagsLower.some(t => t.includes("concept"))) statusBadge = "AI CONCEPT ✦";
+    else if (tagsLower.some(t => t.includes("prototype"))) statusBadge = "B2B PROTOTYPE 💡";
+
+    // Quick Metrics
+    const metricsPills = (project.metrics || []).slice(0, 2).map(m => `
+      <div class="quick-metric-chip">
+        <span class="quick-metric-val">${m.val}</span>
+        <span>${m.label}</span>
+      </div>
+    `).join("");
+
     return `
-    <article class="project-item" id="${project.id}" onclick="openCaseStudyModal('${project.id}')">
-      <div class="project-number-stamp">#${numStamp}</div>
-      <div class="project-media">
-        <img src="${project.image}" alt="${project.title}" class="project-img">
-      </div>
-      <div>
-        <div class="project-tags">
-          ${(project.tags || []).map(t => `<span class="tag-pill">${t}</span>`).join("")}
+    <article class="project-item ${themeClass}" id="${project.id}" onclick="handleCardClick('${project.id}', event)">
+      
+      <!-- Retro Window Bar -->
+      <div class="card-window-bar">
+        <div class="window-dots">
+          <span class="window-dot dot-red"></span>
+          <span class="window-dot dot-yellow"></span>
+          <span class="window-dot dot-green"></span>
         </div>
-        <h2 class="project-title-large">${project.summary}</h2>
-        <div style="font-size: 13px; color: var(--text-dim); margin-bottom: 24px; text-transform: lowercase; font-weight: 700;">
-          ${(project.tags || []).join(" ∙ ")}
-        </div>
-        <button class="btn-read-case" onclick="event.stopPropagation(); openCaseStudyModal('${project.id}')">
-          explore case study ✦
-        </button>
+        <div class="window-slug">sanvi.design/case/${project.id}</div>
+        <div class="window-status">${statusBadge}</div>
       </div>
+
+      <!-- Card Main Body -->
+      <div class="project-card-body">
+        <div class="project-number-stamp">#${numStamp}</div>
+        
+        <!-- Transparent Media Stage with HUD Focus Brackets -->
+        <div class="project-media">
+          <span class="hud-bracket hud-tl"></span>
+          <span class="hud-bracket hud-tr"></span>
+          <span class="hud-bracket hud-bl"></span>
+          <span class="hud-bracket hud-br"></span>
+          <img src="${project.image}" alt="${project.title}" class="project-img">
+        </div>
+
+        <!-- Project Meta & Information -->
+        <div>
+          <div class="project-tags">
+            ${(project.tags || []).map(t => `<span class="tag-pill">${t}</span>`).join("")}
+          </div>
+          <h2 class="project-title-large">${project.summary}</h2>
+          
+          <!-- Hover-revealed Quick Metrics Strip -->
+          <div class="card-metrics-strip">
+            ${metricsPills}
+          </div>
+
+          <button class="btn-read-case" onclick="event.stopPropagation(); handleCardClick('${project.id}', event)">
+            <span>explore case study</span>
+            <span class="btn-arrow">↗</span>
+          </button>
+        </div>
+      </div>
+
     </article>
   `;
   }).join("");
+}
+
+function handleCardClick(id, event) {
+  fireConfetti(event);
+  openCaseStudyModal(id);
 }
 
 /* 3D Parallax Mouse Tilt Animation with Neubrutalist Hard Shadow */

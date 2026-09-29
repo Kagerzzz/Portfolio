@@ -538,7 +538,7 @@ button {
 }
 
 /* ==========================================================================
-   4. Projects Showcase (Asymmetric Neubrutalism Cards & Transparent Stage)
+   4. Projects Showcase (Hyper-Unique Retro OS Windows & HUD Brackets)
    ========================================================================== */
 .projects-section {
   padding-bottom: 120px;
@@ -549,11 +549,9 @@ button {
   background: var(--bg-card);
   border: var(--border-neo);
   border-radius: var(--radius-lg);
-  padding: 48px;
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 48px;
-  align-items: center;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
   position: relative;
   cursor: pointer;
   box-shadow: var(--shadow-neo-md);
@@ -561,14 +559,90 @@ button {
   overflow: hidden;
 }
 
+/* Card Persona Accent Themes */
+.card-theme-0 { --card-accent: #FFDE59; }
+.card-theme-1 { --card-accent: #FF90E8; }
+.card-theme-2 { --card-accent: #4CC9F0; }
+.card-theme-3 { --card-accent: #70E000; }
+.card-theme-4 { --card-accent: #FF914D; }
+
 .project-item:hover {
   transform: translate(-4px, -4px);
   box-shadow: var(--shadow-neo-lg);
 }
 
-.project-item:nth-child(even) {
+/* Retro Window Top Bar */
+.card-window-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: var(--bg-surface);
+  border-bottom: var(--border-neo);
+  user-select: none;
+}
+
+.window-dots {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.window-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  transition: transform 0.15s ease;
+}
+
+.window-dot:hover {
+  transform: scale(1.35);
+}
+
+.window-dot.dot-red { background: #FF5A5F; }
+.window-dot.dot-yellow { background: #FFDE59; }
+.window-dot.dot-green { background: #70E000; }
+
+.window-slug {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-dim);
+  text-transform: lowercase;
+  letter-spacing: 0.04em;
+  background: var(--bg-card);
+  padding: 4px 14px;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--border-color);
+  box-shadow: var(--shadow-neo-xs);
+}
+
+.window-status {
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--border-color);
+  background: var(--card-accent, var(--neo-yellow));
+  color: #000000;
+  box-shadow: var(--shadow-neo-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Project Card Inner Body */
+.project-card-body {
+  padding: 44px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 48px;
+  align-items: center;
+  position: relative;
+}
+
+.project-item:nth-child(even) .project-card-body {
   grid-template-columns: 1fr 1.2fr;
-  background: var(--bg-card-alt);
 }
 
 .project-item:nth-child(even) .project-media {
@@ -585,16 +659,17 @@ button {
   font-weight: 800;
   line-height: 1;
   color: var(--border-color);
-  opacity: 0.16;
+  opacity: 0.14;
   pointer-events: none;
   user-select: none;
   letter-spacing: -0.05em;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
 .project-item:hover .project-number-stamp {
   opacity: 0.35;
-  transform: scale(1.05);
+  transform: scale(1.08) rotate(-3deg);
+  color: var(--card-accent, var(--border-color));
 }
 
 /* Frame Stage Container - Transparent & Borderless (Preserved) */
@@ -613,6 +688,65 @@ button {
   perspective: 1000px;
 }
 
+/* HUD Focus Brackets */
+.hud-bracket {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-color: var(--border-color);
+  pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.25s ease;
+  z-index: 10;
+}
+
+.hud-tl {
+  top: -8px;
+  left: -8px;
+  border-top: 3.5px solid;
+  border-left: 3.5px solid;
+}
+
+.hud-tr {
+  top: -8px;
+  right: -8px;
+  border-top: 3.5px solid;
+  border-right: 3.5px solid;
+}
+
+.hud-bl {
+  bottom: -8px;
+  left: -8px;
+  border-bottom: 3.5px solid;
+  border-left: 3.5px solid;
+}
+
+.hud-br {
+  bottom: -8px;
+  right: -8px;
+  border-bottom: 3.5px solid;
+  border-right: 3.5px solid;
+}
+
+.project-item:hover .hud-tl {
+  transform: translate(-12px, -12px);
+  border-color: var(--card-accent, #FFDE59);
+}
+
+.project-item:hover .hud-tr {
+  transform: translate(12px, -12px);
+  border-color: var(--card-accent, #FFDE59);
+}
+
+.project-item:hover .hud-bl {
+  transform: translate(-12px, 12px);
+  border-color: var(--card-accent, #FFDE59);
+}
+
+.project-item:hover .hud-br {
+  transform: translate(12px, 12px);
+  border-color: var(--card-accent, #FFDE59);
+}
+
 /* Project PNG Mockup Element with Dynamic Mouse Parallax & Hard Offset Drop Shadow */
 .project-img {
   width: 100%;
@@ -624,6 +758,46 @@ button {
   will-change: transform, box-shadow;
   transition: var(--spring-transition);
   transform-origin: center center;
+}
+
+/* Quick-Metrics Chips */
+.card-metrics-strip {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 18px 0 24px;
+}
+
+.quick-metric-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-surface);
+  border: 2px solid var(--border-color);
+  box-shadow: 2px 2px 0px var(--border-color);
+  font-size: 12px;
+  font-weight: 700;
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.quick-metric-val {
+  font-weight: 800;
+  font-family: var(--font-serif);
+  font-size: 14px;
+  color: var(--text-main);
+}
+
+.project-item:hover .quick-metric-chip {
+  transform: translateY(-5px);
+  box-shadow: 4px 4px 0px var(--border-color);
+  background: var(--card-accent, var(--neo-yellow));
+  color: #000000;
+}
+
+.project-item:hover .quick-metric-chip .quick-metric-val {
+  color: #000000;
 }
 
 /* Mouse-Following Floating Pill Badge ("tap me ✦" -> "EXPLORE CASE ↗") */
@@ -657,7 +831,7 @@ button {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .tag-pill {
@@ -689,17 +863,10 @@ button {
   font-weight: 700;
 }
 
-.project-desc-text {
-  font-size: 1rem;
-  color: var(--text-muted);
-  line-height: 1.6;
-  margin-bottom: 24px;
-}
-
 .btn-read-case {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   padding: 10px 24px;
   border-radius: var(--radius-pill);
   background: var(--neo-yellow);
@@ -711,10 +878,20 @@ button {
   transition: var(--spring-transition);
 }
 
-.btn-read-case:hover {
-  background: var(--neo-pink);
-  transform: translate(-2px, -2px);
+.btn-read-case .btn-arrow {
+  display: inline-block;
+  font-size: 16px;
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.project-item:hover .btn-read-case {
+  background: var(--card-accent, var(--neo-pink));
+  transform: translate(-3px, -3px);
   box-shadow: var(--shadow-neo-sm);
+}
+
+.project-item:hover .btn-read-case .btn-arrow {
+  transform: translate(3px, -3px) rotate(45deg);
 }
 
 .btn-read-case:active {
