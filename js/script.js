@@ -116,7 +116,9 @@ document.addEventListener("DOMContentLoaded", () => {
   initHeroTabs();
   renderProjects();
   initModalEvents();
-  initMouseFollowingBadge();
+  initCursorTrailEngine();
+  initCustomCursorAndBadge();
+  initMagneticElements();
   init3DParallaxTilt();
   initConfettiEngine();
   
@@ -356,36 +358,300 @@ function init3DParallaxTilt() {
   });
 }
 
-/* Mouse-Following Floating Badge ("tap me ✦" -> "EXPLORE CASE ↗") */
-function initMouseFollowingBadge() {
-  const badge = document.getElementById("floating-badge");
-  if (!badge) return;
+/* ==========================================================================
+   Interactive Screen Mouse Effects:
+   1. Stardust & Sparkle Particle Engine (Canvas)
+   2. Dual-Layer Neubrutalist Dynamic Cursor & Context Badge
+   3. Subtle Magnetic Element Drift
+   ========================================================================== */
 
-  document.addEventListener("mousemove", (e) => {
-    badge.style.left = `${e.clientX}px`;
-    badge.style.top = `${e.clientY}px`;
+/* High Performance Neubrutalism Sparkle & Shape Cursor Trail */
+function initCursorTrailEngine() {
+  const canvas = document.getElementById("cursor-trail-canvas");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  let width = (canvas.width = window.innerWidth);
+  let height = (canvas.height = window.innerHeight);
+
+  window.addEventListener("resize", () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
   });
 
-  document.addEventListener("mouseover", (e) => {
-    const projectCard = e.target.closest(".project-item");
-    if (projectCard) {
-      badge.classList.add("visible", "explore");
-      badge.innerHTML = "EXPLORE CASE ↗";
-    } else {
-      badge.classList.remove("explore");
-      badge.innerHTML = "tap me ✦";
-      
-      const isInteractive = e.target.closest("button, a, .hero-rotating-badge");
-      if (isInteractive) {
-        badge.classList.add("visible");
+  const particles = [];
+  const PALETTE = ["#FFDE59", "#FF90E8", "#70E000", "#4CC9F0", "#FF914D", "#FFFFFF"];
+  const SHAPES = ["star", "cross", "diamond", "dot"];
+
+  let lastX = -100;
+  let lastY = -100;
+  let lastTime = performance.now();
+
+  function spawnParticle(x, y, burst = false) {
+    const angle = Math.random() * Math.PI * 2;
+    const speed = burst ? Math.random() * 4 + 1.5 : Math.random() * 1.5 + 0.3;
+    const size = burst ? Math.random() * 12 + 8 : Math.random() * 9 + 6;
+    
+    particles.push({
+      x,
+      y,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed - (burst ? 0.4 : 0.7), // gentle float upwards
+      size,
+      initialSize: size,
+      color: PALETTE[Math.floor(Math.random() * PALETTE.length)],
+      shape: SHAPES[Math.floor(Math.random() * SHAPES.length)],
+      rot: Math.random() * Math.PI,
+      rotSpeed: (Math.random() - 0.5) * 0.15,
+      alpha: 1,
+      decay: burst ? Math.random() * 0.025 + 0.02 : Math.random() * 0.035 + 0.025
+    });
+  }
+
+  // Draw 4-point sparkle star (Neubrutalism ✦)
+  function drawSparkleStar(c, size) {
+    c.beginPath();
+    const half = size / 2;
+    for (let i = 0; i < 4; i++) {
+      const a = (i * Math.PI) / 2;
+      const x1 = Math.cos(a) * half;
+      const y1 = Math.sin(a) * half;
+      const aNext = a + Math.PI / 4;
+      const x2 = Math.cos(aNext) * (half * 0.28);
+      const y2 = Math.sin(aNext) * (half * 0.28);
+      if (i === 0) c.moveTo(x1, y1);
+      else c.lineTo(x1, y1);
+      c.lineTo(x2, y2);
+    }
+    c.closePath();
+    c.fill();
+    c.lineWidth = 1;
+    c.strokeStyle = "#000000";
+    c.stroke();
+  }
+
+  // Draw retro cross (+)
+  function drawCross(c, size) {
+    const w = size * 0.25;
+    const h = size;
+    c.fillRect(-w / 2, -h / 2, w, h);
+    c.fillRect(-h / 2, -w / 2, h, w);
+    c.lineWidth = 1;
+    c.strokeStyle = "#000000";
+    c.strokeRect(-w / 2, -h / 2, w, h);
+    c.strokeRect(-h / 2, -w / 2, h, w);
+  }
+
+  // Draw diamond (◆)
+  function drawDiamond(c, size) {
+    c.beginPath();
+    c.moveTo(0, -size / 2);
+    c.lineTo(size / 2, 0);
+    c.lineTo(0, size / 2);
+    c.lineTo(-size / 2, 0);
+    c.closePath();
+    c.fill();
+    c.lineWidth = 1;
+    c.strokeStyle = "#000000";
+    c.stroke();
+  }
+
+  // Mouse move event
+  document.addEventListener("mousemove", (e) => {
+    const x = e.clientX;
+    const y = e.clientY;
+    const dist = Math.hypot(x - lastX, y - lastY);
+    const now = performance.now();
+    const dt = now - lastTime || 16;
+    const speed = dist / dt;
+
+    if (dist > 8) {
+      const count = Math.min(3, Math.floor(dist / 15) + 1);
+      for (let i = 0; i < count; i++) {
+        const factor = i / count;
+        spawnParticle(lastX + (x - lastX) * factor, lastY + (y - lastY) * factor, speed > 1.2);
+      }
+      lastX = x;
+      lastY = y;
+      lastTime = now;
+    }
+  });
+
+  // Burst on click
+  document.addEventListener("click", (e) => {
+    for (let i = 0; i < 10; i++) {
+      spawnParticle(e.clientX, e.clientY, true);
+    }
+  });
+
+  // Render loop
+  function loop() {
+    ctx.clearRect(0, 0, width, height);
+
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      p.rot += p.rotSpeed;
+      p.alpha -= p.decay;
+      p.size = Math.max(0, p.initialSize * p.alpha);
+
+      if (p.alpha <= 0 || p.size <= 0) {
+        particles.splice(i, 1);
+        continue;
+      }
+
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.globalAlpha = Math.max(0, p.alpha);
+      ctx.fillStyle = p.color;
+
+      if (p.shape === "star") {
+        drawSparkleStar(ctx, p.size);
+      } else if (p.shape === "cross") {
+        drawCross(ctx, p.size);
+      } else if (p.shape === "diamond") {
+        drawDiamond(ctx, p.size);
       } else {
+        ctx.beginPath();
+        ctx.arc(0, 0, p.size / 2.5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = "#000000";
+        ctx.stroke();
+      }
+
+      ctx.restore();
+    }
+
+    requestAnimationFrame(loop);
+  }
+
+  requestAnimationFrame(loop);
+}
+
+/* Dual-Layer Neubrutalist Dynamic Cursor & Context-Aware Floating Badge */
+function initCustomCursorAndBadge() {
+  const dot = document.getElementById("cursor-dot");
+  const ring = document.getElementById("cursor-ring");
+  const badge = document.getElementById("floating-badge");
+  if (!dot || !ring || !badge) return;
+
+  let mouseX = -100, mouseY = -100;
+  let ringX = -100, ringY = -100;
+  let badgeX = -100, badgeY = -100;
+  let isMoving = false;
+  let idleTimer = null;
+
+  document.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    // Instant dot movement
+    dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+
+    // Wake up
+    if (!isMoving) {
+      isMoving = true;
+      dot.style.opacity = "1";
+      ring.style.opacity = "1";
+    }
+
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => {
+      if (!badge.classList.contains("explore") && !badge.classList.contains("pop")) {
         badge.classList.remove("visible");
       }
+    }, 1800);
+  });
+
+  document.addEventListener("mousedown", () => {
+    ring.classList.add("clicking");
+  });
+
+  document.addEventListener("mouseup", () => {
+    ring.classList.remove("clicking");
+  });
+
+  // Smooth spring lerp loop for outer ring and floating badge
+  function animLoop() {
+    ringX += (mouseX - ringX) * 0.22;
+    ringY += (mouseY - ringY) * 0.22;
+    ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+
+    badgeX += (mouseX - badgeX) * 0.16;
+    badgeY += (mouseY - badgeY) * 0.16;
+    badge.style.transform = `translate(${badgeX + 18}px, ${badgeY + 18}px)`;
+
+    requestAnimationFrame(animLoop);
+  }
+  requestAnimationFrame(animLoop);
+
+  // Context-aware hover detector
+  document.addEventListener("mouseover", (e) => {
+    const projectCard = e.target.closest(".project-item");
+    const rotatingBadge = e.target.closest(".hero-rotating-badge");
+    const themeBtn = e.target.closest("#theme-toggle");
+    const sayHiBtn = e.target.closest(".btn-say-hi, a[href='#resume']");
+    const heroTab = e.target.closest(".hero-tab-btn");
+    const moodDot = e.target.closest(".mood-dot");
+    const generalInteractive = e.target.closest("button, a, input, textarea, .nav-brand");
+
+    if (projectCard) {
+      ring.classList.add("active-hover");
+      badge.className = "floating-cursor-badge visible explore";
+      badge.innerHTML = "EXPLORE CASE ↗";
+    } else if (rotatingBadge) {
+      ring.classList.add("active-hover");
+      badge.className = "floating-cursor-badge visible pop";
+      badge.innerHTML = "POP CONFETTI! ✦";
+    } else if (themeBtn) {
+      ring.classList.add("active-hover");
+      badge.className = "floating-cursor-badge visible";
+      badge.innerHTML = "SWITCH THEME ☼";
+    } else if (sayHiBtn) {
+      ring.classList.add("active-hover");
+      badge.className = "floating-cursor-badge visible interactive";
+      badge.innerHTML = "SAY HELLO ✉";
+    } else if (heroTab) {
+      ring.classList.add("active-hover");
+      badge.className = "floating-cursor-badge visible interactive";
+      badge.innerHTML = "CLICK TO READ ✦";
+    } else if (moodDot) {
+      ring.classList.add("active-hover");
+      badge.className = "floating-cursor-badge visible";
+      badge.innerHTML = "CHANGE MOOD 🎨";
+    } else if (generalInteractive) {
+      ring.classList.add("active-hover");
+      badge.classList.remove("visible");
+    } else {
+      ring.classList.remove("active-hover");
+      badge.classList.remove("visible", "explore", "pop", "interactive");
     }
   });
 
   document.addEventListener("mouseleave", () => {
+    dot.style.opacity = "0";
+    ring.style.opacity = "0";
     badge.classList.remove("visible");
+  });
+}
+
+/* Subtle Magnetic Float on Key Neubrutalist Elements */
+function initMagneticElements() {
+  const magnets = document.querySelectorAll(".hero-rotating-badge, .btn-say-hi");
+  magnets.forEach(el => {
+    el.addEventListener("mousemove", (e) => {
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      el.style.transform = `translate(${x * 0.22}px, ${y * 0.22}px)`;
+    });
+    el.addEventListener("mouseleave", () => {
+      el.style.transform = "";
+    });
   });
 }
 

@@ -1357,6 +1357,121 @@ button {
   margin-right: 6px;
 }
 
+/* ==========================================================================
+   Interactive Screen Mouse Effects (Neubrutalism Sparkle Trail & Custom Cursor)
+   ========================================================================== */
+
+#cursor-trail-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 99990;
+}
+
+/* Neubrutalist Inner Dot */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background: var(--text-main);
+  border: 1.5px solid var(--border-color);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999999;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s ease, transform 0.08s ease;
+  will-change: transform;
+}
+
+/* Neubrutalist Outer Trailing Ring */
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 34px;
+  border: 2px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999998;
+  transform: translate(-50%, -50%);
+  transition: width 0.22s cubic-bezier(0.2, 0.8, 0.2, 1),
+              height 0.22s cubic-bezier(0.2, 0.8, 0.2, 1),
+              background-color 0.2s ease,
+              border-color 0.2s ease,
+              box-shadow 0.2s ease,
+              transform 0.1s ease;
+  will-change: transform, width, height;
+}
+
+/* Hovering Interactive Elements */
+.cursor-ring.active-hover {
+  width: 56px;
+  height: 56px;
+  background: rgba(255, 222, 89, 0.35);
+  border-width: 3px;
+  box-shadow: 2px 2px 0px var(--border-color);
+}
+
+.cursor-ring.clicking {
+  transform: translate(-50%, -50%) scale(0.75);
+  background: var(--neo-pink);
+}
+
+/* Floating Follower Badge */
+.floating-cursor-badge {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 999999;
+  background: var(--neo-yellow);
+  color: #000000;
+  border: 2.5px solid #000000;
+  box-shadow: 3px 3px 0px #000000;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.7);
+  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.2s ease;
+  will-change: transform, opacity;
+}
+
+.floating-cursor-badge.visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.floating-cursor-badge.explore {
+  background: var(--neo-pink);
+  color: #000000;
+  box-shadow: 4px 4px 0px #000000;
+}
+
+.floating-cursor-badge.pop {
+  background: var(--neo-green);
+  color: #000000;
+  box-shadow: 4px 4px 0px #000000;
+}
+
+.floating-cursor-badge.interactive {
+  background: var(--neo-cyan);
+  color: #000000;
+  box-shadow: 3px 3px 0px #000000;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .doc-grid-2 { grid-template-columns: 1fr; }
@@ -1373,4 +1488,11 @@ button {
   .modal-hero-banner { height: 220px; }
   .modal-metrics-grid { grid-template-columns: 1fr; }
   .mood-switcher { bottom: 16px; left: 16px; }
+
+  #cursor-trail-canvas,
+  .cursor-dot,
+  .cursor-ring,
+  .floating-cursor-badge {
+    display: none !important;
+  }
 }
