@@ -12,54 +12,61 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   
   <style>
-    /* Admin Dashboard Custom Styles */
+    /* Neubrutalism Admin Dashboard Styles */
     .admin-container {
       max-width: 1100px;
-      margin: 100px auto 60px;
+      margin: 110px auto 60px;
       padding: 0 24px;
     }
     
     .admin-card {
       background: var(--bg-surface);
-      border: 1px solid var(--border-color);
+      border: var(--border-neo);
       border-radius: var(--radius-lg);
-      padding: 32px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      padding: 36px;
+      box-shadow: var(--shadow-neo-md);
     }
     
     .login-box {
-      max-width: 420px;
+      max-width: 440px;
       margin: 120px auto;
+      background: var(--bg-surface);
     }
     
     .form-group {
       margin-bottom: 20px;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 8px;
     }
     
     .form-label {
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 800;
       color: var(--text-main);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
     
     .form-input, .form-textarea, .form-select {
       width: 100%;
-      padding: 10px 14px;
+      padding: 12px 16px;
       border-radius: var(--radius-sm);
-      border: 1px solid var(--border-color);
+      border: var(--border-neo);
       background: var(--bg-card);
       color: var(--text-main);
       font-family: inherit;
       font-size: 14px;
+      font-weight: 600;
       outline: none;
-      transition: border-color 0.2s ease;
+      box-shadow: var(--shadow-neo-xs);
+      transition: all 0.15s ease;
     }
     
     .form-input:focus, .form-textarea:focus, .form-select:focus {
-      border-color: var(--text-main);
+      background: var(--bg-surface);
+      transform: translate(-1px, -1px);
+      box-shadow: var(--shadow-neo-sm);
     }
     
     .form-textarea {
@@ -69,54 +76,101 @@
     
     .btn-submit {
       width: 100%;
-      padding: 12px;
+      padding: 14px;
       border-radius: var(--radius-pill);
-      background: var(--text-main);
-      color: var(--bg-main);
-      font-size: 14px;
-      font-weight: 600;
-      transition: opacity 0.2s ease;
+      background: var(--neo-yellow);
+      color: #000000;
+      border: var(--border-neo);
+      font-size: 15px;
+      font-weight: 800;
+      box-shadow: var(--shadow-neo-sm);
+      cursor: pointer;
+      transition: var(--spring-transition);
     }
 
-    .btn-submit:hover { opacity: 0.9; }
+    .btn-submit:hover { 
+      transform: translate(-2px, -2px);
+      box-shadow: var(--shadow-neo-md);
+      background: var(--neo-green);
+    }
+
+    .btn-submit:active {
+      transform: translate(2px, 2px);
+      box-shadow: 0px 0px 0px var(--border-color);
+    }
 
     .btn-sm {
       padding: 6px 14px;
       border-radius: var(--radius-pill);
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 800;
+      border: 2px solid var(--border-color);
+      box-shadow: 2px 2px 0px var(--border-color);
+      cursor: pointer;
+      transition: var(--spring-transition);
     }
 
-    .btn-danger { background: #EF4444; color: #FFF; }
-    .btn-secondary { background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-main); }
+    .btn-sm:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 3px 3px 0px var(--border-color);
+    }
+
+    .btn-danger { background: #FF5A5F; color: #FFFFFF; }
+    .btn-secondary { background: var(--neo-cyan); color: #000000; }
     
-    /* Table */
+    /* Neubrutalism Table */
     .admin-table {
       width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-top: 24px;
+      border: var(--border-neo);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-neo-sm);
     }
     
     .admin-table th, .admin-table td {
       padding: 14px 16px;
       text-align: left;
-      border-bottom: 1px solid var(--border-color);
+      border-bottom: 2px solid var(--border-color);
       font-size: 14px;
     }
     
     .admin-table th {
-      font-weight: 600;
-      color: var(--text-dim);
+      background: var(--neo-yellow);
+      color: #000000;
+      font-weight: 800;
       text-transform: uppercase;
       font-size: 12px;
+      letter-spacing: 0.05em;
+      border-right: 2px solid var(--border-color);
+    }
+
+    .admin-table th:last-child {
+      border-right: none;
+    }
+
+    .admin-table td {
+      border-right: 2px solid var(--border-color);
+      background: var(--bg-card);
+    }
+
+    .admin-table td:last-child {
+      border-right: none;
+    }
+
+    .admin-table tr:last-child td {
+      border-bottom: none;
     }
     
     .table-thumb {
       width: 60px;
-      height: 40px;
+      height: 42px;
       object-fit: cover;
       border-radius: 6px;
-      border: 1px solid var(--border-color);
+      border: 2px solid var(--border-color);
+      box-shadow: 2px 2px 0px var(--border-color);
     }
 
     .admin-header {

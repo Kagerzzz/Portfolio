@@ -234,7 +234,7 @@ function renderProjects() {
   `).join("");
 }
 
-/* 3D Parallax Mouse Tilt Animation */
+/* 3D Parallax Mouse Tilt Animation with Neubrutalist Hard Shadow */
 function init3DParallaxTilt() {
   const cards = document.querySelectorAll(".project-item");
   cards.forEach(card => {
@@ -249,16 +249,21 @@ function init3DParallaxTilt() {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
       
-      const rotateX = ((y - centerY) / centerY) * -8;
-      const rotateY = ((x - centerX) / centerX) * 8;
+      const rotateX = ((y - centerY) / centerY) * -6;
+      const rotateY = ((x - centerX) / centerX) * 6;
       
-      img.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale(1.1) translateY(-10px)`;
-      img.style.filter = `drop-shadow(${(-rotateY * 1.5).toFixed(1)}px ${(rotateX * 1.5 + 20).toFixed(1)}px 35px rgba(0,0,0,0.22))`;
+      const shadowX = Math.round(-rotateY * 1.2 + 4);
+      const shadowY = Math.round(rotateX * 1.2 + 6);
+      
+      img.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale(1.05) translateY(-6px)`;
+      img.style.boxShadow = `${shadowX}px ${shadowY}px 0px var(--border-color)`;
+      img.style.filter = "none";
     });
 
     card.addEventListener("mouseleave", () => {
       img.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1) translateY(0px)";
-      img.style.filter = "drop-shadow(0 10px 20px rgba(0,0,0,0.12))";
+      img.style.boxShadow = "var(--shadow-neo-sm)";
+      img.style.filter = "none";
     });
   });
 }
