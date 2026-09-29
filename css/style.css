@@ -889,10 +889,12 @@ button {
   box-shadow: var(--shadow-neo-md);
 }
 
+.job-theme-current { border-left: 8px solid #00F5D4; }
 .job-theme-0 { border-left: 8px solid #FFDE59; }
 .job-theme-1 { border-left: 8px solid #FF90E8; }
 .job-theme-2 { border-left: 8px solid #4CC9F0; }
 .job-theme-3 { border-left: 8px solid #70E000; }
+.job-theme-4 { border-left: 8px solid #9B5DE5; }
 
 .cv-job-header {
   display: flex;
