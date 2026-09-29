@@ -6,11 +6,11 @@
   <title>CV Hiếu Thân - Product & UI/UX Designer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Space+Grotesk:wght@700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
   <style>
     @page {
       size: A4 portrait;
-      margin: 10mm 12mm 10mm 12mm;
+      margin: 8mm;
     }
 
     * {
@@ -23,310 +23,419 @@
 
     body {
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: #FFFFFF;
-      color: #111827;
+      background-color: #F8F6F0;
+      color: #000000;
       line-height: 1.5;
       font-size: 11.5px;
-      padding: 24px;
+      padding: 16px;
     }
 
-    .cv-sheet {
-      max-width: 860px;
+    /* Main Window Shell (Neubrutalism OS Frame) */
+    .cv-window {
+      max-width: 900px;
       margin: 0 auto;
       background: #FFFFFF;
-      border: 2px solid #111827;
-      border-radius: 12px;
-      padding: 28px 32px;
-      box-shadow: 4px 4px 0px #111827;
-    }
-
-    /* Top Header */
-    .header-layout {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 24px;
-      padding-bottom: 20px;
-      border-bottom: 2px solid #111827;
-      margin-bottom: 20px;
-    }
-
-    .header-identity {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .avatar-frame {
-      width: 88px;
-      height: 88px;
-      border-radius: 50%;
-      border: 2.5px solid #111827;
+      border: 3px solid #000000;
+      border-radius: 16px;
+      box-shadow: 6px 6px 0px #000000;
       overflow: hidden;
-      background: #000;
-      flex-shrink: 0;
     }
 
-    .avatar-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: 50% 12%;
-      display: block;
-    }
-
-    .identity-text h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 28px;
-      line-height: 1.15;
-      color: #111827;
-      margin-bottom: 4px;
-    }
-
-    .role-tag {
-      display: inline-block;
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
+    /* Retro OS Header Bar */
+    .os-bar {
       background: #FFDE59;
-      color: #111827;
-      padding: 3px 10px;
-      border: 1.5px solid #111827;
-      border-radius: 6px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    /* Contact Details Column */
-    .header-contact {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      font-size: 11px;
-      flex-shrink: 0;
-      background: #F9FAFB;
-      border: 1.5px solid #E5E7EB;
-      border-radius: 8px;
-      padding: 10px 14px;
-    }
-
-    .contact-item {
+      border-bottom: 3px solid #000000;
+      padding: 9px 18px;
       display: flex;
       align-items: center;
-      gap: 8px;
-      color: #374151;
-      font-weight: 600;
+      justify-content: space-between;
     }
 
-    .contact-item a {
-      color: #111827;
-      text-decoration: none;
-      font-weight: 700;
+    .os-controls {
+      display: flex;
+      align-items: center;
+      gap: 7px;
     }
 
-    /* Bio Section */
-    .bio-strip {
-      background: #FDFBF7;
-      border-left: 4px solid #FF90E8;
-      border-radius: 0 8px 8px 0;
-      padding: 10px 14px;
-      font-size: 11.5px;
-      line-height: 1.55;
-      color: #374151;
-      margin-bottom: 22px;
+    .os-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid #000000;
+      display: inline-block;
     }
+    .dot-red { background: #FF5E5B; }
+    .dot-yellow { background: #FFAA00; }
+    .dot-green { background: #00F5D4; }
 
-    /* Main Grid */
-    .main-grid {
-      display: grid;
-      grid-template-columns: 240px 1fr;
-      gap: 28px;
-    }
-
-    /* Section Titles */
-    .section-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 12px;
+    .os-title {
+      font-family: 'Space Grotesk', monospace;
       font-weight: 800;
+      font-size: 11px;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: #111827;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 12px;
-      padding-bottom: 4px;
-      border-bottom: 2px solid #111827;
+      color: #000000;
     }
 
-    /* Left Column Elements */
-    .left-col-block {
-      margin-bottom: 22px;
+    .os-badge {
+      background: #000000;
+      color: #00F5D4;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 10px;
+      padding: 3px 12px;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
     }
 
-    .edu-entry {
-      margin-bottom: 10px;
+    /* Bento Grid */
+    .cv-grid {
+      display: grid;
+      grid-template-columns: 310px 1fr;
+      gap: 16px;
+      padding: 16px;
+      background: #FDFBF7;
     }
-    .edu-entry:last-child {
+
+    /* Neubrutalist Bento Cards */
+    .card-neo {
+      background: #FFFFFF;
+      border: 2.5px solid #000000;
+      border-radius: 12px;
+      box-shadow: 3.5px 3.5px 0px #000000;
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+    .card-neo:last-child {
       margin-bottom: 0;
     }
 
-    .edu-year {
-      font-size: 10px;
+    .card-bar {
+      background: #F4F1EA;
+      border-bottom: 2px solid #000000;
+      padding: 6px 14px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 10.5px;
       font-weight: 800;
-      color: #6B7280;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #000000;
+    }
+
+    /* Profile / Identity Card */
+    .profile-wrap {
+      padding: 14px 16px;
+      text-align: center;
+    }
+
+    .avatar-box {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+
+    .avatar-img {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      border: 3px solid #000000;
+      object-fit: cover;
+      object-position: 50% 12%;
+      display: block;
+      box-shadow: 2px 2px 0px #000000;
+      background: #000000;
+    }
+
+    .exp-pill {
+      position: absolute;
+      bottom: -2px;
+      right: -10px;
+      background: #00F5D4;
+      color: #000000;
+      border: 2px solid #000000;
+      border-radius: 999px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 9px;
+      font-weight: 800;
+      padding: 2px 8px;
+      box-shadow: 1.5px 1.5px 0px #000000;
+      transform: rotate(-3deg);
+      white-space: nowrap;
+    }
+
+    .intro-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #666666;
+      margin-bottom: 2px;
+      letter-spacing: 0.05em;
+    }
+
+    .candidate-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 900;
+      line-height: 1.15;
+      color: #000000;
+      margin-bottom: 6px;
+    }
+
+    .title-pill {
+      display: inline-block;
+      padding: 3px 12px;
+      background: #FF90E8;
+      color: #000000;
+      border: 2px solid #000000;
+      border-radius: 999px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      box-shadow: 2px 2px 0px #000000;
+      margin-bottom: 10px;
+    }
+
+    .bio-text {
+      background: #FDFBF7;
+      border: 1.5px solid #000000;
+      border-radius: 8px;
+      padding: 8px 10px;
+      text-align: left;
+      font-size: 11px;
+      line-height: 1.5;
+      color: #222222;
+    }
+
+    /* Contact Details List (High Readability) */
+    .contact-list {
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11.5px;
+      color: #111111;
+    }
+
+    .contact-icon {
+      font-size: 14px;
+      width: 20px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .contact-val {
+      font-weight: 700;
+      color: #000000;
+      word-break: break-all;
+    }
+
+    .contact-val a {
+      color: #000000;
+      text-decoration: underline;
+      text-decoration-thickness: 1.5px;
+    }
+
+    /* Education List */
+    .edu-box {
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .edu-card-item {
+      border-left: 4px solid #00F5D4;
+      padding-left: 10px;
+    }
+    .edu-card-item.mirr {
+      border-left-color: #FF90E8;
+    }
+
+    .edu-period {
+      font-size: 9.5px;
+      font-weight: 800;
+      color: #666666;
       letter-spacing: 0.04em;
     }
 
-    .edu-school {
-      font-size: 12px;
-      font-weight: 700;
-      color: #111827;
+    .edu-name {
+      font-size: 12.5px;
+      font-weight: 800;
+      color: #000000;
     }
 
-    .edu-degree {
+    .edu-field {
       font-size: 11px;
-      color: #4B5563;
+      color: #333333;
     }
 
-    /* Skill Badges */
-    .skills-flex {
+    /* Tools & Expertise Stack */
+    .tools-box {
+      padding: 12px 14px;
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
     }
 
-    .skill-chip {
+    .tool-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 9px;
+      background: #FFFFFF;
+      border: 1.5px solid #000000;
+      border-radius: 999px;
       font-size: 10.5px;
-      font-weight: 700;
-      background: #F3F4F6;
-      color: #1F2937;
-      border: 1px solid #D1D5DB;
-      padding: 3px 8px;
-      border-radius: 6px;
+      font-weight: 800;
+      box-shadow: 1.5px 1.5px 0px #000000;
     }
 
-    .skill-chip.highlight {
-      background: #FEF3C7;
-      border-color: #F59E0B;
-      color: #92400E;
+    .tool-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      border: 1px solid #000000;
     }
 
-    .skill-chip.tech {
-      background: #ECFDF5;
-      border-color: #10B981;
-      color: #065F46;
+    /* Right Column: Work Experience Timeline */
+    .exp-column {
+      height: 100%;
     }
 
-    /* Right Column: Work Experience */
-    .timeline-wrap {
+    .exp-list {
+      padding: 14px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 12px;
     }
 
-    .job-item {
-      padding-left: 14px;
-      border-left: 3px solid #E5E7EB;
-      position: relative;
+    .job-entry {
+      background: #FFFFFF;
+      border: 2px solid #000000;
+      border-radius: 10px;
+      padding: 12px 14px;
+      box-shadow: 2.5px 2.5px 0px #000000;
     }
 
-    .job-item.current-job {
-      border-left: 3.5px solid #10B981;
+    .job-entry.current {
+      border-left: 7px solid #00F5D4;
+      background: #FCFFFE;
     }
+    .job-entry.vgs { border-left: 7px solid #FFDE59; }
+    .job-entry.novatech { border-left: 7px solid #FF90E8; }
+    .job-entry.global { border-left: 7px solid #4CC9F0; }
 
-    .job-header {
+    .job-top-bar {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 4px;
-      flex-wrap: wrap;
-      gap: 6px;
+      align-items: flex-start;
+      margin-bottom: 6px;
+      gap: 8px;
     }
 
-    .job-role {
-      font-size: 14px;
-      font-weight: 800;
-      color: #111827;
+    .job-role-text {
+      font-size: 14.5px;
+      font-weight: 900;
+      color: #000000;
+      line-height: 1.2;
     }
 
-    .job-company {
+    .job-company-text {
       font-size: 12px;
-      font-weight: 600;
-      color: #4B5563;
+      font-weight: 700;
+      color: #333333;
     }
 
-    .job-period {
-      font-size: 10px;
+    .job-pill {
+      display: inline-block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 9.5px;
       font-weight: 800;
-      color: #374151;
-      background: #F3F4F6;
-      border: 1px solid #D1D5DB;
-      padding: 2px 7px;
-      border-radius: 4px;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.04em;
+      padding: 3px 9px;
+      border: 1.5px solid #000000;
+      border-radius: 999px;
+      background: #F0EDE6;
+      color: #000000;
+      white-space: nowrap;
     }
 
-    .job-period.active-tag {
-      background: #D1FAE5;
-      border-color: #10B981;
-      color: #065F46;
+    .job-pill.active {
+      background: #00F5D4;
     }
 
     .job-bullets {
       margin: 0;
-      padding-left: 16px;
+      padding-left: 17px;
       font-size: 11px;
       line-height: 1.5;
-      color: #374151;
+      color: #1A202C;
     }
 
     .job-bullets li {
-      margin-bottom: 4px;
+      margin-bottom: 3.5px;
     }
     .job-bullets li:last-child {
       margin-bottom: 0;
     }
 
-    /* Action bar on screen */
-    .floating-nav {
+    /* Screen action buttons */
+    .screen-actions {
       position: fixed;
-      bottom: 24px;
-      right: 24px;
+      bottom: 20px;
+      right: 20px;
       display: flex;
       gap: 12px;
-      z-index: 1000;
+      z-index: 9999;
     }
 
-    .nav-btn {
+    .btn-neo {
       background: #FFDE59;
-      color: #111827;
-      border: 2px solid #111827;
+      color: #000000;
+      border: 2.5px solid #000000;
       border-radius: 999px;
       padding: 10px 20px;
+      font-family: 'Space Grotesk', sans-serif;
       font-size: 13px;
       font-weight: 800;
-      box-shadow: 3px 3px 0px #111827;
+      box-shadow: 3.5px 3.5px 0px #000000;
       cursor: pointer;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      transition: transform 0.15s ease;
+    }
+
+    .btn-neo:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 5px 5px 0px #000000;
+      background: #00F5D4;
     }
 
     @media print {
       body {
-        padding: 0;
-        background: #FFFFFF !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        background: transparent !important;
       }
-      .cv-sheet {
-        border: none;
-        box-shadow: none;
-        padding: 0;
-        max-width: 100%;
-        border-radius: 0;
+      .cv-window {
+        max-width: 100% !important;
+        border: 2.5px solid #000000 !important;
+        border-radius: 12px !important;
+        box-shadow: none !important;
       }
-      .floating-nav {
+      .screen-actions {
         display: none !important;
       }
     }
@@ -334,162 +443,188 @@
 </head>
 <body>
 
-  <!-- Controls (hidden on print) -->
-  <div class="floating-nav">
-    <button class="nav-btn" onclick="window.print()">🖨️ In hoặc Lưu PDF</button>
-    <a href="index.html#cv" class="nav-btn" style="background: #FFFFFF;">← Về Portfolio</a>
+  <!-- Screen Actions (hidden when printing) -->
+  <div class="screen-actions">
+    <button class="btn-neo" onclick="window.print()">🖨️ In hoặc Lưu PDF</button>
+    <a href="index.html#cv" class="btn-neo" style="background: #FFFFFF;">← Về Portfolio</a>
   </div>
 
-  <div class="cv-sheet">
-    <!-- Top Header Profile -->
-    <header class="header-layout">
-      <div class="header-identity">
-        <div class="avatar-frame">
-          <img src="assets/avatar-thanhieu.jpg" alt="Hiếu Thân">
-        </div>
-        <div class="identity-text">
-          <h1>Hiếu. Thân</h1>
-          <span class="role-tag">Product & UI/UX Designer</span>
-        </div>
+  <div class="cv-window">
+    <!-- Neubrutalism Retro OS Top Bar -->
+    <header class="os-bar">
+      <div class="os-controls">
+        <span class="os-dot dot-red"></span>
+        <span class="os-dot dot-yellow"></span>
+        <span class="os-dot dot-green"></span>
       </div>
-
-      <div class="header-contact">
-        <div class="contact-item">
-          <span>📱</span> +84 869 183 692
-        </div>
-        <div class="contact-item">
-          <span>✉️</span> thanhieu.work@gmail.com
-        </div>
-        <div class="contact-item">
-          <span>🔗</span> <a href="https://bit.ly/hieuthanz" target="_blank">bit.ly/hieuthanz</a>
-        </div>
-        <div class="contact-item">
-          <span>📍</span> Hoàng Mai, Hà Nội
-        </div>
-        <div class="contact-item">
-          <span>🎂</span> 13/03/2001
-        </div>
-      </div>
+      <div class="os-title">thanhieu.designer // portfolio.neubrutalism.cv</div>
+      <div class="os-badge">OPEN TO WORK ✦</div>
     </header>
 
-    <!-- Professional Bio Statement -->
-    <div class="bio-strip">
-      Là một nhà thiết kế với hơn 3 năm kinh nghiệm, mình dành niềm đam mê lớn với thiết kế ứng dụng và phát triển sản phẩm. Mình không bao giờ ngừng học cách trở thành phiên bản tốt nhất của bản thân. Thật tốt nếu niềm đam mê và kiến thức của mình đóng góp vào sự phát triển của doanh nghiệp bạn. See you soon! ~~
-    </div>
-
-    <!-- Main Content Layout -->
-    <main class="main-grid">
-      <!-- Left Column: Education & Skills -->
-      <aside class="left-col">
-        <!-- Education -->
-        <section class="left-col-block">
-          <h2 class="section-title">🎓 Học Vấn</h2>
-          <div class="edu-entry">
-            <div class="edu-year">2019 — 2024</div>
-            <div class="edu-school">Đại học Thăng Long</div>
-            <div class="edu-degree">Computer Science (Khoa học Máy tính)</div>
+    <!-- Bento Grid Content -->
+    <main class="cv-grid">
+      <!-- Left Bento Column -->
+      <aside class="col-left">
+        <!-- Identity Card -->
+        <section class="card-neo">
+          <div class="card-bar">
+            <span>id://candidate</span>
+            <span>ACTIVE</span>
           </div>
-          <div class="edu-entry" style="margin-top: 10px;">
-            <div class="edu-year">2023</div>
-            <div class="edu-school">Mirr Studio</div>
-            <div class="edu-degree">Comprehensive UI Design Course</div>
-          </div>
-        </section>
-
-        <!-- Tools & Stack -->
-        <section class="left-col-block">
-          <h2 class="section-title">🛠️ Công Cụ & Kỹ Năng</h2>
-          <div class="skills-flex">
-            <span class="skill-chip highlight">Figma</span>
-            <span class="skill-chip highlight">Photoshop</span>
-            <span class="skill-chip highlight">Illustrator</span>
-            <span class="skill-chip">Canva</span>
-            <span class="skill-chip">Premiere Pro</span>
-            <span class="skill-chip">UI/UX & Wireframe</span>
-            <span class="skill-chip">Design System</span>
-            <span class="skill-chip">Print & POD</span>
-            <span class="skill-chip">Web / Mobile App</span>
-            <span class="skill-chip tech">Claude / AI Prototyping</span>
+          <div class="profile-wrap">
+            <div class="avatar-box">
+              <img src="assets/avatar-thanhieu.jpg" alt="Hiếu Thân" class="avatar-img">
+              <span class="exp-pill">3+ YEARS EXP</span>
+            </div>
+            <div class="intro-label">Hello, I'm</div>
+            <h1 class="candidate-name">Hiếu. Thân</h1>
+            <div class="title-pill">UI/UX & Product Designer</div>
+            <div class="bio-text">
+              "Là một nhà thiết kế với hơn 3 năm kinh nghiệm, mình dành niềm đam mê lớn với thiết kế ứng dụng và phát triển sản phẩm. Mình không bao giờ ngừng học cách trở thành phiên bản tốt nhất của bản thân. Thật tốt nếu niềm đam mê và kiến thức của mình đóng góp vào sự phát triển của doanh nghiệp bạn. See you soon! ~~"
+            </div>
           </div>
         </section>
 
-        <!-- Highlights -->
-        <section class="left-col-block">
-          <h2 class="section-title">✦ Thế Mạnh</h2>
-          <div style="font-size: 11px; line-height: 1.6; color: #4B5563;">
-            <p>• Tư duy sản phẩm và trải nghiệm người dùng (UX flow).</p>
-            <p>• Nắm chắc kiến thức khoa học máy tính, phối hợp trơn tru với Dev.</p>
-            <p>• Ứng dụng AI tăng tốc quy trình wireframing & prototype.</p>
+        <!-- Contact Info Card (Clean & Easy to Read) -->
+        <section class="card-neo">
+          <div class="card-bar">
+            <span>📍 Liên hệ</span>
+            <span>contact.info</span>
+          </div>
+          <div class="contact-list">
+            <div class="contact-row">
+              <span class="contact-icon">📱</span>
+              <span class="contact-val">+84 869 183 692</span>
+            </div>
+            <div class="contact-row">
+              <span class="contact-icon">✉️</span>
+              <span class="contact-val">thanhieu.work@gmail.com</span>
+            </div>
+            <div class="contact-row">
+              <span class="contact-icon">🔗</span>
+              <span class="contact-val"><a href="https://bit.ly/hieuthanz" target="_blank">bit.ly/hieuthanz</a></span>
+            </div>
+            <div class="contact-row">
+              <span class="contact-icon">📍</span>
+              <span class="contact-val">Hoàng Mai, Hà Nội</span>
+            </div>
+            <div class="contact-row">
+              <span class="contact-icon">🎂</span>
+              <span class="contact-val">13/03/2001</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Education Card -->
+        <section class="card-neo">
+          <div class="card-bar">
+            <span>🎓 Học vấn</span>
+            <span>edu.history</span>
+          </div>
+          <div class="edu-box">
+            <div class="edu-card-item">
+              <div class="edu-period">2019 — 2024</div>
+              <div class="edu-name">Đại học Thăng Long</div>
+              <div class="edu-field">Computer Science (Khoa học Máy tính)</div>
+            </div>
+            <div class="edu-card-item mirr">
+              <div class="edu-period">2023 — 2023</div>
+              <div class="edu-name">Mirr Studio</div>
+              <div class="edu-field">Comprehensive UI Design Course</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Skills & Stack Card -->
+        <section class="card-neo">
+          <div class="card-bar">
+            <span>🛠️ Kỹ Năng & Công Cụ</span>
+            <span>stack.v2</span>
+          </div>
+          <div class="tools-box">
+            <span class="tool-tag"><span class="tool-dot" style="background:#FF90E8;"></span> Figma</span>
+            <span class="tool-tag"><span class="tool-dot" style="background:#4CC9F0;"></span> Photoshop</span>
+            <span class="tool-tag"><span class="tool-dot" style="background:#FFDE59;"></span> Illustrator</span>
+            <span class="tool-tag"><span class="tool-dot" style="background:#70E000;"></span> Canva</span>
+            <span class="tool-tag"><span class="tool-dot" style="background:#9B5DE5;"></span> Premiere Pro</span>
+            <span class="tool-tag"><span class="tool-dot" style="background:#FF6B6B;"></span> UI/UX Design</span>
+            <span class="tool-tag"><span class="tool-dot" style="background:#F15BB5;"></span> Print & POD</span>
+            <span class="tool-tag"><span class="tool-dot" style="background:#00F5D4;"></span> Web / App</span>
+            <span class="tool-tag" style="background:#FFEEDD; border-color:#FF851B;"><span class="tool-dot" style="background:#FF851B;"></span> Claude / AI Tools</span>
           </div>
         </section>
       </aside>
 
-      <!-- Right Column: Work Experience -->
-      <section class="right-col">
-        <h2 class="section-title">💼 Kinh Nghiệm Làm Việc</h2>
-        
-        <div class="timeline-wrap">
-          <!-- Job 1 (SandboxVN) -->
-          <article class="job-item current-job">
-            <div class="job-header">
-              <div>
-                <span class="job-role">Product Designer</span>
-                <span class="job-company"> · SandboxVN</span>
+      <!-- Right Bento Column: Work Experience -->
+      <section class="col-right">
+        <div class="card-neo exp-column">
+          <div class="card-bar">
+            <span>💼 Kinh Nghiệm Làm Việc Chuyên Sâu</span>
+            <span>timeline.log</span>
+          </div>
+          <div class="exp-list">
+            <!-- Job 1 (SandboxVN) -->
+            <article class="job-entry current">
+              <div class="job-top-bar">
+                <div>
+                  <div class="job-role-text">Product Designer</div>
+                  <div class="job-company-text">🏢 SandboxVN</div>
+                </div>
+                <span class="job-pill active">03/2025 — NOW · MIDDLE</span>
               </div>
-              <span class="job-period active-tag">03/2025 — HIỆN TẠI · MIDDLE</span>
-            </div>
-            <ul class="job-bullets">
-              <li>Phân tích yêu cầu và nhu cầu người dùng, làm rõ nghiệp vụ cùng khách hàng/sales để xác định bài toán và phạm vi tính năng. Chuyển hóa yêu cầu thành giải pháp sản phẩm, user flow và thiết kế UI/UX trên Figma.</li>
-              <li>Phối hợp với Developer trong quá trình handoff, giải thích yêu cầu và đảm bảo tính năng được triển khai đúng nghiệp vụ.</li>
-              <li>Kiểm tra, nghiệm thu sản phẩm sau triển khai và phối hợp xử lý các vấn đề phát sinh.</li>
-              <li>Ứng dụng AI tools như Claude để prototype và xây dựng nhanh frontend hỗ trợ kiểm chứng và hoàn thiện giải pháp.</li>
-            </ul>
-          </article>
+              <ul class="job-bullets">
+                <li>Phân tích yêu cầu và nhu cầu người dùng, làm rõ nghiệp vụ cùng khách hàng/sales để xác định bài toán và phạm vi tính năng. Chuyển hóa yêu cầu thành giải pháp sản phẩm, user flow và thiết kế UI/UX trên Figma.</li>
+                <li>Phối hợp với Developer trong quá trình handoff, giải thích yêu cầu và đảm bảo tính năng được triển khai đúng nghiệp vụ.</li>
+                <li>Kiểm tra, nghiệm thu sản phẩm sau triển khai và phối hợp xử lý các vấn đề phát sinh.</li>
+                <li>Ứng dụng AI tools như Claude để prototype và xây dựng nhanh frontend hỗ trợ kiểm chứng và hoàn thiện giải pháp.</li>
+              </ul>
+            </article>
 
-          <!-- Job 2 (VGS) -->
-          <article class="job-item">
-            <div class="job-header">
-              <div>
-                <span class="job-role">UI/UX Designer</span>
-                <span class="job-company"> · VGS Software Company</span>
+            <!-- Job 2 (VGS) -->
+            <article class="job-entry vgs">
+              <div class="job-top-bar">
+                <div>
+                  <div class="job-role-text">UI/UX Designer</div>
+                  <div class="job-company-text">🏢 VGS Software Company</div>
+                </div>
+                <span class="job-pill">05/2024 — 02/2025 · JUNIOR</span>
               </div>
-              <span class="job-period">05/2024 — 02/2025 · JUNIOR</span>
-            </div>
-            <ul class="job-bullets">
-              <li>Trao đổi với khách hàng, lên wireframe, thiết kế UI/UX cho website & mobile app theo yêu cầu.</li>
-              <li>Khảo nghiệm và chọn lọc, tối ưu hóa giao diện người dùng nhằm nâng cao trải nghiệm khách hàng.</li>
-            </ul>
-          </article>
+              <ul class="job-bullets">
+                <li>Trao đổi với khách hàng, lên wireframe, thiết kế UI/UX cho website & mobile app theo yêu cầu.</li>
+                <li>Khảo nghiệm và chọn lọc, tối ưu hóa giao diện người dùng nhằm nâng cao trải nghiệm khách hàng.</li>
+              </ul>
+            </article>
 
-          <!-- Job 3 (NovaTech) -->
-          <article class="job-item">
-            <div class="job-header">
-              <div>
-                <span class="job-role">UI/UX Designer</span>
-                <span class="job-company"> · NovaTech Solutions</span>
+            <!-- Job 3 (NovaTech) -->
+            <article class="job-entry novatech">
+              <div class="job-top-bar">
+                <div>
+                  <div class="job-role-text">UI/UX Designer</div>
+                  <div class="job-company-text">🏢 NovaTech Solutions</div>
+                </div>
+                <span class="job-pill">03/2023 — 05/2024 · FRESHER</span>
               </div>
-              <span class="job-period">03/2023 — 05/2024 · FRESHER</span>
-            </div>
-            <ul class="job-bullets">
-              <li>Lên ý tưởng và thiết kế UI/UX web, app, landing page theo yêu cầu của khách hàng trong lĩnh vực e-commerce.</li>
-              <li>Phối hợp với team marketing thiết kế các ấn phẩm phục vụ hoạt động truyền thông và quảng bá sản phẩm.</li>
-            </ul>
-          </article>
+              <ul class="job-bullets">
+                <li>Lên ý tưởng và thiết kế UI/UX web, app, landing page theo yêu cầu của khách hàng trong lĩnh vực e-commerce.</li>
+                <li>Phối hợp với team marketing thiết kế các ấn phẩm phục vụ hoạt động truyền thông và quảng bá sản phẩm.</li>
+              </ul>
+            </article>
 
-          <!-- Job 4 (Global Printing) -->
-          <article class="job-item">
-            <div class="job-header">
-              <div>
-                <span class="job-role">Graphic Designer</span>
-                <span class="job-company"> · Global Printing CO.,LTD</span>
+            <!-- Job 4 (Global Printing) -->
+            <article class="job-entry global">
+              <div class="job-top-bar">
+                <div>
+                  <div class="job-role-text">Graphic Designer</div>
+                  <div class="job-company-text">🏢 Global Printing CO.,LTD</div>
+                </div>
+                <span class="job-pill">11/2021 — 02/2023 · JUNIOR</span>
               </div>
-              <span class="job-period">11/2021 — 02/2023 · JUNIOR</span>
-            </div>
-            <ul class="job-bullets">
-              <li>Lên ý tưởng và thiết kế ấn phẩm như box, label, bags, card, khuôn cắt, v.v... phê duyệt màu sắc thành phẩm và chất lượng.</li>
-              <li>Thiết kế trong lĩnh vực marketing như poster, banner, logo, brand identity phục vụ thị trường xuất khẩu.</li>
-            </ul>
-          </article>
+              <ul class="job-bullets">
+                <li>Lên ý tưởng và thiết kế ấn phẩm như box, label, bags, card, khuôn cắt, v.v... phê duyệt màu sắc thành phẩm và chất lượng.</li>
+                <li>Thiết kế trong lĩnh vực marketing như poster, banner, logo, brand identity phục vụ thị trường xuất khẩu.</li>
+              </ul>
+            </article>
+          </div>
         </div>
       </section>
     </main>
