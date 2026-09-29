@@ -1,5 +1,6 @@
 /**
- * Sanvithi.com Portfolio Interactive Logic & Framer Spring 3D Tilt Hover
+ * Sanvithi.com Portfolio - Creative Neubrutalism Engine
+ * Confetti Particles, Live Clocks, Dynamic Cursor, 3D Parallax Tilt & Supabase DB
  */
 
 // Hero Questions & Interactive Answers
@@ -110,11 +111,14 @@ let activeProjects = [...PROJECTS_DATA];
 // Initialize Events
 document.addEventListener("DOMContentLoaded", () => {
   initThemeToggle();
+  initMoodSwitcher();
+  initLiveClocks();
   initHeroTabs();
   renderProjects();
   initModalEvents();
   initMouseFollowingBadge();
   init3DParallaxTilt();
+  initConfettiEngine();
   
   // Asynchronously fetch dynamic data from Supabase DB if available
   fetchProjectsFromSupabase();
@@ -160,7 +164,7 @@ async function fetchProjectsFromSupabase() {
   }
 }
 
-/* Theme Toggle */
+/* Theme Toggle (Light / Dark) */
 function initThemeToggle() {
   const themeBtn = document.getElementById("theme-toggle");
   const savedTheme = localStorage.getItem("sanvithi_theme") || "light";
@@ -182,8 +186,48 @@ function updateThemeIcon(theme) {
   const icon = document.getElementById("theme-icon");
   if (!icon) return;
   icon.innerHTML = theme === "dark"
-    ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`
-    : `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+    ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`
+    : `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+}
+
+/* Mood Switcher (Color Palette Customizer) */
+function initMoodSwitcher() {
+  const moodDots = document.querySelectorAll(".mood-dot");
+  const savedMood = localStorage.getItem("sanvithi_mood") || "default";
+  document.documentElement.setAttribute("data-mood", savedMood);
+
+  moodDots.forEach(dot => {
+    if (dot.getAttribute("data-set-mood") === savedMood) dot.classList.add("active");
+    else dot.classList.remove("active");
+
+    dot.addEventListener("click", () => {
+      moodDots.forEach(d => d.classList.remove("active"));
+      dot.classList.add("active");
+      const selectedMood = dot.getAttribute("data-set-mood");
+      document.documentElement.setAttribute("data-mood", selectedMood);
+      localStorage.setItem("sanvithi_mood", selectedMood);
+      fireConfetti();
+    });
+  });
+}
+
+/* Live Dual Clocks (San Francisco & Bangalore) */
+function initLiveClocks() {
+  const sfEl = document.getElementById("sf-time");
+  const blrEl = document.getElementById("blr-time");
+  if (!sfEl || !blrEl) return;
+
+  function tick() {
+    const now = new Date();
+    const sfTime = now.toLocaleTimeString("en-US", { timeZone: "America/Los_Angeles", hour: "2-digit", minute: "2-digit", hour12: true });
+    const blrTime = now.toLocaleTimeString("en-US", { timeZone: "Asia/Kolkata", hour: "2-digit", minute: "2-digit", hour12: true });
+
+    sfEl.innerText = `SF ${sfTime}`;
+    blrEl.innerText = `BLR ${blrTime}`;
+  }
+
+  tick();
+  setInterval(tick, 1000);
 }
 
 /* Hero Tabs */
@@ -208,13 +252,16 @@ function initHeroTabs() {
   });
 }
 
-/* Render Projects Grid */
+/* Render Projects Grid with Retro Number Stamps & Asymmetric Layout */
 function renderProjects() {
   const container = document.getElementById("projects-container");
   if (!container) return;
 
-  container.innerHTML = activeProjects.map(project => `
+  container.innerHTML = activeProjects.map((project, index) => {
+    const numStamp = (index + 1).toString().padStart(2, "0");
+    return `
     <article class="project-item" id="${project.id}" onclick="openCaseStudyModal('${project.id}')">
+      <div class="project-number-stamp">#${numStamp}</div>
       <div class="project-media">
         <img src="${project.image}" alt="${project.title}" class="project-img">
       </div>
@@ -223,15 +270,16 @@ function renderProjects() {
           ${(project.tags || []).map(t => `<span class="tag-pill">${t}</span>`).join("")}
         </div>
         <h2 class="project-title-large">${project.summary}</h2>
-        <div style="font-size: 13px; color: var(--text-dim); margin-bottom: 20px; text-transform: lowercase;">
+        <div style="font-size: 13px; color: var(--text-dim); margin-bottom: 24px; text-transform: lowercase; font-weight: 700;">
           ${(project.tags || []).join(" ∙ ")}
         </div>
         <button class="btn-read-case" onclick="event.stopPropagation(); openCaseStudyModal('${project.id}')">
-          read case study ✦
+          explore case study ✦
         </button>
       </div>
     </article>
-  `).join("");
+  `;
+  }).join("");
 }
 
 /* 3D Parallax Mouse Tilt Animation with Neubrutalist Hard Shadow */
@@ -257,18 +305,16 @@ function init3DParallaxTilt() {
       
       img.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale(1.05) translateY(-6px)`;
       img.style.boxShadow = `${shadowX}px ${shadowY}px 0px var(--border-color)`;
-      img.style.filter = "none";
     });
 
     card.addEventListener("mouseleave", () => {
       img.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1) translateY(0px)";
       img.style.boxShadow = "var(--shadow-neo-sm)";
-      img.style.filter = "none";
     });
   });
 }
 
-/* Mouse-Following Floating Badge ("tap me ✦") */
+/* Mouse-Following Floating Badge ("tap me ✦" -> "EXPLORE CASE ↗") */
 function initMouseFollowingBadge() {
   const badge = document.getElementById("floating-badge");
   if (!badge) return;
@@ -281,9 +327,18 @@ function initMouseFollowingBadge() {
   document.addEventListener("mouseover", (e) => {
     const projectCard = e.target.closest(".project-item");
     if (projectCard) {
-      badge.classList.add("visible");
+      badge.classList.add("visible", "explore");
+      badge.innerHTML = "EXPLORE CASE ↗";
     } else {
-      badge.classList.remove("visible");
+      badge.classList.remove("explore");
+      badge.innerHTML = "tap me ✦";
+      
+      const isInteractive = e.target.closest("button, a, .hero-rotating-badge");
+      if (isInteractive) {
+        badge.classList.add("visible");
+      } else {
+        badge.classList.remove("visible");
+      }
     }
   });
 
@@ -292,7 +347,7 @@ function initMouseFollowingBadge() {
   });
 }
 
-/* Modal Case Study */
+/* Modal Case Study with Counter Roll Animation */
 function openCaseStudyModal(id) {
   const p = activeProjects.find(item => item.id === id) || PROJECTS_DATA.find(item => item.id === id);
   if (!p) return;
@@ -302,10 +357,11 @@ function openCaseStudyModal(id) {
 
   content.innerHTML = `
     <img src="${p.image}" alt="${p.title}" class="modal-hero-banner">
-    <div class="project-tags" style="margin-bottom: 12px;">
+    <div class="project-tags" style="margin-bottom: 14px;">
       ${p.tags.map(t => `<span class="tag-pill">${t}</span>`).join("")}
+      <span class="tag-pill" style="background: var(--neo-yellow); font-weight: 800;">VERIFIED CASE STUDY ✦</span>
     </div>
-    <h2 class="font-serif" style="font-size: 2.2rem; margin-bottom: 16px;">${p.title}</h2>
+    <h2 class="font-serif" style="font-size: 2.3rem; margin-bottom: 16px; letter-spacing: -0.02em;">${p.title}</h2>
     
     <div class="modal-metrics-grid">
       ${p.metrics.map(m => `
@@ -316,20 +372,21 @@ function openCaseStudyModal(id) {
       `).join("")}
     </div>
 
-    <div style="font-size: 1rem; color: var(--text-muted); line-height: 1.8;">
-      <h3 class="font-serif" style="font-size: 1.3rem; color: var(--text-main); margin: 24px 0 8px;">Overview</h3>
+    <div style="font-size: 1.05rem; color: var(--text-muted); line-height: 1.8;">
+      <h3 class="font-serif" style="font-size: 1.4rem; color: var(--text-main); margin: 28px 0 10px;">Overview</h3>
       <p>${p.overview}</p>
 
-      <h3 class="font-serif" style="font-size: 1.3rem; color: var(--text-main); margin: 24px 0 8px;">The Problem</h3>
+      <h3 class="font-serif" style="font-size: 1.4rem; color: var(--text-main); margin: 28px 0 10px;">The Challenge</h3>
       <p>${p.challenge}</p>
 
-      <h3 class="font-serif" style="font-size: 1.3rem; color: var(--text-main); margin: 24px 0 8px;">The Solution</h3>
+      <h3 class="font-serif" style="font-size: 1.4rem; color: var(--text-main); margin: 28px 0 10px;">The Solution & Impact</h3>
       <p>${p.solution}</p>
     </div>
   `;
 
   modal.classList.add("active");
   document.body.style.overflow = "hidden";
+  fireConfetti();
 }
 
 function initModalEvents() {
@@ -353,12 +410,15 @@ function closeModal() {
   document.body.style.overflow = "";
 }
 
-function copyEmailToast() {
+/* Copy Email Toast with Confetti Burst */
+function copyEmailToast(event) {
   const email = "sanvithi.saya@gmail.com";
   navigator.clipboard.writeText(email).then(() => {
-    showToast(`email copied: ${email}`);
+    showToast(`email copied: ${email} ✦`);
+    fireConfetti(event);
   }).catch(() => {
-    showToast(`email: ${email}`);
+    showToast(`email: ${email} ✦`);
+    fireConfetti(event);
   });
 }
 
@@ -368,4 +428,93 @@ function showToast(msg) {
   toast.innerText = msg;
   toast.classList.add("show");
   setTimeout(() => toast.classList.remove("show"), 3500);
+}
+
+/* ==========================================================================
+   Lightweight Neubrutalist Confetti Engine (Zero Dependencies)
+   ========================================================================== */
+let confettiParticles = [];
+let confettiCtx = null;
+let confettiAnimationId = null;
+
+function initConfettiEngine() {
+  const canvas = document.getElementById("confetti-canvas");
+  if (!canvas) return;
+  confettiCtx = canvas.getContext("2d");
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener("resize", resize);
+  resize();
+}
+
+function fireConfetti(event = null) {
+  if (!confettiCtx) return;
+  const colors = ["#FFDE59", "#FF90E8", "#70E000", "#4CC9F0", "#FF914D", "#FFFFFF", "#000000"];
+  const startX = event && event.clientX ? event.clientX : window.innerWidth / 2;
+  const startY = event && event.clientY ? event.clientY : window.innerHeight * 0.4;
+
+  const count = 55;
+  for (let i = 0; i < count; i++) {
+    const angle = (Math.PI * 2 * Math.random());
+    const velocity = 5 + Math.random() * 9;
+    confettiParticles.push({
+      x: startX,
+      y: startY,
+      vx: Math.cos(angle) * velocity,
+      vy: Math.sin(angle) * velocity - 3,
+      size: 7 + Math.random() * 8,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      rotation: Math.random() * 360,
+      vRot: (Math.random() - 0.5) * 15,
+      alpha: 1,
+      decay: 0.015 + Math.random() * 0.02
+    });
+  }
+
+  if (!confettiAnimationId) {
+    animateConfetti();
+  }
+}
+
+function animateConfetti() {
+  const canvas = document.getElementById("confetti-canvas");
+  if (!canvas || !confettiCtx) return;
+
+  confettiCtx.clearRect(0, 0, canvas.width, canvas.height);
+
+  for (let i = confettiParticles.length - 1; i >= 0; i--) {
+    const p = confettiParticles[i];
+    p.x += p.vx;
+    p.y += p.vy;
+    p.vy += 0.35; // gravity
+    p.vx *= 0.98; // air resistance
+    p.rotation += p.vRot;
+    p.alpha -= p.decay;
+
+    if (p.alpha <= 0 || p.y > canvas.height) {
+      confettiParticles.splice(i, 1);
+      continue;
+    }
+
+    confettiCtx.save();
+    confettiCtx.globalAlpha = p.alpha;
+    confettiCtx.translate(p.x, p.y);
+    confettiCtx.rotate((p.rotation * Math.PI) / 180);
+    confettiCtx.fillStyle = p.color;
+    confettiCtx.strokeStyle = "#000000";
+    confettiCtx.lineWidth = 1.5;
+    confettiCtx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.7);
+    confettiCtx.strokeRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.7);
+    confettiCtx.restore();
+  }
+
+  if (confettiParticles.length > 0) {
+    confettiAnimationId = requestAnimationFrame(animateConfetti);
+  } else {
+    confettiAnimationId = null;
+    confettiCtx.clearRect(0, 0, canvas.width, canvas.height);
+  }
 }
