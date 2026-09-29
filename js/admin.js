@@ -9,6 +9,7 @@ const DEFAULT_PASSCODE = "admin123";
 document.addEventListener("DOMContentLoaded", () => {
   initAdminAuth();
   initFormListeners();
+  initImageDesigner();
 });
 
 /* 1. Admin Passcode Authentication */
@@ -279,19 +280,51 @@ function changeDocFontSize(size) {
   }
 }
 
+/* Insert Image: Dialog with URL / Local File Picker */
 function insertDocImage() {
-  const url = prompt("Nhập đường dẫn ảnh (URL hoặc assets/saas.png):", "assets/saas.png");
-  if (!url) return;
-  const caption = prompt("Nhập chú thích ảnh (tùy chọn):", "Mockup Giao Diện Dự Án");
-  
-  const html = `
-    <div class="doc-img-block">
-      <img src="${url}" alt="${caption}" class="doc-img">
-      ${caption ? `<div class="doc-caption">${caption}</div>` : ''}
-    </div>
-    <p></p>
-  `;
-  execDocCmd('insertHTML', html);
+  const choice = confirm("Bấm OK để TẢI ẢNH TỪ MÁY TÍNH.\nBấm CANCEL để NHẬP ĐƯỜNG DẪN ẢNH (URL).");
+  if (choice) {
+    const fileInput = document.getElementById("doc-image-file-input");
+    if (fileInput) fileInput.click();
+  } else {
+    const url = prompt("Nhập đường dẫn ảnh (URL hoặc assets/saas.png):", "assets/saas.png");
+    if (!url) return;
+    const caption = prompt("Nhập chú thích ảnh (tùy chọn):", "Ảnh Minh Họa Giao Diện");
+
+    const html = `
+      <div class="doc-img-block align-center">
+        <img src="${url}" alt="${caption || 'Image'}" class="doc-img" style="width: 100%;">
+        ${caption ? `<div class="doc-caption">${caption}</div>` : ''}
+      </div>
+      <p></p>
+    `;
+    execDocCmd('insertHTML', html);
+    showToast("Đã chèn ảnh! Bạn có thể click vào ảnh để thu nhỏ/phóng to tùy thích.");
+  }
+}
+
+/* Local Image File Reader */
+function handleLocalImageFileSelected(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(evt) {
+    const dataUrl = evt.target.result;
+    const caption = prompt("Nhập chú thích ảnh (tùy chọn):", file.name.replace(/\.[^/.]+$/, ""));
+
+    const html = `
+      <div class="doc-img-block align-center">
+        <img src="${dataUrl}" alt="${caption || 'Image'}" class="doc-img" style="width: 100%;">
+        ${caption ? `<div class="doc-caption">${caption}</div>` : ''}
+      </div>
+      <p></p>
+    `;
+    execDocCmd('insertHTML', html);
+    showToast("Đã tải ảnh lên! Hãy click vào ảnh để chỉnh kích thước và căn lề.");
+    e.target.value = ''; // Reset
+  };
+  reader.readAsDataURL(file);
 }
 
 function insertDocTwoColumns() {
@@ -403,4 +436,248 @@ function showToast(msg) {
   toast.innerText = msg;
   toast.classList.add("show");
   setTimeout(() => toast.classList.remove("show"), 3500);
+}
+
+/* ==========================================================================
+   Visual Interactive Image Designer & Resizer Engine
+   - Click to select image
+   - Visual floating toolbar with quick presets (25%, 50%, 75%, 100%)
+   - Zoom -/+ by 10%
+   - Align left, center, right, float with text wrapping
+   - Frame styles (Neubrutalism, Rounded, Minimal)
+   - Interactive corner drag-to-resize handle
+   ========================================================================== */
+
+let activeImage = null;
+
+function initImageDesigner() {
+  const canvas = document.getElementById("project-doc-canvas");
+  const toolbar = document.getElementById("image-designer-bar");
+  const resizeBox = document.getElementById("image-resize-box");
+  const fileInput = document.getElementById("doc-image-file-input");
+
+  if (!canvas || !toolbar || !resizeBox) return;
+
+  // 1. Click on canvas images to select
+  canvas.addEventListener("click", (e) => {
+    const img = e.target.closest("img");
+    if (img && canvas.contains(img)) {
+      e.stopPropagation();
+      selectDocImage(img);
+    } else {
+      deselectDocImage();
+    }
+  });
+
+  // 2. Click outside deselects
+  document.addEventListener("click", (e) => {
+    if (toolbar.contains(e.target) || resizeBox.contains(e.target)) return;
+    if (e.target.closest("#project-doc-canvas img")) return;
+    deselectDocImage();
+  });
+
+  // 3. Keep overlay positioned on scroll or resize
+  const modalArea = document.querySelector(".modal-card");
+  if (modalArea) {
+    modalArea.addEventListener("scroll", updateImageOverlayPosition);
+  }
+  window.addEventListener("scroll", updateImageOverlayPosition, true);
+  window.addEventListener("resize", updateImageOverlayPosition);
+
+  // 4. Corner Drag-to-Resize Handler
+  initCornerDragResize();
+
+  // 5. Direct Local File Upload Handler
+  if (fileInput) {
+    fileInput.addEventListener("change", handleLocalImageFileSelected);
+  }
+}
+
+function selectDocImage(img) {
+  activeImage = img;
+  updateImageOverlayPosition();
+
+  const toolbar = document.getElementById("image-designer-bar");
+  const resizeBox = document.getElementById("image-resize-box");
+  if (toolbar) toolbar.classList.remove("hidden");
+  if (resizeBox) resizeBox.classList.remove("hidden");
+
+  updateImageSizeBadge();
+}
+
+function deselectDocImage() {
+  activeImage = null;
+  const toolbar = document.getElementById("image-designer-bar");
+  const resizeBox = document.getElementById("image-resize-box");
+  if (toolbar) toolbar.classList.add("hidden");
+  if (resizeBox) resizeBox.classList.add("hidden");
+}
+
+function updateImageOverlayPosition() {
+  if (!activeImage) return;
+  const toolbar = document.getElementById("image-designer-bar");
+  const resizeBox = document.getElementById("image-resize-box");
+  if (!toolbar || !resizeBox) return;
+
+  const rect = activeImage.getBoundingClientRect();
+  
+  // Update resize box
+  resizeBox.style.top = `${rect.top}px`;
+  resizeBox.style.left = `${rect.left}px`;
+  resizeBox.style.width = `${rect.width}px`;
+  resizeBox.style.height = `${rect.height}px`;
+
+  // Update floating toolbar position (centered horizontally above image)
+  let toolbarTop = rect.top;
+  if (toolbarTop < 80) {
+    // If too close to viewport top, show below image
+    toolbarTop = rect.bottom + 50;
+  }
+  toolbar.style.top = `${toolbarTop}px`;
+  toolbar.style.left = `${rect.left + rect.width / 2}px`;
+}
+
+function updateImageSizeBadge() {
+  if (!activeImage) return;
+  const badge = document.getElementById("img-size-badge");
+  if (!badge) return;
+
+  const widthStyle = activeImage.style.width;
+  if (widthStyle.includes("%")) {
+    badge.innerText = widthStyle;
+  } else {
+    const parentWidth = activeImage.parentElement.clientWidth || 600;
+    const currentPercent = Math.round((activeImage.clientWidth / parentWidth) * 100);
+    badge.innerText = `${Math.min(100, Math.max(10, currentPercent))}%`;
+  }
+}
+
+/* Quick Resize Presets (25%, 50%, 75%, 100%) */
+function resizeActiveImage(ratio) {
+  if (!activeImage) return;
+  const percent = Math.round(ratio * 100);
+  activeImage.style.width = `${percent}%`;
+  activeImage.style.maxWidth = "100%";
+  activeImage.style.height = "auto";
+  updateImageSizeBadge();
+  setTimeout(updateImageOverlayPosition, 50);
+}
+
+/* Fine-Grained Zoom (+10% / -10%) */
+function zoomActiveImage(delta) {
+  if (!activeImage) return;
+  const parentWidth = activeImage.parentElement.clientWidth || 600;
+  let currentPercent = Math.round((activeImage.clientWidth / parentWidth) * 100);
+  if (activeImage.style.width && activeImage.style.width.includes("%")) {
+    currentPercent = parseInt(activeImage.style.width, 10);
+  }
+
+  let newPercent = Math.min(100, Math.max(15, currentPercent + delta));
+  activeImage.style.width = `${newPercent}%`;
+  activeImage.style.maxWidth = "100%";
+  activeImage.style.height = "auto";
+  updateImageSizeBadge();
+  setTimeout(updateImageOverlayPosition, 50);
+}
+
+/* Alignment & Text Wrapping */
+function alignActiveImage(mode) {
+  if (!activeImage) return;
+  let block = activeImage.closest(".doc-img-block");
+  
+  // If not inside .doc-img-block, wrap it
+  if (!block) {
+    block = document.createElement("div");
+    block.className = "doc-img-block";
+    activeImage.parentNode.insertBefore(block, activeImage);
+    block.appendChild(activeImage);
+  }
+
+  block.classList.remove("align-left", "align-center", "align-right", "float-left", "float-right");
+
+  if (mode === "left") {
+    block.classList.add("align-left");
+  } else if (mode === "center") {
+    block.classList.add("align-center");
+  } else if (mode === "right") {
+    block.classList.add("align-right");
+  } else if (mode === "float-left") {
+    block.classList.add("float-left");
+  } else if (mode === "float-right") {
+    block.classList.add("float-right");
+  }
+
+  updateImageOverlayPosition();
+}
+
+/* Frame Styles: Default -> Rounded -> Minimal -> Card */
+function toggleActiveImageFrame() {
+  if (!activeImage) return;
+
+  if (activeImage.classList.contains("style-rounded")) {
+    activeImage.classList.remove("style-rounded");
+    activeImage.classList.add("style-minimal");
+    showToast("Kiểu ảnh: Tối giản (Không viền)");
+  } else if (activeImage.classList.contains("style-minimal")) {
+    activeImage.classList.remove("style-minimal");
+    activeImage.classList.add("style-card");
+    showToast("Kiểu ảnh: Thẻ Neubrutalism Đậm");
+  } else if (activeImage.classList.contains("style-card")) {
+    activeImage.classList.remove("style-card");
+    showToast("Kiểu ảnh: Chuẩn Mặc Định");
+  } else {
+    activeImage.classList.add("style-rounded");
+    showToast("Kiểu ảnh: Bo Tròn Mềm Mại");
+  }
+
+  updateImageOverlayPosition();
+}
+
+/* Delete Image */
+function deleteActiveImage() {
+  if (!activeImage) return;
+  const block = activeImage.closest(".doc-img-block");
+  if (block) block.remove();
+  else activeImage.remove();
+  deselectDocImage();
+  showToast("Đã xóa ảnh!");
+}
+
+/* Interactive Drag-to-Resize */
+function initCornerDragResize() {
+  const handles = document.querySelectorAll(".resize-handle");
+  handles.forEach(handle => {
+    handle.addEventListener("mousedown", (e) => {
+      if (!activeImage) return;
+      e.preventDefault();
+      e.stopPropagation();
+
+      const startX = e.clientX;
+      const startWidth = activeImage.clientWidth;
+      const parentWidth = activeImage.parentElement.clientWidth || 600;
+      const isLeft = handle.classList.contains("handle-bl");
+
+      function onMouseMove(moveEvent) {
+        const deltaX = moveEvent.clientX - startX;
+        const widthChange = isLeft ? -deltaX * 2 : deltaX * 2;
+        let newWidth = Math.max(80, Math.min(parentWidth, startWidth + widthChange));
+        let newPercent = Math.round((newWidth / parentWidth) * 100);
+
+        activeImage.style.width = `${newPercent}%`;
+        activeImage.style.maxWidth = "100%";
+        activeImage.style.height = "auto";
+
+        updateImageSizeBadge();
+        updateImageOverlayPosition();
+      }
+
+      function onMouseUp() {
+        document.removeEventListener("mousemove", onMouseMove);
+        document.removeEventListener("mouseup", onMouseUp);
+      }
+
+      document.addEventListener("mousemove", onMouseMove);
+      document.addEventListener("mouseup", onMouseUp);
+    });
+  });
 }

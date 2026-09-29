@@ -180,6 +180,120 @@
     }
 
     .hidden { display: none !important; }
+
+    /* Floating Visual Image Designer Toolbar */
+    .image-designer-bar {
+      position: fixed;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: #000000;
+      color: #FFFFFF;
+      border: 2.5px solid var(--neo-yellow);
+      border-radius: var(--radius-pill);
+      box-shadow: 4px 4px 0px var(--neo-yellow);
+      z-index: 100000;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 700;
+      transform: translate(-50%, -100%);
+      margin-top: -12px;
+      pointer-events: auto;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .designer-badge {
+      background: var(--neo-yellow);
+      color: #000000;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .designer-group {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .designer-divider {
+      width: 1px;
+      height: 18px;
+      background: #444444;
+      margin: 0 4px;
+    }
+
+    .designer-btn {
+      background: #222222;
+      color: #FFFFFF;
+      border: 1px solid #444444;
+      border-radius: var(--radius-pill);
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .designer-btn:hover {
+      background: var(--neo-cyan);
+      color: #000000;
+      border-color: #000000;
+      transform: scale(1.05);
+    }
+
+    .designer-btn.btn-danger-pill:hover {
+      background: #FF5A5F;
+      color: #FFFFFF;
+      border-color: #000000;
+    }
+
+    /* Interactive Resize Overlay Box */
+    .image-resize-box {
+      position: fixed;
+      pointer-events: none;
+      border: 2px dashed var(--neo-cyan);
+      box-shadow: 0 0 0 1px #000000;
+      z-index: 99999;
+      box-sizing: border-box;
+      border-radius: 8px;
+    }
+
+    .resize-handle {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: var(--neo-yellow);
+      border: 2px solid #000000;
+      border-radius: 3px;
+      pointer-events: auto;
+      box-shadow: 1px 1px 0px #000000;
+    }
+
+    .handle-br {
+      right: -7px;
+      bottom: -7px;
+      cursor: nwse-resize;
+    }
+
+    .handle-bl {
+      left: -7px;
+      bottom: -7px;
+      cursor: nesw-resize;
+    }
+
+    .doc-canvas img {
+      cursor: pointer;
+      transition: outline 0.15s ease;
+    }
+
+    .doc-canvas img:hover {
+      outline: 3px solid var(--neo-cyan);
+      outline-offset: 3px;
+    }
   </style>
 </head>
 <body>
@@ -355,6 +469,44 @@
 
   <!-- Toast Notification -->
   <div id="toast" class="toast">Đã cập nhật dữ liệu!</div>
+
+  <!-- Floating Visual Image Designer Toolbar -->
+  <div id="image-designer-bar" class="image-designer-bar hidden">
+    <div class="designer-badge" id="img-size-badge">100%</div>
+    <div class="designer-group">
+      <button type="button" class="designer-btn" onclick="resizeActiveImage(0.25)" title="Cỡ nhỏ 25%">25%</button>
+      <button type="button" class="designer-btn" onclick="resizeActiveImage(0.50)" title="Cỡ vừa 50%">50%</button>
+      <button type="button" class="designer-btn" onclick="resizeActiveImage(0.75)" title="Cỡ lớn 75%">75%</button>
+      <button type="button" class="designer-btn" onclick="resizeActiveImage(1.0)" title="Toàn rộng 100%">100%</button>
+    </div>
+    <div class="designer-divider"></div>
+    <div class="designer-group">
+      <button type="button" class="designer-btn" onclick="zoomActiveImage(-10)" title="Thu nhỏ (-10%)">🔍−</button>
+      <button type="button" class="designer-btn" onclick="zoomActiveImage(10)" title="Phóng to (+10%)">🔍+</button>
+    </div>
+    <div class="designer-divider"></div>
+    <div class="designer-group">
+      <button type="button" class="designer-btn" onclick="alignActiveImage('left')" title="Căn lề trái">⇤ Trái</button>
+      <button type="button" class="designer-btn" onclick="alignActiveImage('center')" title="Căn giữa">↔ Giữa</button>
+      <button type="button" class="designer-btn" onclick="alignActiveImage('right')" title="Căn lề phải">⇥ Phải</button>
+      <button type="button" class="designer-btn" onclick="alignActiveImage('float-left')" title="Chữ bao quanh bên phải (Float Left)">📰 Bao trái</button>
+      <button type="button" class="designer-btn" onclick="alignActiveImage('float-right')" title="Chữ bao quanh bên trái (Float Right)">📰 Bao phải</button>
+    </div>
+    <div class="designer-divider"></div>
+    <div class="designer-group">
+      <button type="button" class="designer-btn" onclick="toggleActiveImageFrame()" title="Đổi kiểu viền: Neubrutalism / Bo tròn / Tối giản">🖼️ Viền</button>
+      <button type="button" class="designer-btn btn-danger-pill" onclick="deleteActiveImage()" title="Xóa ảnh này">🗑️ Xóa</button>
+    </div>
+  </div>
+
+  <!-- Interactive Resize Overlay Box with Corner Drag Handles -->
+  <div id="image-resize-box" class="image-resize-box hidden">
+    <div class="resize-handle handle-br" title="Kéo góc này để phóng to/thu nhỏ ảnh"></div>
+    <div class="resize-handle handle-bl" title="Kéo góc này để phóng to/thu nhỏ ảnh"></div>
+  </div>
+
+  <!-- Hidden File Input for Direct Local Image Upload -->
+  <input type="file" id="doc-image-file-input" accept="image/*" class="hidden">
 
   <!-- Scripts -->
   <script src="js/blob-config.js"></script>

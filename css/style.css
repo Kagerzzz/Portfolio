@@ -1252,10 +1252,30 @@ button {
   gap: 8px;
 }
 
-/* Document Images */
+/* Document Images with Flexible Visual Sizing & Alignments */
 .doc-img-block {
   margin: 28px 0;
   text-align: center;
+  position: relative;
+  clear: both;
+}
+
+.doc-img-block.align-left { text-align: left; }
+.doc-img-block.align-center { text-align: center; }
+.doc-img-block.align-right { text-align: right; }
+
+.doc-img-block.float-left {
+  float: left;
+  margin: 8px 24px 20px 0;
+  max-width: 50%;
+  clear: none;
+}
+
+.doc-img-block.float-right {
+  float: right;
+  margin: 8px 0 20px 24px;
+  max-width: 50%;
+  clear: none;
 }
 
 .doc-img {
@@ -1265,6 +1285,22 @@ button {
   border: var(--border-neo);
   box-shadow: var(--shadow-neo-sm);
   display: inline-block;
+  vertical-align: middle;
+  transition: width 0.15s ease, transform 0.15s ease, box-shadow 0.2s ease, border-radius 0.2s ease;
+}
+
+.doc-img.style-rounded {
+  border-radius: 28px !important;
+}
+
+.doc-img.style-minimal {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.doc-img.style-card {
+  border: 3px solid #000000;
+  box-shadow: 6px 6px 0px #000000;
 }
 
 .doc-caption {
