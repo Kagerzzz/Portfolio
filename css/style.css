@@ -396,19 +396,19 @@ button {
    Bento Hero Showcase Card (Personal Integrated Statement Box)
    ========================================================================== */
 .bento-hero-card {
-  background: var(--bg-card);
-  border: var(--border-neo);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-neo-lg);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
   max-width: 860px;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   transition: var(--spring-transition);
   margin-bottom: 28px;
 }
 
 .bento-hero-card:hover {
-  box-shadow: 10px 10px 0px var(--shadow-color);
+  box-shadow: none;
 }
 
 /* Card Topbar */
@@ -416,10 +416,11 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 22px;
-  background: var(--bg-surface);
-  border-bottom: var(--border-neo);
+  padding: 0;
+  background: transparent;
+  border-bottom: none;
   gap: 12px;
+  margin-bottom: 24px;
 }
 
 .hero-author-badge {
@@ -477,8 +478,9 @@ button {
 
 /* Card Content Area */
 .hero-card-content {
-  padding: 32px 32px 28px;
+  padding: 0;
   position: relative;
+  margin-bottom: 28px;
 }
 
 .hero-topic-pill {
@@ -541,9 +543,9 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 22px;
-  background: var(--bg-surface);
-  border-top: var(--border-neo);
+  padding: 0;
+  background: transparent;
+  border-top: none;
   gap: 12px;
 }
 
@@ -2386,13 +2388,16 @@ button {
   }
 
   .bento-hero-card {
-    border-radius: 12px;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
     margin-bottom: 20px;
-    box-shadow: var(--shadow-neo-md);
   }
 
   .hero-card-topbar {
-    padding: 10px 14px;
+    padding: 0;
+    margin-bottom: 16px;
   }
 
   .hero-mini-avatar {
@@ -2415,7 +2420,8 @@ button {
   }
 
   .hero-card-content {
-    padding: 20px 16px 18px;
+    padding: 0;
+    margin-bottom: 20px;
   }
 
   .hero-topic-pill {
@@ -2432,7 +2438,7 @@ button {
   }
 
   .hero-card-footer {
-    padding: 10px 12px;
+    padding: 0;
     gap: 8px;
   }
 
