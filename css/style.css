@@ -959,19 +959,6 @@ button {
   margin-bottom: 0;
 }
 
-/* Responsive CV Grid */
-@media (max-width: 900px) {
-  .cv-bento-grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-  .cv-section-title {
-    font-size: 2.1rem;
-  }
-  .cv-job-title {
-    font-size: 1.35rem;
-  }
-}
 
 /* ==========================================================================
    4. Projects Showcase (Hyper-Unique Retro OS Windows & HUD Brackets)
@@ -1297,6 +1284,29 @@ button {
   margin-bottom: 28px;
   font-weight: 700;
 }
+
+.shack-social-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.shack-social-actions .btn-say-hi {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  padding: 10px 22px;
+  text-decoration: none;
+}
+
+.shack-btn-fb { background: var(--neo-cyan); }
+.shack-btn-yt { background: var(--neo-yellow); }
+.shack-btn-zl { background: var(--neo-green); }
+.shack-btn-em { background: var(--neo-pink); }
 
 .shack-copyright {
   font-size: 12px;
@@ -2057,27 +2067,535 @@ button {
   box-shadow: 3px 3px 0px #000000;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
-  .doc-grid-2 { grid-template-columns: 1fr; }
+/* ==========================================================================
+   Comprehensive Mobile & Tablet Responsive Architecture
+   Breakpoints: 992px (Tablet Landscape), 768px (Tablet Portrait / Phone),
+   520px (Standard Phone), 380px (Compact Phone), Touch Screen Optimization
+   ========================================================================== */
 
-  .hero-headline { font-size: 2.6rem; min-height: auto; }
-  .hero-rotating-badge { display: none; }
-  .project-item, .project-item:nth-child(even) {
-    grid-template-columns: 1fr;
-    padding: 28px;
+/* 1. Medium Tablets & Large Screens (<= 992px) */
+@media (max-width: 992px) {
+  .container {
+    padding: 0 24px;
   }
-  .project-item:nth-child(even) .project-media { order: 0; }
-  .project-media { height: 250px; }
-  .modal-content-area { padding: 24px; }
-  .modal-hero-banner { height: 220px; }
-  .modal-metrics-grid { grid-template-columns: 1fr; }
-  .mood-switcher { bottom: 16px; left: 16px; }
 
+  .hero-section {
+    padding-top: 130px;
+    padding-bottom: 50px;
+    min-height: auto;
+  }
+
+  .hero-tabs {
+    padding-right: 0;
+  }
+
+  .hero-rotating-badge {
+    display: none;
+  }
+
+  .hero-headline {
+    font-size: 2.6rem;
+    min-height: auto;
+    max-width: 100%;
+  }
+
+  /* Projects Bento Card Body Fix */
+  .project-card-body,
+  .project-item:nth-child(even) .project-card-body {
+    grid-template-columns: 1fr;
+    padding: 32px 28px;
+    gap: 32px;
+  }
+
+  .project-media,
+  .project-item:nth-child(even) .project-media {
+    order: -1;
+    height: 300px;
+  }
+
+  /* CV Experience Bento Grid */
+  .cv-bento-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .cv-section-title {
+    font-size: 2.1rem;
+  }
+
+  .cv-job-title {
+    font-size: 1.35rem;
+  }
+
+  /* Modal Details */
+  .modal-content-area {
+    padding: 32px 28px;
+  }
+
+  .modal-hero-banner {
+    height: 260px;
+  }
+
+  .doc-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 2. Mobile Phones & Small Tablets (<= 768px) */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  /* Floating Header Navigation */
+  .header {
+    top: 10px;
+    padding: 0 10px;
+    width: 100%;
+  }
+
+  .nav-wrapper {
+    width: 100%;
+    max-width: 100%;
+    padding: 6px 12px;
+    gap: 8px;
+    justify-content: space-between;
+    box-shadow: var(--shadow-neo-sm);
+  }
+
+  .nav-brand {
+    font-size: clamp(0.9rem, 3.6vw, 1.1rem);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+
+  .nav-links {
+    gap: 2px;
+  }
+
+  .nav-link {
+    font-size: 12px;
+    padding: 4px 7px;
+  }
+
+  .nav-actions {
+    gap: 6px;
+  }
+
+  .btn-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .btn-say-hi {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    padding-top: 86px;
+    padding-bottom: 36px;
+    min-height: auto;
+  }
+
+  .hero-tabs {
+    padding-right: 0;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+
+  .hero-tab-btn {
+    font-size: 11px;
+    padding: 6px 11px;
+    letter-spacing: 0.02em;
+    min-height: 36px;
+  }
+
+  .hero-headline {
+    font-size: clamp(1.65rem, 6.2vw, 2.2rem);
+    line-height: 1.25;
+    min-height: auto;
+    margin-bottom: 22px;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .scroll-indicator {
+    font-size: 11px;
+    padding: 5px 12px;
+  }
+
+  /* Marquee Ribbons */
+  .marquee-section {
+    padding: 16px 0 28px;
+  }
+
+  .marquee-track {
+    font-size: 12.5px;
+    padding: 8px 0;
+    gap: 14px;
+  }
+
+  /* Projects Showcase */
+  .projects-section {
+    padding-bottom: 70px;
+  }
+
+  .project-item {
+    margin-bottom: 48px;
+    border-radius: 12px;
+  }
+
+  .card-window-bar {
+    padding: 8px 12px;
+  }
+
+  .window-dots {
+    gap: 5px;
+  }
+
+  .window-dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .window-slug {
+    font-size: 10.5px;
+    padding: 2px 8px;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .window-status {
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+
+  .project-card-body,
+  .project-item:nth-child(even) .project-card-body {
+    grid-template-columns: 1fr;
+    padding: 20px 16px;
+    gap: 18px;
+  }
+
+  .project-media,
+  .project-item:nth-child(even) .project-media {
+    order: -1;
+    height: 210px;
+  }
+
+  .project-number-stamp {
+    font-size: 2.8rem;
+    top: 6px;
+    right: 12px;
+    opacity: 0.12;
+  }
+
+  .project-tags {
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+
+  .tag-pill {
+    font-size: 10.5px;
+    padding: 4px 9px;
+  }
+
+  .project-title-large {
+    font-size: 1.45rem;
+    line-height: 1.25;
+    margin-bottom: 12px;
+  }
+
+  .project-desc {
+    font-size: 13.5px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+
+  .btn-read-case {
+    padding: 8px 18px;
+    font-size: 12.5px;
+  }
+
+  /* Resume / Experience Section */
+  .cv-section {
+    padding: 50px 0 70px;
+  }
+
+  .cv-section-title {
+    font-size: 1.75rem;
+    margin-bottom: 24px;
+  }
+
+  .cv-header-card {
+    padding: 22px 16px;
+  }
+
+  .cv-avatar-img {
+    width: 84px;
+    height: 84px;
+  }
+
+  .cv-avatar-badge {
+    font-size: 9px;
+    padding: 3px 8px;
+    bottom: -2px;
+    right: -6px;
+  }
+
+  .cv-name {
+    font-size: 1.85rem;
+  }
+
+  .cv-role-pill {
+    font-size: 12px;
+    padding: 4px 12px;
+    margin-bottom: 14px;
+  }
+
+  .cv-bio-box {
+    font-size: 13px;
+    padding: 14px;
+    line-height: 1.55;
+  }
+
+  .cv-timeline {
+    padding: 16px;
+    gap: 18px;
+  }
+
+  .cv-job-block {
+    padding: 16px 14px;
+  }
+
+  .cv-job-header {
+    margin-bottom: 8px;
+    gap: 6px;
+  }
+
+  .cv-job-title {
+    font-size: 1.22rem;
+  }
+
+  .cv-job-company {
+    font-size: 13px;
+  }
+
+  .cv-job-stamp {
+    font-size: 1.35rem;
+  }
+
+  .cv-job-tasks {
+    padding-left: 18px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .cv-tool-pill {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+  /* Footer Shack */
+  .footer-shack {
+    padding: 50px 0 36px;
+  }
+
+  .shack-box {
+    padding: 24px 16px;
+    box-shadow: var(--shadow-neo-sm);
+  }
+
+  .shack-quote {
+    font-size: 1.08rem;
+    line-height: 1.55;
+    margin-bottom: 20px;
+  }
+
+  .shack-social-actions {
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .shack-social-actions .btn-say-hi {
+    padding: 8px 14px;
+    font-size: 12.5px;
+    gap: 6px;
+  }
+
+  .shack-copyright {
+    font-size: 11px;
+    line-height: 1.6;
+  }
+
+  /* Modals (Case Study & Contact Say Hi) */
+  .modal-overlay {
+    padding: 10px !important;
+  }
+
+  .modal-card {
+    max-height: 94vh;
+    border-radius: 12px;
+  }
+
+  .modal-close {
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .modal-content-area {
+    padding: 20px 14px;
+  }
+
+  .modal-hero-banner {
+    height: 190px;
+    margin-bottom: 18px;
+  }
+
+  .modal-metrics-grid {
+    grid-template-columns: 1fr;
+    padding: 16px 12px;
+    gap: 12px;
+    margin: 20px 0;
+  }
+
+  .metric-num {
+    font-size: 1.8rem;
+  }
+
+  .doc-img-block.float-left,
+  .doc-img-block.float-right {
+    float: none !important;
+    max-width: 100% !important;
+    margin: 16px 0 !important;
+  }
+
+  .doc-callout {
+    padding: 16px 14px;
+    font-size: 13px;
+    margin: 20px 0;
+  }
+
+  .contact-modal-body {
+    padding: 18px 14px 22px;
+  }
+
+  .contact-modal-heading {
+    font-size: 1.35rem;
+  }
+
+  .contact-modal-desc {
+    font-size: 12px;
+    margin-bottom: 16px;
+  }
+
+  /* Prevent iOS Safari auto-zoom on input focus */
+  .form-input,
+  .form-textarea {
+    font-size: 16px !important;
+    padding: 10px 12px;
+  }
+
+  .contact-form-actions {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .btn-submit-neo {
+    width: 100%;
+    justify-content: center;
+    padding: 11px 20px;
+  }
+
+  /* Mood Switcher Floating Pill */
+  .mood-switcher {
+    bottom: 12px;
+    left: 12px;
+    padding: 4px 8px;
+    gap: 6px;
+  }
+
+  .mood-label {
+    display: none;
+  }
+
+  .mood-dot {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* 3. Small Mobile Devices (<= 520px) */
+@media (max-width: 520px) {
+  .cv-info-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .cv-info-full {
+    grid-column: span 1;
+  }
+
+  .nav-brand {
+    font-size: 0.95rem;
+  }
+
+  .nav-links {
+    gap: 1px;
+  }
+
+  .nav-link {
+    padding: 3px 6px;
+    font-size: 11.5px;
+  }
+
+  .btn-say-hi {
+    padding: 5px 10px;
+    font-size: 11.5px;
+  }
+}
+
+/* 4. Extra Small Screens (<= 380px) */
+@media (max-width: 380px) {
+  .nav-brand {
+    font-size: 0.85rem;
+  }
+
+  .nav-link {
+    padding: 2px 4px;
+    font-size: 11px;
+  }
+
+  .btn-say-hi {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+
+  .hero-tab-btn {
+    font-size: 10px;
+    padding: 5px 8px;
+  }
+}
+
+/* 5. Touch Screen Optimization (Disables Virtual Mouse Artifacts) */
+@media (hover: none) and (pointer: coarse) {
   #cursor-trail-canvas,
   .cursor-dot,
   .cursor-ring,
   .floating-cursor-badge {
     display: none !important;
   }
+
+  * {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.06);
+  }
 }
+

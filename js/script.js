@@ -356,6 +356,13 @@ function init3DParallaxTilt() {
 function initCursorTrailEngine() {
   const canvas = document.getElementById("cursor-trail-canvas");
   if (!canvas) return;
+
+  const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+  if (isTouchDevice) {
+    canvas.style.display = "none";
+    return;
+  }
+
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
 
@@ -526,6 +533,14 @@ function initCustomCursorAndBadge() {
   const badge = document.getElementById("floating-badge");
   if (!dot || !ring || !badge) return;
 
+  const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+  if (isTouchDevice) {
+    dot.style.display = "none";
+    ring.style.display = "none";
+    badge.style.display = "none";
+    return;
+  }
+
   let mouseX = -100, mouseY = -100;
   let ringX = -100, ringY = -100;
   let badgeX = -100, badgeY = -100;
@@ -645,6 +660,9 @@ function initCustomCursorAndBadge() {
 
 /* Subtle Magnetic Float on Key Neubrutalist Elements */
 function initMagneticElements() {
+  const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+  if (isTouchDevice) return;
+
   const magnets = document.querySelectorAll(".hero-rotating-badge, .btn-say-hi");
   magnets.forEach(el => {
     el.addEventListener("mousemove", (e) => {
