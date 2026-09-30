@@ -3,13 +3,21 @@
  * Confetti Particles, Live Clocks, Dynamic Cursor, 3D Parallax Tilt & Supabase DB
  */
 
-// Hero Questions & Interactive Answers
+// Hero Questions & Interactive Perspectives
+const HERO_PERSPECTIVES = [
+  { key: "who", label: "✦ WHO I AM", text: "Chỉ là một designer với niềm đam mê lớn với phát triển sản phẩm.", theme: "who", color: "var(--neo-green)" },
+  { key: "care", label: "♥ WHAT I CARE ABOUT", text: "Tìm kiếm sự cân bằng giữa giá trị, thẩm mỹ, và tính hữu dụng.", theme: "care", color: "var(--neo-pink)" },
+  { key: "believe", label: "★ WHAT I BELIEVE IN", text: "Thấu hiểu người dùng trước khi tìm cách giải quyết vấn đề của họ.", theme: "believe", color: "var(--neo-yellow)" },
+  { key: "cook", label: "⚡ WHAT I CAN COOK", text: "Biến những ý tưởng thành trải nghiệm, rồi để trải nghiệm chạm tới người dùng.", theme: "cook", color: "var(--neo-orange)" },
+  { key: "upto", label: "☕ WHAT I'M UP TO", text: "Lang thang giữa thiết kế, công nghệ, khách hàng và những ý tưởng tạo nên giá trị.", theme: "upto", color: "var(--neo-cyan)" }
+];
+
 const HERO_TAB_DATA = {
-  who: "Chỉ là một designer với niềm đam mê lớn với phát triển sản phẩm.",
-  care: "Tìm kiếm sự cân bằng giữa giá trị, thẩm mỹ, và tính hữu dụng.",
-  believe: "Thấu hiểu người dùng trước khi tìm cách giải quyết vấn đề của họ.",
-  cook: "Biến những ý tưởng thành trải nghiệm, rồi để trải nghiệm chạm tới người dùng.",
-  upto: "Lang thang giữa thiết kế, công nghệ, khách hàng và những ý tưởng tạo nên giá trị."
+  who: HERO_PERSPECTIVES[0].text,
+  care: HERO_PERSPECTIVES[1].text,
+  believe: HERO_PERSPECTIVES[2].text,
+  cook: HERO_PERSPECTIVES[3].text,
+  upto: HERO_PERSPECTIVES[4].text
 };
 
 // All 5 Real Sanvithi.com Projects
@@ -224,26 +232,112 @@ function initLiveClocks() {
   setInterval(tick, 1000);
 }
 
-/* Hero Tabs */
+/* Bento Hero Showcase Card & Auto-Rotation Engine */
 function initHeroTabs() {
-  const tabBtns = document.querySelectorAll(".hero-tab-btn");
+  const card = document.getElementById("bento-hero-card");
+  const tabBtns = document.querySelectorAll(".hero-num-tab");
   const headline = document.getElementById("hero-dynamic-text");
+  const badge = document.getElementById("hero-topic-badge");
+  const progressBar = document.getElementById("hero-progress-bar");
+  const prevBtn = document.getElementById("hero-prev-btn");
+  const nextBtn = document.getElementById("hero-next-btn");
 
-  tabBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-      tabBtns.forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
+  if (!headline || !tabBtns.length) return;
 
-      const key = btn.getAttribute("data-tab");
-      if (headline && HERO_TAB_DATA[key]) {
-        headline.style.opacity = "0";
-        setTimeout(() => {
-          headline.innerText = HERO_TAB_DATA[key];
-          headline.style.opacity = "1";
-        }, 150);
+  let currentIndex = 0;
+  const DURATION = 6500; // 6.5 seconds per statement
+  let startTime = performance.now();
+  let isPaused = false;
+
+  function setPerspective(index, manual = false) {
+    currentIndex = (index + HERO_PERSPECTIVES.length) % HERO_PERSPECTIVES.length;
+    const current = HERO_PERSPECTIVES[currentIndex];
+
+    // Update active tab buttons
+    tabBtns.forEach((btn, i) => {
+      btn.classList.toggle("active", i === currentIndex);
+    });
+
+    // Update topic badge
+    if (badge) {
+      badge.className = `hero-topic-pill topic-${current.theme}`;
+      badge.innerText = current.label;
+    }
+
+    // Animate text update
+    headline.style.opacity = "0";
+    headline.style.transform = "translateY(6px)";
+    setTimeout(() => {
+      headline.innerText = current.text;
+      headline.style.opacity = "1";
+      headline.style.transform = "translateY(0)";
+    }, 150);
+
+    // Update progress bar color
+    if (progressBar) {
+      progressBar.style.backgroundColor = current.color;
+      if (manual) {
+        startTime = performance.now();
+        progressBar.style.width = "0%";
       }
+    }
+  }
+
+  // Next / Prev button listeners
+  if (prevBtn) {
+    prevBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      setPerspective(currentIndex - 1, true);
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      setPerspective(currentIndex + 1, true);
+    });
+  }
+
+  // Number tabs click
+  tabBtns.forEach((btn, i) => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      setPerspective(i, true);
     });
   });
+
+  // Progress Bar & Auto-Rotate Loop
+  function progressLoop(now) {
+    if (!isPaused) {
+      const elapsed = now - startTime;
+      const progress = Math.min(100, (elapsed / DURATION) * 100);
+      if (progressBar) {
+        progressBar.style.width = `${progress}%`;
+      }
+
+      if (elapsed >= DURATION) {
+        setPerspective(currentIndex + 1, false);
+        startTime = performance.now();
+      }
+    } else {
+      // Pause progress
+      startTime = now - (parseFloat(progressBar ? progressBar.style.width || 0 : 0) / 100) * DURATION;
+    }
+
+    requestAnimationFrame(progressLoop);
+  }
+
+  requestAnimationFrame(progressLoop);
+
+  // Pause auto-rotation when user is interacting with card
+  if (card) {
+    card.addEventListener("mouseenter", () => { isPaused = true; });
+    card.addEventListener("mouseleave", () => { isPaused = false; });
+    card.addEventListener("touchstart", () => { isPaused = true; }, { passive: true });
+    card.addEventListener("touchend", () => {
+      setTimeout(() => { isPaused = false; }, 2500);
+    }, { passive: true });
+  }
 }
 
 /* Render Projects Grid with Retro Window OS, HUD Brackets, & Quick-Metrics */
@@ -620,7 +714,7 @@ function initCustomCursorAndBadge() {
     const rotatingBadge = e.target.closest(".hero-rotating-badge");
     const themeBtn = e.target.closest("#theme-toggle");
     const sayHiBtn = e.target.closest(".btn-say-hi, a[href='#resume']");
-    const heroTab = e.target.closest(".hero-tab-btn");
+    const heroTab = e.target.closest(".hero-tab-btn, .hero-num-tab, .hero-arrow-btn");
     const moodDot = e.target.closest(".mood-dot");
     const generalInteractive = e.target.closest("button, a, input, textarea, .nav-brand");
 

@@ -58,18 +58,64 @@
           <div class="badge-center-icon">✦</div>
         </div>
 
-        <!-- Question Pills -->
-        <div class="hero-tabs">
-          <button class="hero-tab-btn active" data-tab="who">WHO I AM</button>
-          <button class="hero-tab-btn" data-tab="care">WHAT I CARE ABOUT</button>
-          <button class="hero-tab-btn" data-tab="believe">WHAT I BELIEVE IN</button>
-          <button class="hero-tab-btn" data-tab="cook">WHAT I CAN COOK</button>
-          <button class="hero-tab-btn" data-tab="upto">WHAT I'M UP TO</button>
-        </div>
+        <!-- Bento Hero Card -->
+        <div class="bento-hero-card" id="bento-hero-card">
+          <!-- Topbar with mini avatar and live status -->
+          <div class="hero-card-topbar">
+            <div class="hero-author-badge">
+              <img src="assets/avt.jpg" alt="Thân Hiếu" class="hero-mini-avatar">
+              <div class="hero-author-meta">
+                <span class="hero-author-name">Thân Hiếu ✦</span>
+                <span class="hero-author-role">Product Designer</span>
+              </div>
+            </div>
+            <div class="hero-status-tag">
+              <span class="pulse-dot"></span>
+              <span class="hero-status-text">LIVE PERSPECTIVES</span>
+            </div>
+          </div>
 
-        <h1 id="hero-dynamic-text" class="hero-headline font-serif">
-          Chỉ là một designer với niềm đam mê lớn với phát triển sản phẩm.
-        </h1>
+          <!-- Main Content Area -->
+          <div class="hero-card-content">
+            <div id="hero-topic-badge" class="hero-topic-pill topic-who">✦ WHO I AM</div>
+            <h1 id="hero-dynamic-text" class="hero-headline font-serif">
+              Chỉ là một designer với niềm đam mê lớn với phát triển sản phẩm.
+            </h1>
+            <div class="hero-progress-track">
+              <div id="hero-progress-bar" class="hero-progress-fill"></div>
+            </div>
+          </div>
+
+          <!-- Interactive Number Tabs & Navigation -->
+          <div class="hero-card-footer">
+            <div class="hero-num-tabs">
+              <button class="hero-num-tab active" data-index="0" data-tab="who">
+                <span class="tab-num">01</span>
+                <span class="tab-label-text">WHO</span>
+              </button>
+              <button class="hero-num-tab" data-index="1" data-tab="care">
+                <span class="tab-num">02</span>
+                <span class="tab-label-text">CARE</span>
+              </button>
+              <button class="hero-num-tab" data-index="2" data-tab="believe">
+                <span class="tab-num">03</span>
+                <span class="tab-label-text">BELIEVE</span>
+              </button>
+              <button class="hero-num-tab" data-index="3" data-tab="cook">
+                <span class="tab-num">04</span>
+                <span class="tab-label-text">COOK</span>
+              </button>
+              <button class="hero-num-tab" data-index="4" data-tab="upto">
+                <span class="tab-num">05</span>
+                <span class="tab-label-text">UP TO</span>
+              </button>
+            </div>
+            <div class="hero-nav-arrows">
+              <button id="hero-prev-btn" class="hero-arrow-btn" aria-label="Previous Perspective" title="Câu trước">←</button>
+              <button id="hero-next-btn" class="hero-arrow-btn" aria-label="Next Perspective" title="Câu kế tiếp">→</button>
+            </div>
+          </div>
+        </div>
 
         <div class="scroll-indicator">
           scroll to explore work ↓

@@ -392,57 +392,251 @@ button {
   50% { transform: translateY(-8px); }
 }
 
-.hero-tabs {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 32px;
-  padding-right: 130px;
+/* ==========================================================================
+   Bento Hero Showcase Card (Personal Integrated Statement Box)
+   ========================================================================== */
+.bento-hero-card {
+  background: var(--bg-card);
+  border: var(--border-neo);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-neo-lg);
+  max-width: 860px;
+  position: relative;
+  overflow: hidden;
+  transition: var(--spring-transition);
+  margin-bottom: 28px;
 }
 
-.hero-tab-btn {
-  padding: 8px 18px;
-  border-radius: var(--radius-pill);
+.bento-hero-card:hover {
+  box-shadow: 10px 10px 0px var(--shadow-color);
+}
+
+/* Card Topbar */
+.hero-card-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 22px;
   background: var(--bg-surface);
-  border: var(--border-neo);
+  border-bottom: var(--border-neo);
+  gap: 12px;
+}
+
+.hero-author-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-mini-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  object-fit: cover;
+  object-position: 50% 12%;
+  box-shadow: 2px 2px 0px var(--border-color);
+  background: #000000;
+}
+
+.hero-author-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-author-name {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-weight: 700;
   color: var(--text-main);
-  font-size: 12px;
+  line-height: 1.2;
+}
+
+.hero-author-role {
+  font-size: 11px;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  box-shadow: var(--shadow-neo-xs);
-  transition: var(--spring-transition);
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
 }
 
-.hero-tab-btn:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: var(--shadow-neo-sm);
-  background: var(--neo-yellow);
+.hero-status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--border-color);
+  background: var(--bg-card-alt);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-main);
+}
+
+/* Card Content Area */
+.hero-card-content {
+  padding: 32px 32px 28px;
+  position: relative;
+}
+
+.hero-topic-pill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--border-color);
+  box-shadow: 2px 2px 0px var(--border-color);
   color: #000000;
+  margin-bottom: 20px;
+  transition: all 0.2s ease;
 }
 
-.hero-tab-btn.active {
-  background: var(--neo-green);
-  color: #000000;
-  box-shadow: var(--shadow-neo-sm);
-  transform: translate(-2px, -2px);
-}
-
-.hero-tab-btn[data-tab="care"].active { background: var(--neo-pink); }
-.hero-tab-btn[data-tab="believe"].active { background: var(--neo-yellow); }
-.hero-tab-btn[data-tab="cook"].active { background: var(--neo-orange); }
-.hero-tab-btn[data-tab="upto"].active { background: var(--neo-cyan); }
+.hero-topic-pill.topic-who { background: var(--neo-green); }
+.hero-topic-pill.topic-care { background: var(--neo-pink); }
+.hero-topic-pill.topic-believe { background: var(--neo-yellow); }
+.hero-topic-pill.topic-cook { background: var(--neo-orange); }
+.hero-topic-pill.topic-upto { background: var(--neo-cyan); }
 
 .hero-headline {
   font-family: var(--font-serif);
-  font-size: clamp(2.4rem, 4vw, 3.5rem);
-  line-height: 1.18;
+  font-size: clamp(1.85rem, 3.8vw, 2.75rem);
+  line-height: 1.28;
   font-weight: 700;
-  margin-bottom: 40px;
-  max-width: 760px;
-  min-height: 140px;
-  transition: opacity 0.2s ease;
-  letter-spacing: -0.02em;
+  margin-bottom: 28px;
+  color: var(--text-main);
+  min-height: 95px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  letter-spacing: -0.015em;
+  word-break: break-word;
+}
+
+/* Subtle Progress Bar */
+.hero-progress-track {
+  width: 100%;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  position: relative;
+}
+
+[data-theme="dark"] .hero-progress-track {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.hero-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--neo-green);
+  transition: width 0.1s linear, background-color 0.25s ease;
+}
+
+/* Card Footer with Numbered Tabs [01]..[05] and Arrows */
+.hero-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 22px;
+  background: var(--bg-surface);
+  border-top: var(--border-neo);
+  gap: 12px;
+}
+
+.hero-num-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.hero-num-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  color: var(--text-main);
+  font-size: 12px;
+  font-weight: 800;
+  box-shadow: 2px 2px 0px var(--border-color);
+  transition: var(--spring-transition);
+  cursor: pointer;
+}
+
+.hero-num-tab .tab-num {
+  font-family: var(--font-mono);
+  font-weight: 800;
+}
+
+.hero-num-tab .tab-label-text {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.hero-num-tab:hover {
+  transform: translate(-1.5px, -1.5px);
+  box-shadow: 3px 3px 0px var(--border-color);
+}
+
+.hero-num-tab.active {
+  background: var(--neo-green);
+  color: #000000;
+  transform: translate(-2px, -2px);
+  box-shadow: 3px 3px 0px var(--border-color);
+}
+
+.hero-num-tab.active .tab-label-text {
+  color: #000000;
+}
+
+.hero-num-tab[data-tab="care"].active { background: var(--neo-pink); }
+.hero-num-tab[data-tab="believe"].active { background: var(--neo-yellow); }
+.hero-num-tab[data-tab="cook"].active { background: var(--neo-orange); }
+.hero-num-tab[data-tab="upto"].active { background: var(--neo-cyan); }
+
+.hero-nav-arrows {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hero-arrow-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 14px;
+  box-shadow: 2px 2px 0px var(--border-color);
+  transition: var(--spring-transition);
+  cursor: pointer;
+}
+
+.hero-arrow-btn:hover {
+  background: var(--neo-yellow);
+  color: #000000;
+  transform: translate(-1.5px, -1.5px);
+  box-shadow: 3px 3px 0px var(--border-color);
+}
+
+.hero-arrow-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 0px 0px 0px var(--border-color);
 }
 
 .scroll-indicator {
@@ -2184,33 +2378,84 @@ button {
     font-size: 12.5px;
   }
 
-  /* Hero Section */
+  /* Bento Hero Card Mobile */
   .hero-section {
-    padding-top: 86px;
-    padding-bottom: 36px;
+    padding-top: 82px;
+    padding-bottom: 32px;
     min-height: auto;
   }
 
-  .hero-tabs {
-    padding-right: 0;
-    gap: 6px;
+  .bento-hero-card {
+    border-radius: 12px;
     margin-bottom: 20px;
+    box-shadow: var(--shadow-neo-md);
   }
 
-  .hero-tab-btn {
-    font-size: 11px;
-    padding: 6px 11px;
-    letter-spacing: 0.02em;
-    min-height: 36px;
+  .hero-card-topbar {
+    padding: 10px 14px;
+  }
+
+  .hero-mini-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .hero-author-name {
+    font-size: 13px;
+  }
+
+  .hero-author-role {
+    font-size: 10px;
+  }
+
+  .hero-status-tag {
+    padding: 4px 8px;
+    font-size: 9.5px;
+    gap: 6px;
+  }
+
+  .hero-card-content {
+    padding: 20px 16px 18px;
+  }
+
+  .hero-topic-pill {
+    font-size: 10px;
+    padding: 4px 10px;
+    margin-bottom: 14px;
   }
 
   .hero-headline {
-    font-size: clamp(1.65rem, 6.2vw, 2.2rem);
+    font-size: clamp(1.4rem, 5.2vw, 1.95rem);
     line-height: 1.25;
-    min-height: auto;
-    margin-bottom: 22px;
-    word-break: break-word;
-    overflow-wrap: break-word;
+    min-height: 75px;
+    margin-bottom: 18px;
+  }
+
+  .hero-card-footer {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .hero-num-tabs {
+    gap: 4px;
+    flex: 1;
+    justify-content: space-between;
+  }
+
+  .hero-num-tab {
+    padding: 6px 8px;
+    font-size: 11.5px;
+    gap: 4px;
+  }
+
+  .hero-num-tab .tab-label-text {
+    display: none;
+  }
+
+  .hero-arrow-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 13px;
   }
 
   .scroll-indicator {
