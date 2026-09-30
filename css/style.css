@@ -1377,6 +1377,185 @@ button {
   padding: 44px;
 }
 
+/* Contact / Say Hi Modal (Neubrutalism OS Window Form) */
+.contact-modal-card {
+  max-width: 520px;
+  background: var(--bg-card);
+  border: 3px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-neo-lg);
+  overflow: hidden;
+  padding: 0;
+}
+
+.contact-modal-bar {
+  background: var(--neo-yellow);
+  color: #000000;
+  border-bottom: 2.5px solid var(--border-color);
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.contact-modal-close {
+  background: #000000;
+  color: #FFFFFF;
+  border: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 4px;
+  font-weight: 900;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.contact-modal-close:hover {
+  background: var(--neo-pink);
+  color: #000000;
+  transform: scale(1.1);
+}
+
+.contact-modal-body {
+  padding: 24px 28px 28px;
+}
+
+.contact-modal-heading {
+  font-size: 1.6rem;
+  line-height: 1.2;
+  margin-bottom: 8px;
+  color: var(--text-main);
+}
+
+.contact-modal-desc {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-main);
+}
+
+.form-label .req {
+  color: var(--neo-pink);
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--bg-surface);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  box-shadow: var(--shadow-neo-xs);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--neo-cyan);
+  box-shadow: var(--shadow-neo-sm);
+  background: var(--bg-main);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.contact-form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.btn-submit-neo {
+  padding: 10px 24px;
+  font-size: 14px;
+  background: var(--neo-green);
+  cursor: pointer;
+}
+
+.btn-submit-neo:hover {
+  background: var(--neo-yellow);
+}
+
+.btn-submit-neo:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: var(--shadow-neo-xs);
+}
+
+.contact-alt-link {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-dim);
+  text-decoration: underline;
+  transition: color 0.15s ease;
+}
+
+.contact-alt-link:hover {
+  color: var(--text-main);
+}
+
+.contact-status-msg {
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  border: 2px solid #000000;
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-top: 10px;
+}
+
+.contact-status-msg.success {
+  background: var(--neo-green);
+  color: #000000;
+}
+
+.contact-status-msg.warning {
+  background: var(--neo-yellow);
+  color: #000000;
+}
+
+.hidden {
+  display: none !important;
+}
+
 .modal-hero-banner {
   width: 100%;
   height: 360px;

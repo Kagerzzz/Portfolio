@@ -721,7 +721,10 @@ function initModalEvents() {
     });
   }
   document.addEventListener("keydown", e => {
-    if (e.key === "Escape" && modal && modal.classList.contains("active")) closeModal();
+    if (e.key === "Escape") {
+      if (modal && modal.classList.contains("active")) closeModal();
+      closeContactModal();
+    }
   });
 }
 
@@ -729,6 +732,111 @@ function closeModal() {
   const modal = document.getElementById("case-study-modal");
   if (modal) modal.classList.remove("active");
   document.body.style.overflow = "";
+}
+
+/* ==========================================================================
+   Contact / Say Hi Popup Modal & Email Submission Engine
+   ========================================================================== */
+function openContactModal(event) {
+  if (event) event.preventDefault();
+  const modal = document.getElementById("contact-modal");
+  if (!modal) return;
+  modal.classList.add("active");
+  document.body.style.overflow = "hidden";
+  const nameInput = document.getElementById("contact-name");
+  const msgInput = document.getElementById("contact-message");
+  const gmailLink = document.getElementById("contact-direct-gmail");
+
+  function updateGmailLink() {
+    if (!gmailLink) return;
+    const n = nameInput ? nameInput.value.trim() : "";
+    const m = msgInput ? msgInput.value.trim() : "";
+    const subject = encodeURIComponent(n ? `[Portfolio] Tin nhắn từ ${n}` : "[Portfolio] Liên hệ công việc");
+    const body = encodeURIComponent(m ? `${m}\n\n---\nNgười gửi: ${n}` : "");
+    gmailLink.href = `https://mail.google.com/mail/?view=cm&fs=1&to=thanhieu.work@gmail.com&su=${subject}&body=${body}`;
+  }
+
+  if (nameInput) {
+    nameInput.addEventListener("input", updateGmailLink);
+    setTimeout(() => nameInput.focus(), 150);
+  }
+  if (msgInput) {
+    msgInput.addEventListener("input", updateGmailLink);
+  }
+  updateGmailLink();
+}
+
+function closeContactModal() {
+  const modal = document.getElementById("contact-modal");
+  if (!modal) return;
+  modal.classList.remove("active");
+  document.body.style.overflow = "";
+}
+
+function handleContactOverlayClick(event) {
+  if (event.target && event.target.id === "contact-modal") {
+    closeContactModal();
+  }
+}
+
+async function handleContactSubmit(event) {
+  event.preventDefault();
+  const nameInput = document.getElementById("contact-name");
+  const emailInput = document.getElementById("contact-email");
+  const msgInput = document.getElementById("contact-message");
+  const submitBtn = document.getElementById("contact-submit-btn");
+  const submitText = document.getElementById("submit-text");
+  const statusEl = document.getElementById("contact-status");
+
+  const name = nameInput ? nameInput.value.trim() : "";
+  const email = emailInput ? emailInput.value.trim() : "";
+  const message = msgInput ? msgInput.value.trim() : "";
+
+  if (!name || !email || !message) return;
+
+  submitBtn.disabled = true;
+  submitText.innerText = "Đang gửi...";
+  statusEl.className = "contact-status-msg hidden";
+
+  try {
+    const response = await fetch("https://formsubmit.co/ajax/thanhieu.work@gmail.com", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        _subject: `[Portfolio] Tin nhắn từ ${name} (${email})`,
+        "Họ và tên": name,
+        "Email người gửi": email,
+        "Nội dung": message,
+        _template: "table"
+      })
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      statusEl.className = "contact-status-msg success";
+      statusEl.innerHTML = "🎉 Cảm ơn bạn! Tin nhắn đã được gửi đến hộp thư thanhieu.work@gmail.com của Thân Hiếu. Mình sẽ phản hồi sớm nhất!";
+      statusEl.classList.remove("hidden");
+      document.getElementById("contact-form").reset();
+      fireConfetti(event);
+      setTimeout(() => {
+        closeContactModal();
+        statusEl.classList.add("hidden");
+      }, 4000);
+    } else {
+      throw new Error(data.message || "Gửi không thành công");
+    }
+  } catch (error) {
+    statusEl.className = "contact-status-msg warning";
+    const mailtoUrl = `mailto:thanhieu.work@gmail.com?subject=${encodeURIComponent(`[Portfolio] Tin nhắn từ ${name}`)}&body=${encodeURIComponent(`${message}\n\n---\nNgười gửi: ${name}\nEmail: ${email}`)}`;
+    statusEl.innerHTML = `⚠️ Đang tạm ngưng kết nối nền. <a href="${mailtoUrl}" target="_blank" style="text-decoration:underline; font-weight:800; color:#000;">Bấm vào đây để gửi trực tiếp qua ứng dụng Email của bạn ↗</a>`;
+    statusEl.classList.remove("hidden");
+  } finally {
+    submitBtn.disabled = false;
+    submitText.innerText = "Gửi tin nhắn ✦";
+  }
 }
 
 /* Copy Email Toast with Confetti Burst */
