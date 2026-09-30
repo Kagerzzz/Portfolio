@@ -779,6 +779,10 @@ function handleContactOverlayClick(event) {
   }
 }
 
+// Cấu hình Web3Forms Access Key cho Thân Hiếu (thanhieu.work@gmail.com)
+// Lấy miễn phí tại: https://web3forms.com (nhập thanhieu.work@gmail.com)
+const WEB3FORMS_ACCESS_KEY = "YOUR_WEB3FORMS_ACCESS_KEY";
+
 async function handleContactSubmit(event) {
   event.preventDefault();
   const nameInput = document.getElementById("contact-name");
@@ -799,39 +803,54 @@ async function handleContactSubmit(event) {
   statusEl.className = "contact-status-msg hidden";
 
   try {
-    const response = await fetch("https://formsubmit.co/ajax/thanhieu.work@gmail.com", {
+    // Nếu chưa cấu hình Access Key, tự động mở soạn thảo Gmail với đầy đủ nội dung điền sẵn
+    if (!WEB3FORMS_ACCESS_KEY || WEB3FORMS_ACCESS_KEY === "YOUR_WEB3FORMS_ACCESS_KEY") {
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=thanhieu.work@gmail.com&su=${encodeURIComponent(`[Portfolio] Tin nhắn từ ${name}`)}&body=${encodeURIComponent(`${message}\n\n---\nNgười gửi: ${name}\nEmail: ${email}`)}`;
+      window.open(gmailUrl, "_blank");
+      
+      statusEl.className = "contact-status-msg success";
+      statusEl.innerHTML = `📬 Đã mở khung soạn thư Gmail gửi tới <strong>thanhieu.work@gmail.com</strong>! Bạn chỉ cần nhấn nút Gửi (Send) trên Gmail là xong.<br><small style="color:#222; font-size:11px; display:inline-block; margin-top:6px;">✦ Tip: Chỉ cần dán Access Key từ Web3Forms vào script.js để kích hoạt gửi ngầm 100%.</small>`;
+      statusEl.classList.remove("hidden");
+      document.getElementById("contact-form").reset();
+      fireConfetti(event);
+      return;
+    }
+
+    // Gửi ngầm qua API Web3Forms
+    const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
       },
       body: JSON.stringify({
-        _subject: `[Portfolio] Tin nhắn từ ${name} (${email})`,
-        "Họ và tên": name,
-        "Email người gửi": email,
-        "Nội dung": message,
-        _template: "table"
+        access_key: WEB3FORMS_ACCESS_KEY,
+        name: name,
+        email: email,
+        message: message,
+        from_name: `${name} (Portfolio)`,
+        subject: `[Portfolio] Tin nhắn mới từ ${name}`
       })
     });
 
     const data = await response.json();
-    if (response.ok) {
+    if (data.success) {
       statusEl.className = "contact-status-msg success";
-      statusEl.innerHTML = "🎉 Cảm ơn bạn! Tin nhắn đã được gửi đến hộp thư thanhieu.work@gmail.com của Thân Hiếu. Mình sẽ phản hồi sớm nhất!";
+      statusEl.innerHTML = "🎉 Cảm ơn bạn! Tin nhắn đã được gửi trực tiếp đến hộp thư thanhieu.work@gmail.com của Thân Hiếu. Mình sẽ phản hồi bạn sớm nhất!";
       statusEl.classList.remove("hidden");
       document.getElementById("contact-form").reset();
       fireConfetti(event);
       setTimeout(() => {
         closeContactModal();
         statusEl.classList.add("hidden");
-      }, 4000);
+      }, 4500);
     } else {
       throw new Error(data.message || "Gửi không thành công");
     }
   } catch (error) {
     statusEl.className = "contact-status-msg warning";
-    const mailtoUrl = `mailto:thanhieu.work@gmail.com?subject=${encodeURIComponent(`[Portfolio] Tin nhắn từ ${name}`)}&body=${encodeURIComponent(`${message}\n\n---\nNgười gửi: ${name}\nEmail: ${email}`)}`;
-    statusEl.innerHTML = `⚠️ Đang tạm ngưng kết nối nền. <a href="${mailtoUrl}" target="_blank" style="text-decoration:underline; font-weight:800; color:#000;">Bấm vào đây để gửi trực tiếp qua ứng dụng Email của bạn ↗</a>`;
+    const mailtoUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=thanhieu.work@gmail.com&su=${encodeURIComponent(`[Portfolio] Tin nhắn từ ${name}`)}&body=${encodeURIComponent(`${message}\n\n---\nNgười gửi: ${name}\nEmail: ${email}`)}`;
+    statusEl.innerHTML = `⚠️ Đang tạm ngưng kết nối nền. <a href="${mailtoUrl}" target="_blank" style="text-decoration:underline; font-weight:800; color:#000;">Bấm vào đây để mở và gửi ngay qua Gmail của bạn ↗</a>`;
     statusEl.classList.remove("hidden");
   } finally {
     submitBtn.disabled = false;
