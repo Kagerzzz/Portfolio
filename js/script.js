@@ -379,12 +379,8 @@ function renderProjects() {
       <div class="project-card-body">
         <div class="project-number-stamp">#${numStamp}</div>
         
-        <!-- Transparent Media Stage with HUD Focus Brackets -->
+        <!-- Transparent Media Stage -->
         <div class="project-media">
-          <span class="hud-bracket hud-tl"></span>
-          <span class="hud-bracket hud-tr"></span>
-          <span class="hud-bracket hud-bl"></span>
-          <span class="hud-bracket hud-br"></span>
           <img src="${project.image}" alt="${project.title}" class="project-img">
         </div>
 
