@@ -780,8 +780,7 @@ function handleContactOverlayClick(event) {
 }
 
 // Cấu hình Web3Forms Access Key cho Thân Hiếu (thanhieu.work@gmail.com)
-// Lấy miễn phí tại: https://web3forms.com (nhập thanhieu.work@gmail.com)
-const WEB3FORMS_ACCESS_KEY = "YOUR_WEB3FORMS_ACCESS_KEY";
+const WEB3FORMS_ACCESS_KEY = "4fb69466-138c-47ff-9493-df5b10220ffb";
 
 async function handleContactSubmit(event) {
   event.preventDefault();
