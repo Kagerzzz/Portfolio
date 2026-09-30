@@ -345,6 +345,11 @@ function renderProjects() {
   const container = document.getElementById("projects-container");
   if (!container) return;
 
+  const countBadge = document.getElementById("work-count-badge");
+  if (countBadge) {
+    countBadge.textContent = `${String(activeProjects.length).padStart(2, "0")} CASE STUDIES ✦`;
+  }
+
   container.innerHTML = activeProjects.map((project, index) => {
     const numStamp = (index + 1).toString().padStart(2, "0");
     const themeClass = `card-theme-${index % 5}`;
