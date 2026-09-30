@@ -529,8 +529,18 @@ function initCustomCursorAndBadge() {
   let mouseX = -100, mouseY = -100;
   let ringX = -100, ringY = -100;
   let badgeX = -100, badgeY = -100;
-  let isMoving = false;
   let idleTimer = null;
+
+  function showCursor() {
+    dot.style.opacity = "1";
+    ring.style.opacity = "1";
+  }
+
+  function hideCursor() {
+    dot.style.opacity = "0";
+    ring.style.opacity = "0";
+    badge.classList.remove("visible");
+  }
 
   document.addEventListener("mousemove", (e) => {
     mouseX = e.clientX;
@@ -539,12 +549,8 @@ function initCustomCursorAndBadge() {
     // Instant dot movement
     dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
 
-    // Wake up
-    if (!isMoving) {
-      isMoving = true;
-      dot.style.opacity = "1";
-      ring.style.opacity = "1";
-    }
+    // Ensure cursor is always visible when moving inside the window
+    showCursor();
 
     clearTimeout(idleTimer);
     idleTimer = setTimeout(() => {
@@ -552,6 +558,23 @@ function initCustomCursorAndBadge() {
         badge.classList.remove("visible");
       }
     }, 1800);
+  });
+
+  document.addEventListener("mouseenter", showCursor);
+
+  document.addEventListener("mouseleave", hideCursor);
+
+  // Restore cursor when switching back to this tab
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      hideCursor();
+    }
+  });
+
+  window.addEventListener("blur", hideCursor);
+
+  window.addEventListener("focus", () => {
+    // When window re-gains focus, cursor will show as soon as user moves mouse
   });
 
   document.addEventListener("mousedown", () => {
@@ -617,12 +640,6 @@ function initCustomCursorAndBadge() {
       ring.classList.remove("active-hover");
       badge.classList.remove("visible", "explore", "pop", "interactive");
     }
-  });
-
-  document.addEventListener("mouseleave", () => {
-    dot.style.opacity = "0";
-    ring.style.opacity = "0";
-    badge.classList.remove("visible");
   });
 }
 
