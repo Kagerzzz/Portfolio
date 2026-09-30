@@ -400,7 +400,7 @@ button {
   border: none;
   border-radius: 0;
   box-shadow: none;
-  max-width: 860px;
+  max-width: 940px;
   position: relative;
   overflow: visible;
   transition: var(--spring-transition);
@@ -492,12 +492,12 @@ button {
 
 .hero-headline {
   font-family: var(--font-serif);
-  font-size: clamp(1.85rem, 3.8vw, 2.75rem);
-  line-height: 1.28;
+  font-size: clamp(2.2rem, 4.2vw, 3.25rem);
+  line-height: 1.22;
   font-weight: 700;
   margin-bottom: 28px;
   color: var(--text-main);
-  min-height: 95px;
+  min-height: 110px;
   transition: opacity 0.2s ease, transform 0.2s ease;
   letter-spacing: -0.015em;
   word-break: break-word;
@@ -2417,8 +2417,8 @@ button {
 
   #hero-dynamic-text,
   .hero-headline {
-    font-size: clamp(1.85rem, 7vw, 2.45rem);
-    line-height: 1.22;
+    font-size: clamp(2.15rem, 8vw, 2.85rem);
+    line-height: 1.2;
     min-height: auto;
     margin-bottom: 22px;
   }
