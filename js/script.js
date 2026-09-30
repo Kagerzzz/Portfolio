@@ -733,7 +733,7 @@ function closeModal() {
 
 /* Copy Email Toast with Confetti Burst */
 function copyEmailToast(event) {
-  const email = "sanvithi.saya@gmail.com";
+  const email = "thanhieu.work@gmail.com";
   navigator.clipboard.writeText(email).then(() => {
     showToast(`email copied: ${email} ✦`);
     fireConfetti(event);
