@@ -5,11 +5,11 @@
 
 // Hero Questions & Interactive Answers
 const HERO_TAB_DATA = {
-  who: "Designer who creates meaningful experiences through visual and motion design.",
-  care: "Pointing my time and skills toward a healthier, greener future for humanity.",
-  believe: "Humans are capable of creating out-of-the-world sublime things when they come together.",
-  cook: "Rich South Indian curries, comforting pasta & fresh matcha lattes.",
-  upto: "Supporting founders in building design-first AI products & exploring gouache painting."
+  who: "Chỉ là một designer với niềm đam mê lớn với phát triển sản phẩm.",
+  care: "Tìm kiếm sự cân bằng giữa giá trị, thẩm mỹ, và tính hữu dụng.",
+  believe: "Thấu hiểu người dùng trước khi tìm cách giải quyết vấn đề của họ.",
+  cook: "Biến những ý tưởng thành trải nghiệm, rồi để trải nghiệm chạm tới người dùng.",
+  upto: "Lang thang giữa thiết kế, công nghệ, khách hàng và những ý tưởng tạo nên giá trị."
 };
 
 // All 5 Real Sanvithi.com Projects
