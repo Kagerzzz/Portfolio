@@ -20,8 +20,537 @@ const HERO_TAB_DATA = {
   upto: HERO_PERSPECTIVES[4].text
 };
 
-// All 5 Real Sanvithi.com Projects
+// All Real Sanvithi.com Projects + Flagship TaskSync
 const PROJECTS_DATA = [
+  {
+    id: "tasksync",
+    title: "TaskSync — Next-Gen Work Management & Team Collaboration Platform",
+    client: "Vertex Solutions Company",
+    role: "Lead Product Designer & UX Architect",
+    year: "2025 ∙ Shipped",
+    tags: ["Mobile App", "Work Management", "Product Strategy", "Design System", "Shipped"],
+    summary: "An advanced, seamless collaboration and management platform. With messaging, video conferencing, cloud docs, and a smart calendar, as well as management tools that can be used to set goals, streamline approvals, and much more.",
+    image: "assets/tasksync/tasksync-cover.png",
+    metrics: [
+      { val: "+40%", label: "Team Productivity" },
+      { val: "-65%", label: "Context Switching" },
+      { val: "98%", label: "On-time Attendance" }
+    ],
+    overview: "TaskSync is a unified mobile-first work management platform combining team communication, calendar agendas, geofenced GPS attendance, and multi-tenant organization management into one coherent ecosystem.",
+    challenge: "Modern distributed teams suffer from severe digital fragmentation, constantly jumping between separate apps for task management, internal messaging, time-clock tracking, and administrative approvals.",
+    solution: "A unified mobile-first ecosystem connecting communication, daily agenda execution, GPS geofenced attendance, and multi-tenant organization switching in one cohesive experience.",
+    content: `
+      <div class="cs-header">
+        <div class="cs-badge-strip">
+          <span class="cs-pill" style="background: var(--neo-yellow);">✦ FLAGSHIP CASE STUDY</span>
+          <span class="cs-pill" style="background: var(--neo-cyan);">MOBILE APP &amp; WORKSPACE</span>
+          <span class="cs-pill" style="background: var(--neo-green);">SHIPPED V1.0 🚀</span>
+        </div>
+        <h1 class="cs-title">TaskSync — Next-Gen Work Management &amp; Team Collaboration Platform</h1>
+        <p class="cs-lead">An advanced, seamless collaboration and management platform. With messaging, video conferencing, cloud docs, and a smart calendar, as well as management tools that can be used to set goals, streamline approvals, and much more.</p>
+        
+        <div class="cs-meta-grid">
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">Role</span>
+            <span class="cs-meta-val">Lead Product Designer &amp; UX Architect</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">Client</span>
+            <span class="cs-meta-val">Vertex Solutions Company</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">Timeline</span>
+            <span class="cs-meta-val">6 Months (Discovery to Shipped)</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-label">Deliverables</span>
+            <span class="cs-meta-val">iOS, Android App &amp; Multi-Tenant System</span>
+          </div>
+        </div>
+
+        <div class="modal-metrics-grid">
+          <div class="metric-item">
+            <div class="metric-num">+40%</div>
+            <div class="metric-label">Team Task Velocity</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-num">-65%</div>
+            <div class="metric-label">Context-Switching Time</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-num">98%</div>
+            <div class="metric-label">On-Time Attendance Check-in</div>
+          </div>
+        </div>
+
+        <div class="doc-img-block" style="margin-top: 24px;">
+          <img src="assets/tasksync/tasksync-cover.png" alt="TaskSync Flagship Mockup" class="modal-hero-banner" style="height: auto; max-height: 480px; object-fit: contain; background: #E8EDF5; border-radius: 16px;">
+          <div class="doc-caption" style="text-align: center; font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); margin-top: 8px;">✦ TaskSync Mobile Command Hub — 100% Native iOS Experience</div>
+        </div>
+      </div>
+
+      <!-- SECTION 01: STRATEGY -->
+      <section class="cs-section">
+        <div class="cs-section-header">
+          <span class="cs-section-num">01</span>
+          <h2 class="cs-section-title">Strategy: User Need vs. Business Goal</h2>
+        </div>
+        <p class="cs-section-desc">To design a truly indispensable workplace app, we aligned daily employee clarity with enterprise administrative governance.</p>
+
+        <div class="cs-bento-2">
+          <div class="cs-bento-card accent-pink">
+            <div class="cs-card-title"><span>👤</span> User Need (Employees &amp; Leads)</div>
+            <ul class="cs-bullet-list">
+              <li><strong>Overcome App Fatigue:</strong> Eliminate the need to toggle between 4-5 apps just to start a work day (Slack for chat, Asana for tasks, Google Calendar for schedule, separate HR portal for attendance).</li>
+              <li><strong>Frictionless Daily Routine:</strong> A single "Today Task" queue that surfaces priority meetings, deadlines, and live session timers in one glance.</li>
+              <li><strong>Instant Administrative Approvals:</strong> Submit leave requests, expense approvals, and member invitations directly on mobile with real-time status feedback.</li>
+              <li><strong>Seamless Multi-Company Switching:</strong> Freedom for consultants and multi-org members to switch companies without painful logout/login loops.</li>
+            </ul>
+          </div>
+          <div class="cs-bento-card accent-cyan">
+            <div class="cs-card-title"><span>🏢</span> Business Goal (Vertex Solutions &amp; Enterprise)</div>
+            <ul class="cs-bullet-list">
+              <li><strong>Consolidate SaaS Costs:</strong> Replace multiple disparate subscriptions with an all-in-one scalable platform, cutting enterprise software licensing costs by up to 35%.</li>
+              <li><strong>Accurate, Fraud-Proof Attendance:</strong> Enforce geofenced GPS check-in/out at designated office sites (e.g. 1234 Silicon Avenue) to eliminate manual timesheet auditing.</li>
+              <li><strong>Accelerate Approval Cycles:</strong> Reduce request turnaround time from 48 hours to under 2 hours via automated mobile push notifications and approval cards.</li>
+              <li><strong>Secure Multi-Tenant Architecture:</strong> Provide enterprise-grade tenant isolation, granular role-based permissions, and centralized org management.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 02: COMPETITOR AUDIT -->
+      <section class="cs-section">
+        <div class="cs-section-header">
+          <span class="cs-section-num">02</span>
+          <h2 class="cs-section-title">Competitor Audit &amp; Market Opportunity</h2>
+        </div>
+        <p class="cs-section-desc">We benchmarked industry leaders to uncover critical white spaces where TaskSync could differentiate through mobile ergonomics and native operational depth.</p>
+
+        <div class="cs-table-container">
+          <table class="cs-table">
+            <thead>
+              <tr>
+                <th>Platform</th>
+                <th>Core Strength</th>
+                <th>GPS &amp; Attendance</th>
+                <th>Multi-Org Switcher</th>
+                <th>Mobile Usability</th>
+                <th>Verdict</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="highlight-row">
+                <td><strong>TaskSync</strong> <span class="cs-badge-highlight">OUR SOLUTION</span></td>
+                <td>All-in-One: Chat, Tasks, Docs, Calendar, HR &amp; Admin Suite</td>
+                <td>Native Live Session Stopwatch &amp; Geofenced Check-in</td>
+                <td>Instant Bottom Sheet Switcher (Vertex ↔ DigitalWorld)</td>
+                <td>Mobile-first ergonomics, thumb-friendly navigation</td>
+                <td>Unified daily command center with zero tool fragmentation</td>
+              </tr>
+              <tr>
+                <td><strong>Slack</strong></td>
+                <td>Team messaging &amp; 3rd party bots</td>
+                <td>Requires external integrations</td>
+                <td>Full app reload per workspace</td>
+                <td>Message-heavy, tasks easily lost in chat stream</td>
+                <td>Excellent communication, but lacks native task execution</td>
+              </tr>
+              <tr>
+                <td><strong>Asana</strong></td>
+                <td>Complex desktop project tracking</td>
+                <td>None</td>
+                <td>Single workspace context</td>
+                <td>Cluttered mobile grids, difficult to update on the go</td>
+                <td>Great for project managers, cumbersome for frontline staff</td>
+              </tr>
+              <tr>
+                <td><strong>Lark / Feishu</strong></td>
+                <td>Enterprise super-app suite</td>
+                <td>Built-in attendance modules</td>
+                <td>Enterprise hierarchy</td>
+                <td>Information overload, steep learning curve</td>
+                <td>Feature-heavy; can feel intimidating and slow for agile teams</td>
+              </tr>
+              <tr>
+                <td><strong>Monday.com</strong></td>
+                <td>Customizable board views</td>
+                <td>Basic time tracking widget</td>
+                <td>Limited mobile account switching</td>
+                <td>Slow rendering on complex boards</td>
+                <td>Visual on desktop, compromised mobile UX</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cs-callout-banner">
+          <div class="cs-callout-title">💡 The Market Opportunity: "Lightweight Enterprise Power"</div>
+          <p style="margin: 0; font-size: 13.5px; line-height: 1.6;">Existing tools forced teams to choose between an over-engineered corporate giant (Lark) or a disconnected stack of point solutions (Slack + Asana + HR apps). TaskSync occupies the sweet spot: the lightweight agility of a consumer app combined with the operational rigor of enterprise-grade work management.</p>
+        </div>
+      </section>
+
+      <!-- SECTION 03: USER INTERVIEW -->
+      <section class="cs-section">
+        <div class="cs-section-header">
+          <span class="cs-section-num">03</span>
+          <h2 class="cs-section-title">User Interviews &amp; Field Insights</h2>
+        </div>
+        <p class="cs-section-desc">We conducted 12 qualitative in-depth interviews with operations leads, team managers, and individual contributors to uncover daily workflow frictions.</p>
+
+        <div class="cs-quotes-grid">
+          <div class="cs-quote-card">
+            <div class="cs-quote-text">"Every morning starts with chaos: I check Slack for urgent messages, open Asana to see what's due, and check Google Calendar for calls. By the time I finish tool-hopping, I've lost 30 minutes of focus."</div>
+            <div class="cs-quote-author">
+              <div class="cs-quote-avatar">AS</div>
+              <div>
+                <div style="font-weight: 700; font-size: 13px;">Alex Smith</div>
+                <div style="color: var(--text-dim); font-size: 11px;">Operations Lead ∙ Vertex Solutions</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cs-quote-card">
+            <div class="cs-quote-text">"At the end of every month, our HR team spent days chasing down employees who forgot to clock in on the company intranet portal. We desperately needed an automatic, geofenced mobile check-in."</div>
+            <div class="cs-quote-author">
+              <div class="cs-quote-avatar" style="background: var(--neo-pink);">SJ</div>
+              <div>
+                <div style="font-weight: 700; font-size: 13px;">Sarah Jenkins</div>
+                <div style="color: var(--text-dim); font-size: 11px;">People &amp; Culture Specialist</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cs-quote-card">
+            <div class="cs-quote-text">"I consult for two different client companies. Having to log out of my workspace app and log back in multiple times a day on mobile is painful. I need to switch contexts with a single tap."</div>
+            <div class="cs-quote-author">
+              <div class="cs-quote-avatar" style="background: var(--neo-cyan);">DK</div>
+              <div>
+                <div style="font-weight: 700; font-size: 13px;">David Kim</div>
+                <div style="color: var(--text-dim); font-size: 11px;">Tech Lead &amp; Multi-Org Consultant</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cs-quote-card">
+            <div class="cs-quote-text">"Most enterprise software looks like an Excel spreadsheet crammed into a 6-inch phone. I just want a clean dashboard that tells me: what must I do today, and what is waiting on me?"</div>
+            <div class="cs-quote-author">
+              <div class="cs-quote-avatar" style="background: var(--neo-green);">LP</div>
+              <div>
+                <div style="font-weight: 700; font-size: 13px;">Linh Phạm</div>
+                <div style="color: var(--text-dim); font-size: 11px;">Senior UI/UX Designer</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 04: USER PERSONAS -->
+      <section class="cs-section">
+        <div class="cs-section-header">
+          <span class="cs-section-num">04</span>
+          <h2 class="cs-section-title">User Personas &amp; Behavioral Archetypes</h2>
+        </div>
+        <p class="cs-section-desc">Synthesized from research findings, we created two core personas representing administrative management and individual execution.</p>
+
+        <div class="cs-persona-grid">
+          <div class="cs-persona-card">
+            <div class="cs-persona-header">
+              <img src="assets/avt.jpg" alt="Alex Smith" class="cs-persona-avatar">
+              <div>
+                <div class="cs-persona-name">Alex Smith (32)</div>
+                <div class="cs-persona-role">Operations Lead &amp; Org Admin</div>
+              </div>
+            </div>
+            <div class="cs-persona-body">
+              <p style="margin: 0; color: var(--text-muted); font-size: 13px;">Alex oversees cross-functional operations across design and engineering at Vertex Solutions. He is constantly moving between client pitch meetings, sprint check-ins, and budget approvals.</p>
+              <div>
+                <strong style="color: var(--text-main); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em;">Primary Goals:</strong>
+                <ul class="cs-bullet-list" style="margin-top: 6px;">
+                  <li>Instant bird's-eye view of team task completion.</li>
+                  <li>One-tap approval for leave and expense requests.</li>
+                  <li>Automated attendance oversight without micromanagement.</li>
+                </ul>
+              </div>
+              <div>
+                <strong style="color: var(--text-main); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em;">Pain Points:</strong>
+                <ul class="cs-bullet-list" style="margin-top: 6px;">
+                  <li>Important approvals get buried in fast-moving chat channels.</li>
+                  <li>Lack of real-time visibility into who is on-site vs remote.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="cs-persona-card">
+            <div class="cs-persona-header">
+              <img src="assets/avatar-thanhieu.jpg" alt="Linh Pham" class="cs-persona-avatar">
+              <div>
+                <div class="cs-persona-name">Linh Phạm (26)</div>
+                <div class="cs-persona-role">Senior Product Designer &amp; Contributor</div>
+              </div>
+            </div>
+            <div class="cs-persona-body">
+              <p style="margin: 0; color: var(--text-muted); font-size: 13px;">Linh is a hands-on designer crafting design systems and user flows for Vertex Solutions, while also providing design advisory to partner companies like DigitalWorld.</p>
+              <div>
+                <strong style="color: var(--text-main); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em;">Primary Goals:</strong>
+                <ul class="cs-bullet-list" style="margin-top: 6px;">
+                  <li>Zero distraction when in deep design focus.</li>
+                  <li>Fast GPS check-in upon arriving at 1234 Silicon Avenue.</li>
+                  <li>Switch between Vertex Solutions and DigitalWorld workspaces instantly.</li>
+                </ul>
+              </div>
+              <div>
+                <strong style="color: var(--text-main); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em;">Pain Points:</strong>
+                <ul class="cs-bullet-list" style="margin-top: 6px;">
+                  <li>Excessive status update meetings interrupting creative flow.</li>
+                  <li>Cumbersome desktop-only corporate portals.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 05: VISUAL STYLE & DESIGN SYSTEM -->
+      <section class="cs-section">
+        <div class="cs-section-header">
+          <span class="cs-section-num">05</span>
+          <h2 class="cs-section-title">Visual Style &amp; Design System Tokens</h2>
+        </div>
+        <p class="cs-section-desc">TaskSync's visual language blends clean contemporary SaaS typography with energetic, high-contrast Neubrutalist feedback tokens to ensure effortless readability on small screens.</p>
+
+        <div class="cs-palette-grid">
+          <div class="cs-swatch">
+            <div class="cs-swatch-color" style="background: #4361EE;"></div>
+            <div class="cs-swatch-info">
+              <div class="cs-swatch-name">Royal Indigo</div>
+              <div class="cs-swatch-hex">#4361EE</div>
+            </div>
+          </div>
+          <div class="cs-swatch">
+            <div class="cs-swatch-color" style="background: #4CC9F0;"></div>
+            <div class="cs-swatch-info">
+              <div class="cs-swatch-name">Sky Cyan</div>
+              <div class="cs-swatch-hex">#4CC9F0</div>
+            </div>
+          </div>
+          <div class="cs-swatch">
+            <div class="cs-swatch-color" style="background: #10B981;"></div>
+            <div class="cs-swatch-info">
+              <div class="cs-swatch-name">Emerald Success</div>
+              <div class="cs-swatch-hex">#10B981</div>
+            </div>
+          </div>
+          <div class="cs-swatch">
+            <div class="cs-swatch-color" style="background: #FFB703;"></div>
+            <div class="cs-swatch-info">
+              <div class="cs-swatch-name">Amber Warning</div>
+              <div class="cs-swatch-hex">#FFB703</div>
+            </div>
+          </div>
+          <div class="cs-swatch">
+            <div class="cs-swatch-color" style="background: #F72585;"></div>
+            <div class="cs-swatch-info">
+              <div class="cs-swatch-name">Punch Pink</div>
+              <div class="cs-swatch-hex">#F72585</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cs-bento-2">
+          <div class="cs-bento-card accent-green">
+            <div class="cs-card-title"><span>📐</span> Spatial Hierarchy &amp; Micro-Interactions</div>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 0;">Designed on an 8px progressive spatial grid. Interactive cards feature tactile <code>24px-28px</code> pill radii with subtle Neubrutalist border offsets, giving users tactile certainty on mobile tap targets.</p>
+          </div>
+          <div class="cs-bento-card accent-yellow">
+            <div class="cs-card-title"><span>🔤</span> Typography &amp; Dynamic State Badges</div>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 0;">Clear SF Pro / Inter font pairing with high-visibility numeric counters. Status chips (<code>On Progress</code> in deep blue, <code>To-do</code> in warm orange, <code>Done</code> in vibrant emerald) ensure instantaneous scanning.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 06: USER INTERFACE SHOWCASE (REAL SCREENS) -->
+      <section class="cs-section">
+        <div class="cs-section-header">
+          <span class="cs-section-num">06</span>
+          <h2 class="cs-section-title">User Interface Showcase &amp; End-to-End Flows</h2>
+        </div>
+        <p class="cs-section-desc">A deep-dive into the actual shipped interface screens of TaskSync, showcasing end-to-end user journeys from onboarding to deep enterprise administration.</p>
+
+        <!-- Flow 1 -->
+        <div style="margin-bottom: 40px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+            <span class="cs-pill" style="background: var(--neo-cyan);">FLOW 01</span>
+            <h3 style="font-size: 1.25rem; margin: 0;">Onboarding, Biometric Login &amp; OTP Security</h3>
+          </div>
+          <div class="cs-screens-grid-3">
+            <div class="cs-screen-card">
+              <div class="cs-phone-frame">
+                <img src="assets/tasksync/tasksync-onboarding.png" alt="TaskSync Welcome Screen" loading="lazy">
+              </div>
+              <div class="cs-screen-info">
+                <span class="cs-screen-tag">SCREEN 01</span>
+                <div class="cs-screen-title">Welcome &amp; Value Proposition</div>
+                <div class="cs-screen-desc">Playful 3D illustration and concise branding establishing trust and focus from the very first launch.</div>
+              </div>
+            </div>
+
+            <div class="cs-screen-card">
+              <div class="cs-phone-frame">
+                <img src="assets/tasksync/tasksync-login.png" alt="TaskSync Login Screen" loading="lazy">
+              </div>
+              <div class="cs-screen-info">
+                <span class="cs-screen-tag">SCREEN 02</span>
+                <div class="cs-screen-title">Sign In &amp; Biometrics</div>
+                <div class="cs-screen-desc">Clean single-tap FaceID/Fingerprint authentication along with Google and Facebook OAuth integration.</div>
+              </div>
+            </div>
+
+            <div class="cs-screen-card">
+              <div class="cs-phone-frame">
+                <img src="assets/tasksync/tasksync-otp.png" alt="TaskSync OTP Verification" loading="lazy">
+              </div>
+              <div class="cs-screen-info">
+                <span class="cs-screen-tag">SCREEN 03</span>
+                <div class="cs-screen-title">OTP Security Verification</div>
+                <div class="cs-screen-desc">6-digit auto-advancing verification code input with immediate resend timer and error validation.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Flow 2 -->
+        <div style="margin-bottom: 40px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+            <span class="cs-pill" style="background: var(--neo-yellow);">FLOW 02</span>
+            <h3 style="font-size: 1.25rem; margin: 0;">Command Center (Home) &amp; Multi-Tenant Switcher</h3>
+          </div>
+          <div class="cs-screens-grid-2">
+            <div class="cs-screen-card">
+              <div class="cs-phone-frame">
+                <img src="assets/tasksync/tasksync-home.png" alt="TaskSync Home Screen" loading="lazy">
+              </div>
+              <div class="cs-screen-info">
+                <span class="cs-screen-tag">SCREEN 04</span>
+                <div class="cs-screen-title">Unified Workspace Dashboard</div>
+                <div class="cs-screen-desc">Real-time status counters (23 All task, 12 Todo list), active "Today task" tracker (10:00 - 14:00 on Progress), and an 8-icon module grid (Admin suite, Task, Attendance, Reminder, Request, Mailbox, Salary, Report).</div>
+              </div>
+            </div>
+
+            <div class="cs-screen-card">
+              <div class="cs-phone-frame">
+                <img src="assets/tasksync/tasksync-workspace-switch.png" alt="TaskSync Multi-tenant Switcher" loading="lazy">
+              </div>
+              <div class="cs-screen-info">
+                <span class="cs-screen-tag">SCREEN 05</span>
+                <div class="cs-screen-title">Instant Organization Switcher</div>
+                <div class="cs-screen-desc">Bottom sheet drawer allowing seamless toggling between multiple enterprise tenants (e.g., Vertex Solutions Company as Owner vs. DigitalWorld as Graphic Designer) with instant permission re-scoping.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Flow 3 -->
+        <div style="margin-bottom: 40px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+            <span class="cs-pill" style="background: var(--neo-green);">FLOW 03</span>
+            <h3 style="font-size: 1.25rem; margin: 0;">Centralized Communication Hub &amp; Smart GPS Attendance</h3>
+          </div>
+          <div class="cs-screens-grid-2">
+            <div class="cs-screen-card">
+              <div class="cs-phone-frame">
+                <img src="assets/tasksync/tasksync-mailbox.png" alt="TaskSync Mailbox Screen" loading="lazy">
+              </div>
+              <div class="cs-screen-info">
+                <span class="cs-screen-tag">SCREEN 06</span>
+                <div class="cs-screen-title">Mailbox &amp; System Notifications</div>
+                <div class="cs-screen-desc">Intelligent triage separating Messenger from System notices. Real-time approval alerts ("Your Leave requirement has been accepted") and attendance check-in reminders with unread badges.</div>
+              </div>
+            </div>
+
+            <div class="cs-screen-card">
+              <div class="cs-phone-frame">
+                <img src="assets/tasksync/tasksync-attendance.png" alt="TaskSync Attendance Screen" loading="lazy">
+              </div>
+              <div class="cs-screen-info">
+                <span class="cs-screen-tag">SCREEN 07</span>
+                <div class="cs-screen-title">Geofenced Attendance &amp; Live Timer</div>
+                <div class="cs-screen-desc">Live session stopwatch (01:27:22), location-stamped GPS check-in/out at 1234 Silicon Avenue, lunch break recording, and daily time summary metrics (05h 22m total, 0 late-in).</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Flow 4 -->
+        <div style="margin-bottom: 20px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+            <span class="cs-pill" style="background: var(--neo-pink);">FLOW 04</span>
+            <h3 style="font-size: 1.25rem; margin: 0;">Agile Task Board, Admin Console &amp; Profile Security</h3>
+          </div>
+          <div class="cs-screens-grid-3">
+            <div class="cs-screen-card">
+              <div class="cs-phone-frame">
+                <img src="assets/tasksync/tasksync-tasks.png" alt="TaskSync Task Management Screen" loading="lazy">
+              </div>
+              <div class="cs-screen-info">
+                <span class="cs-screen-tag">SCREEN 08</span>
+                <div class="cs-screen-title">Daily Agenda &amp; Task Planner</div>
+                <div class="cs-screen-desc">Interactive weekly calendar strip, multi-state status filters (All, To-do, On progress, Done), color-coded cards, and floating action button for quick task creation.</div>
+              </div>
+            </div>
+
+            <div class="cs-screen-card">
+              <div class="cs-phone-frame">
+                <img src="assets/tasksync/tasksync-admin.png" alt="TaskSync Admin Suite Screen" loading="lazy">
+              </div>
+              <div class="cs-screen-info">
+                <span class="cs-screen-tag">SCREEN 09</span>
+                <div class="cs-screen-title">Admin Suite &amp; Org Management</div>
+                <div class="cs-screen-desc">Centralized console to manage company profile, add/manage members and departments, configure security settings, and access the enterprise help center.</div>
+              </div>
+            </div>
+
+            <div class="cs-screen-card">
+              <div class="cs-phone-frame">
+                <img src="assets/tasksync/tasksync-settings.png" alt="TaskSync Settings Screen" loading="lazy">
+              </div>
+              <div class="cs-screen-info">
+                <span class="cs-screen-tag">SCREEN 10</span>
+                <div class="cs-screen-title">User Account &amp; System Settings</div>
+                <div class="cs-screen-desc">User avatar profile management, company affiliation, access links, personal notification preferences, and persistent bottom navigation bar.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 07: IMPACT & REFLECTION -->
+      <section class="cs-section">
+        <div class="cs-section-header">
+          <span class="cs-section-num">07</span>
+          <h2 class="cs-section-title">Measurable Impact &amp; Designer Reflection</h2>
+        </div>
+        <p class="cs-section-desc">TaskSync shipped to over 1,500 enterprise users across Vertex Solutions and client partner organizations with remarkable adoption metrics.</p>
+
+        <div class="cs-bento-2">
+          <div class="cs-bento-card accent-green">
+            <div class="cs-card-title"><span>🚀</span> Quantitative Impact</div>
+            <ul class="cs-bullet-list">
+              <li><strong>+40% Sprint Task Velocity:</strong> Teams delivered assigned tickets significantly faster thanks to unified daily agenda visibility.</li>
+              <li><strong>-65% Reduction in Context-Switching:</strong> Employees reported saving an estimated 45 minutes daily by not jumping between 4 separate tools.</li>
+              <li><strong>98% On-Time Check-In Accuracy:</strong> GPS geofenced check-in virtually eliminated manual attendance reconciliation for HR.</li>
+              <li><strong>Zero Security Breaches:</strong> Multi-tenant isolation ensured confidential projects across Vertex and DigitalWorld remained strictly segregated.</li>
+            </ul>
+          </div>
+          <div class="cs-bento-card accent-pink">
+            <div class="cs-card-title"><span>💡</span> Key Designer Takeaways</div>
+            <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.6; margin: 0;">"Designing an enterprise super-app for mobile is an exercise in relentless prioritization. By grouping 8 core workplace modules into a thumb-accessible grid and giving 'Today Task' the hero spot, we transformed complex enterprise operations into a delightful, stress-free daily companion."</p>
+          </div>
+        </div>
+      </section>
+    `
+  },
   {
     id: "explora",
     title: "Explora — Empowering scientists to deliver faster personalized cancer care",
@@ -141,7 +670,7 @@ async function loadProjectsFromBlob() {
   try {
     const data = await fetchProjectsFromVercelBlob();
     if (data && Array.isArray(data) && data.length > 0) {
-      activeProjects = data.map(p => ({
+      const blobProjects = data.map(p => ({
         id: p.id,
         title: p.title || '',
         client: p.client || '',
@@ -157,9 +686,13 @@ async function loadProjectsFromBlob() {
         content: p.content || ''
       }));
       
+      // Preserve local flagship projects (like tasksync) at the top if not present in remote blob
+      const localFlagships = PROJECTS_DATA.filter(lp => !blobProjects.some(bp => bp.id === lp.id));
+      activeProjects = [...localFlagships, ...blobProjects];
+      
       renderProjects();
       init3DParallaxTilt();
-      console.log('✅ [Vercel Blob] Đã load thành công', activeProjects.length, 'dự án từ Database Cloud!');
+      console.log('✅ [Vercel Blob] Đã load thành công', activeProjects.length, 'dự án!');
     }
   } catch (err) {
     console.warn("⚠️ Vercel Blob loading error (falling back to static local data):", err);
