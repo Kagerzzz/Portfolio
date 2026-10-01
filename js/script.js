@@ -24,68 +24,68 @@ const HERO_TAB_DATA = {
 const PROJECTS_DATA = [
   {
     id: "tasksync",
-    title: "TaskSync — Nền Tảng Quản Lý Công Việc & Cộng Tác Doanh Nghiệp Toàn Diện",
+    title: "TaskSync — All-in-One Work Management & Team Collaboration Platform",
     client: "Vertex Solutions Company",
     role: "Lead Product Designer & UX Architect",
-    year: "2025 ∙ Đã Triển Khai",
-    tags: ["Mobile App", "Quản Lý Công Việc", "Chiến Lược Sản Phẩm", "Hệ Thống Thiết Kế", "Đã Phát Hành"],
-    summary: "Nền tảng quản lý và cộng tác liền mạch thế hệ mới. Tích hợp nhắn tin tức thời, họp video trực tuyến, tài liệu đám mây và lịch thông minh, cùng bộ công cụ quản trị chuyên sâu giúp thiết lập mục tiêu (OKRs), chuẩn hóa quy trình phê duyệt và tối ưu năng suất đội ngũ.",
+    year: "2025 ∙ Shipped",
+    tags: ["Mobile App", "Work Management", "Product Strategy", "Design System", "Shipped"],
+    summary: "Nền tảng all-in-one quản lý công việc và cộng tác nhóm, tích hợp messaging, video call, cloud docs, smart calendar cùng các module quản trị vận hành như OKRs, approval workflow và chấm công GPS.",
     image: "assets/tasksync/tasksync-cover.png",
     metrics: [
-      { val: "+40%", label: "Tốc Độ Hoàn Thành Task" },
-      { val: "-65%", label: "Thời Gian Chuyển Đổi App" },
-      { val: "98%", label: "Điểm Danh GPS Đúng Giờ" }
+      { val: "+40%", label: "Tốc độ xử lý task" },
+      { val: "-65%", label: "Thời gian chuyển đổi app" },
+      { val: "98%", label: "Check-in GPS đúng giờ" }
     ],
-    overview: "TaskSync là giải pháp quản lý công việc all-in-one trên thiết bị di động, hợp nhất giao tiếp nội bộ, lịch trình hàng ngày, chấm công GPS khoanh vùng địa lý và chuyển đổi đa tổ chức (Multi-tenant) vào một trải nghiệm gắn kết duy nhất.",
-    challenge: "Các đội ngũ hiện đại bị phân mảnh kỹ thuật số nghiêm trọng khi phải liên tục nhảy qua lại giữa 4-5 ứng dụng rời rạc: Slack để nhắn tin, Asana để xem task, Google Calendar để canh lịch, và cổng nội bộ cồng kềnh để chấm công và xin nghỉ phép.",
-    solution: "Xây dựng hệ sinh thái di động tinh gọn, kết nối tức thì luồng giao tiếp, thực thi công việc trọng tâm trong ngày, chấm công tự động theo tọa độ văn phòng và phân quyền đa doanh nghiệp chỉ với một chạm.",
+    overview: "TaskSync là giải pháp quản lý công việc all-in-one trên mobile, hợp nhất team messaging, lịch trình, chấm công GPS geofencing và chuyển đổi đa workspace (Multi-tenant) trong một trải nghiệm liền mạch.",
+    challenge: "Nhân sự và team lead thường xuyên gặp tình trạng context switching khi phải chuyển qua lại giữa 4-5 tool độc lập (Slack để chat, Asana để nhận task, Google Calendar để xem lịch, web portal để chấm công và nộp đơn từ).",
+    solution: "Thiết kế ứng dụng mobile-first tinh gọn, hợp nhất daily task, phê duyệt 1-touch, chấm công GPS và fast workspace switching trong một giao diện trực quan, giảm thiểu tối đa thao tác thừa.",
     content: `
       <div class="cs-header">
         <div class="cs-badge-strip">
-          <span class="cs-pill" style="background: var(--neo-yellow);">✦ DỰ ÁN TIÊU BIỂU (FLAGSHIP CASE STUDY)</span>
-          <span class="cs-pill" style="background: var(--neo-cyan);">ỨNG DỤNG DI ĐỘNG &amp; WORKSPACE</span>
-          <span class="cs-pill" style="background: var(--neo-green);">ĐÃ TRIỂN KHAI V1.0 🚀</span>
+          <span class="cs-pill" style="background: var(--neo-yellow);">✦ FLAGSHIP CASE STUDY</span>
+          <span class="cs-pill" style="background: var(--neo-cyan);">MOBILE APP &amp; WORKSPACE</span>
+          <span class="cs-pill" style="background: var(--neo-green);">SHIPPED V1.0 🚀</span>
         </div>
-        <h1 class="cs-title">TaskSync — Nền Tảng Quản Lý Công Việc &amp; Cộng Tác Doanh Nghiệp Toàn Diện</h1>
-        <p class="cs-lead">Nền tảng quản lý và cộng tác liền mạch thế hệ mới. Tích hợp nhắn tin tức thời, họp video trực tuyến, tài liệu đám mây và lịch thông minh, cùng bộ công cụ quản trị chuyên sâu giúp thiết lập mục tiêu (OKRs), chuẩn hóa quy trình phê duyệt và tối ưu năng suất vận hành doanh nghiệp.</p>
+        <h1 class="cs-title">TaskSync — All-in-One Work Management &amp; Team Collaboration Platform</h1>
+        <p class="cs-lead">Nền tảng all-in-one quản lý công việc và cộng tác nhóm, tích hợp messaging, video call, cloud docs, smart calendar cùng các module quản trị vận hành như OKRs, approval workflow và chấm công GPS.</p>
         
         <div class="cs-meta-grid">
           <div class="cs-meta-item">
-            <span class="cs-meta-label">Vai Trò</span>
+            <span class="cs-meta-label">Role</span>
             <span class="cs-meta-val">Lead Product Designer &amp; UX Architect</span>
           </div>
           <div class="cs-meta-item">
-            <span class="cs-meta-label">Khách Hàng</span>
+            <span class="cs-meta-label">Client</span>
             <span class="cs-meta-val">Vertex Solutions Company</span>
           </div>
           <div class="cs-meta-item">
-            <span class="cs-meta-label">Thời Gian</span>
-            <span class="cs-meta-val">6 Tháng (Khám phá ➔ Phát hành)</span>
+            <span class="cs-meta-label">Timeline</span>
+            <span class="cs-meta-val">6 tháng (Research ➔ Release)</span>
           </div>
           <div class="cs-meta-item">
-            <span class="cs-meta-label">Sản Phẩm Bàn Giao</span>
-            <span class="cs-meta-val">iOS, Android App &amp; Hệ Thống Đa Tổ Chức</span>
+            <span class="cs-meta-label">Deliverables</span>
+            <span class="cs-meta-val">iOS &amp; Android Apps, Multi-tenant System</span>
           </div>
         </div>
 
         <div class="modal-metrics-grid">
           <div class="metric-item">
             <div class="metric-num">+40%</div>
-            <div class="metric-label">Tốc Độ Hoàn Thành Task</div>
+            <div class="metric-label">Tốc độ xử lý task</div>
           </div>
           <div class="metric-item">
             <div class="metric-num">-65%</div>
-            <div class="metric-label">Thời Gian Chuyển Đổi App</div>
+            <div class="metric-label">Thời gian chuyển đổi app</div>
           </div>
           <div class="metric-item">
             <div class="metric-num">98%</div>
-            <div class="metric-label">Điểm Danh GPS Đúng Giờ</div>
+            <div class="metric-label">Tỷ lệ check-in GPS đúng giờ</div>
           </div>
         </div>
 
         <div class="doc-img-block" style="margin-top: 24px;">
           <img src="assets/tasksync/tasksync-cover.png" alt="TaskSync Flagship Mockup" class="modal-hero-banner" style="height: auto; max-height: 480px; object-fit: contain; background: #E8EDF5; border-radius: 16px;">
-          <div class="doc-caption" style="text-align: center; font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); margin-top: 8px;">✦ Trung Tâm Chỉ Huy Di Động TaskSync — Trải Nghiệm Chuẩn Native iOS</div>
+          <div class="doc-caption" style="text-align: center; font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); margin-top: 8px;">✦ TaskSync Mobile App — Native iOS Experience</div>
         </div>
       </div>
 
@@ -93,27 +93,27 @@ const PROJECTS_DATA = [
       <section class="cs-section">
         <div class="cs-section-header">
           <span class="cs-section-num">01</span>
-          <h2 class="cs-section-title">Chiến Lược Sản Phẩm: Nhu Cầu Người Dùng vs. Mục Tiêu Doanh Nghiệp</h2>
+          <h2 class="cs-section-title">Product Strategy: User Needs vs. Business Goals</h2>
         </div>
-        <p class="cs-section-desc">Để kiến tạo một ứng dụng làm việc thực sự thiết yếu mỗi ngày, chúng tôi đã cân bằng hoàn hảo giữa sự rõ ràng, mạch lạc của từng nhân viên và năng lực kiểm soát quản trị của ban điều hành.</p>
+        <p class="cs-section-desc">Mục tiêu của dự án là cân bằng giữa trải nghiệm mượt mà, tiện dụng cho nhân viên với nhu cầu kiểm soát dữ liệu và chuẩn hóa quy trình của ban quản trị doanh nghiệp.</p>
 
         <div class="cs-bento-2">
           <div class="cs-bento-card accent-pink">
-            <div class="cs-card-title"><span>👤</span> Nhu Cầu Người Dùng (Nhân Viên &amp; Team Lead)</div>
+            <div class="cs-card-title"><span>👤</span> User Needs (Employees &amp; Team Leads)</div>
             <ul class="cs-bullet-list">
-              <li><strong>Xóa bỏ hội chứng kiệt sức vì công cụ (App Fatigue):</strong> Chấm dứt việc phải nhảy qua lại giữa 4-5 ứng dụng chỉ để bắt đầu ngày làm việc (Slack nhắn tin, Asana nhận việc, Google Calendar canh lịch, cổng nội bộ chấm công).</li>
-              <li><strong>Nhịp làm việc hàng ngày không ma sát:</strong> Hàng đợi công việc trọng tâm "Today Task" làm nổi bật ngay các cuộc họp ưu tiên, deadline gấp và đồng hồ bấm giờ phiên làm việc chỉ trong một ánh nhìn.</li>
-              <li><strong>Phê duyệt hành chính thần tốc:</strong> Nộp đơn nghỉ phép, xin làm thêm giờ (OT), duyệt tạm ứng trực tiếp trên điện thoại và nhận phản hồi phê duyệt tức thì qua thông báo đẩy.</li>
-              <li><strong>Chuyển đổi đa công ty linh hoạt:</strong> Cho phép chuyên gia tư vấn hoặc nhân sự làm việc cho nhiều tổ chức chuyển đổi workspace ngay lập tức mà không cần quy trình đăng xuất - đăng nhập phiền toái.</li>
+              <li><strong>Giảm thiểu App Fatigue &amp; Context Switching:</strong> Không phải nhảy qua lại giữa 4-5 tool độc lập (Slack để chat, Asana để nhận task, Google Calendar để xem lịch, web portal nội bộ để chấm công).</li>
+              <li><strong>Nắm bắt Daily Workflow nhanh chóng:</strong> Khu vực "Today Task" hiển thị ngay các cuộc họp ưu tiên, deadline trong ngày và timer đếm giờ làm việc chỉ trong một màn hình.</li>
+              <li><strong>Xử lý Approval Flow gọn gàng trên mobile:</strong> Tạo và duyệt đơn nghỉ phép, OT, tạm ứng chi phí trực tiếp trên app với push notification theo thời gian thực.</li>
+              <li><strong>Fast Workspace Switching:</strong> Cho phép nhân sự hoặc consultant làm việc với nhiều công ty chuyển đổi context ngay lập tức mà không cần logout/login lại.</li>
             </ul>
           </div>
           <div class="cs-bento-card accent-cyan">
-            <div class="cs-card-title"><span>🏢</span> Mục Tiêu Doanh Nghiệp (Vertex Solutions &amp; Khối Doanh Nghiệp)</div>
+            <div class="cs-card-title"><span>🏢</span> Business Goals (Vertex Solutions &amp; Enterprise Clients)</div>
             <ul class="cs-bullet-list">
-              <li><strong>Tối ưu chi phí bản quyền SaaS:</strong> Thay thế các gói phần mềm rời rạc tốn kém bằng một nền tảng all-in-one thống nhất, giúp doanh nghiệp tiết kiệm đến 35% chi phí bản quyền hàng năm.</li>
-              <li><strong>Chấm công chính xác, chống gian lận:</strong> Thiết lập hàng rào địa lý GPS tại trụ sở văn phòng (như 1234 Silicon Avenue), loại bỏ hoàn toàn việc nhân sự quên chấm công và công đoạn đối soát thủ công phức tạp cuối tháng.</li>
-              <li><strong>Rút ngắn chu kỳ phê duyệt nội bộ:</strong> Giảm thời gian xử lý đơn từ 48 giờ xuống dưới 2 giờ nhờ cơ chế định tuyến thông minh và thẻ duyệt nhanh một chạm.</li>
-              <li><strong>Kiến trúc đa tổ chức (Multi-Tenant) bảo mật cao:</strong> Đảm bảo phân tách dữ liệu tuyệt đối giữa các công ty con/đối tác, phân quyền vai trò chi tiết và bảo mật dữ liệu cấp doanh nghiệp.</li>
+              <li><strong>Tiết kiệm chi phí SaaS:</strong> Hợp nhất các phần mềm rời rạc vào một platform all-in-one, cắt giảm khoảng 35% chi phí bản quyền hàng năm cho doanh nghiệp.</li>
+              <li><strong>Minh bạch hóa dữ liệu chấm công:</strong> Ứng dụng Geofencing GPS tại địa điểm văn phòng, giải quyết tình trạng quên check-in và giảm tải khâu đối soát timesheet cuối tháng cho HR.</li>
+              <li><strong>Rút ngắn chu kỳ phê duyệt:</strong> Giảm thời gian xử lý request từ 48 giờ xuống dưới 2 giờ nhờ notification tức thì và luồng duyệt 1-touch.</li>
+              <li><strong>Multi-tenant Architecture &amp; Data Security:</strong> Tách biệt dữ liệu giữa các workspace, phân quyền RBAC (Role-based Access Control) chặt chẽ theo từng cấp bậc tổ chức.</li>
             </ul>
           </div>
         </div>
@@ -123,70 +123,70 @@ const PROJECTS_DATA = [
       <section class="cs-section">
         <div class="cs-section-header">
           <span class="cs-section-num">02</span>
-          <h2 class="cs-section-title">Phân Tích Đối Thủ &amp; Cơ Hội Thị Trường</h2>
+          <h2 class="cs-section-title">Competitor Audit &amp; Market Opportunity</h2>
         </div>
-        <p class="cs-section-desc">Chúng tôi đã phân tích chuyên sâu các nền tảng hàng đầu trên thị trường để tìm ra khoảng trống giá trị độc bản — nơi TaskSync tạo nên sự khác biệt nhờ công thái học di động và chiều sâu vận hành thực tế.</p>
+        <p class="cs-section-desc">Phân tích benchmark các công cụ phổ biến trên thị trường để xác định gap sản phẩm và định vị giá trị cốt lõi của TaskSync trên mobile.</p>
 
         <div class="cs-table-container">
           <table class="cs-table">
             <thead>
               <tr>
-                <th>Nền Tảng</th>
-                <th>Thế Mạnh Cốt Lõi</th>
-                <th>Chấm Công GPS &amp; Điểm Danh</th>
-                <th>Chuyển Đổi Workspace</th>
-                <th>Trải Nghiệm Mobile (UX)</th>
-                <th>Đánh Giá Chuyên Môn</th>
+                <th>Platform</th>
+                <th>Core Strength</th>
+                <th>GPS Attendance &amp; Time Tracking</th>
+                <th>Workspace Switching</th>
+                <th>Mobile UX &amp; Ergonomics</th>
+                <th>Takeaway / Verdict</th>
               </tr>
             </thead>
             <tbody>
               <tr class="highlight-row">
-                <td><strong>TaskSync</strong> <span class="cs-badge-highlight">GIẢI PHÁP CỦA CHÚNG TÔI</span></td>
-                <td>All-in-One: Chat, Task, Họp video, Cloud Docs, Lịch, Lương &amp; Admin</td>
-                <td>Bấm giờ làm việc trực tiếp &amp; Điểm danh GPS định vị tự động</td>
-                <td>Ngăn kéo chuyển đổi tức thì (Vertex ↔ DigitalWorld) chỉ 1 chạm</td>
-                <td>Công thái học mobile-first, thao tác bằng ngón tay cái dễ dàng</td>
-                <td>Trung tâm chỉ huy công việc hàng ngày gắn kết, xóa tan hoàn toàn sự phân mảnh công cụ.</td>
+                <td><strong>TaskSync</strong> <span class="cs-badge-highlight">OUR SOLUTION</span></td>
+                <td>All-in-One: Chat, Task, Video call, Cloud Docs, Calendar, Payroll &amp; Admin</td>
+                <td>Native GPS check-in &amp; Live session timer tích hợp sẵn</td>
+                <td>Bottom sheet switch nhanh (Vertex ↔ DigitalWorld) 1-touch</td>
+                <td>Mobile-first, tối ưu vùng bấm ngón cái (Thumb zone)</td>
+                <td>Giải quyết trọn vẹn daily workflow cho cả nhân viên và admin, không bị phân mảnh công cụ.</td>
               </tr>
               <tr>
                 <td><strong>Slack</strong></td>
-                <td>Nhắn tin nhóm mạnh mẽ &amp; kết nối bot bên thứ ba</td>
-                <td>Cần cài thêm ứng dụng tích hợp bên ngoài</td>
-                <td>Tải lại toàn bộ ứng dụng mỗi lần đổi workspace</td>
-                <td>Quá tải tin nhắn, công việc dễ bị trôi và thất lạc</td>
-                <td>Giao tiếp xuất sắc nhưng thiếu khả năng thực thi và quản lý task chuyên sâu.</td>
+                <td>Team messaging mạnh, ecosystem tích hợp bot phong phú</td>
+                <td>Phụ thuộc vào app bên thứ ba tích hợp</td>
+                <td>Mỗi lần switch workspace phải reload lại toàn bộ state</td>
+                <td>Dễ bị trôi tin nhắn và task trong các channel lớn</td>
+                <td>Mạnh về giao tiếp nhưng thiếu công cụ execution và quản lý task chuyên sâu.</td>
               </tr>
               <tr>
                 <td><strong>Asana</strong></td>
-                <td>Quản trị dự án phức tạp trên giao diện máy tính</td>
-                <td>Không có tính năng chấm công</td>
-                <td>Chỉ hoạt động trong 1 ngữ cảnh workspace</td>
-                <td>Giao diện bảng trên di động bị chật chội, khó cập nhật nhanh</td>
-                <td>Rất tốt cho Quản lý dự án, nhưng cồng kềnh với nhân sự thực thi hàng ngày.</td>
+                <td>Quản lý project phức tạp và timeline tốt trên desktop</td>
+                <td>Không hỗ trợ chấm công / time tracking</td>
+                <td>Chỉ hoạt động trong một context workspace đơn lẻ</td>
+                <td>Giao diện board/list trên mobile bị ngợp, khó thao tác nhanh</td>
+                <td>Phù hợp với Project Manager trên desktop, cồng kềnh với nhân viên thực thi trên mobile.</td>
               </tr>
               <tr>
                 <td><strong>Lark / Feishu</strong></td>
-                <td>Hệ sinh thái siêu ứng dụng doanh nghiệp đồ sộ</td>
-                <td>Tích hợp sẵn mô-đun chấm công</td>
-                <td>Phân cấp phân quyền tổ chức doanh nghiệp</td>
-                <td>Quá tải thông tin, độ phức tạp cao, mất thời gian làm quen</td>
-                <td>Quá nặng nề; gây cảm giác ngột ngạt và thao tác chậm đối với các đội ngũ tinh gọn.</td>
+                <td>Super-app doanh nghiệp với hệ sinh thái đồ sộ</td>
+                <td>Tích hợp sẵn module chấm công</td>
+                <td>Quản lý phân cấp organization tốt</td>
+                <td>Information density quá cao, learning curve dốc</td>
+                <td>Quá nặng nề và phức tạp đối với các startup và team vừa và nhỏ.</td>
               </tr>
               <tr>
                 <td><strong>Monday.com</strong></td>
-                <td>Tùy biến bảng và cột linh hoạt</td>
-                <td>Tiện ích đếm giờ cơ bản</td>
-                <td>Hạn chế chuyển đổi tài khoản trên di động</td>
-                <td>Tốc độ tải chậm trên các bảng dữ liệu lớn</td>
-                <td>Trực quan trên desktop, nhưng trải nghiệm di động bị cắt giảm nhiều tính năng.</td>
+                <td>Khả năng tùy biến bảng biểu và custom workflow linh hoạt</td>
+                <td>Chỉ có widget timer cơ bản</td>
+                <td>Hạn chế switch nhiều account trên mobile</td>
+                <td>Tốc độ load chậm khi dữ liệu lớn, mobile app hạn chế tính năng</td>
+                <td>Trực quan trên web nhưng bản mobile chỉ đóng vai trò xem thông tin phụ trợ.</td>
               </tr>
             </tbody>
           </table>
         </div>
 
         <div class="cs-callout-banner">
-          <div class="cs-callout-title">💡 Cơ Hội Thị Trường: "Sức Mạnh Doanh Nghiệp Trong Lớp Áo Tinh Gọn"</div>
-          <p style="margin: 0; font-size: 13.5px; line-height: 1.6;">Các công cụ hiện tại ép buộc doanh nghiệp phải chọn giữa một siêu ứng dụng quá cồng kềnh khó dùng hoặc một mớ công cụ rời rạc đắt đỏ. TaskSync đón đầu điểm giao thoa vàng: sự gọn nhẹ, mượt mà của một ứng dụng tiêu dùng kết hợp với tính kỷ luật, chuẩn hóa của hệ thống vận hành doanh nghiệp.</p>
+          <div class="cs-callout-title">💡 Market Opportunity: Consumer-grade UX meets Enterprise Power</div>
+          <p style="margin: 0; font-size: 13.5px; line-height: 1.6;">Phần lớn phần mềm doanh nghiệp thường bị đánh giá là phức tạp và khó dùng trên mobile. TaskSync tập trung vào điểm giao thoa: mang lại trải nghiệm mượt mà, trực quan như một ứng dụng consumer nhưng vẫn đáp ứng đầy đủ yêu cầu quản trị và bảo mật của doanh nghiệp.</p>
         </div>
       </section>
 
@@ -194,46 +194,46 @@ const PROJECTS_DATA = [
       <section class="cs-section">
         <div class="cs-section-header">
           <span class="cs-section-num">03</span>
-          <h2 class="cs-section-title">Phỏng Vấn Người Dùng &amp; Thấu Cảm Thực Địa</h2>
+          <h2 class="cs-section-title">User Interviews &amp; Key Insights</h2>
         </div>
-        <p class="cs-section-desc">Chúng tôi đã thực hiện 12 cuộc phỏng vấn sâu với các Trưởng bộ phận Vận hành, Quản lý Nhân sự, Tech Lead và Designer để bóc tách những ma sát nhức nhối trong nhịp làm việc thường nhật.</p>
+        <p class="cs-section-desc">Chúng tôi thực hiện 12 cuộc phỏng vấn sâu với Operations Lead, HR Specialist, Tech Lead và Designer để tìm hiểu các rào cản và friction point trong quy trình làm việc hàng ngày.</p>
 
         <div class="cs-quotes-grid">
           <div class="cs-quote-card">
-            <div class="cs-quote-text">"Mỗi buổi sáng bắt đầu trong hỗn loạn: Tôi mở Slack xem tin nhắn khẩn, vào Asana kiểm tra task đến hạn, rồi bật Google Calendar canh giờ họp. Đến khi nhảy qua hết các ứng dụng thì tôi đã mất toi 30 phút tập trung quý báu."</div>
+            <div class="cs-quote-text">"Đầu giờ sáng tôi phải mở Slack check tin khẩn, vào Asana xem task, rồi bật Google Calendar xem giờ meeting. Cứ chuyển đổi qua lại giữa các app làm tôi mất tập trung và tốn gần 30 phút mỗi ngày."</div>
             <div class="cs-quote-author">
               <div class="cs-quote-avatar">AS</div>
               <div>
                 <div style="font-weight: 700; font-size: 13px;">Alex Smith</div>
-                <div style="color: var(--text-dim); font-size: 11px;">Trưởng Bộ Phận Vận Hành ∙ Vertex Solutions</div>
+                <div style="color: var(--text-dim); font-size: 11px;">Operations Lead ∙ Vertex Solutions</div>
               </div>
             </div>
           </div>
 
           <div class="cs-quote-card">
-            <div class="cs-quote-text">"Cứ đến cuối tháng là phòng Nhân sự lại phải đi nhắc từng người quên điểm danh trên cổng nội bộ máy tính. Chúng tôi cần một cơ chế tự động nhắc và điểm danh GPS ngay trên điện thoại khi nhân viên vừa bước chân vào công ty."</div>
+            <div class="cs-quote-text">"Cuối tháng nào HR cũng phải đi đòi giải trình vì nhân viên quên chấm công trên web portal. Nếu có tính năng tự động nhắc hoặc check-in GPS ngay khi nhân viên đến văn phòng thì khâu tính lương sẽ nhàn hơn rất nhiều."</div>
             <div class="cs-quote-author">
               <div class="cs-quote-avatar" style="background: var(--neo-pink);">SJ</div>
               <div>
                 <div style="font-weight: 700; font-size: 13px;">Sarah Jenkins</div>
-                <div style="color: var(--text-dim); font-size: 11px;">Chuyên Viên Nhân Sự &amp; Văn Hóa</div>
+                <div style="color: var(--text-dim); font-size: 11px;">HR &amp; People Operations</div>
               </div>
             </div>
           </div>
 
           <div class="cs-quote-card">
-            <div class="cs-quote-text">"Tôi làm tư vấn công nghệ cho 2 doanh nghiệp đối tác cùng lúc. Việc phải đăng xuất ra rồi đăng nhập lại workspace khác trên điện thoại hàng chục lần mỗi ngày thực sự là cực hình. Tôi cần chuyển ngữ cảnh chỉ bằng 1 chạm."</div>
+            <div class="cs-quote-text">"Tôi làm việc cho cả Vertex và DigitalWorld. Việc phải logout rồi login lại workspace khác trên điện thoại nhiều lần mỗi ngày rất bất tiện. Tôi cần switch nhanh giữa hai workspace chỉ bằng một thao tác."</div>
             <div class="cs-quote-author">
               <div class="cs-quote-avatar" style="background: var(--neo-cyan);">DK</div>
               <div>
                 <div style="font-weight: 700; font-size: 13px;">David Kim</div>
-                <div style="color: var(--text-dim); font-size: 11px;">Tech Lead &amp; Cố Vấn Đa Doanh Nghiệp</div>
+                <div style="color: var(--text-dim); font-size: 11px;">Tech Lead &amp; Technical Advisor</div>
               </div>
             </div>
           </div>
 
           <div class="cs-quote-card">
-            <div class="cs-quote-text">"Phần lớn phần mềm doanh nghiệp trông chẳng khác nào một bảng tính Excel bị ép vào màn hình điện thoại 6-inch. Tôi chỉ muốn một bảng điều khiển thật gọn gàng, nói cho tôi biết: Hôm nay tôi cần làm gì nhất, và có việc gì đang chờ tôi duyệt?"</div>
+            <div class="cs-quote-text">"Nhiều app doanh nghiệp nhồi nhét quá nhiều bảng biểu lên màn hình mobile. Tôi chỉ cần một dashboard rõ ràng: hôm nay cần làm task gì trước, và có request nào đang chờ duyệt hay không."</div>
             <div class="cs-quote-author">
               <div class="cs-quote-avatar" style="background: var(--neo-green);">LP</div>
               <div>
@@ -249,9 +249,9 @@ const PROJECTS_DATA = [
       <section class="cs-section">
         <div class="cs-section-header">
           <span class="cs-section-num">04</span>
-          <h2 class="cs-section-title">Chân Dung Người Dùng &amp; Hành Vi Điển Hình</h2>
+          <h2 class="cs-section-title">User Personas</h2>
         </div>
-        <p class="cs-section-desc">Được đúc kết từ dữ liệu nghiên cứu thực tế, chúng tôi xây dựng hai chân dung đại diện cho hai nhóm người dùng cốt lõi: Nhà quản trị vận hành và Nhân sự thực thi sáng tạo.</p>
+        <p class="cs-section-desc">Dựa trên kết quả phỏng vấn và dữ liệu khảo sát, chúng tôi xây dựng hai chân dung người dùng đại diện cho hai nhóm đối tượng chính: Quản lý vận hành và Nhân sự thực thi.</p>
 
         <div class="cs-persona-grid">
           <div class="cs-persona-card">
@@ -259,24 +259,24 @@ const PROJECTS_DATA = [
               <img src="assets/avt.jpg" alt="Alex Smith" class="cs-persona-avatar">
               <div>
                 <div class="cs-persona-name">Alex Smith (32 tuổi)</div>
-                <div class="cs-persona-role">Trưởng Bộ Phận Vận Hành &amp; Quản Trị Viên</div>
+                <div class="cs-persona-role">Operations Lead &amp; Workspace Admin</div>
               </div>
             </div>
             <div class="cs-persona-body">
-              <p style="margin: 0; color: var(--text-muted); font-size: 13px;">Alex điều phối hoạt động liên phòng ban giữa Thiết kế và Kỹ thuật tại Vertex Solutions. Anh liên tục di chuyển giữa các cuộc họp chào thầu với khách hàng, các buổi rà soát sprint và duyệt ngân sách dự án.</p>
+              <p style="margin: 0; color: var(--text-muted); font-size: 13px;">Alex phụ trách điều phối dự án liên phòng ban tại Vertex Solutions. Thường xuyên di chuyển, tham gia client meeting, theo dõi sprint progress và duyệt ngân sách dự án.</p>
               <div>
-                <strong style="color: var(--text-main); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em;">Mục Tiêu Cốt Lõi:</strong>
+                <strong style="color: var(--text-main); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em;">Goals:</strong>
                 <ul class="cs-bullet-list" style="margin-top: 6px;">
-                  <li>Nắm bắt bức tranh tổng thể tiến độ công việc của toàn đội ngũ ngay tức thì.</li>
-                  <li>Phê duyệt đơn xin nghỉ phép, tạm ứng chi phí chỉ với 1 cú chạm.</li>
-                  <li>Giám sát chuyên cần và chấm công tự động mà không cần giám sát tiểu tiết.</li>
+                  <li>Nắm bắt nhanh tiến độ công việc tổng quan của team trên mobile.</li>
+                  <li>Duyệt nhanh đơn nghỉ phép, đề xuất tạm ứng chi phí qua 1-touch approval.</li>
+                  <li>Theo dõi tỷ lệ đi làm và chấm công của nhân sự mà không phải quản lý vi mô.</li>
                 </ul>
               </div>
               <div>
-                <strong style="color: var(--text-main); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em;">Điểm Nhức Nhối (Pain Points):</strong>
+                <strong style="color: var(--text-main); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em;">Pain Points:</strong>
                 <ul class="cs-bullet-list" style="margin-top: 6px;">
-                  <li>Các đề xuất phê duyệt quan trọng dễ bị trôi và chôn vùi trong các kênh chat đông đúc.</li>
-                  <li>Thiếu tầm nhìn thời gian thực xem ai đang có mặt tại văn phòng, ai đang làm việc từ xa.</li>
+                  <li>Request phê duyệt thường bị trôi trong các group chat trao đổi công việc.</li>
+                  <li>Khó nắm bắt real-time tình trạng nhân sự (ai đang on-site, ai làm remote hay nghỉ phép).</li>
                 </ul>
               </div>
             </div>
@@ -287,24 +287,24 @@ const PROJECTS_DATA = [
               <img src="assets/avatar-thanhieu.jpg" alt="Linh Pham" class="cs-persona-avatar">
               <div>
                 <div class="cs-persona-name">Linh Phạm (26 tuổi)</div>
-                <div class="cs-persona-role">Senior Product Designer &amp; Nhân Sự Trực Tiếp</div>
+                <div class="cs-persona-role">Senior Product Designer &amp; IC (Individual Contributor)</div>
               </div>
             </div>
             <div class="cs-persona-body">
-              <p style="margin: 0; color: var(--text-muted); font-size: 13px;">Linh trực tiếp xây dựng hệ thống thiết kế (Design System) và luồng người dùng cho Vertex Solutions, đồng thời giữ vai trò cố vấn thiết kế cho doanh nghiệp đối tác DigitalWorld.</p>
+              <p style="margin: 0; color: var(--text-muted); font-size: 13px;">Linh đảm nhiệm thiết kế Design System và User Flow cho Vertex Solutions, đồng thời tham gia tư vấn design cho đối tác DigitalWorld.</p>
               <div>
-                <strong style="color: var(--text-main); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em;">Mục Tiêu Cốt Lõi:</strong>
+                <strong style="color: var(--text-main); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em;">Goals:</strong>
                 <ul class="cs-bullet-list" style="margin-top: 6px;">
-                  <li>Tập trung tối đa vào công việc thiết kế chuyên sâu mà không bị xao nhãng.</li>
-                  <li>Điểm danh GPS nhanh chóng ngay khi đến văn phòng tại 1234 Silicon Avenue.</li>
-                  <li>Chuyển đổi linh hoạt giữa không gian làm việc Vertex Solutions và DigitalWorld trong tích tắc.</li>
+                  <li>Tập trung vào deep work mà không bị ngắt quãng bởi thông báo không cần thiết.</li>
+                  <li>Check-in GPS nhanh chóng ngay khi đến văn phòng tại 1234 Silicon Avenue.</li>
+                  <li>Switch linh hoạt giữa workspace Vertex Solutions và DigitalWorld trên cùng một app.</li>
                 </ul>
               </div>
               <div>
-                <strong style="color: var(--text-main); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em;">Điểm Nhức Nhối (Pain Points):</strong>
+                <strong style="color: var(--text-main); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em;">Pain Points:</strong>
                 <ul class="cs-bullet-list" style="margin-top: 6px;">
-                  <li>Quá nhiều cuộc họp báo cáo tiến độ ngắt quãng dòng chảy sáng tạo.</li>
-                  <li>Các cổng thông tin nội bộ lỗi thời, chỉ hỗ trợ máy tính bàn gây bất tiện khi di chuyển.</li>
+                  <li>Quá nhiều meeting status update làm gián đoạn thời gian thiết kế.</li>
+                  <li>Các portal nội bộ cũ kỹ chỉ dùng được trên desktop, bất tiện khi di chuyển.</li>
                 </ul>
               </div>
             </div>
@@ -316,43 +316,43 @@ const PROJECTS_DATA = [
       <section class="cs-section">
         <div class="cs-section-header">
           <span class="cs-section-num">05</span>
-          <h2 class="cs-section-title">Phong Cách Thị Giác &amp; Hệ Thống Thiết Kế (Design Tokens)</h2>
+          <h2 class="cs-section-title">Visual Style &amp; Design System</h2>
         </div>
-        <p class="cs-section-desc">Ngôn ngữ thị giác của TaskSync là sự hòa quyện giữa kiểu chữ hiện đại trang nhã, thẻ công việc viền đáy phân loại màu sắc và thanh điều hướng cong nổi công thái học, mang lại nhịp quét mắt thoáng đãng và chuẩn mực trên thiết bị di động.</p>
+        <p class="cs-section-desc">Design System của TaskSync tập trung vào tính tối giản, hệ thống typography phân cấp rõ ràng, card component có viền đáy nhận diện trạng thái và floating bottom navigation bar thân thiện với ngón tay cái.</p>
 
         <div class="cs-palette-grid">
           <div class="cs-swatch">
             <div class="cs-swatch-color" style="background: #4E6AF3;"></div>
             <div class="cs-swatch-info">
-              <div class="cs-swatch-name">Royal Blue</div>
+              <div class="cs-swatch-name">Royal Blue (Primary)</div>
               <div class="cs-swatch-hex">#4E6AF3</div>
             </div>
           </div>
           <div class="cs-swatch">
             <div class="cs-swatch-color" style="background: #00BA88;"></div>
             <div class="cs-swatch-info">
-              <div class="cs-swatch-name">Emerald Green</div>
+              <div class="cs-swatch-name">Emerald (Success / Done)</div>
               <div class="cs-swatch-hex">#00BA88</div>
             </div>
           </div>
           <div class="cs-swatch">
             <div class="cs-swatch-color" style="background: #FF8A00;"></div>
             <div class="cs-swatch-info">
-              <div class="cs-swatch-name">Vivid Orange</div>
+              <div class="cs-swatch-name">Orange (Warning / To-do)</div>
               <div class="cs-swatch-hex">#FF8A00</div>
             </div>
           </div>
           <div class="cs-swatch">
             <div class="cs-swatch-color" style="background: #FF3B30;"></div>
             <div class="cs-swatch-info">
-              <div class="cs-swatch-name">Coral Red</div>
+              <div class="cs-swatch-name">Coral Red (Alert / Unread)</div>
               <div class="cs-swatch-hex">#FF3B30</div>
             </div>
           </div>
           <div class="cs-swatch">
             <div class="cs-swatch-color" style="background: #7B2CBF;"></div>
             <div class="cs-swatch-info">
-              <div class="cs-swatch-name">Deep Purple</div>
+              <div class="cs-swatch-name">Purple (Feature Modules)</div>
               <div class="cs-swatch-hex">#7B2CBF</div>
             </div>
           </div>
@@ -360,12 +360,12 @@ const PROJECTS_DATA = [
 
         <div class="cs-bento-2">
           <div class="cs-bento-card accent-green">
-            <div class="cs-card-title"><span>📐</span> Cấu Trúc Thẻ Viền Đáy Màu &amp; Công Thái Học Di Động</div>
-            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 0;">Sử dụng thẻ nền trắng thuần khiết bo góc mềm <code>12px</code> với đường viền đáy màu <code>2.5px</code> (Accent Bottom Border) tương ứng với từng trạng thái nhiệm vụ. Thanh điều hướng đáy cong nổi (Floating Pill Bar <code>36px</code>) đặt trọn vẹn trong vùng hoạt động tự nhiên của ngón tay cái.</p>
+            <div class="cs-card-title"><span>📐</span> Card Component &amp; Mobile Ergonomics</div>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 0;">Card nền trắng với border-radius <code>14px</code>, viền mảnh <code>1px solid #EDF1F7</code> kết hợp đường viền đáy màu <code>2.5px</code> (Accent Bottom Border) để phân biệt trạng thái task (Blue: On Progress, Orange: To-do, Green: Done). Floating Bottom Nav (Pill Bar <code>36px</code>) được đặt cách mép đáy màn hình, tối ưu cho thao tác một tay.</p>
           </div>
           <div class="cs-bento-card accent-yellow">
-            <div class="cs-card-title"><span>🔤</span> Header Tối Giản, Dải Tab Gạch Chân &amp; Huy Hiệu Bo Tròn</div>
-            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 0;">Header sử dụng nút quay lại tối giản không đóng hộp, tiêu đề canh trái đậm nét (<code>20px</code>). Hệ thống tab chuyển đổi sử dụng gạch chân xanh năng động (<code>border-bottom: 2px solid #3E79F7</code>), kết hợp các huy hiệu trạng thái con nhộng bo tròn (<code>14px</code>) giúp quét thông tin trong 3 giây.</p>
+            <div class="cs-card-title"><span>🔤</span> Typography, Tab Navigation &amp; Status Badges</div>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 0;">Sử dụng system font SF Pro / Roboto với scale từ <code>11px</code> (caption/badge) đến <code>24px</code> (page title), độ tương phản đạt chuẩn WCAG AAA. Hệ thống tab chuyển đổi sử gạch chân active màu primary (<code>2px solid #3E79F7</code>), kết hợp badge con nhộng (<code>14px</code>) giúp quét thông tin nhanh và chính xác.</p>
           </div>
         </div>
       </section>
@@ -374,15 +374,15 @@ const PROJECTS_DATA = [
       <section class="cs-section">
         <div class="cs-section-header">
           <span class="cs-section-num">06</span>
-          <h2 class="cs-section-title">Trải Nghiệm Giao Diện Người Dùng &amp; Các Luồng Vận Hành Toàn Diện</h2>
+          <h2 class="cs-section-title">User Interface &amp; Core User Flows</h2>
         </div>
-        <p class="cs-section-desc">Khám phá chuyên sâu toàn bộ 20 màn hình giao diện thực tế đã phát hành của TaskSync, dẫn dắt người xem qua 7 luồng trải nghiệm khép kín từ lúc nhập môn đến quản trị doanh nghiệp chuyên sâu.</p>
+        <p class="cs-section-desc">Hệ thống 20 màn hình giao diện thực tế của TaskSync, trải dài qua 7 user flow cốt lõi từ onboarding, cộng tác nhóm đến quản trị hệ thống.</p>
 
         <!-- Flow 1 -->
         <div style="margin-bottom: 44px;">
           <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
-            <span class="cs-pill" style="background: var(--neo-cyan);">LUỒNG 01</span>
-            <h3 style="font-size: 1.25rem; margin: 0;">Nhập Môn, Đăng Nhập Sinh Trắc Học &amp; Bảo Mật OTP</h3>
+            <span class="cs-pill" style="background: var(--neo-cyan);">FLOW 01</span>
+            <h3 style="font-size: 1.25rem; margin: 0;">Onboarding, Biometric Auth &amp; OTP Verification</h3>
           </div>
           <div class="cs-screens-grid-3">
             <div class="cs-screen-card">
@@ -390,9 +390,9 @@ const PROJECTS_DATA = [
                 <img src="assets/tasksync/tasksync-onboarding.png" alt="TaskSync Welcome Screen" loading="lazy">
               </div>
               <div class="cs-screen-info">
-                <span class="cs-screen-tag">MÀN HÌNH 01</span>
-                <div class="cs-screen-title">Chào Mừng &amp; Định Vị Giá Trị</div>
-                <div class="cs-screen-desc">Hình minh họa 3D hiện đại, thông điệp thương hiệu tinh gọn giúp thiết lập sự tin tưởng và tập trung ngay từ lần đầu mở ứng dụng.</div>
+                <span class="cs-screen-tag">SCREEN 01</span>
+                <div class="cs-screen-title">Welcome &amp; Value Proposition</div>
+                <div class="cs-screen-desc">Giới thiệu các tính năng cốt lõi và định hình giá trị sản phẩm ngay trong lần đầu tiếp cận của người dùng mới.</div>
               </div>
             </div>
 
@@ -401,9 +401,9 @@ const PROJECTS_DATA = [
                 <img src="assets/tasksync/tasksync-login.png" alt="TaskSync Login Screen" loading="lazy">
               </div>
               <div class="cs-screen-info">
-                <span class="cs-screen-tag">MÀN HÌNH 02</span>
-                <div class="cs-screen-title">Đăng Nhập &amp; Sinh Trắc Học</div>
-                <div class="cs-screen-desc">Xác thực một chạm bằng FaceID và Vân tay tiện lợi, tích hợp đăng nhập an toàn qua tài khoản Google và Facebook OAuth.</div>
+                <span class="cs-screen-tag">SCREEN 02</span>
+                <div class="cs-screen-title">Sign In &amp; Biometrics</div>
+                <div class="cs-screen-desc">Form đăng nhập doanh nghiệp hỗ trợ xác thực FaceID/TouchID và đăng nhập một chạm qua OAuth.</div>
               </div>
             </div>
 
@@ -412,9 +412,9 @@ const PROJECTS_DATA = [
                 <img src="assets/tasksync/tasksync-otp.png" alt="TaskSync OTP Verification" loading="lazy">
               </div>
               <div class="cs-screen-info">
-                <span class="cs-screen-tag">MÀN HÌNH 03</span>
-                <div class="cs-screen-title">Xác Thực Bảo Mật Mã OTP</div>
-                <div class="cs-screen-desc">Giao diện nhập mã 6 số tự động nhảy ô, tích hợp đồng hồ đếm ngược gửi lại mã và cơ chế kiểm tra lỗi trực quan tức thì.</div>
+                <span class="cs-screen-tag">SCREEN 03</span>
+                <div class="cs-screen-title">OTP Security Verification</div>
+                <div class="cs-screen-desc">Màn hình nhập mã 6 số tự động focus, tích hợp countdown đếm ngược gửi lại mã và bàn phím số ảo.</div>
               </div>
             </div>
           </div>
@@ -423,8 +423,8 @@ const PROJECTS_DATA = [
         <!-- Flow 2 -->
         <div style="margin-bottom: 44px;">
           <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
-            <span class="cs-pill" style="background: var(--neo-yellow);">LUỒNG 02</span>
-            <h3 style="font-size: 1.25rem; margin: 0;">Trung Tâm Chỉ Huy (Home) &amp; Bộ Chuyển Đổi Đa Tổ Chức</h3>
+            <span class="cs-pill" style="background: var(--neo-yellow);">FLOW 02</span>
+            <h3 style="font-size: 1.25rem; margin: 0;">Dashboard &amp; Fast Workspace Switching</h3>
           </div>
           <div class="cs-screens-grid-2">
             <div class="cs-screen-card">
@@ -432,9 +432,9 @@ const PROJECTS_DATA = [
                 <img src="assets/tasksync/tasksync-home.png" alt="TaskSync Home Screen" loading="lazy">
               </div>
               <div class="cs-screen-info">
-                <span class="cs-screen-tag">MÀN HÌNH 04</span>
-                <div class="cs-screen-title">Bảng Điều Khiển Không Gian Làm Việc</div>
-                <div class="cs-screen-desc">Bộ đếm thời gian thực (23 Tất cả task, 12 Việc cần làm), thẻ theo dõi việc trọng tâm "Today task" nổi bật cùng lưới 8 mô-đun chức năng tiện ích (Admin, Task, Chấm công, Nhắc việc, Đề xuất, Hộp thư, Lương, Báo cáo).</div>
+                <span class="cs-screen-tag">SCREEN 04</span>
+                <div class="cs-screen-title">Workspace Home &amp; Daily Hub</div>
+                <div class="cs-screen-desc">Thống kê nhanh trạng thái task, card theo dõi "Today Task" và grid 8 module chức năng chính của ứng dụng.</div>
               </div>
             </div>
 
@@ -443,9 +443,9 @@ const PROJECTS_DATA = [
                 <img src="assets/tasksync/tasksync-workspace-switch.png" alt="TaskSync Multi-tenant Switcher" loading="lazy">
               </div>
               <div class="cs-screen-info">
-                <span class="cs-screen-tag">MÀN HÌNH 05</span>
-                <div class="cs-screen-title">Ngăn Kéo Chuyển Đổi Doanh Nghiệp Tức Thì</div>
-                <div class="cs-screen-desc">Ngăn kéo dưới màn hình cho phép chuyển đổi không gian giữa Vertex Solutions và DigitalWorld chỉ với một chạm kèm tái phân quyền ngay lập tức.</div>
+                <span class="cs-screen-tag">SCREEN 05</span>
+                <div class="cs-screen-title">Multi-tenant Workspace Switcher</div>
+                <div class="cs-screen-desc">Bottom sheet hỗ trợ chuyển đổi tức thì giữa các workspace (Vertex Solutions, DigitalWorld) mà không phải login lại.</div>
               </div>
             </div>
           </div>
@@ -454,8 +454,8 @@ const PROJECTS_DATA = [
         <!-- Flow 3 -->
         <div style="margin-bottom: 44px;">
           <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
-            <span class="cs-pill" style="background: var(--neo-blue); color: #fff;">LUỒNG 03</span>
-            <h3 style="font-size: 1.25rem; margin: 0;">Cộng Tác Toàn Diện: Tin Nhắn, Họp Video &amp; Tài Liệu Đám Mây</h3>
+            <span class="cs-pill" style="background: var(--neo-blue); color: #fff;">FLOW 03</span>
+            <h3 style="font-size: 1.25rem; margin: 0;">Team Collaboration: Chat, Video Call &amp; Cloud Docs</h3>
           </div>
           <div class="cs-screens-grid-3">
             <div class="cs-screen-card">
@@ -463,9 +463,9 @@ const PROJECTS_DATA = [
                 <img src="assets/tasksync/tasksync-chat.png" alt="TaskSync Direct Chat &amp; Voice Messaging" loading="lazy">
               </div>
               <div class="cs-screen-info">
-                <span class="cs-screen-tag">MÀN HÌNH 06</span>
-                <div class="cs-screen-title">Nhắn Tin Nhóm &amp; Ghi Âm Dạng Sóng</div>
-                <div class="cs-screen-desc">Không gian trò chuyện trực tiếp hỗ trợ tin nhắn thoại dạng sóng âm sinh động, thẻ xem trước tệp thiết kế Figma, trạng thái đã đọc và thông báo soạn thảo thời gian thực.</div>
+                <span class="cs-screen-tag">SCREEN 06</span>
+                <div class="cs-screen-title">Direct &amp; Team Chat</div>
+                <div class="cs-screen-desc">Tin nhắn nhóm hỗ trợ preview file thiết kế Figma, voice message dạng waveform và trạng thái typing theo thời gian thực.</div>
               </div>
             </div>
 
@@ -474,9 +474,9 @@ const PROJECTS_DATA = [
                 <img src="assets/tasksync/tasksync-video.png" alt="TaskSync HD Video Conferencing" loading="lazy">
               </div>
               <div class="cs-screen-info">
-                <span class="cs-screen-tag">MÀN HÌNH 07</span>
-                <div class="cs-screen-title">Hội Nghị Truyền Hình HD &amp; Nhận Diện Giọng Nói</div>
-                <div class="cs-screen-desc">Giao diện họp video lưới 2x2 với viền phát sáng neon nhận diện người đang phát biểu, ô chia sẻ màn hình trực tiếp và cụm nút điều khiển nổi tiện dụng.</div>
+                <span class="cs-screen-tag">SCREEN 07</span>
+                <div class="cs-screen-title">Video Conference</div>
+                <div class="cs-screen-desc">Giao diện video call lưới 2x2, viền highlight người phát biểu, chia sẻ màn hình và dock điều khiển nổi.</div>
               </div>
             </div>
 
@@ -485,9 +485,9 @@ const PROJECTS_DATA = [
                 <img src="assets/tasksync/tasksync-docs.png" alt="TaskSync Collaborative Cloud Docs" loading="lazy">
               </div>
               <div class="cs-screen-info">
-                <span class="cs-screen-tag">MÀN HÌNH 08</span>
-                <div class="cs-screen-title">Tài Liệu Đám Mây &amp; Con Trỏ Trực Tiếp</div>
-                <div class="cs-screen-desc">Bộ soạn thảo văn bản cộng tác thời gian thực với con trỏ trực tiếp nhiều người dùng (Linh P.), danh sách việc cần làm (Checklist), thanh công cụ định dạng và lịch sử phiên bản.</div>
+                <span class="cs-screen-tag">SCREEN 08</span>
+                <div class="cs-screen-title">Real-time Cloud Docs</div>
+                <div class="cs-screen-desc">Trình soạn thảo văn bản cộng tác real-time với multi-cursor, checklist, formatting toolbar và lịch sử chỉnh sửa.</div>
               </div>
             </div>
           </div>
@@ -496,8 +496,8 @@ const PROJECTS_DATA = [
         <!-- Flow 4 -->
         <div style="margin-bottom: 44px;">
           <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
-            <span class="cs-pill" style="background: var(--neo-pink);">LUỒNG 04</span>
-            <h3 style="font-size: 1.25rem; margin: 0;">Lịch Thông Minh &amp; Thực Thi Công Việc Chuyên Sâu</h3>
+            <span class="cs-pill" style="background: var(--neo-pink);">FLOW 04</span>
+            <h3 style="font-size: 1.25rem; margin: 0;">Smart Calendar &amp; Task Execution</h3>
           </div>
           <div class="cs-screens-grid-3">
             <div class="cs-screen-card">
@@ -505,9 +505,9 @@ const PROJECTS_DATA = [
                 <img src="assets/tasksync/tasksync-calendar.png" alt="TaskSync Smart Calendar Screen" loading="lazy">
               </div>
               <div class="cs-screen-info">
-                <span class="cs-screen-tag">MÀN HÌNH 09</span>
-                <div class="cs-screen-title">Lịch Thông Minh &amp; Dòng Thời Gian Lịch Trình</div>
-                <div class="cs-screen-desc">Dải chọn ngày tuần linh hoạt, dòng thời gian phân loại sự kiện theo mảng màu (UI Kit Review, Client Demo, OKR Alignment), liên kết cuộc họp và nút FAB tạo sự kiện nhanh.</div>
+                <span class="cs-screen-tag">SCREEN 09</span>
+                <div class="cs-screen-title">Smart Calendar &amp; Event Timeline</div>
+                <div class="cs-screen-desc">Dải chọn ngày dạng trượt ngang, timeline sự kiện phân loại theo màu và nút FAB tạo lịch họp nhanh.</div>
               </div>
             </div>
 
@@ -516,9 +516,9 @@ const PROJECTS_DATA = [
                 <img src="assets/tasksync/tasksync-tasks.png" alt="TaskSync Task Management Screen" loading="lazy">
               </div>
               <div class="cs-screen-info">
-                <span class="cs-screen-tag">MÀN HÌNH 10</span>
-                <div class="cs-screen-title">Bảng Quản Trị Công Việc &amp; Kế Hoạch Hàng Ngày</div>
-                <div class="cs-screen-desc">Thanh chọn ngày tuần tương tác, bộ lọc trạng thái đa chiều (Tất cả, Cần làm, Đang làm, Hoàn thành), thẻ công việc phân màu trực quan và nút bấm thao tác nhanh.</div>
+                <span class="cs-screen-tag">SCREEN 10</span>
+                <div class="cs-screen-title">Task Agenda &amp; Status Filter</div>
+                <div class="cs-screen-desc">Bộ lọc trạng thái (All, To-do, On progress, Done) kết hợp card task có viền màu accent đáy phân loại trực quan.</div>
               </div>
             </div>
 
@@ -527,9 +527,9 @@ const PROJECTS_DATA = [
                 <img src="assets/tasksync/tasksync-task-detail.png" alt="TaskSync Task Details Screen" loading="lazy">
               </div>
               <div class="cs-screen-info">
-                <span class="cs-screen-tag">MÀN HÌNH 11</span>
-                <div class="cs-screen-title">Chi Tiết Nhiệm Vụ &amp; Danh Sách Việc Phụ</div>
-                <div class="cs-screen-desc">Xem chi tiết đầu việc mã #TASK, thanh tiến độ subtasks hoàn thành 75%, phân công người phụ trách, tệp đính kèm .fig, .pdf và cập nhật trạng thái nhanh.</div>
+                <span class="cs-screen-tag">SCREEN 11</span>
+                <div class="cs-screen-title">Task Detail &amp; Subtasks Checklist</div>
+                <div class="cs-screen-desc">Chi tiết nhiệm vụ với progress bar hoàn thành subtasks, danh sách assignee, file đính kèm và cập nhật trạng thái.</div>
               </div>
             </div>
           </div>
@@ -538,8 +538,8 @@ const PROJECTS_DATA = [
         <!-- Flow 5 -->
         <div style="margin-bottom: 44px;">
           <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
-            <span class="cs-pill" style="background: var(--neo-green);">LUỒNG 05</span>
-            <h3 style="font-size: 1.25rem; margin: 0;">Quy Trình Vận Hành Doanh Nghiệp: Đề Xuất &amp; Phê Duyệt</h3>
+            <span class="cs-pill" style="background: var(--neo-green);">FLOW 05</span>
+            <h3 style="font-size: 1.25rem; margin: 0;">Internal Request &amp; Approval Workflow</h3>
           </div>
           <div class="cs-screens-grid-2">
             <div class="cs-screen-card">
@@ -547,9 +547,9 @@ const PROJECTS_DATA = [
                 <img src="assets/tasksync/tasksync-request.png" alt="TaskSync Request Creation Screen" loading="lazy">
               </div>
               <div class="cs-screen-info">
-                <span class="cs-screen-tag">MÀN HÌNH 12</span>
-                <div class="cs-screen-title">Trung Tâm Đề Xuất: Nghỉ Phép &amp; Làm Thêm OT</div>
-                <div class="cs-screen-desc">Mẫu nộp đơn tinh gọn cho Nghỉ phép, Làm thêm OT, Hoàn ứng; tự động tính số ngày công và phân cấp luồng duyệt đa tầng từ Team Lead tới Giám đốc Nhân sự.</div>
+                <span class="cs-screen-tag">SCREEN 12</span>
+                <div class="cs-screen-title">Request Submission (Leave / OT / Expense)</div>
+                <div class="cs-screen-desc">Form gửi đề xuất nghỉ phép, làm thêm giờ và thanh toán chi phí, tự động định tuyến luồng duyệt theo phòng ban.</div>
               </div>
             </div>
 
@@ -558,9 +558,9 @@ const PROJECTS_DATA = [
                 <img src="assets/tasksync/tasksync-mailbox.png" alt="TaskSync Mailbox Screen" loading="lazy">
               </div>
               <div class="cs-screen-info">
-                <span class="cs-screen-tag">MÀN HÌNH 13</span>
-                <div class="cs-screen-title">Hộp Thư Hợp Nhất &amp; Thông Báo Phê Duyệt</div>
-                <div class="cs-screen-desc">Hệ thống phân luồng thông minh tách biệt Tin nhắn trao đổi và Thông báo hệ thống; cập nhật kết quả duyệt nghỉ phép và nhắc nhở chuyên cần tức thì.</div>
+                <span class="cs-screen-tag">SCREEN 13</span>
+                <div class="cs-screen-title">Unified Mailbox &amp; System Notifications</div>
+                <div class="cs-screen-desc">Hộp thư phân loại 3 tab (All / Messenger / System) với badge đếm số tin chưa đọc và cập nhật kết quả duyệt đơn.</div>
               </div>
             </div>
           </div>
@@ -569,8 +569,8 @@ const PROJECTS_DATA = [
         <!-- Flow 6 -->
         <div style="margin-bottom: 44px;">
           <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
-            <span class="cs-pill" style="background: var(--neo-purple); color: #fff;">LUỒNG 06</span>
-            <h3 style="font-size: 1.25rem; margin: 0;">Chấm Công GPS, Nhắc Việc Ngữ Cảnh &amp; Quản Lý Tiền Lương</h3>
+            <span class="cs-pill" style="background: var(--neo-purple); color: #fff;">FLOW 06</span>
+            <h3 style="font-size: 1.25rem; margin: 0;">GPS Attendance, Geofenced Reminders &amp; Payroll</h3>
           </div>
           <div class="cs-screens-grid-3">
             <div class="cs-screen-card">
@@ -578,9 +578,9 @@ const PROJECTS_DATA = [
                 <img src="assets/tasksync/tasksync-attendance.png" alt="TaskSync Attendance Screen" loading="lazy">
               </div>
               <div class="cs-screen-info">
-                <span class="cs-screen-tag">MÀN HÌNH 14</span>
-                <div class="cs-screen-title">Điểm Danh Chấm Công GPS &amp; Bấm Giờ Trực Tiếp</div>
-                <div class="cs-screen-desc">Đồng hồ đếm giờ làm việc trực tiếp, ghi nhận vị trí GPS tại 1234 Silicon Avenue, chấm giờ ăn trưa và tổng hợp chỉ số chuyên cần hàng ngày (05h 22m, 0 đi trễ).</div>
+                <span class="cs-screen-tag">SCREEN 14</span>
+                <div class="cs-screen-title">GPS Attendance &amp; Live Session Timer</div>
+                <div class="cs-screen-desc">Chấm công GPS tại địa điểm văn phòng, đồng hồ đếm giờ ca làm việc thực tế và thống kê tổng kết chuyên cần trong ngày.</div>
               </div>
             </div>
 
@@ -589,9 +589,9 @@ const PROJECTS_DATA = [
                 <img src="assets/tasksync/tasksync-reminder.png" alt="TaskSync Smart Reminders Screen" loading="lazy">
               </div>
               <div class="cs-screen-info">
-                <span class="cs-screen-tag">MÀN HÌNH 15</span>
-                <div class="cs-screen-title">Nhắc Việc Thông Minh Tọa Độ Geofence</div>
-                <div class="cs-screen-desc">Cơ chế nhắc việc nhận biết vị trí: tự động kích hoạt lời nhắc điểm danh khi người dùng đến gần bán kính 100m tòa nhà văn phòng, kèm ghi âm lời nhắc bằng giọng nói.</div>
+                <span class="cs-screen-tag">SCREEN 15</span>
+                <div class="cs-screen-title">Geofenced Smart Reminders</div>
+                <div class="cs-screen-desc">Hệ thống nhắc nhở tự động kích hoạt khi người dùng vào bán kính văn phòng, hỗ trợ ghi chú voice memo tiện lợi.</div>
               </div>
             </div>
 
@@ -600,9 +600,9 @@ const PROJECTS_DATA = [
                 <img src="assets/tasksync/tasksync-salary.png" alt="TaskSync Salary Screen" loading="lazy">
               </div>
               <div class="cs-screen-info">
-                <span class="cs-screen-tag">MÀN HÌNH 16</span>
-                <div class="cs-screen-title">Bảng Lương &amp; Thu Nhập Xuất Phiếu PDF</div>
-                <div class="cs-screen-desc">Bảng tổng hợp thu nhập minh bạch hiển thị số tiền lương thực nhận $4,850.00, tài khoản ngân hàng thụ hưởng, chi tiết phụ cấp và nút tải phiếu lương PDF chính thức.</div>
+                <span class="cs-screen-tag">SCREEN 16</span>
+                <div class="cs-screen-title">Salary Breakdown &amp; Payslip Export</div>
+                <div class="cs-screen-desc">Bảng kê thu nhập thực nhận (Net pay), chi tiết phụ cấp, khấu trừ thuế và nút tải phiếu lương file PDF chính thức.</div>
               </div>
             </div>
           </div>
@@ -611,8 +611,8 @@ const PROJECTS_DATA = [
         <!-- Flow 7 -->
         <div style="margin-bottom: 20px;">
           <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
-            <span class="cs-pill" style="background: var(--neo-yellow);">LUỒNG 07</span>
-            <h3 style="font-size: 1.25rem; margin: 0;">Báo Cáo Chiến Lược, Quản Trị Mục Tiêu OKRs &amp; Cài Đặt Hệ Thống</h3>
+            <span class="cs-pill" style="background: var(--neo-yellow);">FLOW 07</span>
+            <h3 style="font-size: 1.25rem; margin: 0;">Performance Analytics, OKRs &amp; Admin Console</h3>
           </div>
           <div class="cs-screens-grid-4">
             <div class="cs-screen-card">
@@ -620,9 +620,9 @@ const PROJECTS_DATA = [
                 <img src="assets/tasksync/tasksync-report.png" alt="TaskSync Performance Report Screen" loading="lazy">
               </div>
               <div class="cs-screen-info">
-                <span class="cs-screen-tag">MÀN HÌNH 17</span>
-                <div class="cs-screen-title">Phân Tích Hiệu Suất &amp; Phân Bổ Giờ Làm</div>
-                <div class="cs-screen-desc">Báo cáo chỉ số năng suất trực quan (168.5 giờ làm việc, 42 task đúng hạn, 100% chuyên cần), biểu đồ cột giờ làm theo 4 tuần và đánh giá xếp hạng A+ xuất sắc.</div>
+                <span class="cs-screen-tag">SCREEN 17</span>
+                <div class="cs-screen-title">Performance Analytics &amp; Hours Log</div>
+                <div class="cs-screen-desc">Báo cáo năng suất cá nhân với biểu đồ cột giờ làm theo tuần, tỷ lệ task hoàn thành đúng hạn và rating hiệu suất.</div>
               </div>
             </div>
 
@@ -631,9 +631,9 @@ const PROJECTS_DATA = [
                 <img src="assets/tasksync/tasksync-goals.png" alt="TaskSync OKRs &amp; Goals Screen" loading="lazy">
               </div>
               <div class="cs-screen-info">
-                <span class="cs-screen-tag">MÀN HÌNH 18</span>
-                <div class="cs-screen-title">Quản Trị Mục Tiêu OKRs &amp; Kết Quả Then Chốt</div>
-                <div class="cs-screen-desc">Theo dõi tiến độ quý với vòng tròn 78%, thanh tiến độ chi tiết từng Kết quả then chốt KR, phân công người chịu trách nhiệm và nhãn trạng thái On Track / At Risk.</div>
+                <span class="cs-screen-tag">SCREEN 18</span>
+                <div class="cs-screen-title">OKRs &amp; Goal Tracking</div>
+                <div class="cs-screen-desc">Theo dõi tiến độ mục tiêu quý, thanh progress từng Key Result, người phụ trách và trạng thái On Track / At Risk.</div>
               </div>
             </div>
 
@@ -642,9 +642,9 @@ const PROJECTS_DATA = [
                 <img src="assets/tasksync/tasksync-admin.png" alt="TaskSync Admin Suite Screen" loading="lazy">
               </div>
               <div class="cs-screen-info">
-                <span class="cs-screen-tag">MÀN HÌNH 19</span>
-                <div class="cs-screen-title">Bộ Công Cụ Quản Trị Doanh Nghiệp</div>
-                <div class="cs-screen-desc">Bảng điều khiển trung tâm giúp quản trị hồ sơ công ty, thêm/bớt nhân sự và phòng ban, thiết lập bảo mật và truy cập trung tâm trợ giúp doanh nghiệp.</div>
+                <span class="cs-screen-tag">SCREEN 19</span>
+                <div class="cs-screen-title">Organization Admin Suite</div>
+                <div class="cs-screen-desc">Admin console quản trị hồ sơ công ty, cấu hình phòng ban/thành viên, phân quyền RBAC và cài đặt security.</div>
               </div>
             </div>
 
@@ -653,9 +653,9 @@ const PROJECTS_DATA = [
                 <img src="assets/tasksync/tasksync-settings.png" alt="TaskSync Settings Screen" loading="lazy">
               </div>
               <div class="cs-screen-info">
-                <span class="cs-screen-tag">MÀN HÌNH 20</span>
-                <div class="cs-screen-title">Hồ Sơ Cá Nhân &amp; Cài Đặt Hệ Thống</div>
-                <div class="cs-screen-desc">Quản lý ảnh đại diện, chức danh công ty, liên kết nhanh, tùy chọn thông báo cá nhân và thanh điều hướng đáy ứng dụng chuẩn mực.</div>
+                <span class="cs-screen-tag">SCREEN 20</span>
+                <div class="cs-screen-title">Account Profile &amp; Preferences</div>
+                <div class="cs-screen-desc">Quản lý profile cá nhân, cài đặt thông báo, liên kết trợ giúp và floating bottom nav bar nhất quán.</div>
               </div>
             </div>
           </div>
@@ -666,23 +666,23 @@ const PROJECTS_DATA = [
       <section class="cs-section">
         <div class="cs-section-header">
           <span class="cs-section-num">07</span>
-          <h2 class="cs-section-title">Hiệu Quả Đo Lường &amp; Đúc Kết Của Designer</h2>
+          <h2 class="cs-section-title">Impact &amp; Design Reflection</h2>
         </div>
-        <p class="cs-section-desc">TaskSync đã được phát hành và đưa vào vận hành thực tế cho hơn 1,500 nhân sự tại Vertex Solutions cùng các doanh nghiệp đối tác với những chỉ số tiếp nhận ấn tượng.</p>
+        <p class="cs-section-desc">TaskSync đã được triển khai và đưa vào sử dụng thực tế cho hơn 1,500 nhân sự tại Vertex Solutions cùng các đối tác với các chỉ số đo lường tích cực.</p>
 
         <div class="cs-bento-2">
           <div class="cs-bento-card accent-green">
-            <div class="cs-card-title"><span>🚀</span> Tác Động Định Lượng Thực Tế</div>
+            <div class="cs-card-title"><span>🚀</span> Quantitative Impact</div>
             <ul class="cs-bullet-list">
-              <li><strong>+40% Tốc độ hoàn thành công việc Sprint:</strong> Đội ngũ hoàn thành các nhiệm vụ được giao nhanh hơn đáng kể nhờ sự minh bạch của hàng đợi công việc trọng tâm mỗi ngày.</li>
-              <li><strong>-65% Thời gian gián đoạn chuyển đổi ứng dụng:</strong> Nhân viên tiết kiệm trung bình 45 phút mỗi ngày nhờ không còn phải liên tục nhảy qua lại giữa 4 phần mềm riêng biệt.</li>
-              <li><strong>98% Tỷ lệ chấm công đúng giờ và chuẩn xác:</strong> Cơ chế điểm danh GPS khoanh vùng địa lý đã triệt tiêu hoàn toàn công tác rà soát thủ công bảng công vào mỗi cuối tháng cho phòng Nhân sự.</li>
-              <li><strong>Bảo mật dữ liệu tuyệt đối 100%:</strong> Kiến trúc đa tổ chức (Multi-tenant) cách ly nghiêm ngặt, đảm bảo các dự án bảo mật giữa Vertex Solutions và đối tác DigitalWorld không bao giờ bị rò rỉ.</li>
+              <li><strong>+40% Tốc độ hoàn thành task trong Sprint:</strong> Giảm thời gian trễ hạn nhờ hiển thị trực quan hàng đợi Today Task ngay tại màn hình Home.</li>
+              <li><strong>-65% Thời gian gián đoạn vì Context Switching:</strong> Tiết kiệm trung bình 45 phút/ngày cho mỗi nhân sự khi không phải liên tục chuyển đổi giữa nhiều phần mềm độc lập.</li>
+              <li><strong>98% Tỷ lệ chấm công đúng giờ:</strong> Tính năng check-in GPS và geofenced reminder giúp giảm 90% khiếu nại đối soát bảng công cuối tháng của bộ phận HR.</li>
+              <li><strong>Zero Data Leakage:</strong> Kiến trúc Multi-tenant đảm bảo phân tách hoàn toàn dữ liệu giữa các workspace của doanh nghiệp và đối tác.</li>
             </ul>
           </div>
           <div class="cs-bento-card accent-pink">
-            <div class="cs-card-title"><span>💡</span> Đúc Kết Sâu Sắc Của Lead Designer</div>
-            <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.6; margin: 0;">"Thiết kế một siêu ứng dụng doanh nghiệp cho màn hình di động là một bài toán đòi hỏi sự chọn lọc và ưu tiên không khoan nhượng. Bằng cách quy hoạch 8 mô-đun nghiệp vụ cốt lõi vào một lưới công thái học trong tầm với của ngón tay cái, đồng thời trao vị trí 'trung tâm sân khấu' cho tính năng việc cần làm hôm nay (Today Task), chúng tôi đã biến những quy trình vận hành khô khan, phức tạp của doanh nghiệp thành một người bạn đồng hành số nhẹ nhàng, tin cậy và tràn đầy cảm hứng mỗi ngày."</p>
+            <div class="cs-card-title"><span>💡</span> Design Reflection</div>
+            <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.6; margin: 0;">"Khi thiết kế một B2B product phục vụ cả nhân viên lẫn cấp quản lý trên mobile, thách thức lớn nhất là giải quyết Information Density (mật độ thông tin) mà không làm phức tạp hóa giao diện. Bằng cách ưu tiên luồng công việc cấp thiết nhất trong ngày (Today Task, Check-in/Check-out, Fast Approval) ngay tại màn hình chính và tối ưu Thumb Zone cho các tương tác 1 tay, TaskSync mang lại trải nghiệm gọn gàng, giảm cognitive load đáng kể cho người dùng cuối nhưng vẫn bảo đảm tính kỷ luật trong quản trị vận hành."</p>
           </div>
         </div>
       </section>
