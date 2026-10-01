@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Hard Offset Neubrutalist Shadow -->
+  <rect x="9" y="9" width="46" height="46" rx="13" fill="#000000" />
+  
+  <!-- Main Badge Face (Electric Neo-Yellow) -->
+  <rect x="5" y="5" width="46" height="46" rx="13" fill="#FFDE59" stroke="#000000" stroke-width="3.5" />
+  
+  <!-- Bold Geometric 'H' (Neubrutalist Monogram) -->
+  <path d="M 16 17 L 22.5 17 L 22.5 27 L 31 27 L 31 17 L 37.5 17 L 37.5 41 L 31 41 L 31 32.5 L 22.5 32.5 L 22.5 41 L 16 41 Z" fill="#000000" />
+  
+  <!-- Signature 4-pointed Sparkle Star ✦ (Electric Neo-Cyan with Black Ink Stroke) -->
+  <path d="M 43 13 C 43 19 45.5 21.5 51.5 21.5 C 45.5 21.5 43 24 43 30 C 43 24 40.5 21.5 34.5 21.5 C 40.5 21.5 43 19 43 13 Z" 
+        fill="#00F0FF" stroke="#000000" stroke-width="1.8" stroke-linejoin="round" />
+</svg>
