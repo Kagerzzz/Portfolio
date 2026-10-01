@@ -595,12 +595,12 @@ button {
 .hero-nav-arrows {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .hero-arrow-btn {
-  width: 34px;
-  height: 34px;
+  width: 38px;
+  height: 38px;
   border-radius: var(--radius-pill);
   border: 2px solid var(--border-color);
   background: var(--bg-card);
@@ -608,18 +608,30 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 800;
-  font-size: 14px;
   box-shadow: 2px 2px 0px var(--border-color);
   transition: var(--spring-transition);
   cursor: pointer;
+  padding: 0;
+}
+
+.hero-arrow-btn svg {
+  display: block;
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .hero-arrow-btn:hover {
   background: var(--neo-yellow);
   color: #000000;
-  transform: translate(-1.5px, -1.5px);
-  box-shadow: 3px 3px 0px var(--border-color);
+  transform: translate(-2px, -2px);
+  box-shadow: 3.5px 3.5px 0px var(--border-color);
+}
+
+#hero-prev-btn:hover svg {
+  transform: translateX(-2px);
+}
+
+#hero-next-btn:hover svg {
+  transform: translateX(2px);
 }
 
 .hero-arrow-btn:active {
