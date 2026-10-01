@@ -318,54 +318,54 @@ const PROJECTS_DATA = [
           <span class="cs-section-num">05</span>
           <h2 class="cs-section-title">Phong Cách Thị Giác &amp; Hệ Thống Thiết Kế (Design Tokens)</h2>
         </div>
-        <p class="cs-section-desc">Ngôn ngữ thị giác của TaskSync là sự hòa quyện giữa kiểu chữ SaaS hiện đại, trang nhã và các thẻ trạng thái Neubrutalist tương phản cao, mang lại khả năng quét nhận diện cực nhanh trên màn hình di động.</p>
+        <p class="cs-section-desc">Ngôn ngữ thị giác của TaskSync là sự hòa quyện giữa kiểu chữ hiện đại trang nhã, thẻ công việc viền đáy phân loại màu sắc và thanh điều hướng cong nổi công thái học, mang lại nhịp quét mắt thoáng đãng và chuẩn mực trên thiết bị di động.</p>
 
         <div class="cs-palette-grid">
           <div class="cs-swatch">
-            <div class="cs-swatch-color" style="background: #4361EE;"></div>
+            <div class="cs-swatch-color" style="background: #4E6AF3;"></div>
             <div class="cs-swatch-info">
-              <div class="cs-swatch-name">Royal Indigo</div>
-              <div class="cs-swatch-hex">#4361EE</div>
+              <div class="cs-swatch-name">Royal Blue</div>
+              <div class="cs-swatch-hex">#4E6AF3</div>
             </div>
           </div>
           <div class="cs-swatch">
-            <div class="cs-swatch-color" style="background: #4CC9F0;"></div>
+            <div class="cs-swatch-color" style="background: #00BA88;"></div>
             <div class="cs-swatch-info">
-              <div class="cs-swatch-name">Sky Cyan</div>
-              <div class="cs-swatch-hex">#4CC9F0</div>
+              <div class="cs-swatch-name">Emerald Green</div>
+              <div class="cs-swatch-hex">#00BA88</div>
             </div>
           </div>
           <div class="cs-swatch">
-            <div class="cs-swatch-color" style="background: #10B981;"></div>
+            <div class="cs-swatch-color" style="background: #FF8A00;"></div>
             <div class="cs-swatch-info">
-              <div class="cs-swatch-name">Emerald Success</div>
-              <div class="cs-swatch-hex">#10B981</div>
+              <div class="cs-swatch-name">Vivid Orange</div>
+              <div class="cs-swatch-hex">#FF8A00</div>
             </div>
           </div>
           <div class="cs-swatch">
-            <div class="cs-swatch-color" style="background: #FFB703;"></div>
+            <div class="cs-swatch-color" style="background: #FF3B30;"></div>
             <div class="cs-swatch-info">
-              <div class="cs-swatch-name">Amber Warning</div>
-              <div class="cs-swatch-hex">#FFB703</div>
+              <div class="cs-swatch-name">Coral Red</div>
+              <div class="cs-swatch-hex">#FF3B30</div>
             </div>
           </div>
           <div class="cs-swatch">
-            <div class="cs-swatch-color" style="background: #F72585;"></div>
+            <div class="cs-swatch-color" style="background: #7B2CBF;"></div>
             <div class="cs-swatch-info">
-              <div class="cs-swatch-name">Punch Pink</div>
-              <div class="cs-swatch-hex">#F72585</div>
+              <div class="cs-swatch-name">Deep Purple</div>
+              <div class="cs-swatch-hex">#7B2CBF</div>
             </div>
           </div>
         </div>
 
         <div class="cs-bento-2">
           <div class="cs-bento-card accent-green">
-            <div class="cs-card-title"><span>📐</span> Cấu Trúc Không Gian 8px &amp; Tương Tác Vi Mô</div>
-            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 0;">Được thiết kế trên lưới không gian lũy tiến 8px. Các thẻ tương tác sở hữu độ bo góc công thái học <code>24px - 28px</code> kèm độ dịch chuyển bóng nhẹ, mang lại phản hồi xúc giác chân thực và diện tích chạm an toàn cho ngón tay cái.</p>
+            <div class="cs-card-title"><span>📐</span> Cấu Trúc Thẻ Viền Đáy Màu &amp; Công Thái Học Di Động</div>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 0;">Sử dụng thẻ nền trắng thuần khiết bo góc mềm <code>12px</code> với đường viền đáy màu <code>2.5px</code> (Accent Bottom Border) tương ứng với từng trạng thái nhiệm vụ. Thanh điều hướng đáy cong nổi (Floating Pill Bar <code>36px</code>) đặt trọn vẹn trong vùng hoạt động tự nhiên của ngón tay cái.</p>
           </div>
           <div class="cs-bento-card accent-yellow">
-            <div class="cs-card-title"><span>🔤</span> Kiểu Chữ Rõ Ràng &amp; Huy Hiệu Trạng Thái Động</div>
-            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 0;">Kết hợp font chữ SF Pro / Inter với các chỉ số đo lường kích thước lớn. Thẻ trạng thái màu sắc phân biệt (<code>On Progress</code> xanh dương, <code>To-do</code> cam ấm, <code>Done</code> xanh lục ngọc) giúp mắt nhận diện trạng thái công việc trong 3 giây.</p>
+            <div class="cs-card-title"><span>🔤</span> Header Tối Giản, Dải Tab Gạch Chân &amp; Huy Hiệu Bo Tròn</div>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 0;">Header sử dụng nút quay lại tối giản không đóng hộp, tiêu đề canh trái đậm nét (<code>20px</code>). Hệ thống tab chuyển đổi sử dụng gạch chân xanh năng động (<code>border-bottom: 2px solid #3E79F7</code>), kết hợp các huy hiệu trạng thái con nhộng bo tròn (<code>14px</code>) giúp quét thông tin trong 3 giây.</p>
           </div>
         </div>
       </section>
