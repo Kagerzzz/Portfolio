@@ -5,7 +5,7 @@
 
 // Hero Questions & Interactive Perspectives
 const HERO_PERSPECTIVES = [
-  { key: "who", label: "✦ WHO I AM", text: "Chỉ là một designer với niềm đam mê lớn với phát triển sản phẩm.", theme: "who", color: "var(--neo-green)" },
+  { key: "who", label: "✦ WHO I AM", text: "Chỉ là một product designer với niềm đam mê lớn dành cho phát triển sản phẩm.", theme: "who", color: "var(--neo-green)" },
   { key: "care", label: "♥ WHAT I CARE ABOUT", text: "Tìm kiếm sự cân bằng giữa giá trị, thẩm mỹ, và tính hữu dụng.", theme: "care", color: "var(--neo-pink)" },
   { key: "believe", label: "★ WHAT I BELIEVE IN", text: "Thấu hiểu người dùng trước khi tìm cách giải quyết vấn đề của họ.", theme: "believe", color: "var(--neo-yellow)" },
   { key: "cook", label: "⚡ WHAT I CAN COOK", text: "Biến những ý tưởng thành trải nghiệm, rồi để trải nghiệm chạm tới người dùng.", theme: "cook", color: "var(--neo-orange)" },
