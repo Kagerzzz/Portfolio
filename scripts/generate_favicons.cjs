@@ -9,20 +9,21 @@ const TEMP_DIR = path.join(__dirname, 'temp_favicon_gen');
 
 if (!fs.existsSync(TEMP_DIR)) fs.mkdirSync(TEMP_DIR, { recursive: true });
 
-// Production Favicon SVG - Perfectly centered and balanced inside 64x64 canvas
+// Ultra-Large Neubrutalist Favicon SVG
+// Maximized badge area (57x57), tight 2px shadow, giant bold 'H' (+50% scale), and prominent '✦' sparkle.
 const faviconSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- Hard Offset Neubrutalist Shadow -->
-  <rect x="9" y="9" width="46" height="46" rx="13" fill="#000000" />
+  <!-- Tight Neubrutalist Hard Shadow (No wasted canvas padding) -->
+  <rect x="4" y="4" width="57" height="57" rx="16" fill="#000000" />
   
-  <!-- Main Badge Face (Electric Neo-Yellow) -->
-  <rect x="5" y="5" width="46" height="46" rx="13" fill="#FFDE59" stroke="#000000" stroke-width="3.5" />
+  <!-- Ultra-wide Badge Face (57x57 in 64x64 canvas) -->
+  <rect x="2" y="2" width="57" height="57" rx="16" fill="#FFDE59" stroke="#000000" stroke-width="4" />
   
-  <!-- Bold Geometric 'H' (Neubrutalist Monogram) -->
-  <path d="M 16 17 L 22.5 17 L 22.5 27 L 31 27 L 31 17 L 37.5 17 L 37.5 41 L 31 41 L 31 32.5 L 22.5 32.5 L 22.5 41 L 16 41 Z" fill="#000000" />
+  <!-- Massive Chunky 'H' for instant 16x16 tab legibility -->
+  <path d="M 14 14 L 23 14 L 23 27 L 36 27 L 36 14 L 45 14 L 45 47 L 36 47 L 36 35 L 23 35 L 23 47 L 14 47 Z" fill="#000000" />
   
-  <!-- Signature 4-pointed Sparkle Star ✦ (Electric Neo-Cyan with Black Ink Stroke) -->
-  <path d="M 43 13 C 43 19 45.5 21.5 51.5 21.5 C 45.5 21.5 43 24 43 30 C 43 24 40.5 21.5 34.5 21.5 C 40.5 21.5 43 19 43 13 Z" 
-        fill="#00F0FF" stroke="#000000" stroke-width="1.8" stroke-linejoin="round" />
+  <!-- Signature 4-pointed Sparkle Star ✦ (Neo-Cyan with Black Ink Stroke) -->
+  <path d="M 51 9 C 51 18 54 21 62 21 C 54 21 51 24 51 33 C 51 24 48 21 40 21 C 48 21 51 18 51 9 Z" 
+        fill="#00F0FF" stroke="#000000" stroke-width="2.2" stroke-linejoin="round" />
 </svg>`;
 
 // Write primary SVG files
@@ -46,8 +47,8 @@ function getFaviconHTML(size) {
     justify-content: center;
   }
   svg {
-    width: ${size}px;
-    height: ${size}px;
+    width: 100%;
+    height: 100%;
     display: block;
   }
 </style>
@@ -89,4 +90,4 @@ try {
   fs.rmSync(TEMP_DIR, { recursive: true, force: true });
 } catch (e) {}
 
-console.log('Favicon generation complete.');
+console.log('Production favicon generation complete.');
