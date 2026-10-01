@@ -795,6 +795,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initMagneticElements();
   init3DParallaxTilt();
   initConfettiEngine();
+  initScrollSpy();
   
   // Asynchronously fetch dynamic data from Vercel Blob Store
   loadProjectsFromBlob();
@@ -834,6 +835,55 @@ async function loadProjectsFromBlob() {
   } catch (err) {
     console.warn("⚠️ Vercel Blob loading error (falling back to static local data):", err);
   }
+}
+
+/* Navigation ScrollSpy & Smooth Active Tab Highlighting */
+function initScrollSpy() {
+  const navLinks = document.querySelectorAll(".nav-links .nav-link");
+  const sections = [
+    document.getElementById("hero"),
+    document.getElementById("cv"),
+    document.getElementById("work"),
+    document.getElementById("story")
+  ].filter(Boolean);
+
+  if (!navLinks.length || !sections.length) return;
+
+  function updateActiveNav() {
+    const scrollPos = window.scrollY + 180;
+
+    let currentId = "";
+    for (let i = sections.length - 1; i >= 0; i--) {
+      const section = sections[i];
+      if (section && section.offsetTop <= scrollPos) {
+        currentId = section.getAttribute("id");
+        break;
+      }
+    }
+
+    if (!currentId && sections[0]) {
+      currentId = sections[0].getAttribute("id");
+    }
+
+    navLinks.forEach(link => {
+      const href = link.getAttribute("href");
+      if (href === `#${currentId}`) {
+        link.classList.add("active");
+      } else {
+        link.classList.remove("active");
+      }
+    });
+  }
+
+  window.addEventListener("scroll", updateActiveNav, { passive: true });
+  updateActiveNav();
+
+  navLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      navLinks.forEach(l => l.classList.remove("active"));
+      link.classList.add("active");
+    });
+  });
 }
 
 /* Theme Toggle (Light / Dark) */
