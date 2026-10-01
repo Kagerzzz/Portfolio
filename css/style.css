@@ -2219,6 +2219,19 @@ button {
   margin-bottom: 32px;
 }
 
+.cs-screens-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+@media (max-width: 1100px) {
+  .cs-screens-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 .cs-screen-card {
   display: flex;
   flex-direction: column;

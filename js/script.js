@@ -379,7 +379,7 @@ const PROJECTS_DATA = [
         <p class="cs-section-desc">A deep-dive into the actual shipped interface screens of TaskSync, showcasing end-to-end user journeys from onboarding to deep enterprise administration.</p>
 
         <!-- Flow 1 -->
-        <div style="margin-bottom: 40px;">
+        <div style="margin-bottom: 44px;">
           <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
             <span class="cs-pill" style="background: var(--neo-cyan);">FLOW 01</span>
             <h3 style="font-size: 1.25rem; margin: 0;">Onboarding, Biometric Login &amp; OTP Security</h3>
@@ -421,10 +421,10 @@ const PROJECTS_DATA = [
         </div>
 
         <!-- Flow 2 -->
-        <div style="margin-bottom: 40px;">
+        <div style="margin-bottom: 44px;">
           <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
             <span class="cs-pill" style="background: var(--neo-yellow);">FLOW 02</span>
-            <h3 style="font-size: 1.25rem; margin: 0;">Command Center (Home) &amp; Multi-Tenant Switcher</h3>
+            <h3 style="font-size: 1.25rem; margin: 0;">Unified Command Center &amp; Multi-Tenant Switcher</h3>
           </div>
           <div class="cs-screens-grid-2">
             <div class="cs-screen-card">
@@ -452,51 +452,188 @@ const PROJECTS_DATA = [
         </div>
 
         <!-- Flow 3 -->
-        <div style="margin-bottom: 40px;">
+        <div style="margin-bottom: 44px;">
           <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
-            <span class="cs-pill" style="background: var(--neo-green);">FLOW 03</span>
-            <h3 style="font-size: 1.25rem; margin: 0;">Centralized Communication Hub &amp; Smart GPS Attendance</h3>
+            <span class="cs-pill" style="background: var(--neo-blue); color: #fff;">FLOW 03</span>
+            <h3 style="font-size: 1.25rem; margin: 0;">Seamless Collaboration: Messaging, Video Calls &amp; Cloud Docs</h3>
           </div>
-          <div class="cs-screens-grid-2">
+          <div class="cs-screens-grid-3">
             <div class="cs-screen-card">
               <div class="cs-phone-frame">
-                <img src="assets/tasksync/tasksync-mailbox.png" alt="TaskSync Mailbox Screen" loading="lazy">
+                <img src="assets/tasksync/tasksync-chat.png" alt="TaskSync Direct Chat &amp; Voice Messaging" loading="lazy">
               </div>
               <div class="cs-screen-info">
                 <span class="cs-screen-tag">SCREEN 06</span>
-                <div class="cs-screen-title">Mailbox &amp; System Notifications</div>
-                <div class="cs-screen-desc">Intelligent triage separating Messenger from System notices. Real-time approval alerts ("Your Leave requirement has been accepted") and attendance check-in reminders with unread badges.</div>
+                <div class="cs-screen-title">Team Direct Chat &amp; Voice Notes</div>
+                <div class="cs-screen-desc">Conversational workspace featuring waveform audio voice messages, inline Figma deliverable preview cards, read receipts, and real-time typing indicators.</div>
               </div>
             </div>
 
             <div class="cs-screen-card">
               <div class="cs-phone-frame">
-                <img src="assets/tasksync/tasksync-attendance.png" alt="TaskSync Attendance Screen" loading="lazy">
+                <img src="assets/tasksync/tasksync-video.png" alt="TaskSync HD Video Conferencing" loading="lazy">
               </div>
               <div class="cs-screen-info">
                 <span class="cs-screen-tag">SCREEN 07</span>
-                <div class="cs-screen-title">Geofenced Attendance &amp; Live Timer</div>
-                <div class="cs-screen-desc">Live session stopwatch (01:27:22), location-stamped GPS check-in/out at 1234 Silicon Avenue, lunch break recording, and daily time summary metrics (05h 22m total, 0 late-in).</div>
+                <div class="cs-screen-title">HD Video Conferencing &amp; Speaker Grid</div>
+                <div class="cs-screen-desc">2x2 participant video grid with active-speaker neon indicator border, real-time screen share cell, encrypted stream badges, and quick-toggle floating controls.</div>
+              </div>
+            </div>
+
+            <div class="cs-screen-card">
+              <div class="cs-phone-frame">
+                <img src="assets/tasksync/tasksync-docs.png" alt="TaskSync Collaborative Cloud Docs" loading="lazy">
+              </div>
+              <div class="cs-screen-info">
+                <span class="cs-screen-tag">SCREEN 08</span>
+                <div class="cs-screen-title">Collaborative Cloud Docs &amp; Live Cursors</div>
+                <div class="cs-screen-desc">Real-time collaborative markdown document editor with live multiplayer presence cursors, inline checklists, formatting bar, and enterprise version history.</div>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Flow 4 -->
-        <div style="margin-bottom: 20px;">
+        <div style="margin-bottom: 44px;">
           <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
             <span class="cs-pill" style="background: var(--neo-pink);">FLOW 04</span>
-            <h3 style="font-size: 1.25rem; margin: 0;">Agile Task Board, Admin Console &amp; Profile Security</h3>
+            <h3 style="font-size: 1.25rem; margin: 0;">Smart Calendar &amp; Deep Task Execution</h3>
           </div>
           <div class="cs-screens-grid-3">
+            <div class="cs-screen-card">
+              <div class="cs-phone-frame">
+                <img src="assets/tasksync/tasksync-calendar.png" alt="TaskSync Smart Calendar Screen" loading="lazy">
+              </div>
+              <div class="cs-screen-info">
+                <span class="cs-screen-tag">SCREEN 09</span>
+                <div class="cs-screen-title">Smart Calendar &amp; Agenda Timeline</div>
+                <div class="cs-screen-desc">Dynamic week-strip selector, schedule timeline with color-coded category markers, meeting links, participant avatars, and floating quick-event creation.</div>
+              </div>
+            </div>
+
             <div class="cs-screen-card">
               <div class="cs-phone-frame">
                 <img src="assets/tasksync/tasksync-tasks.png" alt="TaskSync Task Management Screen" loading="lazy">
               </div>
               <div class="cs-screen-info">
-                <span class="cs-screen-tag">SCREEN 08</span>
-                <div class="cs-screen-title">Daily Agenda &amp; Task Planner</div>
+                <span class="cs-screen-tag">SCREEN 10</span>
+                <div class="cs-screen-title">Daily Agenda &amp; Task Planner Board</div>
                 <div class="cs-screen-desc">Interactive weekly calendar strip, multi-state status filters (All, To-do, On progress, Done), color-coded cards, and floating action button for quick task creation.</div>
+              </div>
+            </div>
+
+            <div class="cs-screen-card">
+              <div class="cs-phone-frame">
+                <img src="assets/tasksync/tasksync-task-detail.png" alt="TaskSync Task Details Screen" loading="lazy">
+              </div>
+              <div class="cs-screen-info">
+                <span class="cs-screen-tag">SCREEN 11</span>
+                <div class="cs-screen-title">Task Details &amp; Subtask Checklist</div>
+                <div class="cs-screen-desc">Deep task view with #TASK key, priority indicators, subtask completion progress bar, assignees, attached design assets (.fig, .pdf), and instant status updates.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Flow 5 -->
+        <div style="margin-bottom: 44px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+            <span class="cs-pill" style="background: var(--neo-green);">FLOW 05</span>
+            <h3 style="font-size: 1.25rem; margin: 0;">Enterprise Workflows: Requests &amp; Approvals</h3>
+          </div>
+          <div class="cs-screens-grid-2">
+            <div class="cs-screen-card">
+              <div class="cs-phone-frame">
+                <img src="assets/tasksync/tasksync-request.png" alt="TaskSync Request Creation Screen" loading="lazy">
+              </div>
+              <div class="cs-screen-info">
+                <span class="cs-screen-tag">SCREEN 12</span>
+                <div class="cs-screen-title">Submit Request Center: Leave &amp; OT</div>
+                <div class="cs-screen-desc">Streamlined multi-category request hub (Paid Leave, Overtime, Expenses), calendar range calculator, reason input, and auto-routed multi-level approval hierarchy.</div>
+              </div>
+            </div>
+
+            <div class="cs-screen-card">
+              <div class="cs-phone-frame">
+                <img src="assets/tasksync/tasksync-mailbox.png" alt="TaskSync Mailbox Screen" loading="lazy">
+              </div>
+              <div class="cs-screen-info">
+                <span class="cs-screen-tag">SCREEN 13</span>
+                <div class="cs-screen-title">Centralized Mailbox &amp; Push Alerts</div>
+                <div class="cs-screen-desc">Intelligent triage separating Messenger from System notices. Real-time approval alerts ("Your Leave requirement has been accepted") and attendance check-in reminders with unread badges.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Flow 6 -->
+        <div style="margin-bottom: 44px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+            <span class="cs-pill" style="background: var(--neo-purple); color: #fff;">FLOW 06</span>
+            <h3 style="font-size: 1.25rem; margin: 0;">GPS Attendance, Smart Reminders &amp; Payroll Hub</h3>
+          </div>
+          <div class="cs-screens-grid-3">
+            <div class="cs-screen-card">
+              <div class="cs-phone-frame">
+                <img src="assets/tasksync/tasksync-attendance.png" alt="TaskSync Attendance Screen" loading="lazy">
+              </div>
+              <div class="cs-screen-info">
+                <span class="cs-screen-tag">SCREEN 14</span>
+                <div class="cs-screen-title">Geofenced GPS Attendance &amp; Live Timer</div>
+                <div class="cs-screen-desc">Live session stopwatch (01:27:22), location-stamped GPS check-in/out at 1234 Silicon Avenue, lunch break recording, and daily time summary metrics (05h 22m total, 0 late-in).</div>
+              </div>
+            </div>
+
+            <div class="cs-screen-card">
+              <div class="cs-phone-frame">
+                <img src="assets/tasksync/tasksync-reminder.png" alt="TaskSync Smart Reminders Screen" loading="lazy">
+              </div>
+              <div class="cs-screen-info">
+                <span class="cs-screen-tag">SCREEN 15</span>
+                <div class="cs-screen-title">Smart Reminders &amp; Geofence Triggers</div>
+                <div class="cs-screen-desc">Contextual location-aware reminder engine with automatic check-in prompts when arriving within 100m of the office, daily alarm schedules, and quick audio voice additions.</div>
+              </div>
+            </div>
+
+            <div class="cs-screen-card">
+              <div class="cs-phone-frame">
+                <img src="assets/tasksync/tasksync-salary.png" alt="TaskSync Salary Screen" loading="lazy">
+              </div>
+              <div class="cs-screen-info">
+                <span class="cs-screen-tag">SCREEN 16</span>
+                <div class="cs-screen-title">Salary &amp; Payroll Hub with PDF Export</div>
+                <div class="cs-screen-desc">Transparent monthly compensation dashboard displaying net take-home salary ($4,850.00), disbursed bank account details, earnings breakdown, and single-tap PDF payslip download.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Flow 7 -->
+        <div style="margin-bottom: 20px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+            <span class="cs-pill" style="background: var(--neo-yellow);">FLOW 07</span>
+            <h3 style="font-size: 1.25rem; margin: 0;">Executive Intelligence, OKRs &amp; Enterprise Admin</h3>
+          </div>
+          <div class="cs-screens-grid-4">
+            <div class="cs-screen-card">
+              <div class="cs-phone-frame">
+                <img src="assets/tasksync/tasksync-report.png" alt="TaskSync Performance Report Screen" loading="lazy">
+              </div>
+              <div class="cs-screen-info">
+                <span class="cs-screen-tag">SCREEN 17</span>
+                <div class="cs-screen-title">Performance Analytics &amp; Workload</div>
+                <div class="cs-screen-desc">Real-time productivity KPIs (168.5h logged, 42 tasks, 100% attendance), weekly workload distribution bar chart, category allocation, and A+ performance rating.</div>
+              </div>
+            </div>
+
+            <div class="cs-screen-card">
+              <div class="cs-phone-frame">
+                <img src="assets/tasksync/tasksync-goals.png" alt="TaskSync OKRs &amp; Goals Screen" loading="lazy">
+              </div>
+              <div class="cs-screen-info">
+                <span class="cs-screen-tag">SCREEN 18</span>
+                <div class="cs-screen-title">Strategic OKRs &amp; Team Goals</div>
+                <div class="cs-screen-desc">Quarterly objective tracking with 78% progress ring, multi-tier Key Results progress bars, milestone assignees, and real-time status indicators (On Track / At Risk).</div>
               </div>
             </div>
 
@@ -505,8 +642,8 @@ const PROJECTS_DATA = [
                 <img src="assets/tasksync/tasksync-admin.png" alt="TaskSync Admin Suite Screen" loading="lazy">
               </div>
               <div class="cs-screen-info">
-                <span class="cs-screen-tag">SCREEN 09</span>
-                <div class="cs-screen-title">Admin Suite &amp; Org Management</div>
+                <span class="cs-screen-tag">SCREEN 19</span>
+                <div class="cs-screen-title">Enterprise Admin Suite &amp; Management</div>
                 <div class="cs-screen-desc">Centralized console to manage company profile, add/manage members and departments, configure security settings, and access the enterprise help center.</div>
               </div>
             </div>
@@ -516,8 +653,8 @@ const PROJECTS_DATA = [
                 <img src="assets/tasksync/tasksync-settings.png" alt="TaskSync Settings Screen" loading="lazy">
               </div>
               <div class="cs-screen-info">
-                <span class="cs-screen-tag">SCREEN 10</span>
-                <div class="cs-screen-title">User Account &amp; System Settings</div>
+                <span class="cs-screen-tag">SCREEN 20</span>
+                <div class="cs-screen-title">User Account &amp; System Preferences</div>
                 <div class="cs-screen-desc">User avatar profile management, company affiliation, access links, personal notification preferences, and persistent bottom navigation bar.</div>
               </div>
             </div>
