@@ -29,6 +29,14 @@
       margin: 120px auto;
       background: var(--bg-surface);
     }
+
+    /* Modal Scroll Enforcement */
+    #project-edit-modal .modal-card {
+      max-height: 90vh;
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+    }
     
     .form-group {
       margin-bottom: 20px;
