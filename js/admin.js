@@ -93,6 +93,24 @@ async function fetchProjects() {
 function loadFallbackProjects() {
   projectsList = [
     {
+      id: "tasksync",
+      title: "TaskSync — All-in-One Work Management & Team Collaboration Platform",
+      client: "Vertex Solutions Company",
+      role: "Lead Product Designer & UX Architect",
+      year: "2025 ∙ Shipped",
+      tags: ["Mobile App", "Work Management", "Product Strategy", "Design System", "Shipped"],
+      summary: "Nền tảng all-in-one quản lý công việc và cộng tác nhóm, tích hợp messaging, video call, cloud docs, smart calendar cùng các module quản trị vận hành như OKRs, approval workflow và chấm công GPS.",
+      image_url: "assets/tasksync/tasksync-cover.png",
+      metrics: [
+        { val: "+40%", label: "Tốc độ xử lý task" },
+        { val: "-65%", label: "Thời gian chuyển đổi app" },
+        { val: "98%", label: "Check-in GPS đúng giờ" }
+      ],
+      overview: "TaskSync là giải pháp quản lý công việc all-in-one trên mobile, hợp nhất team messaging, lịch trình, chấm công GPS geofencing và chuyển đổi đa workspace (Multi-tenant) trong một trải nghiệm liền mạch.",
+      challenge: "Nhân sự và team lead thường xuyên gặp tình trạng context switching khi phải chuyển qua lại giữa 4-5 tool độc lập (Slack để chat, Asana để nhận task, Google Calendar để xem lịch, web portal để chấm công và nộp đơn từ).",
+      solution: "Thiết kế ứng dụng mobile-first tinh gọn, hợp nhất daily task, phê duyệt 1-touch, chấm công GPS và fast workspace switching trong một giao diện trực quan, giảm thiểu tối đa thao tác thừa."
+    },
+    {
       id: "explora",
       title: "Explora — Empowering scientists to deliver faster personalized cancer care",
       client: "Cellworks Biotech",
