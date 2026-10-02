@@ -1357,7 +1357,9 @@ button {
 }
 
 /* ==========================================================================
-   Neubrutalist Artboard Frame & Media Stage
+   Physical Specimen / Blueprint Dossier Media Stage
+   (Distinct physical design document concept: Binder clip, technical ruler border,
+   technical drafting canvas, QC inspection stamp, and barcode inventory sticker)
    ========================================================================== */
 .project-media {
   width: 100%;
@@ -1368,138 +1370,149 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 0;
+  padding: 12px 0;
   overflow: visible;
-  perspective: 1000px;
+  perspective: 1200px;
 }
 
-.media-frame {
+/* Dossier Sheet Base */
+.dossier-specimen-sheet {
   width: 100%;
   height: 100%;
-  background: var(--bg-surface);
-  border: var(--border-neo);
-  border-radius: var(--radius-md);
-  box-shadow: 6px 6px 0px var(--border-color), 10px 10px 0px var(--card-accent, var(--neo-yellow));
+  background: #FFFFFF;
+  border: 2.5px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: 7px 7px 0px #000000;
   position: relative;
   display: flex;
   flex-direction: column;
   overflow: visible;
-  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease;
+  transform: rotate(-0.5deg);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
   will-change: transform, box-shadow;
 }
 
-.project-item:hover .media-frame {
-  transform: translate(-3px, -3px);
-  box-shadow: 8px 8px 0px var(--border-color), 13px 13px 0px var(--card-accent, var(--neo-yellow));
+[data-theme="dark"] .dossier-specimen-sheet {
+  background: #181922;
+  box-shadow: 7px 7px 0px #000000;
 }
 
-/* Washi Tape Pin (Top Center Sticker) */
-.media-tape-strip {
+.project-item:hover .dossier-specimen-sheet {
+  transform: rotate(0deg) translate(-3px, -3px);
+  box-shadow: 10px 10px 0px #000000;
+}
+
+/* Metal Heavy-Duty Binder Clip at Top Center */
+.dossier-binder-clip {
   position: absolute;
-  top: -13px;
+  top: -16px;
   left: 50%;
-  transform: translateX(-50%) rotate(-1.5deg);
-  background: var(--card-accent, var(--neo-yellow));
-  color: #000000;
-  border: 2px solid var(--border-color);
-  box-shadow: 2px 2px 0px var(--border-color);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 800;
-  padding: 3px 14px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  z-index: 10;
-  user-select: none;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   pointer-events: none;
-  transition: transform 0.2s ease;
-  white-space: nowrap;
+  user-select: none;
 }
 
-.project-item:hover .media-tape-strip {
-  transform: translateX(-50%) rotate(1deg) scale(1.05);
+.clip-wire-loop {
+  width: 22px;
+  height: 14px;
+  border: 2.5px solid #222222;
+  border-bottom: none;
+  border-radius: 7px 7px 0 0;
+  background: transparent;
 }
 
-/* Frame Header Bar (Mini Retro OS/Canvas Toolbar) */
-.media-frame-header {
-  height: 34px;
-  padding: 0 14px;
-  background: var(--bg-main);
-  border-bottom: 2.5px solid var(--border-color);
-  border-radius: calc(var(--radius-md) - 3px) calc(var(--radius-md) - 3px) 0 0;
+.clip-metal-body {
+  width: 52px;
+  height: 15px;
+  background: linear-gradient(180deg, #3A3B45 0%, #15161C 100%);
+  border: 2px solid #000000;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.35);
+  position: relative;
+}
+
+.clip-metal-body::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 6px;
+  right: 6px;
+  height: 2px;
+  background: rgba(255,255,255,0.45);
+  border-radius: 1px;
+}
+
+/* Dossier Top Technical Margin & Specimen ID Bar */
+.dossier-header-strip {
+  padding: 8px 14px 6px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 2px solid var(--border-color);
+  background: #FAF8F5;
   user-select: none;
   flex-shrink: 0;
 }
 
-.media-frame-meta {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+[data-theme="dark"] .dossier-header-strip {
+  background: #1F202B;
 }
 
-.media-pulse-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--neo-green);
-  box-shadow: 0 0 0 1.5px var(--border-color);
-  animation: pulseDot 2s infinite;
-}
-
-.media-frame-tag {
+.dossier-file-id {
   font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 800;
-  letter-spacing: 0.06em;
-  color: var(--text-dim);
+  letter-spacing: 0.08em;
+  color: var(--text-main);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dossier-file-id .file-icon {
+  font-size: 11px;
+}
+
+.dossier-classification {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  padding: 2px 6px;
+  background: #000000;
+  color: #FFFFFF;
+  border-radius: 2px;
   text-transform: uppercase;
 }
 
-.media-frame-tools {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+[data-theme="dark"] .dossier-classification {
+  background: #FFFFFF;
+  color: #000000;
 }
 
-.frame-tool-chip {
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  font-weight: 800;
-  padding: 2px 6px;
-  background: var(--bg-surface);
-  border: 1.5px solid var(--border-color);
-  border-radius: var(--radius-xs);
-  color: var(--text-muted);
-}
-
-.frame-tool-icon {
-  font-size: 12px;
-  color: var(--text-main);
-}
-
-/* Image Viewport Canvas */
-.media-canvas-viewport {
+/* Main Dossier Blueprint Canvas Area */
+.dossier-blueprint-stage {
   flex: 1;
   position: relative;
   overflow: hidden;
-  background: #F4F6FB;
-  background-image: radial-gradient(rgba(0, 0, 0, 0.12) 1px, transparent 1px);
-  background-size: 14px 14px;
-  border-radius: 0 0 calc(var(--radius-md) - 3px) calc(var(--radius-md) - 3px);
+  background: #0D1B2A;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-[data-theme="dark"] .media-canvas-viewport {
-  background: #17181F;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-}
-
-.media-canvas-viewport .project-img {
+.dossier-blueprint-stage .project-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1507,59 +1520,127 @@ button {
   border-radius: 0;
   box-shadow: none;
   transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: block;
 }
 
-.project-item:hover .media-canvas-viewport .project-img {
-  transform: scale(1.03);
+.project-item:hover .dossier-blueprint-stage .project-img {
+  transform: scale(1.035);
 }
 
-/* Technical Blueprint Crosshairs (+) */
-.crosshair {
-  position: absolute;
+/* Technical Calibration Scale (Bottom Ruler Strip) */
+.dossier-ruler-strip {
+  height: 22px;
+  background: #FAF8F5;
+  border-top: 2px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
   font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 900;
-  color: var(--border-color);
-  opacity: 0.35;
-  pointer-events: none;
+  font-size: 8.5px;
+  font-weight: 700;
+  color: var(--text-dim);
   user-select: none;
+  flex-shrink: 0;
+  letter-spacing: 0.04em;
+  background-image: repeating-linear-gradient(90deg, var(--border-color) 0, var(--border-color) 1px, transparent 1px, transparent 10px);
+  background-size: 100% 6px;
+  background-repeat: no-repeat;
+  background-position: bottom 0 center;
+}
+
+[data-theme="dark"] .dossier-ruler-strip {
+  background: #1F202B;
+}
+
+/* Rubber Ink Inspection Stamp (Red Ink / Green Ink Angled Seal) */
+.dossier-qc-stamp {
+  position: absolute;
+  top: 40px;
+  right: 14px;
+  border: 2.5px dashed #FF334B;
+  color: #FF334B;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transform: rotate(12deg);
+  border-radius: 3px;
+  box-shadow: 0 2px 8px rgba(255, 51, 75, 0.2);
+  user-select: none;
+  pointer-events: none;
+  z-index: 10;
+  transition: transform 0.25s ease;
+}
+
+[data-theme="dark"] .dossier-qc-stamp {
+  background: rgba(20, 20, 28, 0.92);
+}
+
+.project-item:hover .dossier-qc-stamp {
+  transform: rotate(8deg) scale(1.08);
+}
+
+/* Barcode Technical Specimen Tag at Bottom Left */
+.dossier-barcode-tag {
+  position: absolute;
+  bottom: 28px;
+  left: 14px;
+  background: #FFFFFF;
+  border: 1.5px solid #000000;
+  box-shadow: 2.5px 2.5px 0px #000000;
+  padding: 3px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  z-index: 10;
+  user-select: none;
+  pointer-events: none;
+  transform: rotate(-1.5deg);
+  transition: transform 0.2s ease;
+}
+
+.project-item:hover .dossier-barcode-tag {
+  transform: rotate(0deg) scale(1.05);
+}
+
+.barcode-lines {
+  font-family: monospace;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #000000;
   line-height: 1;
 }
 
-.crosshair-tl { top: 6px; left: 8px; }
-.crosshair-tr { top: 6px; right: 8px; }
-.crosshair-bl { bottom: 6px; left: 8px; }
-.crosshair-br { bottom: 6px; right: 8px; }
-
-/* Floating Corner Sticker Badge */
-.media-floating-sticker {
-  position: absolute;
-  bottom: -10px;
-  right: 18px;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 6px 14px;
-  border: 2px solid var(--border-color);
-  border-radius: var(--radius-pill);
-  box-shadow: 3px 3px 0px var(--border-color);
-  color: #000000;
-  font-size: 11px;
+.barcode-subtext {
+  font-family: var(--font-mono);
+  font-size: 7.5px;
   font-weight: 800;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  z-index: 10;
-  transform: rotate(3deg);
-  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease;
-  user-select: none;
-  pointer-events: none;
-  white-space: nowrap;
+  letter-spacing: 0.08em;
+  color: #333333;
 }
 
-.project-item:hover .media-floating-sticker {
-  transform: rotate(-3deg) scale(1.08);
-  box-shadow: 4px 4px 0px var(--border-color);
+/* Technical drafting crosshair markers on stage */
+.dossier-crosshair {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.45);
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+  z-index: 5;
 }
+
+.dossier-crosshair-tl { top: 8px; left: 10px; }
+.dossier-crosshair-tr { top: 8px; right: 10px; }
+.dossier-crosshair-bl { bottom: 8px; left: 10px; }
+.dossier-crosshair-br { bottom: 8px; right: 10px; }
 
 .project-tags {
   display: flex;
@@ -3000,17 +3081,21 @@ button {
     height: 300px;
   }
 
-  .media-tape-strip {
-    font-size: 9px;
-    padding: 2.5px 10px;
-    top: -11px;
+  .dossier-qc-stamp {
+    font-size: 9.5px;
+    padding: 3px 8px;
+    top: 36px;
+    right: 10px;
   }
 
-  .media-floating-sticker {
-    font-size: 10px;
-    padding: 4px 10px;
-    bottom: -8px;
-    right: 12px;
+  .dossier-barcode-tag {
+    bottom: 24px;
+    left: 10px;
+    padding: 2px 6px;
+  }
+
+  .barcode-lines {
+    font-size: 9px;
   }
 
   /* CV Experience Bento Grid */
@@ -3263,32 +3348,44 @@ button {
     height: 220px;
   }
 
-  .media-tape-strip {
-    font-size: 8px;
-    padding: 2px 8px;
-    top: -10px;
-    letter-spacing: 0.04em;
+  .clip-metal-body {
+    width: 42px;
+    height: 12px;
   }
 
-  .media-frame-header {
-    height: 28px;
-    padding: 0 10px;
+  .clip-wire-loop {
+    width: 18px;
+    height: 11px;
   }
 
-  .media-frame-tag {
+  .dossier-header-strip {
+    padding: 5px 8px;
+  }
+
+  .dossier-file-id {
     font-size: 8.5px;
   }
 
-  .frame-tool-chip {
-    font-size: 8px;
+  .dossier-classification {
+    font-size: 7.5px;
     padding: 1px 4px;
   }
 
-  .media-floating-sticker {
-    font-size: 9px;
-    padding: 3px 8px;
-    bottom: -6px;
+  .dossier-ruler-strip {
+    height: 18px;
+    font-size: 7.5px;
+    padding: 0 8px;
+  }
+
+  .dossier-qc-stamp {
+    font-size: 8.5px;
+    padding: 2px 6px;
+    top: 30px;
     right: 8px;
+  }
+
+  .dossier-barcode-tag {
+    display: none;
   }
 
   .project-number-stamp {

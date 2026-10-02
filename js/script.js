@@ -1081,31 +1081,82 @@ function renderProjects() {
     else if (tagsLower.some(t => t.includes("concept"))) statusBadge = "AI CONCEPT ✦";
     else if (tagsLower.some(t => t.includes("prototype"))) statusBadge = "B2B PROTOTYPE 💡";
 
-    // Neubrutalist stickers and washi tapes mapping
-    const getProjectTape = (proj, i) => {
+    // Dossier Specimen Metadata Mapping
+    const getDossierMeta = (proj, i) => {
       const pid = (proj.id || "").toLowerCase();
-      if (pid.includes("tasksync")) return "STAGE // FIGMA SPEC";
-      if (pid.includes("explora")) return "LAB // DESIGN SYSTEM";
-      if (pid.includes("mira")) return "PROTOTYPE // V1.4";
-      if (pid.includes("manage")) return "ENTERPRISE // STABLE";
-      if (pid.includes("consumer") || pid.includes("research")) return "AI // RESEARCH AGENT";
-      if (pid.includes("insurance") || pid.includes("fintech")) return "FINTECH // PROD DEPLOY";
-      return `CANVAS // FRAME [${(i + 1).toString().padStart(2, "0")}]`;
+      if (pid.includes("tasksync")) {
+        return {
+          fileId: "DOC-2025 // MOBILE-SPEC-01",
+          classification: "PROD-READY",
+          stampText: "APPROVED ✦",
+          stampColor: "#059669",
+          stampBorder: "#059669",
+          barcode: "||| | |||| || |||",
+          code: "FIGMA-V4.2.0-SHIPPED",
+          scale: "1:1 FULL FIDELITY · 375×812 PT"
+        };
+      }
+      if (pid.includes("explora")) {
+        return {
+          fileId: "LAB-2024 // BIOTECH-ENGINE",
+          classification: "R&D ARCHIVE",
+          stampText: "QC PASSED ★",
+          stampColor: "#E11D48",
+          stampBorder: "#E11D48",
+          barcode: "|| ||| | || |||||",
+          code: "SPECIMEN-BIO-EXP-9",
+          scale: "DESIGN SYSTEM // TOKENS & ATOMS"
+        };
+      }
+      if (pid.includes("mira")) {
+        return {
+          fileId: "AI-2024 // WEARABLE-UX",
+          classification: "CLINICAL-V1",
+          stampText: "VERIFIED ✦",
+          stampColor: "#D97706",
+          stampBorder: "#D97706",
+          barcode: "|||| | || ||| ||",
+          code: "EXP-HEALTH-AI-88",
+          scale: "MULTI-MODAL INTERFACE · 100% SCALE"
+        };
+      }
+      if (pid.includes("manage")) {
+        return {
+          fileId: "SYS-2023 // HARDWARE-OPS",
+          classification: "STABLE CORE",
+          stampText: "DEPLOYED ⚡",
+          stampColor: "#2563EB",
+          stampBorder: "#2563EB",
+          barcode: "|| || |||| | |||",
+          code: "HW-FIELD-OPS-V2",
+          scale: "INDUSTRIAL WORKFLOW · 5D → 2D"
+        };
+      }
+      if (pid.includes("consumer") || pid.includes("research")) {
+        return {
+          fileId: "AGT-2024 // RESEARCH-PILOT",
+          classification: "AGENTIC-LAB",
+          stampText: "EVAL PASSED ★",
+          stampColor: "#7C3AED",
+          stampBorder: "#7C3AED",
+          barcode: "||| || | |||| ||",
+          code: "AI-RESEARCH-EXP-3",
+          scale: "AUTONOMOUS UX PROTO · 2 FOUNDERS"
+        };
+      }
+      return {
+        fileId: `SPEC-${2025 - i} // DOSSIER-${(i + 1).toString().padStart(2, "0")}`,
+        classification: "CONFIDENTIAL",
+        stampText: "INSPECTED ✦",
+        stampColor: "#DC2626",
+        stampBorder: "#DC2626",
+        barcode: "||| | |||| || |||",
+        code: `PORTFOLIO-CASE-${i + 1}`,
+        scale: "TECHNICAL BLUEPRINT · HIGH RES"
+      };
     };
 
-    const getProjectSticker = (proj) => {
-      const pid = (proj.id || "").toLowerCase();
-      if (pid.includes("tasksync")) return { text: "✦ EXPLORE 20 SCREENS", bg: "var(--neo-cyan)" };
-      if (pid.includes("explora")) return { text: "★ R&D PLATFORM", bg: "var(--neo-pink)" };
-      if (pid.includes("mira")) return { text: "✦ WEARABLE UI", bg: "var(--neo-yellow)" };
-      if (pid.includes("manage")) return { text: "⚡ FIELD OPERATIONS", bg: "var(--neo-green)" };
-      if (pid.includes("consumer") || pid.includes("research")) return { text: "✦ AGENTIC SYSTEM", bg: "var(--neo-purple)" };
-      if (pid.includes("insurance") || pid.includes("fintech")) return { text: "★ FINTECH ENGINE", bg: "var(--neo-orange)" };
-      return { text: "✦ CASE STUDY", bg: "var(--card-accent, var(--neo-yellow))" };
-    };
-
-    const tapeText = getProjectTape(project, index);
-    const sticker = getProjectSticker(project);
+    const dossier = getDossierMeta(project, index);
 
     return `
     <article class="project-item ${themeClass}" id="${project.id}" onclick="handleCardClick('${project.id}', event)">
@@ -1125,38 +1176,53 @@ function renderProjects() {
       <div class="project-card-body">
         <div class="project-number-stamp">#${numStamp}</div>
         
-        <!-- Neubrutalist Artboard Frame & Media Stage -->
+        <!-- Physical Blueprint Dossier Specimen Stage -->
         <div class="project-media">
-          <div class="media-frame">
-            <!-- Pinned Washi Tape -->
-            <div class="media-tape-strip">${tapeText}</div>
-
-            <!-- Mini Retro OS / Canvas Toolbar -->
-            <div class="media-frame-header">
-              <div class="media-frame-meta">
-                <span class="media-pulse-dot"></span>
-                <span class="media-frame-tag">CANVAS // ARTBOARD [${numStamp}]</span>
-              </div>
-              <div class="media-frame-tools">
-                <span class="frame-tool-chip">100% SCALE</span>
-                <span class="frame-tool-icon">✦</span>
-              </div>
+          <div class="dossier-specimen-sheet">
+            
+            <!-- Heavy-Duty Metal Binder Clip -->
+            <div class="dossier-binder-clip" aria-hidden="true">
+              <div class="clip-wire-loop"></div>
+              <div class="clip-metal-body"></div>
             </div>
 
-            <!-- Design Artboard Canvas Viewport -->
-            <div class="media-canvas-viewport">
+            <!-- Top Header Strip & Specimen ID -->
+            <div class="dossier-header-strip">
+              <div class="dossier-file-id">
+                <span class="file-icon">📁</span>
+                <span>${dossier.fileId}</span>
+              </div>
+              <div class="dossier-classification">${dossier.classification}</div>
+            </div>
+
+            <!-- Blueprint Technical Canvas Stage -->
+            <div class="dossier-blueprint-stage">
               <img src="${project.image_url || project.image}" alt="${project.title}" class="project-img" loading="lazy">
+              
               <!-- Blueprint Drafting Crosshairs -->
-              <span class="crosshair crosshair-tl">+</span>
-              <span class="crosshair crosshair-tr">+</span>
-              <span class="crosshair crosshair-bl">+</span>
-              <span class="crosshair crosshair-br">+</span>
+              <span class="dossier-crosshair dossier-crosshair-tl">+</span>
+              <span class="dossier-crosshair dossier-crosshair-tr">+</span>
+              <span class="dossier-crosshair dossier-crosshair-bl">+</span>
+              <span class="dossier-crosshair dossier-crosshair-br">+</span>
+
+              <!-- Rubber Ink QC Inspection Stamp -->
+              <div class="dossier-qc-stamp" style="color: ${dossier.stampColor}; border-color: ${dossier.stampBorder};">
+                ${dossier.stampText}
+              </div>
+
+              <!-- Barcode Technical Specimen Tag -->
+              <div class="dossier-barcode-tag" aria-hidden="true">
+                <span class="barcode-lines">${dossier.barcode}</span>
+                <span class="barcode-subtext">${dossier.code}</span>
+              </div>
             </div>
 
-            <!-- Floating Neubrutalist Interactive Sticker -->
-            <div class="media-floating-sticker" style="background: ${sticker.bg};">
-              <span class="sticker-text">${sticker.text}</span>
+            <!-- Bottom Ruler Technical Calibration Strip -->
+            <div class="dossier-ruler-strip">
+              <span>SCALE: ${dossier.scale}</span>
+              <span>CALIBRATED // MM</span>
             </div>
+
           </div>
         </div>
 
@@ -1184,12 +1250,12 @@ function handleCardClick(id, event) {
   openCaseStudyModal(id);
 }
 
-/* 3D Parallax Mouse Tilt Animation with Neubrutalist Hard Dual Shadow */
+/* 3D Parallax Mouse Tilt Animation for Blueprint Dossier Specimen */
 function init3DParallaxTilt() {
   const cards = document.querySelectorAll(".project-item");
   cards.forEach(card => {
-    const frame = card.querySelector(".media-frame");
-    if (!frame) return;
+    const sheet = card.querySelector(".dossier-specimen-sheet");
+    if (!sheet) return;
 
     card.addEventListener("mousemove", (e) => {
       const rect = card.getBoundingClientRect();
@@ -1202,16 +1268,16 @@ function init3DParallaxTilt() {
       const rotateX = ((y - centerY) / centerY) * -5;
       const rotateY = ((x - centerX) / centerX) * 5;
       
-      const shadowX = Math.round(-rotateY * 1.2 + 6);
-      const shadowY = Math.round(rotateX * 1.2 + 6);
+      const shadowX = Math.round(-rotateY * 1.2 + 7);
+      const shadowY = Math.round(rotateX * 1.2 + 7);
       
-      frame.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale(1.02) translateY(-4px)`;
-      frame.style.boxShadow = `${shadowX}px ${shadowY}px 0px var(--border-color), ${shadowX + 4}px ${shadowY + 4}px 0px var(--card-accent, var(--neo-yellow))`;
+      sheet.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale(1.02) translateY(-4px)`;
+      sheet.style.boxShadow = `${shadowX}px ${shadowY}px 0px #000000`;
     });
 
     card.addEventListener("mouseleave", () => {
-      frame.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1) translateY(0px)";
-      frame.style.boxShadow = "6px 6px 0px var(--border-color), 10px 10px 0px var(--card-accent, var(--neo-yellow))";
+      sheet.style.transform = "perspective(1000px) rotate(-0.5deg) rotateX(0deg) rotateY(0deg) scale(1) translateY(0px)";
+      sheet.style.boxShadow = "7px 7px 0px #000000";
     });
   });
 }
