@@ -1357,9 +1357,13 @@ button {
 }
 
 /* ==========================================================================
-   Physical Specimen / Blueprint Dossier Media Stage
-   (Distinct physical design document concept: Binder clip, technical ruler border,
-   technical drafting canvas, QC inspection stamp, and barcode inventory sticker)
+   Unique Project-Media Showcase Framework
+   Each project features a completely distinct Neubrutalist object concept:
+   1. TaskSync: Physical Blueprint Dossier with Binder Clip & QC Stamp
+   2. Explora: Retro Studio Hardware Monitor (Braun / Teenage Engineering)
+   3. Mira.ai: Layered Risograph / Hologram Fashion Poster with Hangtag
+   4. Manage: Industrial Technical Terminal HUD with LED Indicators
+   5. AI Consumer & Insurance: Tech Specimen Spec Sheet with Stamped Seal
    ========================================================================== */
 .project-media {
   width: 100%;
@@ -1375,26 +1379,30 @@ button {
   perspective: 1200px;
 }
 
-/* Dossier Sheet Base */
-.dossier-specimen-sheet {
+.media-interactive-object {
   width: 100%;
   height: 100%;
-  background: #FFFFFF;
-  border: 2.5px solid var(--border-color);
-  border-radius: 4px;
-  box-shadow: 7px 7px 0px #000000;
   position: relative;
   display: flex;
   flex-direction: column;
   overflow: visible;
-  transform: rotate(-0.5deg);
-  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
   will-change: transform, box-shadow;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
+}
+
+/* ==========================================================================
+   STYLE 1: TaskSync — Physical Blueprint Dossier Specimen Sheet
+   ========================================================================== */
+.dossier-specimen-sheet {
+  background: #FFFFFF;
+  border: 2.5px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: 7px 7px 0px #000000;
+  transform: rotate(-0.5deg);
 }
 
 [data-theme="dark"] .dossier-specimen-sheet {
   background: #181922;
-  box-shadow: 7px 7px 0px #000000;
 }
 
 .project-item:hover .dossier-specimen-sheet {
@@ -1402,7 +1410,6 @@ button {
   box-shadow: 10px 10px 0px #000000;
 }
 
-/* Metal Heavy-Duty Binder Clip at Top Center */
 .dossier-binder-clip {
   position: absolute;
   top: -16px;
@@ -1446,7 +1453,6 @@ button {
   border-radius: 1px;
 }
 
-/* Dossier Top Technical Margin & Specimen ID Bar */
 .dossier-header-strip {
   padding: 8px 14px 6px;
   display: flex;
@@ -1458,9 +1464,7 @@ button {
   flex-shrink: 0;
 }
 
-[data-theme="dark"] .dossier-header-strip {
-  background: #1F202B;
-}
+[data-theme="dark"] .dossier-header-strip { background: #1F202B; }
 
 .dossier-file-id {
   font-family: var(--font-mono);
@@ -1472,10 +1476,6 @@ button {
   display: flex;
   align-items: center;
   gap: 6px;
-}
-
-.dossier-file-id .file-icon {
-  font-size: 11px;
 }
 
 .dossier-classification {
@@ -1495,7 +1495,6 @@ button {
   color: #000000;
 }
 
-/* Main Dossier Blueprint Canvas Area */
 .dossier-blueprint-stage {
   flex: 1;
   position: relative;
@@ -1503,10 +1502,8 @@ button {
   background: #0D1B2A;
   background-image: 
     linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 20px 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1517,8 +1514,6 @@ button {
   height: 100%;
   object-fit: cover;
   border: none;
-  border-radius: 0;
-  box-shadow: none;
   transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
   display: block;
 }
@@ -1527,7 +1522,6 @@ button {
   transform: scale(1.035);
 }
 
-/* Technical Calibration Scale (Bottom Ruler Strip) */
 .dossier-ruler-strip {
   height: 22px;
   background: #FAF8F5;
@@ -1542,25 +1536,21 @@ button {
   color: var(--text-dim);
   user-select: none;
   flex-shrink: 0;
-  letter-spacing: 0.04em;
   background-image: repeating-linear-gradient(90deg, var(--border-color) 0, var(--border-color) 1px, transparent 1px, transparent 10px);
   background-size: 100% 6px;
   background-repeat: no-repeat;
   background-position: bottom 0 center;
 }
 
-[data-theme="dark"] .dossier-ruler-strip {
-  background: #1F202B;
-}
+[data-theme="dark"] .dossier-ruler-strip { background: #1F202B; }
 
-/* Rubber Ink Inspection Stamp (Red Ink / Green Ink Angled Seal) */
 .dossier-qc-stamp {
   position: absolute;
   top: 40px;
   right: 14px;
-  border: 2.5px dashed #FF334B;
-  color: #FF334B;
-  background: rgba(255, 255, 255, 0.9);
+  border: 2.5px dashed #059669;
+  color: #059669;
+  background: rgba(255, 255, 255, 0.92);
   padding: 4px 10px;
   font-family: var(--font-mono);
   font-size: 11px;
@@ -1569,22 +1559,15 @@ button {
   text-transform: uppercase;
   transform: rotate(12deg);
   border-radius: 3px;
-  box-shadow: 0 2px 8px rgba(255, 51, 75, 0.2);
   user-select: none;
   pointer-events: none;
   z-index: 10;
   transition: transform 0.25s ease;
 }
 
-[data-theme="dark"] .dossier-qc-stamp {
-  background: rgba(20, 20, 28, 0.92);
-}
+[data-theme="dark"] .dossier-qc-stamp { background: rgba(20, 20, 28, 0.92); }
+.project-item:hover .dossier-qc-stamp { transform: rotate(8deg) scale(1.08); }
 
-.project-item:hover .dossier-qc-stamp {
-  transform: rotate(8deg) scale(1.08);
-}
-
-/* Barcode Technical Specimen Tag at Bottom Left */
 .dossier-barcode-tag {
   position: absolute;
   bottom: 28px;
@@ -1597,14 +1580,8 @@ button {
   flex-direction: column;
   gap: 1px;
   z-index: 10;
-  user-select: none;
   pointer-events: none;
   transform: rotate(-1.5deg);
-  transition: transform 0.2s ease;
-}
-
-.project-item:hover .dossier-barcode-tag {
-  transform: rotate(0deg) scale(1.05);
 }
 
 .barcode-lines {
@@ -1620,11 +1597,9 @@ button {
   font-family: var(--font-mono);
   font-size: 7.5px;
   font-weight: 800;
-  letter-spacing: 0.08em;
   color: #333333;
 }
 
-/* Technical drafting crosshair markers on stage */
 .dossier-crosshair {
   position: absolute;
   font-family: var(--font-mono);
@@ -1632,15 +1607,556 @@ button {
   font-weight: 900;
   color: rgba(255, 255, 255, 0.45);
   pointer-events: none;
-  user-select: none;
   line-height: 1;
   z-index: 5;
 }
-
 .dossier-crosshair-tl { top: 8px; left: 10px; }
 .dossier-crosshair-tr { top: 8px; right: 10px; }
 .dossier-crosshair-bl { bottom: 8px; left: 10px; }
 .dossier-crosshair-br { bottom: 8px; right: 10px; }
+
+
+/* ==========================================================================
+   STYLE 2: Explora — Retro Hardware Monitor (Braun / Teenage Engineering)
+   ========================================================================== */
+.hardware-monitor-shell {
+  background: #E5E7EB;
+  border: 3px solid #111827;
+  border-radius: 12px;
+  box-shadow: 8px 8px 0px #111827;
+  padding: 10px 12px 14px;
+  gap: 10px;
+}
+
+[data-theme="dark"] .hardware-monitor-shell {
+  background: #252836;
+  border-color: #000000;
+  box-shadow: 8px 8px 0px #000000;
+}
+
+.project-item:hover .hardware-monitor-shell {
+  transform: translate(-3px, -3px);
+  box-shadow: 11px 11px 0px #111827;
+}
+
+/* Monitor Top Grille & Bezel Header */
+.monitor-top-bezel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px;
+}
+
+.speaker-grille-dots {
+  display: flex;
+  gap: 4px;
+}
+.grille-hole {
+  width: 5px;
+  height: 5px;
+  background: #111827;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.hardware-brand-badge {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: #111827;
+  background: #F3F4F6;
+  border: 1.5px solid #111827;
+  padding: 2px 7px;
+  border-radius: 3px;
+}
+[data-theme="dark"] .hardware-brand-badge {
+  color: #F9FAFB;
+  background: #111827;
+}
+
+.rec-indicator-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-weight: 800;
+  color: #EF4444;
+}
+
+.rec-led-dot {
+  width: 8px;
+  height: 8px;
+  background: #EF4444;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #EF4444;
+  animation: pulseDot 1.5s infinite;
+}
+
+/* CRT Screen Screen Inner Bezel */
+.crt-screen-bezel {
+  flex: 1;
+  position: relative;
+  background: #000000;
+  border: 2px solid #111827;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.crt-screen-bezel .project-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+  display: block;
+}
+
+.project-item:hover .crt-screen-bezel .project-img {
+  transform: scale(1.04);
+}
+
+/* CRT Scanlines and HUD Glare */
+.crt-screen-bezel::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0.6;
+}
+
+/* Screen HUD Camera Brackets */
+.screen-hud-overlay {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  right: 10px;
+  bottom: 8px;
+  pointer-events: none;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hud-top-meta, .hud-bot-meta {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-weight: 700;
+  color: #34D399;
+  text-shadow: 0 0 4px rgba(52, 211, 153, 0.6);
+  letter-spacing: 0.05em;
+}
+
+/* Monitor Bottom Hardware Controls Bar */
+.monitor-controls-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px;
+}
+
+.hardware-dials {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.hardware-dial-knob {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #E5E7EB 30%, #9CA3AF 100%);
+  border: 2px solid #111827;
+  position: relative;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+}
+
+.hardware-dial-knob::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  width: 2px;
+  height: 6px;
+  background: #111827;
+  transform: translateX(-50%);
+}
+
+.hardware-dial-notch {
+  width: 14px;
+  height: 14px;
+  background: #374151;
+  border: 1.5px solid #111827;
+  border-radius: 2px;
+}
+
+.hardware-status-code {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #6B7280;
+}
+
+
+/* ==========================================================================
+   STYLE 3: Mira.ai — Layered Risograph Poster & Fashion Hangtag
+   ========================================================================== */
+.risograph-poster-canvas {
+  background: #FFFBF0;
+  border: 2.5px solid #000000;
+  box-shadow: 8px 8px 0px #FF90E8, 12px 12px 0px #000000;
+  position: relative;
+  padding: 10px;
+  transform: rotate(1deg);
+}
+
+[data-theme="dark"] .risograph-poster-canvas {
+  background: #1C1917;
+  box-shadow: 8px 8px 0px #FF90E8, 12px 12px 0px #000000;
+}
+
+.project-item:hover .risograph-poster-canvas {
+  transform: rotate(0deg) translate(-3px, -3px);
+  box-shadow: 10px 10px 0px #FF90E8, 15px 15px 0px #000000;
+}
+
+/* Fashion Hangtag with String Piercing */
+.poster-hangtag {
+  position: absolute;
+  top: -18px;
+  right: 18px;
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+
+.hangtag-string {
+  width: 2px;
+  height: 16px;
+  background: #000000;
+  box-shadow: 1px 0px 0px rgba(0,0,0,0.2);
+}
+
+.hangtag-card {
+  background: #FFDE59;
+  border: 2px solid #000000;
+  box-shadow: 3px 3px 0px #000000;
+  padding: 3px 10px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 900;
+  color: #000000;
+  letter-spacing: 0.08em;
+  transform: rotate(3deg);
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+.poster-inner-art {
+  flex: 1;
+  position: relative;
+  border: 2px solid #000000;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.poster-inner-art .project-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+  display: block;
+}
+
+.project-item:hover .poster-inner-art .project-img {
+  transform: scale(1.04);
+}
+
+/* Hologram Shimmer Sticker */
+.poster-hologram-sticker {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, #FF90E8 0%, #4CC9F0 50%, #FFDE59 100%);
+  border: 2px solid #000000;
+  box-shadow: 3px 3px 0px #000000;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 900;
+  color: #000000;
+  letter-spacing: 0.08em;
+  z-index: 10;
+  transform: rotate(-3deg);
+  pointer-events: none;
+  transition: transform 0.25s ease;
+}
+
+.project-item:hover .poster-hologram-sticker {
+  transform: rotate(2deg) scale(1.08);
+}
+
+.poster-footer-strip {
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #000000;
+  text-transform: uppercase;
+}
+
+[data-theme="dark"] .poster-footer-strip {
+  color: #E7E5E4;
+}
+
+
+/* ==========================================================================
+   STYLE 4: Manage (Siemens) — Industrial Terminal HUD & LED Indicators
+   ========================================================================== */
+.terminal-hud-console {
+  background: #0B0F19;
+  border: 3px solid #1E293B;
+  border-radius: 6px;
+  box-shadow: 8px 8px 0px #2563EB;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-item:hover .terminal-hud-console {
+  transform: translate(-3px, -3px);
+  box-shadow: 11px 11px 0px #2563EB;
+}
+
+.terminal-top-panel {
+  height: 32px;
+  background: #111827;
+  border-bottom: 2px solid #1E293B;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  user-select: none;
+}
+
+.terminal-title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.terminal-badge {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-weight: 800;
+  background: #2563EB;
+  color: #FFFFFF;
+  padding: 1.5px 5px;
+  border-radius: 2px;
+  letter-spacing: 0.08em;
+}
+
+.terminal-filename {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #94A3B8;
+  letter-spacing: 0.05em;
+}
+
+.terminal-led-indicators {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.terminal-led {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+.led-power { background: #10B981; box-shadow: 0 0 5px #10B981; }
+.led-sync { background: #3B82F6; box-shadow: 0 0 5px #3B82F6; }
+.led-alert { background: #F59E0B; }
+
+.terminal-viewport-screen {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: #020617;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.terminal-viewport-screen .project-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+  display: block;
+}
+
+.project-item:hover .terminal-viewport-screen .project-img {
+  transform: scale(1.035);
+}
+
+/* Radar Target HUD Overlay */
+.terminal-hud-reticle {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border: 1px dashed rgba(59, 130, 246, 0.4);
+  pointer-events: none;
+  z-index: 6;
+}
+
+.reticle-corner {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: #3B82F6;
+  border-style: solid;
+}
+.reticle-tl { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+.reticle-tr { top: -1px; right: -1px; border-width: 2px 2px 0 0; }
+.reticle-bl { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; }
+.reticle-br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+.terminal-bottom-telemetry {
+  height: 24px;
+  background: #0F172A;
+  border-top: 1.5px solid #1E293B;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-weight: 700;
+  color: #38BDF8;
+  letter-spacing: 0.05em;
+}
+
+
+/* ==========================================================================
+   STYLE 5: AI Research & Insurance — Technical Lab Spec Sheet & Stamp
+   ========================================================================== */
+.lab-spec-card {
+  background: #FAF5FF;
+  border: 2.5px solid #000000;
+  border-radius: 4px;
+  box-shadow: 8px 8px 0px #7C3AED;
+  position: relative;
+  transform: rotate(-0.8deg);
+}
+
+[data-theme="dark"] .lab-spec-card {
+  background: #171324;
+  box-shadow: 8px 8px 0px #7C3AED;
+}
+
+.project-item:hover .lab-spec-card {
+  transform: rotate(0deg) translate(-3px, -3px);
+  box-shadow: 11px 11px 0px #7C3AED;
+}
+
+/* Top Lab Tag Strip */
+.lab-spec-top-tab {
+  height: 32px;
+  background: #7C3AED;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.lab-spec-viewport {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: #100C1F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lab-spec-viewport .project-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+  display: block;
+}
+
+.project-item:hover .lab-spec-viewport .project-img {
+  transform: scale(1.035);
+}
+
+.lab-floating-badge {
+  position: absolute;
+  bottom: 12px;
+  right: 14px;
+  background: #FBBF24;
+  color: #000000;
+  border: 2px solid #000000;
+  box-shadow: 3px 3px 0px #000000;
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  transform: rotate(2deg);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.lab-spec-footer {
+  height: 22px;
+  background: #F3E8FF;
+  border-top: 1.5px solid #000000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 800;
+  color: #6B21A8;
+}
+
+[data-theme="dark"] .lab-spec-footer {
+  background: #251B3D;
+  color: #C084FC;
+}
 
 .project-tags {
   display: flex;

@@ -1081,82 +1081,163 @@ function renderProjects() {
     else if (tagsLower.some(t => t.includes("concept"))) statusBadge = "AI CONCEPT ✦";
     else if (tagsLower.some(t => t.includes("prototype"))) statusBadge = "B2B PROTOTYPE 💡";
 
-    // Dossier Specimen Metadata Mapping
-    const getDossierMeta = (proj, i) => {
+    // Generate unique project-media interactive object HTML for each project
+    const renderProjectMediaObject = (proj, i) => {
       const pid = (proj.id || "").toLowerCase();
+      const imgSrc = proj.image_url || proj.image;
+
+      // 1. TaskSync: Physical Blueprint Dossier with Metal Binder Clip & QC Stamp
       if (pid.includes("tasksync")) {
-        return {
-          fileId: "DOC-2025 // MOBILE-SPEC-01",
-          classification: "PROD-READY",
-          stampText: "APPROVED ✦",
-          stampColor: "#059669",
-          stampBorder: "#059669",
-          barcode: "||| | |||| || |||",
-          code: "FIGMA-V4.2.0-SHIPPED",
-          scale: "1:1 FULL FIDELITY · 375×812 PT"
-        };
+        return `
+        <div class="project-media">
+          <div class="media-interactive-object dossier-specimen-sheet">
+            <div class="dossier-binder-clip" aria-hidden="true">
+              <div class="clip-wire-loop"></div>
+              <div class="clip-metal-body"></div>
+            </div>
+            <div class="dossier-header-strip">
+              <div class="dossier-file-id">
+                <span>📁</span>
+                <span>DOC-2025 // MOBILE-SPEC-01</span>
+              </div>
+              <div class="dossier-classification">PROD-READY</div>
+            </div>
+            <div class="dossier-blueprint-stage">
+              <img src="${imgSrc}" alt="${proj.title}" class="project-img" loading="lazy">
+              <span class="dossier-crosshair dossier-crosshair-tl">+</span>
+              <span class="dossier-crosshair dossier-crosshair-tr">+</span>
+              <span class="dossier-crosshair dossier-crosshair-bl">+</span>
+              <span class="dossier-crosshair dossier-crosshair-br">+</span>
+              <div class="dossier-qc-stamp">APPROVED ✦</div>
+              <div class="dossier-barcode-tag" aria-hidden="true">
+                <span class="barcode-lines">||| | |||| || |||</span>
+                <span class="barcode-subtext">FIGMA-V4.2.0-SHIPPED</span>
+              </div>
+            </div>
+            <div class="dossier-ruler-strip">
+              <span>SCALE: 1:1 FULL FIDELITY · 375×812 PT</span>
+              <span>CALIBRATED // MM</span>
+            </div>
+          </div>
+        </div>`;
       }
+
+      // 2. Explora: Retro Studio Hardware Monitor (Braun / Teenage Engineering)
       if (pid.includes("explora")) {
-        return {
-          fileId: "LAB-2024 // BIOTECH-ENGINE",
-          classification: "R&D ARCHIVE",
-          stampText: "QC PASSED ★",
-          stampColor: "#E11D48",
-          stampBorder: "#E11D48",
-          barcode: "|| ||| | || |||||",
-          code: "SPECIMEN-BIO-EXP-9",
-          scale: "DESIGN SYSTEM // TOKENS & ATOMS"
-        };
+        return `
+        <div class="project-media">
+          <div class="media-interactive-object hardware-monitor-shell">
+            <div class="monitor-top-bezel">
+              <div class="speaker-grille-dots">
+                <span class="grille-hole"></span>
+                <span class="grille-hole"></span>
+                <span class="grille-hole"></span>
+              </div>
+              <div class="hardware-brand-badge">CELLWORKS // EXP-9</div>
+              <div class="rec-indicator-group">
+                <span class="rec-led-dot"></span>
+                <span>SIM REC</span>
+              </div>
+            </div>
+            <div class="crt-screen-bezel">
+              <img src="${imgSrc}" alt="${proj.title}" class="project-img" loading="lazy">
+              <div class="screen-hud-overlay">
+                <div class="hud-top-meta">
+                  <span>[CH-01: CANCER BIOTECH]</span>
+                  <span>100% ADOPTION</span>
+                </div>
+                <div class="hud-bot-meta">
+                  <span>FPS: 60 · PARALLEL SIM</span>
+                  <span>SYS: 9→1 UNIFIED</span>
+                </div>
+              </div>
+            </div>
+            <div class="monitor-controls-bar">
+              <div class="hardware-dials">
+                <span class="hardware-dial-knob" title="Frequency Dial"></span>
+                <span class="hardware-dial-notch"></span>
+              </div>
+              <span class="hardware-status-code">R&amp;D ARCHIVE // STABLE</span>
+            </div>
+          </div>
+        </div>`;
       }
+
+      // 3. Mira.ai: Layered Risograph Poster & Fashion Hangtag
       if (pid.includes("mira")) {
-        return {
-          fileId: "AI-2024 // WEARABLE-UX",
-          classification: "CLINICAL-V1",
-          stampText: "VERIFIED ✦",
-          stampColor: "#D97706",
-          stampBorder: "#D97706",
-          barcode: "|||| | || ||| ||",
-          code: "EXP-HEALTH-AI-88",
-          scale: "MULTI-MODAL INTERFACE · 100% SCALE"
-        };
+        return `
+        <div class="project-media">
+          <div class="media-interactive-object risograph-poster-canvas">
+            <div class="poster-hangtag" aria-hidden="true">
+              <div class="hangtag-string"></div>
+              <div class="hangtag-card">★ CLINICAL V1.0</div>
+            </div>
+            <div class="poster-inner-art">
+              <img src="${imgSrc}" alt="${proj.title}" class="project-img" loading="lazy">
+              <div class="poster-hologram-sticker">✦ WEARABLE AI</div>
+            </div>
+            <div class="poster-footer-strip">
+              <span>MIRA.AI BIO-TWIN LAB</span>
+              <span>EST. 2024 · APPL WATCH UX</span>
+            </div>
+          </div>
+        </div>`;
       }
+
+      // 4. Manage (Siemens): Industrial Terminal HUD Console with LEDs
       if (pid.includes("manage")) {
-        return {
-          fileId: "SYS-2023 // HARDWARE-OPS",
-          classification: "STABLE CORE",
-          stampText: "DEPLOYED ⚡",
-          stampColor: "#2563EB",
-          stampBorder: "#2563EB",
-          barcode: "|| || |||| | |||",
-          code: "HW-FIELD-OPS-V2",
-          scale: "INDUSTRIAL WORKFLOW · 5D → 2D"
-        };
+        return `
+        <div class="project-media">
+          <div class="media-interactive-object terminal-hud-console">
+            <div class="terminal-top-panel">
+              <div class="terminal-title-group">
+                <span class="terminal-badge">SIEMENS</span>
+                <span class="terminal-filename">CORE_COMMISSIONING_OS</span>
+              </div>
+              <div class="terminal-led-indicators" aria-label="System status LEDs">
+                <span class="terminal-led led-power" title="Power OK"></span>
+                <span class="terminal-led led-sync" title="Sync Live"></span>
+                <span class="terminal-led led-alert" title="Field Standby"></span>
+              </div>
+            </div>
+            <div class="terminal-viewport-screen">
+              <img src="${imgSrc}" alt="${proj.title}" class="project-img" loading="lazy">
+              <div class="terminal-hud-reticle">
+                <span class="reticle-corner reticle-tl"></span>
+                <span class="reticle-corner reticle-tr"></span>
+                <span class="reticle-corner reticle-bl"></span>
+                <span class="reticle-corner reticle-br"></span>
+              </div>
+            </div>
+            <div class="terminal-bottom-telemetry">
+              <span>TELEMETRY: SENSORS ×1000 LIVE</span>
+              <span>SETUP: 5D ➔ 2D [SPEED]</span>
+            </div>
+          </div>
+        </div>`;
       }
-      if (pid.includes("consumer") || pid.includes("research")) {
-        return {
-          fileId: "AGT-2024 // RESEARCH-PILOT",
-          classification: "AGENTIC-LAB",
-          stampText: "EVAL PASSED ★",
-          stampColor: "#7C3AED",
-          stampBorder: "#7C3AED",
-          barcode: "||| || | |||| ||",
-          code: "AI-RESEARCH-EXP-3",
-          scale: "AUTONOMOUS UX PROTO · 2 FOUNDERS"
-        };
-      }
-      return {
-        fileId: `SPEC-${2025 - i} // DOSSIER-${(i + 1).toString().padStart(2, "0")}`,
-        classification: "CONFIDENTIAL",
-        stampText: "INSPECTED ✦",
-        stampColor: "#DC2626",
-        stampBorder: "#DC2626",
-        barcode: "||| | |||| || |||",
-        code: `PORTFOLIO-CASE-${i + 1}`,
-        scale: "TECHNICAL BLUEPRINT · HIGH RES"
-      };
+
+      // 5. AI Consumer & Insurance: Tech Specimen Lab Spec Sheet
+      return `
+      <div class="project-media">
+        <div class="media-interactive-object lab-spec-card">
+          <div class="lab-spec-top-tab">
+            <span>LAB // SPECIMEN 0${i + 1}</span>
+            <span>AI ENGINE ✦</span>
+          </div>
+          <div class="lab-spec-viewport">
+            <img src="${imgSrc}" alt="${proj.title}" class="project-img" loading="lazy">
+            <div class="lab-floating-badge">★ VERIFIED MODEL</div>
+          </div>
+          <div class="lab-spec-footer">
+            <span>MULTIMODAL EVAL REPORT</span>
+            <span>CONFIDENCE: 99.4%</span>
+          </div>
+        </div>
+      </div>`;
     };
 
-    const dossier = getDossierMeta(project, index);
+    const mediaHtml = renderProjectMediaObject(project, index);
 
     return `
     <article class="project-item ${themeClass}" id="${project.id}" onclick="handleCardClick('${project.id}', event)">
@@ -1176,55 +1257,8 @@ function renderProjects() {
       <div class="project-card-body">
         <div class="project-number-stamp">#${numStamp}</div>
         
-        <!-- Physical Blueprint Dossier Specimen Stage -->
-        <div class="project-media">
-          <div class="dossier-specimen-sheet">
-            
-            <!-- Heavy-Duty Metal Binder Clip -->
-            <div class="dossier-binder-clip" aria-hidden="true">
-              <div class="clip-wire-loop"></div>
-              <div class="clip-metal-body"></div>
-            </div>
-
-            <!-- Top Header Strip & Specimen ID -->
-            <div class="dossier-header-strip">
-              <div class="dossier-file-id">
-                <span class="file-icon">📁</span>
-                <span>${dossier.fileId}</span>
-              </div>
-              <div class="dossier-classification">${dossier.classification}</div>
-            </div>
-
-            <!-- Blueprint Technical Canvas Stage -->
-            <div class="dossier-blueprint-stage">
-              <img src="${project.image_url || project.image}" alt="${project.title}" class="project-img" loading="lazy">
-              
-              <!-- Blueprint Drafting Crosshairs -->
-              <span class="dossier-crosshair dossier-crosshair-tl">+</span>
-              <span class="dossier-crosshair dossier-crosshair-tr">+</span>
-              <span class="dossier-crosshair dossier-crosshair-bl">+</span>
-              <span class="dossier-crosshair dossier-crosshair-br">+</span>
-
-              <!-- Rubber Ink QC Inspection Stamp -->
-              <div class="dossier-qc-stamp" style="color: ${dossier.stampColor}; border-color: ${dossier.stampBorder};">
-                ${dossier.stampText}
-              </div>
-
-              <!-- Barcode Technical Specimen Tag -->
-              <div class="dossier-barcode-tag" aria-hidden="true">
-                <span class="barcode-lines">${dossier.barcode}</span>
-                <span class="barcode-subtext">${dossier.code}</span>
-              </div>
-            </div>
-
-            <!-- Bottom Ruler Technical Calibration Strip -->
-            <div class="dossier-ruler-strip">
-              <span>SCALE: ${dossier.scale}</span>
-              <span>CALIBRATED // MM</span>
-            </div>
-
-          </div>
-        </div>
+        <!-- Distinct Physical Media Stage -->
+        ${mediaHtml}
 
         <!-- Project Meta & Information -->
         <div>
@@ -1250,12 +1284,12 @@ function handleCardClick(id, event) {
   openCaseStudyModal(id);
 }
 
-/* 3D Parallax Mouse Tilt Animation for Blueprint Dossier Specimen */
+/* 3D Parallax Mouse Tilt Animation for Unique Media Objects */
 function init3DParallaxTilt() {
   const cards = document.querySelectorAll(".project-item");
   cards.forEach(card => {
-    const sheet = card.querySelector(".dossier-specimen-sheet");
-    if (!sheet) return;
+    const object = card.querySelector(".media-interactive-object");
+    if (!object) return;
 
     card.addEventListener("mousemove", (e) => {
       const rect = card.getBoundingClientRect();
@@ -1268,16 +1302,16 @@ function init3DParallaxTilt() {
       const rotateX = ((y - centerY) / centerY) * -5;
       const rotateY = ((x - centerX) / centerX) * 5;
       
-      const shadowX = Math.round(-rotateY * 1.2 + 7);
-      const shadowY = Math.round(rotateX * 1.2 + 7);
+      const shadowX = Math.round(-rotateY * 1.2 + 8);
+      const shadowY = Math.round(rotateX * 1.2 + 8);
       
-      sheet.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale(1.02) translateY(-4px)`;
-      sheet.style.boxShadow = `${shadowX}px ${shadowY}px 0px #000000`;
+      object.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale(1.025) translateY(-4px)`;
+      object.style.boxShadow = `${shadowX}px ${shadowY}px 0px #000000`;
     });
 
     card.addEventListener("mouseleave", () => {
-      sheet.style.transform = "perspective(1000px) rotate(-0.5deg) rotateX(0deg) rotateY(0deg) scale(1) translateY(0px)";
-      sheet.style.boxShadow = "7px 7px 0px #000000";
+      object.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1) translateY(0px)";
+      object.style.boxShadow = "";
     });
   });
 }
