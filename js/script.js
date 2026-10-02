@@ -1081,6 +1081,32 @@ function renderProjects() {
     else if (tagsLower.some(t => t.includes("concept"))) statusBadge = "AI CONCEPT ✦";
     else if (tagsLower.some(t => t.includes("prototype"))) statusBadge = "B2B PROTOTYPE 💡";
 
+    // Neubrutalist stickers and washi tapes mapping
+    const getProjectTape = (proj, i) => {
+      const pid = (proj.id || "").toLowerCase();
+      if (pid.includes("tasksync")) return "STAGE // FIGMA SPEC";
+      if (pid.includes("explora")) return "LAB // DESIGN SYSTEM";
+      if (pid.includes("mira")) return "PROTOTYPE // V1.4";
+      if (pid.includes("manage")) return "ENTERPRISE // STABLE";
+      if (pid.includes("consumer") || pid.includes("research")) return "AI // RESEARCH AGENT";
+      if (pid.includes("insurance") || pid.includes("fintech")) return "FINTECH // PROD DEPLOY";
+      return `CANVAS // FRAME [${(i + 1).toString().padStart(2, "0")}]`;
+    };
+
+    const getProjectSticker = (proj) => {
+      const pid = (proj.id || "").toLowerCase();
+      if (pid.includes("tasksync")) return { text: "✦ EXPLORE 20 SCREENS", bg: "var(--neo-cyan)" };
+      if (pid.includes("explora")) return { text: "★ R&D PLATFORM", bg: "var(--neo-pink)" };
+      if (pid.includes("mira")) return { text: "✦ WEARABLE UI", bg: "var(--neo-yellow)" };
+      if (pid.includes("manage")) return { text: "⚡ FIELD OPERATIONS", bg: "var(--neo-green)" };
+      if (pid.includes("consumer") || pid.includes("research")) return { text: "✦ AGENTIC SYSTEM", bg: "var(--neo-purple)" };
+      if (pid.includes("insurance") || pid.includes("fintech")) return { text: "★ FINTECH ENGINE", bg: "var(--neo-orange)" };
+      return { text: "✦ CASE STUDY", bg: "var(--card-accent, var(--neo-yellow))" };
+    };
+
+    const tapeText = getProjectTape(project, index);
+    const sticker = getProjectSticker(project);
+
     return `
     <article class="project-item ${themeClass}" id="${project.id}" onclick="handleCardClick('${project.id}', event)">
       
@@ -1099,9 +1125,39 @@ function renderProjects() {
       <div class="project-card-body">
         <div class="project-number-stamp">#${numStamp}</div>
         
-        <!-- Transparent Media Stage -->
+        <!-- Neubrutalist Artboard Frame & Media Stage -->
         <div class="project-media">
-          <img src="${project.image}" alt="${project.title}" class="project-img">
+          <div class="media-frame">
+            <!-- Pinned Washi Tape -->
+            <div class="media-tape-strip">${tapeText}</div>
+
+            <!-- Mini Retro OS / Canvas Toolbar -->
+            <div class="media-frame-header">
+              <div class="media-frame-meta">
+                <span class="media-pulse-dot"></span>
+                <span class="media-frame-tag">CANVAS // ARTBOARD [${numStamp}]</span>
+              </div>
+              <div class="media-frame-tools">
+                <span class="frame-tool-chip">100% SCALE</span>
+                <span class="frame-tool-icon">✦</span>
+              </div>
+            </div>
+
+            <!-- Design Artboard Canvas Viewport -->
+            <div class="media-canvas-viewport">
+              <img src="${project.image_url || project.image}" alt="${project.title}" class="project-img" loading="lazy">
+              <!-- Blueprint Drafting Crosshairs -->
+              <span class="crosshair crosshair-tl">+</span>
+              <span class="crosshair crosshair-tr">+</span>
+              <span class="crosshair crosshair-bl">+</span>
+              <span class="crosshair crosshair-br">+</span>
+            </div>
+
+            <!-- Floating Neubrutalist Interactive Sticker -->
+            <div class="media-floating-sticker" style="background: ${sticker.bg};">
+              <span class="sticker-text">${sticker.text}</span>
+            </div>
+          </div>
         </div>
 
         <!-- Project Meta & Information -->
@@ -1128,12 +1184,12 @@ function handleCardClick(id, event) {
   openCaseStudyModal(id);
 }
 
-/* 3D Parallax Mouse Tilt Animation with Neubrutalist Hard Shadow */
+/* 3D Parallax Mouse Tilt Animation with Neubrutalist Hard Dual Shadow */
 function init3DParallaxTilt() {
   const cards = document.querySelectorAll(".project-item");
   cards.forEach(card => {
-    const img = card.querySelector(".project-img");
-    if (!img) return;
+    const frame = card.querySelector(".media-frame");
+    if (!frame) return;
 
     card.addEventListener("mousemove", (e) => {
       const rect = card.getBoundingClientRect();
@@ -1143,19 +1199,19 @@ function init3DParallaxTilt() {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
       
-      const rotateX = ((y - centerY) / centerY) * -6;
-      const rotateY = ((x - centerX) / centerX) * 6;
+      const rotateX = ((y - centerY) / centerY) * -5;
+      const rotateY = ((x - centerX) / centerX) * 5;
       
-      const shadowX = Math.round(-rotateY * 1.2 + 4);
+      const shadowX = Math.round(-rotateY * 1.2 + 6);
       const shadowY = Math.round(rotateX * 1.2 + 6);
       
-      img.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale(1.05) translateY(-6px)`;
-      img.style.boxShadow = `${shadowX}px ${shadowY}px 0px var(--border-color)`;
+      frame.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale(1.02) translateY(-4px)`;
+      frame.style.boxShadow = `${shadowX}px ${shadowY}px 0px var(--border-color), ${shadowX + 4}px ${shadowY + 4}px 0px var(--card-accent, var(--neo-yellow))`;
     });
 
     card.addEventListener("mouseleave", () => {
-      img.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1) translateY(0px)";
-      img.style.boxShadow = "var(--shadow-neo-sm)";
+      frame.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1) translateY(0px)";
+      frame.style.boxShadow = "6px 6px 0px var(--border-color), 10px 10px 0px var(--card-accent, var(--neo-yellow))";
     });
   });
 }
