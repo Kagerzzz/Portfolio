@@ -961,6 +961,59 @@ button {
   margin: 0;
 }
 
+.cv-quote-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  text-align: center;
+}
+
+.cv-quote-mark {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--text-main);
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.cv-quote-open {
+  align-self: flex-start;
+  margin-top: -4px;
+}
+
+.cv-quote-close {
+  align-self: flex-end;
+  margin-bottom: -6px;
+}
+
+.cv-quote-content {
+  flex: 1;
+}
+
+.cv-quote-phrase {
+  font-family: var(--font-main);
+  font-size: 12.5px;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.cv-quote-author {
+  display: block;
+  font-family: 'Epilogue', sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-top: 3px;
+  text-transform: uppercase;
+}
+
 /* Personal Info Grid */
 .cv-info-grid {
   padding: 20px;
