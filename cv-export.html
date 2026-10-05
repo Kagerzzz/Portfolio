@@ -10,7 +10,7 @@
   <style>
     @page {
       size: A4 portrait;
-      margin: 8mm;
+      margin: 6mm;
     }
 
     * {
@@ -25,8 +25,8 @@
       font-family: 'Plus Jakarta Sans', 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background-color: #F8F6F0;
       color: #000000;
-      line-height: 1.5;
-      font-size: 12.5px;
+      line-height: 1.45;
+      font-size: 12px;
       padding: 16px;
     }
 
@@ -36,7 +36,7 @@
       margin: 0 auto;
       background: #FFFFFF;
       border: 3px solid #000000;
-      border-radius: 16px;
+      border-radius: 14px;
       box-shadow: 6px 6px 0px #000000;
       overflow: hidden;
     }
@@ -44,8 +44,8 @@
     /* Retro OS Header Bar */
     .os-bar {
       background: #FFDE59;
-      border-bottom: 3px solid #000000;
-      padding: 9px 18px;
+      border-bottom: 2.5px solid #000000;
+      padding: 8px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -91,20 +91,22 @@
     /* Bento Grid */
     .cv-grid {
       display: grid;
-      grid-template-columns: 310px 1fr;
-      gap: 16px;
-      padding: 16px;
+      grid-template-columns: 285px 1fr;
+      gap: 12px;
+      padding: 12px;
       background: #FDFBF7;
     }
 
     /* Neubrutalist Bento Cards */
     .card-neo {
       background: #FFFFFF;
-      border: 2.5px solid #000000;
-      border-radius: 12px;
+      border: 2px solid #000000;
+      border-radius: 10px;
       box-shadow: none;
-      margin-bottom: 14px;
+      margin-bottom: 10px;
       overflow: hidden;
+      page-break-inside: avoid;
+      break-inside: avoid;
     }
     .card-neo:last-child {
       margin-bottom: 0;
@@ -113,9 +115,9 @@
     .card-bar {
       background: #F4F1EA;
       border-bottom: 2px solid #000000;
-      padding: 6px 14px;
+      padding: 5px 12px;
       font-family: 'Epilogue', sans-serif;
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.05em;
@@ -127,21 +129,21 @@
 
     /* Profile / Identity Card */
     .profile-wrap {
-      padding: 14px 16px;
+      padding: 10px 12px;
       text-align: center;
     }
 
     .avatar-box {
       position: relative;
       display: inline-block;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .avatar-img {
-      width: 90px;
-      height: 90px;
+      width: 76px;
+      height: 76px;
       border-radius: 50%;
-      border: 3px solid #000000;
+      border: 2.5px solid #000000;
       object-fit: cover;
       object-position: 50% 12%;
       display: block;
@@ -152,15 +154,15 @@
     .exp-pill {
       position: absolute;
       bottom: -2px;
-      right: -10px;
+      right: -8px;
       background: #00F5D4;
       color: #000000;
-      border: 2px solid #000000;
+      border: 1.5px solid #000000;
       border-radius: 999px;
       font-family: 'Epilogue', sans-serif;
-      font-size: 9px;
+      font-size: 8.5px;
       font-weight: 800;
-      padding: 2px 8px;
+      padding: 2px 7px;
       box-shadow: 1.5px 1.5px 0px #000000;
       transform: rotate(-3deg);
       white-space: nowrap;
@@ -168,7 +170,7 @@
 
     .intro-label {
       font-family: 'Epilogue', sans-serif;
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 800;
       text-transform: uppercase;
       color: #666666;
@@ -178,57 +180,57 @@
 
     .candidate-name {
       font-family: 'Fraunces', 'Playfair Display', serif;
-      font-size: 26px;
+      font-size: 23px;
       font-weight: 900;
       line-height: 1.15;
       color: #000000;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .title-pill {
       display: inline-block;
-      padding: 3px 12px;
+      padding: 2.5px 11px;
       background: #FF90E8;
       color: #000000;
-      border: 2px solid #000000;
+      border: 1.5px solid #000000;
       border-radius: 999px;
       font-family: 'Epilogue', sans-serif;
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 800;
-      box-shadow: 2px 2px 0px #000000;
-      margin-bottom: 10px;
+      box-shadow: 1.5px 1.5px 0px #000000;
+      margin-bottom: 8px;
     }
 
     .bio-text {
       background: #FDFBF7;
       border: 1.5px solid #000000;
       border-radius: 8px;
-      padding: 8px 10px;
+      padding: 7px 9px;
       text-align: left;
-      font-size: 12px;
-      line-height: 1.5;
+      font-size: 11.5px;
+      line-height: 1.45;
       color: #222222;
     }
 
-    /* Contact Details List (High Readability) */
+    /* Contact Details List */
     .contact-list {
-      padding: 12px 14px;
+      padding: 8px 12px;
       display: flex;
       flex-direction: column;
-      gap: 7px;
+      gap: 5px;
     }
 
     .contact-row {
       display: flex;
       align-items: center;
-      gap: 10px;
-      font-size: 12.5px;
+      gap: 8px;
+      font-size: 11.5px;
       color: #111111;
     }
 
     .contact-icon {
-      font-size: 14px;
-      width: 20px;
+      font-size: 13px;
+      width: 18px;
       text-align: center;
       flex-shrink: 0;
     }
@@ -247,62 +249,62 @@
 
     /* Education List */
     .edu-box {
-      padding: 12px 14px;
+      padding: 8px 12px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 7px;
     }
 
     .edu-card-item {
-      border-left: 4px solid #00F5D4;
-      padding-left: 10px;
+      border-left: 3.5px solid #00F5D4;
+      padding-left: 8px;
     }
     .edu-card-item.mirr {
       border-left-color: #FF90E8;
     }
 
     .edu-period {
-      font-size: 10.5px;
+      font-size: 9.5px;
       font-weight: 800;
       color: #666666;
       letter-spacing: 0.04em;
     }
 
     .edu-name {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 800;
       color: #000000;
     }
 
     .edu-field {
-      font-size: 11.5px;
+      font-size: 10.8px;
       color: #333333;
     }
 
     /* Tools & Expertise Stack */
     .tools-box {
-      padding: 12px 14px;
+      padding: 8px 12px;
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 4px;
     }
 
     .tool-tag {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      padding: 4px 9px;
+      gap: 4px;
+      padding: 2.5px 7.5px;
       background: #FFFFFF;
       border: 1.5px solid #000000;
       border-radius: 999px;
-      font-size: 11.5px;
+      font-size: 10.2px;
       font-weight: 800;
-      box-shadow: 1.5px 1.5px 0px #000000;
+      box-shadow: 1.2px 1.2px 0px #000000;
     }
 
     .tool-dot {
-      width: 7px;
-      height: 7px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       border: 1px solid #000000;
     }
@@ -313,46 +315,48 @@
     }
 
     .exp-list {
-      padding: 14px;
+      padding: 9px 11px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 8px;
     }
 
     .job-entry {
       background: #FFFFFF;
-      border: 2px solid #000000;
-      border-radius: 10px;
-      padding: 12px 14px;
+      border: 1.5px solid #000000;
+      border-radius: 8px;
+      padding: 8px 11px;
       box-shadow: none;
+      page-break-inside: avoid;
+      break-inside: avoid;
     }
 
     .job-entry.current {
-      border-left: 7px solid #00F5D4;
+      border-left: 6px solid #00F5D4;
       background: #FCFFFE;
       box-shadow: none;
     }
-    .job-entry.vgs { border-left: 7px solid #FFDE59; }
-    .job-entry.novatech { border-left: 7px solid #FF90E8; }
-    .job-entry.global { border-left: 7px solid #4CC9F0; }
+    .job-entry.vgs { border-left: 6px solid #FFDE59; }
+    .job-entry.novatech { border-left: 6px solid #FF90E8; }
+    .job-entry.global { border-left: 6px solid #4CC9F0; }
 
     .job-top-bar {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 6px;
-      gap: 8px;
+      margin-bottom: 4px;
+      gap: 6px;
     }
 
     .job-role-text {
-      font-size: 15.5px;
+      font-size: 13.8px;
       font-weight: 900;
       color: #000000;
       line-height: 1.2;
     }
 
     .job-company-text {
-      font-size: 12.8px;
+      font-size: 11.5px;
       font-weight: 700;
       color: #333333;
     }
@@ -360,10 +364,10 @@
     .job-pill {
       display: inline-block;
       font-family: 'Epilogue', sans-serif;
-      font-size: 10.5px;
+      font-size: 9.2px;
       font-weight: 800;
       letter-spacing: 0.04em;
-      padding: 3px 9px;
+      padding: 2px 7.5px;
       border: 1.5px solid #000000;
       border-radius: 999px;
       background: #F0EDE6;
@@ -377,14 +381,14 @@
 
     .job-bullets {
       margin: 0;
-      padding-left: 18px;
-      font-size: 12.5px;
-      line-height: 1.55;
+      padding-left: 15px;
+      font-size: 11.2px;
+      line-height: 1.42;
       color: #1A202C;
     }
 
     .job-bullets li {
-      margin-bottom: 3.5px;
+      margin-bottom: 2px;
     }
     .job-bullets li:last-child {
       margin-bottom: 0;
@@ -425,16 +429,21 @@
     }
 
     @media print {
-      body {
+      html, body {
         padding: 0 !important;
         margin: 0 !important;
         background: transparent !important;
+        width: 100% !important;
+        height: 100% !important;
       }
       .cv-window {
         max-width: 100% !important;
-        border: 2.5px solid #000000 !important;
-        border-radius: 12px !important;
+        margin: 0 !important;
+        border: 2px solid #000000 !important;
+        border-radius: 10px !important;
         box-shadow: none !important;
+        page-break-after: avoid;
+        break-after: avoid;
       }
       .screen-actions {
         display: none !important;
@@ -459,7 +468,7 @@
         <span class="os-dot dot-green"></span>
       </div>
       <div class="os-title">thanhieu.designer // portfolio.neubrutalism.cv</div>
-      <div class="os-badge">OPEN TO WORK ✦</div>
+      <div class="os-badge">ACTIVE ✦</div>
     </header>
 
     <!-- Bento Grid Content -->
@@ -469,15 +478,15 @@
         <!-- Identity Card -->
         <section class="card-neo">
           <div class="card-bar">
-            <span>id://candidate</span>
-            <span>ACTIVE</span>
+            <span>id://thanhieu.designer</span>
+            <span>ACTIVE ✦</span>
           </div>
           <div class="profile-wrap">
             <div class="avatar-box">
-              <img src="assets/avt.jpg" alt="Hiếu Thân" class="avatar-img">
+              <img src="assets/avt.jpg" alt="Hiếu Thân (Thân Hiếu) - Product Designer" class="avatar-img">
               <span class="exp-pill">3+ YEARS EXP</span>
             </div>
-            <div class="intro-label">Hello, I'm</div>
+            <div class="intro-label">Xin chào! Mình là</div>
             <h1 class="candidate-name">Hiếu. Thân</h1>
             <div class="title-pill">Product Designer</div>
             <div class="bio-text">
@@ -489,29 +498,29 @@
         <!-- Contact Info Card (Clean & Easy to Read) -->
         <section class="card-neo">
           <div class="card-bar">
-            <span>📍 Liên hệ</span>
+            <span>📍 THÔNG TIN LIÊN HỆ</span>
             <span>contact.info</span>
           </div>
           <div class="contact-list">
             <div class="contact-row">
+              <span class="contact-icon">🎂</span>
+              <span class="contact-val">13/03/2001</span>
+            </div>
+            <div class="contact-row">
               <span class="contact-icon">📱</span>
-              <span class="contact-val">+84 869 183 692</span>
+              <span class="contact-val"><a href="tel:+84869183692">+84 869 183 692</a></span>
             </div>
             <div class="contact-row">
               <span class="contact-icon">✉️</span>
-              <span class="contact-val">thanhieu.work@gmail.com</span>
-            </div>
-            <div class="contact-row">
-              <span class="contact-icon">🔗</span>
-              <span class="contact-val"><a href="https://bit.ly/hieuthanz" target="_blank">bit.ly/hieuthanz</a></span>
+              <span class="contact-val"><a href="mailto:thanhieu.work@gmail.com">thanhieu.work@gmail.com</a></span>
             </div>
             <div class="contact-row">
               <span class="contact-icon">📍</span>
               <span class="contact-val">Hoàng Mai, Hà Nội</span>
             </div>
             <div class="contact-row">
-              <span class="contact-icon">🎂</span>
-              <span class="contact-val">13/03/2001</span>
+              <span class="contact-icon">🔗</span>
+              <span class="contact-val"><a href="https://bit.ly/hieuthanz" target="_blank">bit.ly/hieuthanz</a></span>
             </div>
           </div>
         </section>
@@ -519,8 +528,8 @@
         <!-- Education Card -->
         <section class="card-neo">
           <div class="card-bar">
-            <span>🎓 Học vấn</span>
-            <span>edu.history</span>
+            <span>🎓 HỌC VẤN & ĐÀO TẠO</span>
+            <span>education.log</span>
           </div>
           <div class="edu-box">
             <div class="edu-card-item">
@@ -529,7 +538,7 @@
               <div class="edu-field">Computer Science (Khoa học Máy tính)</div>
             </div>
             <div class="edu-card-item mirr">
-              <div class="edu-period">2023 — 2023</div>
+              <div class="edu-period">2023</div>
               <div class="edu-name">Mirr Studio</div>
               <div class="edu-field">Comprehensive UI Design</div>
             </div>
@@ -539,8 +548,8 @@
         <!-- Skills & Stack Card -->
         <section class="card-neo">
           <div class="card-bar">
-            <span>🛠️ Kỹ Năng & Công Cụ</span>
-            <span>stack.v2</span>
+            <span>🛠️ CÔNG CỤ & KỸ NĂNG</span>
+            <span>skills.stack</span>
           </div>
           <div class="tools-box">
             <span class="tool-tag"><span class="tool-dot" style="background:#FF90E8;"></span> Figma</span>
@@ -548,9 +557,9 @@
             <span class="tool-tag"><span class="tool-dot" style="background:#FFDE59;"></span> Illustrator</span>
             <span class="tool-tag"><span class="tool-dot" style="background:#70E000;"></span> Canva</span>
             <span class="tool-tag"><span class="tool-dot" style="background:#9B5DE5;"></span> Premiere Pro</span>
-            <span class="tool-tag"><span class="tool-dot" style="background:#FF6B6B;"></span> UI/UX Design</span>
-            <span class="tool-tag"><span class="tool-dot" style="background:#F15BB5;"></span> Print & POD</span>
-            <span class="tool-tag"><span class="tool-dot" style="background:#00F5D4;"></span> Web / App</span>
+            <span class="tool-tag"><span class="tool-dot" style="background:#FF6B6B;"></span> UI/UX & Wireframing</span>
+            <span class="tool-tag"><span class="tool-dot" style="background:#F15BB5;"></span> Print & POD Packaging</span>
+            <span class="tool-tag"><span class="tool-dot" style="background:#00F5D4;"></span> Web / App Design</span>
             <span class="tool-tag" style="background:#FFEEDD; border-color:#FF851B;"><span class="tool-dot" style="background:#FF851B;"></span> Claude / AI Tools</span>
           </div>
         </section>
@@ -560,7 +569,7 @@
       <section class="col-right">
         <div class="card-neo exp-column">
           <div class="card-bar">
-            <span>💼 Kinh Nghiệm Làm Việc</span>
+            <span>💼 KINH NGHIỆM LÀM VIỆC</span>
             <span>timeline.log</span>
           </div>
           <div class="exp-list">
@@ -592,7 +601,7 @@
               </div>
               <ul class="job-bullets">
                 <li>Trao đổi với khách hàng, lên wireframe, thiết kế UI/UX cho website & mobile app theo yêu cầu.</li>
-                <li>Khảo nghiệm và chọn lọc, tối ưu hóa giao diện người dùng nhằm nâng cao trải nghiệm khách hàng.</li>
+                <li>Khảo nghiệm và chọn lọc, tối ưu hóa giao diện.</li>
               </ul>
             </article>
 
@@ -607,7 +616,7 @@
               </div>
               <ul class="job-bullets">
                 <li>Lên ý tưởng và thiết kế UI/UX web, app, landing page theo yêu cầu của khách hàng trong lĩnh vực e-commerce.</li>
-                <li>Phối hợp với team marketing thiết kế các ấn phẩm phục vụ hoạt động truyền thông và quảng bá sản phẩm.</li>
+                <li>Phối hợp với team marketing thiết kế các ấn phẩm phục vụ hoạt động truyền thông.</li>
               </ul>
             </article>
 
@@ -622,7 +631,7 @@
               </div>
               <ul class="job-bullets">
                 <li>Lên ý tưởng và thiết kế ấn phẩm như box, label, bags, card, khuôn cắt, v.v... phê duyệt màu sắc thành phẩm và chất lượng.</li>
-                <li>Thiết kế trong lĩnh vực marketing như poster, banner, logo, brand identity phục vụ thị trường xuất khẩu.</li>
+                <li>Thiết kế trong lĩnh vực marketing như poster, banner, logo, brand identity, v.v...</li>
               </ul>
             </article>
           </div>
