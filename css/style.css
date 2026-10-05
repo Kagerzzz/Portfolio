@@ -971,7 +971,7 @@ button {
 
 .cv-quote-mark {
   font-family: 'Fraunces', Georgia, serif;
-  font-size: 28px;
+  font-size: 30px;
   font-weight: 900;
   line-height: 1;
   color: var(--text-main);
@@ -981,12 +981,12 @@ button {
 
 .cv-quote-open {
   align-self: flex-start;
-  margin-top: -4px;
+  margin-top: -3px;
 }
 
 .cv-quote-close {
   align-self: flex-end;
-  margin-bottom: -6px;
+  margin-bottom: -5px;
 }
 
 .cv-quote-content {
@@ -995,9 +995,9 @@ button {
 
 .cv-quote-phrase {
   font-family: 'Caveat', 'Segoe Print', cursive;
-  font-size: 16.5px;
+  font-size: 19.5px;
   font-weight: 700;
-  line-height: 1.35;
+  line-height: 1.3;
   color: var(--text-main);
   margin: 0;
 }
