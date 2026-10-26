@@ -36,6 +36,13 @@ const PROJECTS_DATA = [
       { val: "-65%", label: "Thời gian chuyển đổi app" },
       { val: "98%", label: "Check-in GPS đúng giờ" }
     ],
+    peekScreens: [
+      { label: "✦ Overview", src: "assets/tasksync/tasksync-cover.png", tag: "FLAGSHIP ECOSYSTEM", desc: "Unified Mobile & Desktop Workspace" },
+      { label: "📱 Home", src: "assets/tasksync/tasksync-home.png", tag: "SCREEN 01", desc: "Today Task Queue & Multi-Tenant Switcher" },
+      { label: "📋 Tasks", src: "assets/tasksync/tasksync-tasks.png", tag: "SCREEN 02", desc: "Sprint & Priority Kanban Flow" },
+      { label: "📍 GPS Check-in", src: "assets/tasksync/tasksync-attendance.png", tag: "SCREEN 03", desc: "Geofenced 1-Touch GPS Attendance" },
+      { label: "💬 Team Chat", src: "assets/tasksync/tasksync-chat.png", tag: "SCREEN 04", desc: "Contextual Threads & Fast Approvals" }
+    ],
     overview: "TaskSync là giải pháp quản lý công việc all-in-one trên mobile, hợp nhất team messaging, lịch trình, chấm công GPS geofencing và chuyển đổi đa workspace (Multi-tenant) trong một trải nghiệm liền mạch.",
     challenge: "Nhân sự và team lead thường xuyên gặp tình trạng context switching khi phải chuyển qua lại giữa 4-5 tool độc lập (Slack để chat, Asana để nhận task, Google Calendar để xem lịch, web portal để chấm công và nộp đơn từ).",
     solution: "Thiết kế ứng dụng mobile-first tinh gọn, hợp nhất daily task, phê duyệt 1-touch, chấm công GPS và fast workspace switching trong một giao diện trực quan, giảm thiểu tối đa thao tác thừa.",
@@ -702,6 +709,10 @@ const PROJECTS_DATA = [
       { val: "100%", label: "Organization Adoption" },
       { val: "9 → 1", label: "Systems Consolidated" }
     ],
+    peekScreens: [
+      { label: "🖥️ R&D Studio", src: "assets/saas.png", tag: "IDE WORKSPACE", desc: "Consolidated 9 Legacy Tools into 1 Studio" },
+      { label: "🔬 Parallel Sim", src: "assets/saas.png", tag: "SIMULATION REC", desc: "Parallel Simulation Plotting & Telemetry" }
+    ],
     overview: "Explora is a 0-to-1 unified R&D workspace built for Cellworks, a biotech company focused on curing cancer. Before Explora, scientists juggled 9+ legacy tools and spreadsheets.",
     challenge: "Scientists & engineers spent hours tool-hopping, waiting for legacy systems to process simulations, which created a massive productivity lag in cancer research.",
     solution: "I led the 0 to 1 design to consolidate 9+ legacy tools into a singular IDE with split-workspace grids, parallel simulation plotting, and automated progress tracking."
@@ -719,6 +730,10 @@ const PROJECTS_DATA = [
       { val: "15/15", label: "Testers Greater Confidence" },
       { val: "100%", label: "Preferred AI Context" },
       { val: "~70%", label: "Pregnancies with Nausea" }
+    ],
+    peekScreens: [
+      { label: "⌚ Wearable UX", src: "assets/ecommerce.png", tag: "WEARABLE AI", desc: "Real-time Apple Watch & Bio-Digital Twin" },
+      { label: "🤰 Nutrition Lab", src: "assets/ecommerce.png", tag: "AI CONTEXT", desc: "Personalized Daily Nutrition & Nausea Relief" }
     ],
     overview: "Mira.ai combines physiological sensing (HRV metrics) on the Apple Watch with a bio-digital twin in the mobile app to adapt recipes and provide real-time nausea relief.",
     challenge: "Most pregnancy apps count kicks and bump sizes but ignore the body carrying it — missing the daily realities of nausea, discomfort, and shifting nutrient needs.",
@@ -738,6 +753,10 @@ const PROJECTS_DATA = [
       { val: "100%", label: "Commissioning Accuracy" },
       { val: "+25%", label: "Screen Real Estate" }
     ],
+    peekScreens: [
+      { label: "🏢 3D Floorplan", src: "assets/design-system.png", tag: "COMMISSIONING", desc: "1,000+ Sensor Mapping & Fast Grouping" },
+      { label: "⚡ 5D → 2D Flow", src: "assets/design-system.png", tag: "SYSTEM OPTIMIZATION", desc: "Cut Field Commissioning from 5 to 2 Days" }
+    ],
     overview: "Manage is the primary interface for field engineers commissioning 1,000+ smart sensors across massive commercial building construction sites.",
     challenge: "The legacy interface was a 'wall of data' requiring click marathons and manual coordinate entries, taking 5 full days to commission a single building.",
     solution: "I redesigned the core workflow with direct drag-to-group selection, sticky instruction strips, and a collapsible high-density floor plan interface."
@@ -756,6 +775,9 @@ const PROJECTS_DATA = [
       { val: "MVP", label: "Shipped to App Store" },
       { val: "AI", label: "Driven Insights" }
     ],
+    peekScreens: [
+      { label: "📱 Annotation App", src: "assets/fintech.png", tag: "AI SPECIMEN", desc: "High-Precision Micro-Tasking for Domain Experts" }
+    ],
     overview: "Mobile application enabling domain experts to participate in specialized AI model training and evaluation tasks.",
     challenge: "Creating an engaging consumer UX while collecting high-precision annotations from technical experts.",
     solution: "Streamlined micro-tasking interface with instant visual feedback and gamified progress tracking."
@@ -773,6 +795,9 @@ const PROJECTS_DATA = [
       { val: "10x", label: "Faster Claim Processing" },
       { val: "B2B", label: "Enterprise Ready" },
       { val: "Seed", label: "Investor Pitch Ready" }
+    ],
+    peekScreens: [
+      { label: "📊 Claims Engine", src: "assets/saas.png", tag: "B2B PROTOTYPE", desc: "Multimodal AI Policy Verification & Settlement" }
     ],
     overview: "A automated claims processing engine using multimodal AI models to inspect damage reports, verify policy terms, and draft settlement offers.",
     challenge: "Insurance adjusters needed full auditability for automated AI decisions.",
@@ -1060,7 +1085,48 @@ function initHeroTabs() {
   }
 }
 
-/* Render Projects Grid with Retro Window OS, HUD Brackets, & Quick-Metrics */
+/* Interactive Screen Peek Switcher (Idea 2) */
+window.switchPeekScreen = function(projectId, screenIndex, btnElement, event) {
+  if (event) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+
+  const proj = activeProjects.find(p => p.id === projectId);
+  if (!proj || !proj.peekScreens || !proj.peekScreens[screenIndex]) return;
+
+  const target = proj.peekScreens[screenIndex];
+  const card = document.getElementById(projectId);
+  if (!card) return;
+
+  // Update active state on button pills
+  const pillBar = card.querySelector(".screen-peek-pill-bar");
+  if (pillBar) {
+    pillBar.querySelectorAll(".peek-pill").forEach(p => p.classList.remove("active"));
+    if (btnElement) btnElement.classList.add("active");
+  }
+
+  // Animate main screen image & update HUD telemetry
+  const mainImg = card.querySelector(`#peek-img-${projectId}`);
+  const tagEl = card.querySelector(`#peek-tag-${projectId}`);
+  const descEl = card.querySelector(`#peek-desc-${projectId}`);
+
+  if (mainImg) {
+    mainImg.style.transition = "opacity 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.15s ease";
+    mainImg.style.opacity = "0.2";
+    mainImg.style.transform = "scale(0.96)";
+    setTimeout(() => {
+      mainImg.src = target.src;
+      mainImg.style.opacity = "1";
+      mainImg.style.transform = "scale(1)";
+    }, 130);
+  }
+
+  if (tagEl) tagEl.textContent = target.tag || `VIEW 0${screenIndex + 1}`;
+  if (descEl) descEl.textContent = target.desc || target.label;
+};
+
+/* Render Projects Grid with Retro Window OS, Multi-Screen Depth, & HUD Metrics */
 function renderProjects() {
   const container = document.getElementById("projects-container");
   if (!container) return;
@@ -1073,7 +1139,10 @@ function renderProjects() {
   container.innerHTML = activeProjects.map((project, index) => {
     const numStamp = (index + 1).toString().padStart(2, "0");
     const themeClass = `card-theme-${index % 5}`;
-    
+    const pid = (project.id || "").toLowerCase();
+    const imgSrc = project.image_url || project.image;
+    const isTaskSync = pid.includes("tasksync");
+
     // Status text mapping
     let statusBadge = "FEATURED ✦";
     const tagsLower = (project.tags || []).map(t => t.toLowerCase());
@@ -1081,166 +1150,115 @@ function renderProjects() {
     else if (tagsLower.some(t => t.includes("concept"))) statusBadge = "AI CONCEPT ✦";
     else if (tagsLower.some(t => t.includes("prototype"))) statusBadge = "B2B PROTOTYPE 💡";
 
-    // Generate unique project-media interactive object HTML for each project
-    const renderProjectMediaObject = (proj, i) => {
-      const pid = (proj.id || "").toLowerCase();
-      const imgSrc = proj.image_url || proj.image;
+    // Peek screens data
+    const peekScreens = project.peekScreens || [
+      { label: "Overview", src: imgSrc, tag: "MAIN VIEW", desc: project.title }
+    ];
+    const initialPeek = peekScreens[0];
 
-      // 1. TaskSync: Physical Blueprint Dossier with Metal Binder Clip & QC Stamp
-      if (pid.includes("tasksync")) {
-        return `
-        <div class="project-media">
-          <div class="media-interactive-object dossier-specimen-sheet">
-            <div class="dossier-binder-clip" aria-hidden="true">
-              <div class="clip-wire-loop"></div>
-              <div class="clip-metal-body"></div>
-            </div>
-            <div class="dossier-header-strip">
-              <div class="dossier-file-id">
-                <span>📁</span>
-                <span>DOC-2025 // MOBILE-SPEC-01</span>
-              </div>
-              <div class="dossier-classification">PROD-READY</div>
-            </div>
-            <div class="dossier-blueprint-stage">
-              <img src="${imgSrc}" alt="${proj.title}" class="project-img" loading="lazy">
-              <span class="dossier-crosshair dossier-crosshair-tl">+</span>
-              <span class="dossier-crosshair dossier-crosshair-tr">+</span>
-              <span class="dossier-crosshair dossier-crosshair-bl">+</span>
-              <span class="dossier-crosshair dossier-crosshair-br">+</span>
-              <div class="dossier-qc-stamp">APPROVED ✦</div>
-              <div class="dossier-barcode-tag" aria-hidden="true">
-                <span class="barcode-lines">||| | |||| || |||</span>
-                <span class="barcode-subtext">FIGMA-V4.2.0-SHIPPED</span>
-              </div>
-            </div>
-            <div class="dossier-ruler-strip">
-              <span>SCALE: 1:1 FULL FIDELITY · 375×812 PT</span>
-              <span>CALIBRATED // MM</span>
-            </div>
-          </div>
-        </div>`;
-      }
+    // Multi-Screen Interactive Stage
+    let mediaObjectHtml = "";
 
-      // 2. Explora: Retro Studio Hardware Monitor (Braun / Teenage Engineering)
-      if (pid.includes("explora")) {
-        return `
-        <div class="project-media">
-          <div class="media-interactive-object hardware-monitor-shell">
-            <div class="monitor-top-bezel">
-              <div class="speaker-grille-dots">
-                <span class="grille-hole"></span>
-                <span class="grille-hole"></span>
-                <span class="grille-hole"></span>
-              </div>
-              <div class="hardware-brand-badge">CELLWORKS // EXP-9</div>
-              <div class="rec-indicator-group">
-                <span class="rec-led-dot"></span>
-                <span>SIM REC</span>
-              </div>
-            </div>
-            <div class="crt-screen-bezel">
-              <img src="${imgSrc}" alt="${proj.title}" class="project-img" loading="lazy">
-              <div class="screen-hud-overlay">
-                <div class="hud-top-meta">
-                  <span>[CH-01: CANCER BIOTECH]</span>
-                  <span>100% ADOPTION</span>
-                </div>
-                <div class="hud-bot-meta">
-                  <span>FPS: 60 · PARALLEL SIM</span>
-                  <span>SYS: 9→1 UNIFIED</span>
-                </div>
-              </div>
-            </div>
-            <div class="monitor-controls-bar">
-              <div class="hardware-dials">
-                <span class="hardware-dial-knob" title="Frequency Dial"></span>
-                <span class="hardware-dial-notch"></span>
-              </div>
-              <span class="hardware-status-code">R&amp;D ARCHIVE // STABLE</span>
-            </div>
-          </div>
-        </div>`;
-      }
+    if (isTaskSync) {
+      // Flagship TaskSync: 3D Multi-Device Cascade with Fan-Out Layering
+      mediaObjectHtml = `
+      <div class="media-interactive-object tasksync-cascade-stage">
+        <!-- Floating Flagship Ribbon -->
+        <div class="stage-flagship-pill">✦ FLAGSHIP B2B CASE STUDY</div>
 
-      // 3. Mira.ai: Layered Risograph Poster & Fashion Hangtag
-      if (pid.includes("mira")) {
-        return `
-        <div class="project-media">
-          <div class="media-interactive-object risograph-poster-canvas">
-            <div class="poster-hangtag" aria-hidden="true">
-              <div class="hangtag-string"></div>
-              <div class="hangtag-card">★ CLINICAL V1.0</div>
+        <!-- 3D Layered Phones Group -->
+        <div class="cascade-phones-group">
+          <!-- Left Flanking Phone (Fans out on card hover) -->
+          <div class="cascade-phone phone-fan-left" aria-hidden="true">
+            <div class="phone-speaker"></div>
+            <div class="phone-screen-viewport">
+              <img src="assets/tasksync/tasksync-tasks.png" alt="Tasks Kanban" loading="lazy">
             </div>
-            <div class="poster-inner-art">
-              <img src="${imgSrc}" alt="${proj.title}" class="project-img" loading="lazy">
-              <div class="poster-hologram-sticker">✦ WEARABLE AI</div>
-            </div>
-            <div class="poster-footer-strip">
-              <span>MIRA.AI BIO-TWIN LAB</span>
-              <span>EST. 2024 · APPL WATCH UX</span>
-            </div>
+            <span class="phone-label-tab">TASKS</span>
           </div>
-        </div>`;
-      }
 
-      // 4. Manage (Siemens): Industrial Terminal HUD Console with LEDs
-      if (pid.includes("manage")) {
-        return `
-        <div class="project-media">
-          <div class="media-interactive-object terminal-hud-console">
-            <div class="terminal-top-panel">
-              <div class="terminal-title-group">
-                <span class="terminal-badge">SIEMENS</span>
-                <span class="terminal-filename">CORE_COMMISSIONING_OS</span>
-              </div>
-              <div class="terminal-led-indicators" aria-label="System status LEDs">
-                <span class="terminal-led led-power" title="Power OK"></span>
-                <span class="terminal-led led-sync" title="Sync Live"></span>
-                <span class="terminal-led led-alert" title="Field Standby"></span>
-              </div>
+          <!-- Right Flanking Phone (Fans out on card hover) -->
+          <div class="cascade-phone phone-fan-right" aria-hidden="true">
+            <div class="phone-speaker"></div>
+            <div class="phone-screen-viewport">
+              <img src="assets/tasksync/tasksync-attendance.png" alt="GPS Attendance" loading="lazy">
             </div>
-            <div class="terminal-viewport-screen">
-              <img src="${imgSrc}" alt="${proj.title}" class="project-img" loading="lazy">
-              <div class="terminal-hud-reticle">
-                <span class="reticle-corner reticle-tl"></span>
-                <span class="reticle-corner reticle-tr"></span>
-                <span class="reticle-corner reticle-bl"></span>
-                <span class="reticle-corner reticle-br"></span>
-              </div>
-            </div>
-            <div class="terminal-bottom-telemetry">
-              <span>TELEMETRY: SENSORS ×1000 LIVE</span>
-              <span>SETUP: 5D ➔ 2D [SPEED]</span>
-            </div>
+            <span class="phone-label-tab">GPS CHECK-IN</span>
           </div>
-        </div>`;
-      }
 
-      // 5. AI Consumer & Insurance: Tech Specimen Lab Spec Sheet
-      return `
-      <div class="project-media">
-        <div class="media-interactive-object lab-spec-card">
-          <div class="lab-spec-top-tab">
-            <span>LAB // SPECIMEN 0${i + 1}</span>
-            <span>AI ENGINE ✦</span>
-          </div>
-          <div class="lab-spec-viewport">
-            <img src="${imgSrc}" alt="${proj.title}" class="project-img" loading="lazy">
-            <div class="lab-floating-badge">★ VERIFIED MODEL</div>
-          </div>
-          <div class="lab-spec-footer">
-            <span>MULTIMODAL EVAL REPORT</span>
-            <span>CONFIDENCE: 99.4%</span>
+          <!-- Main Center Stage Phone (Interactive Active Screen) -->
+          <div class="cascade-phone phone-stage-main">
+            <div class="phone-speaker"></div>
+            <div class="phone-screen-viewport">
+              <img id="peek-img-${project.id}" src="${initialPeek.src}" alt="${project.title}" class="peek-main-screen" loading="lazy">
+              <div class="phone-screen-glare"></div>
+            </div>
+            <div class="phone-home-indicator"></div>
           </div>
         </div>
-      </div>`;
-    };
 
-    const mediaHtml = renderProjectMediaObject(project, index);
+        <!-- HUD Telemetry Caption Strip -->
+        <div class="peek-hud-strip">
+          <span class="peek-hud-tag" id="peek-tag-${project.id}">${initialPeek.tag}</span>
+          <span class="peek-hud-desc" id="peek-desc-${project.id}">${initialPeek.desc}</span>
+        </div>
+
+        <!-- Quick-Peek Screen Switcher Tabs -->
+        <div class="screen-peek-pill-bar" onclick="event.stopPropagation()">
+          ${peekScreens.map((s, si) => `
+            <button type="button" class="peek-pill ${si === 0 ? 'active' : ''}" onclick="switchPeekScreen('${project.id}', ${si}, this, event)">
+              <span>${s.label}</span>
+            </button>
+          `).join("")}
+        </div>
+      </div>
+      `;
+    } else {
+      // General Projects: Elevated Device Viewport with Quick-View Switcher
+      mediaObjectHtml = `
+      <div class="media-interactive-object generic-peek-stage">
+        <div class="generic-stage-viewport">
+          <img id="peek-img-${project.id}" src="${initialPeek.src}" alt="${project.title}" class="project-img peek-main-screen" loading="lazy">
+          <div class="stage-hologram-seal">✦ CASE SPECIMEN</div>
+          <div class="viewport-hud-bracket br-tl"></div>
+          <div class="viewport-hud-bracket br-tr"></div>
+          <div class="viewport-hud-bracket br-bl"></div>
+          <div class="viewport-hud-bracket br-br"></div>
+        </div>
+
+        <!-- HUD Telemetry Caption Strip -->
+        <div class="peek-hud-strip">
+          <span class="peek-hud-tag" id="peek-tag-${project.id}">${initialPeek.tag}</span>
+          <span class="peek-hud-desc" id="peek-desc-${project.id}">${initialPeek.desc}</span>
+        </div>
+
+        <!-- Quick-Peek Screen Switcher Tabs -->
+        ${peekScreens.length > 1 ? `
+        <div class="screen-peek-pill-bar" onclick="event.stopPropagation()">
+          ${peekScreens.map((s, si) => `
+            <button type="button" class="peek-pill ${si === 0 ? 'active' : ''}" onclick="switchPeekScreen('${project.id}', ${si}, this, event)">
+              <span>${s.label}</span>
+            </button>
+          `).join("")}
+        </div>` : ''}
+      </div>
+      `;
+    }
+
+    // Impact Metrics HUD
+    const metricsHtml = (project.metrics && project.metrics.length > 0) ? `
+      <div class="project-metrics-hud">
+        ${project.metrics.map((m, mi) => `
+          <div class="metric-hud-chip metric-chip-${mi % 3}">
+            <div class="metric-chip-val">${m.val}</div>
+            <div class="metric-chip-lbl">${m.label}</div>
+          </div>
+        `).join("")}
+      </div>
+    ` : "";
 
     return `
-    <article class="project-item ${themeClass}" id="${project.id}" onclick="handleCardClick('${project.id}', event)">
+    <article class="project-item ${themeClass} ${isTaskSync ? 'is-flagship-item' : ''}" id="${project.id}" onclick="handleCardClick('${project.id}', event)">
       
       <!-- Retro Window Bar -->
       <div class="card-window-bar">
@@ -1250,27 +1268,50 @@ function renderProjects() {
           <span class="window-dot dot-green"></span>
         </div>
         <div class="window-slug">sanvi.design/case/${project.id}</div>
-        <div class="window-status">${statusBadge}</div>
+        <div class="window-actions-group">
+          <span class="window-hint-peek">✦ QUICK PREVIEW UI</span>
+          <div class="window-status">${statusBadge}</div>
+        </div>
       </div>
 
       <!-- Card Main Body -->
       <div class="project-card-body">
         <div class="project-number-stamp">#${numStamp}</div>
         
-        <!-- Distinct Physical Media Stage -->
-        ${mediaHtml}
+        <!-- Interactive Multi-Screen Media Stage -->
+        <div class="project-media">
+          ${mediaObjectHtml}
+        </div>
 
         <!-- Project Meta & Information -->
-        <div>
-          <div class="project-tags">
-            ${(project.tags || []).map(t => `<span class="tag-pill">${t}</span>`).join("")}
+        <div class="project-info-column">
+          <!-- Client & Role Credibility Strip -->
+          <div class="project-cred-strip">
+            <span class="cred-pill cred-client">🏢 ${project.client || "Client"}</span>
+            <span class="cred-pill cred-role">✦ ${project.role || "Product Designer"}</span>
+            <span class="cred-pill cred-year">${project.year || "Shipped"}</span>
           </div>
-          <h2 class="project-title-large">${project.summary}</h2>
 
-          <button class="btn-read-case" onclick="event.stopPropagation(); handleCardClick('${project.id}', event)">
-            <span>explore case study</span>
-            <span class="btn-arrow">↗</span>
-          </button>
+          <!-- Product Title Headline -->
+          <h2 class="project-headline">${project.title}</h2>
+
+          <!-- Product Summary Text -->
+          <p class="project-summary-text">${project.summary}</p>
+
+          <!-- Business & Design Impact Metrics HUD -->
+          ${metricsHtml}
+
+          <!-- Footer with Tags & CTA Button -->
+          <div class="project-card-footer">
+            <div class="project-tags">
+              ${(project.tags || []).map(t => `<span class="tag-pill">${t}</span>`).join("")}
+            </div>
+
+            <button class="btn-read-case" onclick="event.stopPropagation(); handleCardClick('${project.id}', event)">
+              <span>explore case study</span>
+              <span class="btn-arrow">↗</span>
+            </button>
+          </div>
         </div>
       </div>
 

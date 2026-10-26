@@ -1397,6 +1397,26 @@ button {
   box-shadow: var(--shadow-neo-xs);
 }
 
+.window-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.window-hint-peek {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-color);
+  padding: 3px 9px;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.04em;
+  display: inline-block;
+  user-select: none;
+}
+
 .window-status {
   font-size: 11px;
   font-weight: 800;
@@ -1410,18 +1430,28 @@ button {
   letter-spacing: 0.05em;
 }
 
+/* Flagship Project Accent */
+.is-flagship-item {
+  border-width: 3.5px;
+  box-shadow: 8px 8px 0px var(--border-color);
+}
+
+.is-flagship-item:hover {
+  box-shadow: 12px 12px 0px var(--border-color);
+}
+
 /* Project Card Inner Body */
 .project-card-body {
   padding: 44px;
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 48px;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 44px;
   align-items: center;
   position: relative;
 }
 
 .project-item:nth-child(even) .project-card-body {
-  grid-template-columns: 1fr 1.2fr;
+  grid-template-columns: 1fr 1.15fr;
 }
 
 .project-item:nth-child(even) .project-media {
@@ -2280,13 +2310,461 @@ button {
 .tag-pill:nth-child(3n) { background: var(--neo-yellow); }
 .tag-pill:nth-child(4n) { background: var(--neo-green); }
 
-.project-title-large {
-  font-family: var(--font-serif);
-  font-size: 2.1rem;
-  margin-bottom: 16px;
+/* Project Meta Column */
+.project-info-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.project-cred-strip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.cred-pill {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 800;
+  padding: 3.5px 10px;
+  border-radius: 999px;
+  border: 1.5px solid var(--border-color);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  letter-spacing: 0.03em;
+  user-select: none;
+}
+
+.cred-client {
+  background: var(--bg-card-alt);
   color: var(--text-main);
-  line-height: 1.25;
+}
+
+.cred-role {
+  background: var(--neo-pink);
+  color: #000000;
+}
+
+.cred-year {
+  background: var(--bg-surface);
+  color: var(--text-dim);
+}
+
+.project-headline {
+  font-family: var(--font-serif);
+  font-size: 2.15rem;
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+  margin-bottom: 12px;
+}
+
+.project-summary-text {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+/* Impact Metrics HUD Chips */
+.project-metrics-hud {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.metric-hud-chip {
+  background: var(--bg-surface);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  padding: 10px 12px;
+  box-shadow: 2.5px 2.5px 0px var(--border-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.metric-hud-chip:hover {
+  transform: translateY(-2px);
+  box-shadow: 3.5px 3.5px 0px var(--border-color);
+}
+
+.metric-chip-0 { border-left: 5px solid #00F5D4; }
+.metric-chip-1 { border-left: 5px solid #FFDE59; }
+.metric-chip-2 { border-left: 5px solid #FF90E8; }
+
+.metric-chip-val {
+  font-family: var(--font-mono);
+  font-size: 19px;
+  font-weight: 900;
+  color: var(--text-main);
+  line-height: 1.1;
+  margin-bottom: 3px;
+  letter-spacing: -0.02em;
+}
+
+.metric-chip-lbl {
+  font-size: 11px;
   font-weight: 700;
+  color: var(--text-dim);
+  line-height: 1.3;
+}
+
+.project-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   Interactive Multi-Screen Peek Stages (Idea 2)
+   ========================================================================== */
+
+/* 1. TaskSync Flagship 3D Multi-Device Cascade */
+.tasksync-cascade-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: #F8F6F0;
+  border: 2.5px solid var(--border-color);
+  border-radius: 14px;
+  box-shadow: 6px 6px 0px var(--border-color);
+  padding: 16px 14px 12px;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
+}
+
+[data-theme="dark"] .tasksync-cascade-stage {
+  background: #14161E;
+}
+
+.stage-flagship-pill {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  background: var(--neo-yellow);
+  color: #000000;
+  border: 1.5px solid #000000;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 800;
+  padding: 2.5px 9px;
+  box-shadow: 1.5px 1.5px 0px #000000;
+  z-index: 15;
+  letter-spacing: 0.04em;
+}
+
+.cascade-phones-group {
+  position: relative;
+  width: 100%;
+  height: 290px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  margin-top: 12px;
+  margin-bottom: 6px;
+}
+
+.cascade-phone {
+  position: absolute;
+  border: 2.5px solid #000000;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #000000;
+  box-shadow: 4px 4px 0px #000000;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease, opacity 0.25s ease;
+  user-select: none;
+}
+
+.phone-fan-left {
+  width: 140px;
+  height: 255px;
+  left: calc(50% - 145px);
+  transform: rotate(-9deg) translateY(12px) scale(0.88);
+  opacity: 0.82;
+  z-index: 2;
+}
+
+.phone-fan-right {
+  width: 140px;
+  height: 255px;
+  right: calc(50% - 145px);
+  transform: rotate(9deg) translateY(12px) scale(0.88);
+  opacity: 0.82;
+  z-index: 2;
+}
+
+.project-item:hover .phone-fan-left {
+  transform: translateX(-34px) rotate(-14deg) translateY(6px) scale(0.92);
+  opacity: 1;
+  box-shadow: 6px 6px 0px #000000;
+}
+
+.project-item:hover .phone-fan-right {
+  transform: translateX(34px) rotate(14deg) translateY(6px) scale(0.92);
+  opacity: 1;
+  box-shadow: 6px 6px 0px #000000;
+}
+
+.phone-stage-main {
+  width: 180px;
+  height: 285px;
+  z-index: 6;
+  position: relative;
+  box-shadow: 6px 6px 0px #000000;
+  transform: translateY(-2px);
+}
+
+.project-item:hover .phone-stage-main {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 9px 9px 0px #000000;
+}
+
+.phone-speaker {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 3.5px;
+  background: #444;
+  border-radius: 2px;
+  z-index: 12;
+}
+
+.phone-home-indicator {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 45px;
+  height: 3px;
+  background: rgba(0,0,0,0.4);
+  border-radius: 2px;
+  z-index: 12;
+}
+
+.phone-screen-viewport {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  background: #FFFFFF;
+}
+
+.phone-screen-viewport img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.phone-screen-glare {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 65%);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.phone-label-tab {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #000000;
+  color: #00F5D4;
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 4px;
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+  z-index: 10;
+}
+
+/* 2. Generic Peek Stage (Explora, Mira, Manage, AI) */
+.generic-peek-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #F8F6F0;
+  border: 2.5px solid var(--border-color);
+  border-radius: 14px;
+  box-shadow: 6px 6px 0px var(--border-color);
+  padding: 14px;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
+}
+
+[data-theme="dark"] .generic-peek-stage {
+  background: #14161E;
+}
+
+.generic-stage-viewport {
+  flex: 1;
+  width: 100%;
+  min-height: 270px;
+  position: relative;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000000;
+  margin-bottom: 8px;
+}
+
+.generic-stage-viewport img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.project-item:hover .generic-stage-viewport img {
+  transform: scale(1.025);
+}
+
+.stage-hologram-seal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--neo-pink);
+  color: #000000;
+  border: 1.5px solid #000000;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 800;
+  padding: 2px 8px;
+  box-shadow: 1.5px 1.5px 0px #000000;
+  letter-spacing: 0.04em;
+  z-index: 10;
+}
+
+.viewport-hud-bracket {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--neo-cyan);
+  pointer-events: none;
+  z-index: 5;
+}
+.viewport-hud-bracket.br-tl { top: 8px; left: 8px; border-right: none; border-bottom: none; }
+.viewport-hud-bracket.br-tr { top: 8px; right: 8px; border-left: none; border-bottom: none; }
+.viewport-hud-bracket.br-bl { bottom: 8px; left: 8px; border-right: none; border-top: none; }
+.viewport-hud-bracket.br-br { bottom: 8px; right: 8px; border-left: none; border-top: none; }
+
+/* HUD Caption Strip */
+.peek-hud-strip {
+  width: 100%;
+  background: var(--bg-card-alt);
+  border: 1.5px solid var(--border-color);
+  border-radius: 6px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  margin-bottom: 8px;
+  z-index: 8;
+  overflow: hidden;
+}
+
+.peek-hud-tag {
+  font-weight: 800;
+  color: #000000;
+  background: var(--neo-cyan);
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: 1px solid #000000;
+  white-space: nowrap;
+  font-size: 9.5px;
+  flex-shrink: 0;
+}
+
+.peek-hud-desc {
+  font-weight: 700;
+  color: var(--text-main);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Quick-Peek Screen Switcher Tabs */
+.screen-peek-pill-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  z-index: 10;
+  width: 100%;
+  padding: 2px 0;
+}
+
+.peek-pill {
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--text-main);
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 1.5px 1.5px 0px var(--border-color);
+}
+
+.peek-pill:hover {
+  background: var(--neo-yellow);
+  color: #000000;
+  transform: translateY(-1.5px);
+  box-shadow: 2px 2px 0px var(--border-color);
+}
+
+.peek-pill.active {
+  background: #000000;
+  color: #00F5D4;
+  border-color: #000000;
+  box-shadow: none;
+  transform: translate(1px, 1px);
+}
+
+[data-theme="dark"] .peek-pill.active {
+  background: #00F5D4;
+  color: #000000;
+  border-color: #000000;
 }
 
 .btn-read-case {
@@ -3682,14 +4160,15 @@ button {
   .project-card-body,
   .project-item:nth-child(even) .project-card-body {
     grid-template-columns: 1fr;
-    padding: 32px 28px;
-    gap: 32px;
+    padding: 32px 24px;
+    gap: 28px;
   }
 
   .project-media,
   .project-item:nth-child(even) .project-media {
     order: -1;
-    height: 300px;
+    height: auto;
+    min-height: 380px;
   }
 
   .dossier-qc-stamp {
@@ -3943,17 +4422,79 @@ button {
     padding: 3px 8px;
   }
 
+  .window-hint-peek {
+    display: none;
+  }
+
   .project-card-body,
   .project-item:nth-child(even) .project-card-body {
     grid-template-columns: 1fr;
-    padding: 20px 16px;
-    gap: 18px;
+    padding: 22px 16px;
+    gap: 22px;
   }
 
   .project-media,
   .project-item:nth-child(even) .project-media {
     order: -1;
-    height: 220px;
+    height: auto;
+    min-height: 350px;
+  }
+
+  .cascade-phones-group {
+    height: 240px;
+    margin-top: 10px;
+  }
+
+  .phone-fan-left {
+    width: 115px;
+    height: 210px;
+    left: calc(50% - 115px);
+  }
+
+  .phone-fan-right {
+    width: 115px;
+    height: 210px;
+    right: calc(50% - 115px);
+  }
+
+  .phone-stage-main {
+    width: 150px;
+    height: 238px;
+  }
+
+  .project-headline {
+    font-size: 1.65rem;
+  }
+
+  .project-metrics-hud {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .metric-hud-chip {
+    padding: 8px 10px;
+  }
+
+  .metric-chip-val {
+    font-size: 16px;
+  }
+
+  .metric-chip-lbl {
+    font-size: 10px;
+  }
+
+  .screen-peek-pill-bar {
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .peek-pill {
+    white-space: nowrap;
+    font-size: 10px;
+    padding: 3px 8px;
   }
 
   .clip-metal-body {
@@ -4289,6 +4830,11 @@ button {
   .contact-row {
     font-size: 12px;
     gap: 8px;
+  }
+
+  .project-metrics-hud {
+    grid-template-columns: 1fr;
+    gap: 7px;
   }
 
   .nav-brand {
