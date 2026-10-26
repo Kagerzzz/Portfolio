@@ -829,7 +829,7 @@ button {
 .os-bar {
   background: var(--neo-yellow);
   border-bottom: var(--border-neo);
-  padding: 10px 18px;
+  padding: 10px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -839,12 +839,12 @@ button {
 .os-controls {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
 }
 
 .os-dot {
-  width: 12px;
-  height: 12px;
+  width: 13px;
+  height: 13px;
   border-radius: 50%;
   border: 2px solid #000000;
   display: inline-block;
@@ -856,7 +856,7 @@ button {
 .os-title {
   font-family: var(--font-mono);
   font-weight: 800;
-  font-size: 11.5px;
+  font-size: 12.5px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #000000;
@@ -867,8 +867,8 @@ button {
   color: #00F5D4;
   font-family: var(--font-mono);
   font-weight: 800;
-  font-size: 10px;
-  padding: 3px 12px;
+  font-size: 11px;
+  padding: 4px 13px;
   border-radius: 999px;
   letter-spacing: 0.04em;
 }
@@ -876,9 +876,9 @@ button {
 /* Bento Grid */
 .cv-grid {
   display: grid;
-  grid-template-columns: 310px 1fr;
-  gap: 14px;
-  padding: 16px;
+  grid-template-columns: 345px 1fr;
+  gap: 16px;
+  padding: 18px;
   background: var(--bg-card-alt);
   align-items: stretch;
 }
@@ -899,7 +899,7 @@ button {
   border: 2px solid var(--border-color);
   border-radius: 10px;
   box-shadow: none;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   overflow: hidden;
   transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease;
 }
@@ -916,9 +916,9 @@ button {
 .card-bar {
   background: var(--bg-surface);
   border-bottom: 2px solid var(--border-color);
-  padding: 6px 14px;
+  padding: 8px 16px;
   font-family: var(--font-mono);
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -931,25 +931,25 @@ button {
 
 /* Profile / Identity Card */
 .profile-wrap {
-  padding: 14px;
+  padding: 18px 16px;
   text-align: center;
 }
 
 .avatar-box {
   position: relative;
   display: inline-block;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .avatar-img {
-  width: 82px;
-  height: 82px;
+  width: 92px;
+  height: 92px;
   border-radius: 50%;
   border: 2.5px solid var(--border-color);
   object-fit: cover;
   object-position: 50% 12%;
   display: block;
-  box-shadow: 2px 2px 0px var(--border-color);
+  box-shadow: 2.5px 2.5px 0px var(--border-color);
   background: #000000;
   margin: 0 auto;
 }
@@ -957,15 +957,15 @@ button {
 .exp-pill {
   position: absolute;
   bottom: -2px;
-  right: -8px;
+  right: -10px;
   background: #00F5D4;
   color: #000000;
   border: 1.5px solid #000000;
   border-radius: 999px;
   font-family: var(--font-mono);
-  font-size: 8.5px;
+  font-size: 10px;
   font-weight: 800;
-  padding: 2px 7px;
+  padding: 3px 9px;
   box-shadow: 1.5px 1.5px 0px #000000;
   transform: rotate(-3deg);
   white-space: nowrap;
@@ -973,52 +973,52 @@ button {
 
 .intro-label {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11.5px;
   font-weight: 800;
   text-transform: uppercase;
   color: var(--text-dim);
-  margin-bottom: 2px;
+  margin-bottom: 3px;
   letter-spacing: 0.05em;
 }
 
 .candidate-name {
   font-family: var(--font-serif);
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 900;
   line-height: 1.15;
   color: var(--text-main);
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 }
 
 .title-pill {
   display: inline-block;
-  padding: 3px 12px;
+  padding: 4px 14px;
   background: var(--neo-pink);
   color: #000000;
   border: 1.5px solid #000000;
   border-radius: 999px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12.5px;
   font-weight: 800;
   box-shadow: 1.5px 1.5px 0px #000000;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .bio-quote-box {
   background: var(--bg-surface);
   border: 1.5px solid var(--border-color);
   border-radius: 8px;
-  padding: 8px 10px;
+  padding: 10px 14px;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   box-shadow: 1.5px 1.5px 0px var(--border-color);
   text-align: center;
 }
 
 .quote-mark {
   font-family: 'Fraunces', Georgia, serif;
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 900;
   line-height: 1;
   color: var(--text-main);
@@ -1028,12 +1028,12 @@ button {
 
 .quote-open {
   align-self: flex-start;
-  margin-top: -3px;
+  margin-top: -4px;
 }
 
 .quote-close {
   align-self: flex-end;
-  margin-bottom: -5px;
+  margin-bottom: -6px;
 }
 
 .quote-content {
@@ -1042,7 +1042,7 @@ button {
 
 .quote-phrase {
   font-family: 'Caveat', 'Segoe Print', cursive;
-  font-size: 18px;
+  font-size: 21px;
   font-weight: 700;
   line-height: 1.25;
   color: var(--text-main);
@@ -1051,23 +1051,23 @@ button {
 
 /* Contact Details List */
 .contact-list {
-  padding: 10px 14px;
+  padding: 12px 16px;
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 9px;
 }
 
 .contact-row {
   display: flex;
   align-items: center;
-  gap: 9px;
-  font-size: 12px;
+  gap: 10px;
+  font-size: 13.5px;
   color: var(--text-muted);
 }
 
 .contact-icon {
-  font-size: 13px;
-  width: 18px;
+  font-size: 15px;
+  width: 20px;
   text-align: center;
   flex-shrink: 0;
 }
@@ -1091,58 +1091,58 @@ button {
 
 /* Education List */
 .edu-box {
-  padding: 10px 14px;
+  padding: 12px 16px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .edu-card-item {
   border-left: 3.5px solid #00F5D4;
-  padding-left: 9px;
+  padding-left: 10px;
 }
 .edu-card-item.mirr {
   border-left-color: var(--neo-pink);
 }
 
 .edu-period {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 800;
   color: var(--text-dim);
   letter-spacing: 0.04em;
-  margin-bottom: 1px;
+  margin-bottom: 2px;
 }
 
 .edu-name {
-  font-size: 12.5px;
+  font-size: 14px;
   font-weight: 800;
   color: var(--text-main);
 }
 
 .edu-field {
-  font-size: 11.5px;
+  font-size: 13px;
   color: var(--text-muted);
 }
 
 /* Tools & Expertise Stack */
 .tools-box {
-  padding: 10px 14px;
+  padding: 12px 16px;
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 6px;
 }
 
 .tool-tag {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 3px 8px;
+  gap: 6px;
+  padding: 4px 10px;
   background: var(--bg-surface);
   border: 1.5px solid var(--border-color);
   border-radius: 999px;
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 800;
-  box-shadow: 1.2px 1.2px 0px var(--border-color);
+  box-shadow: 1.5px 1.5px 0px var(--border-color);
   color: var(--text-main);
   transition: transform 0.15s ease, background 0.15s ease;
 }
@@ -1166,8 +1166,8 @@ button {
 }
 
 .tool-dot {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   border: 1px solid #000000;
   flex-shrink: 0;
@@ -1181,10 +1181,10 @@ button {
 }
 
 .exp-list {
-  padding: 12px 14px;
+  padding: 14px 16px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   flex: 1;
 }
 
@@ -1192,7 +1192,7 @@ button {
   background: var(--bg-surface);
   border: 1.5px solid var(--border-color);
   border-radius: 8px;
-  padding: 10px 13px;
+  padding: 12px 16px;
   box-shadow: none;
   transition: transform 0.15s ease;
 }
@@ -1212,32 +1212,32 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 5px;
-  gap: 8px;
+  margin-bottom: 6px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
 .job-role-text {
-  font-size: 14.5px;
+  font-size: 16.5px;
   font-weight: 900;
   color: var(--text-main);
-  line-height: 1.2;
+  line-height: 1.25;
 }
 
 .job-company-text {
-  font-size: 12px;
+  font-size: 13.5px;
   font-weight: 700;
   color: var(--text-dim);
-  margin-top: 1px;
+  margin-top: 2px;
 }
 
 .job-pill {
   display: inline-block;
   font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.04em;
-  padding: 2.5px 8.5px;
+  padding: 3px 10px;
   border: 1.5px solid var(--border-color);
   border-radius: 999px;
   background: var(--bg-card-alt);
@@ -1253,14 +1253,14 @@ button {
 
 .job-bullets {
   margin: 0;
-  padding-left: 17px;
-  font-size: 12px;
-  line-height: 1.5;
+  padding-left: 18px;
+  font-size: 13.5px;
+  line-height: 1.6;
   color: var(--text-muted);
 }
 
 .job-bullets li {
-  margin-bottom: 3px;
+  margin-bottom: 4px;
 }
 .job-bullets li:last-child {
   margin-bottom: 0;
@@ -4041,67 +4041,79 @@ button {
   }
 
   .os-bar {
-    padding: 8px 12px;
+    padding: 8px 14px;
   }
 
   .os-title {
-    font-size: 10px;
-    max-width: 200px;
+    font-size: 11px;
+    max-width: 220px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
   .os-badge {
-    font-size: 8.5px;
-    padding: 2px 8px;
+    font-size: 9.5px;
+    padding: 2.5px 9px;
   }
 
   .cv-grid {
     grid-template-columns: 1fr;
-    padding: 12px 10px;
-    gap: 10px;
+    padding: 14px 12px;
+    gap: 12px;
   }
 
   .avatar-img {
-    width: 74px;
-    height: 74px;
+    width: 80px;
+    height: 80px;
   }
 
   .candidate-name {
-    font-size: 20px;
+    font-size: 24px;
   }
 
   .quote-phrase {
-    font-size: 16.5px;
+    font-size: 18.5px;
   }
 
-  .job-entry {
-    padding: 9px 11px;
+  .contact-row {
+    font-size: 13px;
   }
 
-  .job-role-text {
+  .edu-name {
     font-size: 13.5px;
   }
 
+  .edu-field {
+    font-size: 12.5px;
+  }
+
+  .job-entry {
+    padding: 11px 13px;
+  }
+
+  .job-role-text {
+    font-size: 15px;
+  }
+
   .job-company-text {
-    font-size: 11.5px;
+    font-size: 12.5px;
   }
 
   .job-pill {
-    font-size: 8.5px;
-    padding: 2px 7px;
+    font-size: 9.5px;
+    padding: 2.5px 8px;
   }
 
   .job-bullets {
-    padding-left: 15px;
-    font-size: 11.5px;
-    line-height: 1.48;
+    padding-left: 16px;
+    font-size: 13px;
+    line-height: 1.55;
   }
 
   .tool-tag {
-    padding: 2.5px 7px;
-    font-size: 10px;
+    padding: 3px 8px;
+    font-size: 11px;
   }
 
   /* Footer Shack */
@@ -4270,13 +4282,13 @@ button {
 /* 3. Small Mobile Devices (<= 520px) */
 @media (max-width: 520px) {
   .os-title {
-    font-size: 8.8px;
-    max-width: 140px;
+    font-size: 9.5px;
+    max-width: 170px;
   }
 
   .contact-row {
-    font-size: 11px;
-    gap: 7px;
+    font-size: 12px;
+    gap: 8px;
   }
 
   .nav-brand {
