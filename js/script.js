@@ -1,5 +1,5 @@
 /**
- * Sanvithi.com Portfolio - Creative Neubrutalism Engine
+ * Sanvithi.com Portfolio - Creative Portfolio Engine
  * Confetti Particles, Live Clocks, Dynamic Cursor, 3D Parallax Tilt & Supabase DB
  */
 
@@ -1424,7 +1424,7 @@ function init3DParallaxTilt() {
    3. Subtle Magnetic Element Drift
    ========================================================================== */
 
-/* High Performance Neubrutalism Sparkle & Shape Cursor Trail */
+/* High Performance Sparkle & Shape Cursor Trail */
 function initCursorTrailEngine() {
   const canvas = document.getElementById("cursor-trail-canvas");
   if (!canvas) return;
@@ -1475,7 +1475,7 @@ function initCursorTrailEngine() {
     });
   }
 
-  // Draw 4-point sparkle star (Neubrutalism ✦)
+  // Draw 4-point sparkle star (✦)
   function drawSparkleStar(c, size) {
     c.beginPath();
     const half = size / 2;

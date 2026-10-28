@@ -462,7 +462,7 @@ function showToast(msg) {
    - Visual floating toolbar with quick presets (25%, 50%, 75%, 100%)
    - Zoom -/+ by 10%
    - Align left, center, right, float with text wrapping
-   - Frame styles (Neubrutalism, Rounded, Minimal)
+   - Frame styles (Border, Rounded, Minimal)
    - Interactive corner drag-to-resize handle
    ========================================================================== */
 
@@ -639,7 +639,7 @@ function toggleActiveImageFrame() {
   } else if (activeImage.classList.contains("style-minimal")) {
     activeImage.classList.remove("style-minimal");
     activeImage.classList.add("style-card");
-    showToast("Kiểu ảnh: Thẻ Neubrutalism Đậm");
+    showToast("Kiểu ảnh: Thẻ Viền Đậm");
   } else if (activeImage.classList.contains("style-card")) {
     activeImage.classList.remove("style-card");
     showToast("Kiểu ảnh: Chuẩn Mặc Định");

@@ -1,5 +1,5 @@
 /**
- * Neubrutalism SVG Icons Library
+ * SVG Icons Library
  * Clean, lightweight, zero-dependency inline SVG vector icons
  * Matching 24x24 viewBox, stroke-width 2px/2.5px, stroke: currentColor
  */
