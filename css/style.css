@@ -197,12 +197,11 @@ button {
 }
 
 .nav-link {
-  font-size: 13.5px;
-  font-weight: 800;
+  font-size: 14px;
+  font-weight: 700;
   color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  padding: 6px 13px;
+  text-transform: lowercase;
+  padding: 6px 12px;
   border-radius: var(--radius-sm);
   border: 2px solid transparent;
   transition: all 0.15s ease;
@@ -257,10 +256,8 @@ button {
   background: var(--neo-pink);
   color: #000000;
   border: var(--border-neo);
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
   box-shadow: var(--shadow-neo-sm);
   transition: var(--spring-transition);
 }
@@ -2943,8 +2940,6 @@ button {
   font-size: 14px;
   padding: 10px 22px;
   text-decoration: none;
-  text-transform: none;
-  letter-spacing: normal;
 }
 
 .shack-btn-fb { background: var(--neo-cyan); }
