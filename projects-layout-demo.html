@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Featured Projects — 4 Layout Demos (Interactive)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@500;700;800&family=Fraunces:opsz,wght@9..144,700;9..144,900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-canvas: #EDEAE1;
+      --bg-surface: #FFFFFF;
+      --bg-card: #FAF8F5;
+      --border-color: #000000;
+      --border-width: 2.5px;
+      --border-neo: 2.5px solid #000000;
+      --shadow-neo: 5px 5px 0px #000000;
+      --shadow-neo-lg: 8px 8px 0px #000000;
+      --shadow-neo-sm: 3px 3px 0px #000000;
+      --neo-yellow: #FFDE59;
+      --neo-pink: #FF90E8;
+      --neo-cyan: #00F5D4;
+      --neo-green: #70E000;
+      --neo-orange: #FF851B;
+      --neo-purple: #B5179E;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+      --font-serif: 'Fraunces', serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-canvas);
+      color: #000000;
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      padding-bottom: 80px;
+    }
+
+    /* Top Control Ribbon */
+    .demo-navbar {
+      position: sticky;
+      top: 16px;
+      z-index: 1000;
+      max-width: 1100px;
+      margin: 16px auto 32px;
+      padding: 0 16px;
+    }
+
+    .demo-bar-inner {
+      background: #FFFFFF;
+      border: var(--border-neo);
+      border-radius: 12px;
+      box-shadow: var(--shadow-neo);
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .demo-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: -0.01em;
+    }
+
+    .demo-brand-pill {
+      background: var(--neo-yellow);
+      border: 1.5px solid #000000;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-family: var(--font-mono);
+      font-weight: 800;
+    }
+
+    .style-switchers {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .style-btn {
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 2px solid #000000;
+      background: #F4F1EA;
+      color: #000000;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 2px 2px 0px #000000;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .style-btn:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 3px 3px 0px #000000;
+      background: #FFFFFF;
+    }
+
+    .style-btn.active {
+      background: var(--neo-yellow);
+      box-shadow: 3px 3px 0px #000000;
+      transform: translate(-1px, -1px);
+    }
+
+    .style-btn.active.btn-style-2 { background: var(--neo-pink); }
+    .style-btn.active.btn-style-3 { background: var(--neo-cyan); }
+    .style-btn.active.btn-style-4 { background: var(--neo-green); }
+
+    .main-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .demo-info-banner {
+      background: #FFFFFF;
+      border: var(--border-neo);
+      border-radius: 12px;
+      box-shadow: var(--shadow-neo);
+      padding: 20px 24px;
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .demo-info-title {
+      font-size: 22px;
+      font-weight: 900;
+      font-family: var(--font-serif);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .demo-info-desc {
+      font-size: 14px;
+      color: #333333;
+      max-width: 680px;
+    }
+
+    .view-section {
+      display: none;
+      animation: fadeIn 0.25s ease forwards;
+    }
+
+    .view-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Common Retro Window Bar */
+    .os-bar {
+      background: #FFFFFF;
+      border-bottom: var(--border-neo);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .window-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      border: 1.5px solid #000000;
+    }
+    .dot-red { background: #FF5F56; }
+    .dot-yellow { background: #FFBD2E; }
+    .dot-green { background: #27C93F; }
+
+    .os-bar-title {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+    }
+
+    /* ==========================================================================
+       STYLE 1: THE OS DESKTOP / DUAL-PANE STUDIO
+       ========================================================================== */
+    .studio-window {
+      background: #FFFFFF;
+      border: var(--border-neo);
+      border-radius: 14px;
+      box-shadow: var(--shadow-neo-lg);
+      overflow: hidden;
+    }
+
+    .studio-body {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      min-height: 600px;
+    }
+
+    .studio-sidebar {
+      background: #FAF8F5;
+      border-right: var(--border-neo);
+      padding: 18px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sidebar-header {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      color: #666;
+      padding: 0 8px 6px;
+      border-bottom: 1.5px dashed #000;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .project-file-item {
+      padding: 12px 14px;
+      border: 2px solid transparent;
+      border-radius: 10px;
+      background: #FFFFFF;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      box-shadow: 1.5px 1.5px 0px rgba(0,0,0,0.1);
+    }
+
+    .project-file-item:hover {
+      border-color: #000;
+      transform: translateX(4px);
+      box-shadow: 2px 2px 0px #000;
+    }
+
+    .project-file-item.active {
+      background: var(--neo-yellow);
+      border-color: #000000;
+      box-shadow: 3px 3px 0px #000000;
+      transform: translateX(4px);
+    }
+
+    .file-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .file-name {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .file-badge {
+      font-size: 9.5px;
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 999px;
+      border: 1px solid #000;
+      background: #FFFFFF;
+    }
+
+    .file-sub {
+      font-size: 12px;
+      color: #555;
+    }
+
+    .studio-viewport {
+      padding: 28px;
+      background: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .viewport-meta {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .vp-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border: 1.5px solid #000;
+      border-radius: 999px;
+      background: #EDEAE1;
+    }
+
+    .vp-tag.highlight {
+      background: var(--neo-cyan);
+    }
+
+    .viewport-title {
+      font-size: 26px;
+      font-weight: 900;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+
+    .viewport-desc {
+      font-size: 14.5px;
+      color: #333;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .viewport-screen-stage {
+      background: #F4F1EA;
+      border: 2px solid #000000;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 3px 3px 0px #000;
+    }
+
+    .screen-img-container {
+      width: 100%;
+      max-height: 340px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+
+    .screen-img-container img {
+      max-height: 320px;
+      max-width: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      transition: transform 0.25s ease;
+    }
+
+    .screen-tab-bar {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .screen-tab-btn {
+      padding: 5px 12px;
+      font-size: 12px;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      border: 1.5px solid #000;
+      border-radius: 6px;
+      background: #FFFFFF;
+      cursor: pointer;
+      box-shadow: 1.5px 1.5px 0px #000;
+      transition: all 0.15s ease;
+    }
+
+    .screen-tab-btn.active {
+      background: #000;
+      color: #FFF;
+      box-shadow: none;
+    }
+
+    .viewport-metrics-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .vp-metric-card {
+      border: 1.5px solid #000;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: #FAF8F5;
+    }
+
+    .vp-metric-val {
+      font-size: 20px;
+      font-weight: 900;
+      font-family: var(--font-mono);
+    }
+
+    .vp-metric-lbl {
+      font-size: 11.5px;
+      color: #555;
+    }
+
+    .vp-cta-btn {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: var(--neo-pink);
+      border: 2px solid #000;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 14px;
+      box-shadow: var(--shadow-neo-sm);
+      cursor: pointer;
+    }
+
+    /* ==========================================================================
+       STYLE 2: INTERACTIVE DOSSIER / MANILA ARCHIVE
+       ========================================================================== */
+    .dossier-wrap {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .folder-tabs-header {
+      display: flex;
+      gap: 6px;
+      padding-left: 20px;
+      position: relative;
+      bottom: -3px;
+      z-index: 2;
+    }
+
+    .folder-tab {
+      padding: 12px 22px 10px;
+      background: #EDEAE1;
+      border: var(--border-neo);
+      border-bottom: none;
+      border-radius: 12px 12px 0 0;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .folder-tab:hover {
+      transform: translateY(-5px);
+      background: #FFFFFF;
+    }
+
+    .folder-tab.active {
+      background: #FFFFFF;
+      transform: translateY(-8px);
+      box-shadow: 0 -4px 0px rgba(0,0,0,0.1);
+      border-bottom: 3.5px solid #FFFFFF;
+      z-index: 10;
+    }
+
+    .tab-color-mark {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 1px solid #000;
+    }
+
+    .folder-body-card {
+      background: #FFFFFF;
+      border: var(--border-neo);
+      border-radius: 16px;
+      box-shadow: var(--shadow-neo-lg);
+      padding: 36px 32px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .folder-stamp {
+      position: absolute;
+      top: 24px;
+      right: 28px;
+      border: 2px dashed #000;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-weight: 900;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      transform: rotate(3deg);
+      background: var(--neo-yellow);
+    }
+
+    .folder-content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .folder-left-spec {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .spec-header-code {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 800;
+      color: #666;
+    }
+
+    .spec-title {
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+
+    .spec-challenge-box {
+      background: #FAF8F5;
+      border-left: 4px solid #000;
+      padding: 12px 16px;
+      font-size: 13.5px;
+      color: #333;
+    }
+
+    .folder-right-visual {
+      background: #F4F1EA;
+      border: 2px solid #000;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 4px 4px 0px #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .folder-right-visual img {
+      max-width: 100%;
+      max-height: 360px;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    /* ==========================================================================
+       STYLE 3: HORIZONTAL RUNWAY / 3D PERSPECTIVE TRACK
+       ========================================================================== */
+    .runway-viewport {
+      overflow-x: auto;
+      padding: 20px 10px 40px;
+      scroll-snap-type: x mandatory;
+      display: flex;
+      gap: 28px;
+      scrollbar-width: thin;
+    }
+
+    .runway-card {
+      flex: 0 0 520px;
+      scroll-snap-align: center;
+      background: #FFFFFF;
+      border: var(--border-neo);
+      border-radius: 16px;
+      box-shadow: var(--shadow-neo);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: all 0.25s ease;
+    }
+
+    .runway-card:hover {
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: var(--shadow-neo-lg);
+    }
+
+    .runway-watermark {
+      position: absolute;
+      top: 30px;
+      right: 20px;
+      font-family: var(--font-mono);
+      font-size: 80px;
+      font-weight: 900;
+      color: rgba(0,0,0,0.04);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .runway-media-box {
+      height: 280px;
+      background: #F4F1EA;
+      border-bottom: var(--border-neo);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .runway-media-box img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .runway-card:hover .runway-media-box img {
+      transform: scale(1.05);
+    }
+
+    .runway-info {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    .runway-controls {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .runway-nav-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      border: var(--border-neo);
+      box-shadow: var(--shadow-neo-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-weight: 800;
+      font-size: 16px;
+    }
+
+    /* ==========================================================================
+       STYLE 4: ASYMMETRIC BENTO MOSAIC
+       ========================================================================== */
+    .bento-mosaic-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 20px;
+    }
+
+    .bento-card {
+      background: #FFFFFF;
+      border: var(--border-neo);
+      border-radius: 14px;
+      box-shadow: var(--shadow-neo);
+      padding: 24px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.2s ease;
+    }
+
+    .bento-card:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: var(--shadow-neo-lg);
+    }
+
+    /* Card 1: Flagship (Spans 8 cols) */
+    .bento-flagship {
+      grid-column: span 8;
+      background: #FFFFFF;
+      position: relative;
+    }
+
+    /* Card 2: Metric Highlights (Spans 4 cols) */
+    .bento-metric {
+      grid-column: span 4;
+      background: var(--neo-yellow);
+    }
+
+    /* Card 3: Deep Dive (Spans 4 cols) */
+    .bento-compact-1 {
+      grid-column: span 4;
+      background: #FAF8F5;
+    }
+
+    /* Card 4: Architecture (Spans 4 cols) */
+    .bento-compact-2 {
+      grid-column: span 4;
+      background: #FAF8F5;
+    }
+
+    /* Card 5: AI Specimen (Spans 4 cols) */
+    .bento-compact-3 {
+      grid-column: span 4;
+      background: #FAF8F5;
+    }
+
+    .flagship-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .flagship-img-box {
+      background: #F4F1EA;
+      border: 2px solid #000;
+      border-radius: 10px;
+      padding: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 2.5px 2.5px 0px #000;
+    }
+
+    .flagship-img-box img {
+      max-height: 260px;
+      max-width: 100%;
+      object-fit: contain;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .studio-body {
+        grid-template-columns: 1fr;
+      }
+      .studio-sidebar {
+        border-right: none;
+        border-bottom: var(--border-neo);
+      }
+      .folder-content-grid {
+        grid-template-columns: 1fr;
+      }
+      .bento-flagship, .bento-metric, .bento-compact-1, .bento-compact-2, .bento-compact-3 {
+        grid-column: span 12;
+      }
+      .flagship-inner {
+        grid-template-columns: 1fr;
+      }
+      .runway-card {
+        flex: 0 0 85vw;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Controls -->
+  <header class="demo-navbar">
+    <div class="demo-bar-inner">
+      <div class="demo-brand">
+        <span>🎨 Case Studies Redesign</span>
+        <span class="demo-brand-pill">4 STYLES DEMO</span>
+      </div>
+      <div class="style-switchers">
+        <button class="style-btn active btn-style-1" onclick="switchStyle(1)">
+          <span>💻 1. OS Studio</span>
+        </button>
+        <button class="style-btn btn-style-2" onclick="switchStyle(2)">
+          <span>📁 2. Dossier Archive</span>
+        </button>
+        <button class="style-btn btn-style-3" onclick="switchStyle(3)">
+          <span>🚀 3. Horizontal Runway</span>
+        </button>
+        <button class="style-btn btn-style-4" onclick="switchStyle(4)">
+          <span>🍱 4. Bento Mosaic</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-container">
+
+    <!-- Description Banner (Dynamic per style) -->
+    <div class="demo-info-banner" id="info-banner">
+      <div>
+        <div class="demo-info-title" id="info-title">💻 Style 1: The OS Desktop / Dual-Pane Studio</div>
+        <p class="demo-info-desc" id="info-desc">
+          Bàn làm việc hệ điều hành: Cột trái là danh mục file explorer 5 dự án với status badge, cột phải là màn hình điều khiển chính với các mockup tương tác, switch màn hình và chỉ số metric thời gian thực.
+        </p>
+      </div>
+      <span class="vp-tag highlight" id="info-tag">TƯ DUY HỆ THỐNG / BA</span>
+    </div>
+
+    <!-- =========================================================================
+         VIEW 1: OS DUAL-PANE STUDIO
+         ========================================================================= -->
+    <section class="view-section active" id="view-1">
+      <div class="studio-window">
+        <div class="os-bar">
+          <div class="window-dots">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+          </div>
+          <span class="os-bar-title">studio.exe // projects_explorer [workspace active]</span>
+          <span class="vp-tag">5 CASES LOADED</span>
+        </div>
+
+        <div class="studio-body">
+          <!-- Sidebar Explorer -->
+          <div class="studio-sidebar">
+            <div class="sidebar-header">
+              <span>PROJECT DIRECTORY</span>
+              <span>TYPE</span>
+            </div>
+
+            <div class="project-file-item active" onclick="selectStudioProject(0, this)">
+              <div class="file-top-row">
+                <span class="file-name">📁 01_TaskSync.app</span>
+                <span class="file-badge" style="background:#00F5D4;">LIVE</span>
+              </div>
+              <div class="file-sub">All-in-One Team &amp; Work Management</div>
+            </div>
+
+            <div class="project-file-item" onclick="selectStudioProject(1, this)">
+              <div class="file-top-row">
+                <span class="file-name">📁 02_Explora.sys</span>
+                <span class="file-badge" style="background:#FFDE59;">B2B IDE</span>
+              </div>
+              <div class="file-sub">Biotech Cancer Research Workspace</div>
+            </div>
+
+            <div class="project-file-item" onclick="selectStudioProject(2, this)">
+              <div class="file-top-row">
+                <span class="file-name">📁 03_MiraAI.lab</span>
+                <span class="file-badge" style="background:#FF90E8;">AI IOT</span>
+              </div>
+              <div class="file-sub">Pregnancy Wearable Nutrition Twin</div>
+            </div>
+
+            <div class="project-file-item" onclick="selectStudioProject(3, this)">
+              <div class="file-top-row">
+                <span class="file-name">📁 04_Manage.cad</span>
+                <span class="file-badge" style="background:#70E000;">SHIPPED</span>
+              </div>
+              <div class="file-sub">Siemens 3D Sensor Floorplan System</div>
+            </div>
+
+            <div class="project-file-item" onclick="selectStudioProject(4, this)">
+              <div class="file-top-row">
+                <span class="file-name">📁 05_ClaimsAI.b2b</span>
+                <span class="file-badge" style="background:#FF851B;">PROTO</span>
+              </div>
+              <div class="file-sub">Automated Policy Verification Engine</div>
+            </div>
+          </div>
+
+          <!-- Main Stage Viewport -->
+          <div class="studio-viewport" id="studio-viewport">
+            <div>
+              <div class="viewport-meta">
+                <span class="vp-tag highlight" id="s-tag-1">FLAGSHIP CASE STUDY</span>
+                <span class="vp-tag" id="s-tag-2">CLIENT: VERTEX SOLUTIONS</span>
+                <span class="vp-tag" id="s-tag-3">ROLE: LEAD PRODUCT DESIGNER</span>
+              </div>
+
+              <h2 class="viewport-title" id="s-title">TaskSync — All-in-One Work Management &amp; Team Collaboration</h2>
+              <p class="viewport-desc" id="s-desc">
+                Hợp nhất messaging, lịch biểu, chấm công GPS geofencing và chuyển đổi đa workspace (Multi-tenant) trong trải nghiệm mobile-first tinh gọn.
+              </p>
+
+              <!-- Interactive Stage with screen switcher -->
+              <div class="viewport-screen-stage">
+                <div class="screen-img-container">
+                  <img id="s-img" src="assets/tasksync/tasksync-cover.png" alt="Screen Mockup">
+                </div>
+                <div class="screen-tab-bar" id="s-tabs">
+                  <button class="screen-tab-btn active" onclick="switchStudioScreen('assets/tasksync/tasksync-cover.png', this)">✦ Overview</button>
+                  <button class="screen-tab-btn" onclick="switchStudioScreen('assets/tasksync/tasksync-home.png', this)">📱 Home</button>
+                  <button class="screen-tab-btn" onclick="switchStudioScreen('assets/tasksync/tasksync-tasks.png', this)">📋 Tasks</button>
+                  <button class="screen-tab-btn" onclick="switchStudioScreen('assets/tasksync/tasksync-attendance.png', this)">📍 GPS Check-in</button>
+                  <button class="screen-tab-btn" onclick="switchStudioScreen('assets/tasksync/tasksync-chat.png', this)">💬 Team Chat</button>
+                </div>
+              </div>
+
+              <!-- Metrics Row -->
+              <div class="viewport-metrics-row" id="s-metrics">
+                <div class="vp-metric-card">
+                  <div class="vp-metric-val">+40%</div>
+                  <div class="vp-metric-lbl">Tốc độ xử lý task</div>
+                </div>
+                <div class="vp-metric-card">
+                  <div class="vp-metric-val">-65%</div>
+                  <div class="vp-metric-lbl">Thời gian context switch</div>
+                </div>
+                <div class="vp-metric-card">
+                  <div class="vp-metric-val">98%</div>
+                  <div class="vp-metric-lbl">Chấm công GPS đúng giờ</div>
+                </div>
+              </div>
+            </div>
+
+            <button class="vp-cta-btn" onclick="alert('Mở chi tiết case study!')">
+              <span>EXPLORE CASE STUDY</span>
+              <span>↗</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         VIEW 2: INTERACTIVE DOSSIER / MANILA ARCHIVE
+         ========================================================================= -->
+    <section class="view-section" id="view-2">
+      <div class="dossier-wrap">
+        <!-- Physical Manila Folder Tabs -->
+        <div class="folder-tabs-header">
+          <div class="folder-tab active" onclick="selectFolder(0, this)">
+            <span class="tab-color-mark" style="background:var(--neo-yellow);"></span>
+            <span>#01 TASKSYNC</span>
+          </div>
+          <div class="folder-tab" onclick="selectFolder(1, this)">
+            <span class="tab-color-mark" style="background:var(--neo-pink);"></span>
+            <span>#02 EXPLORA</span>
+          </div>
+          <div class="folder-tab" onclick="selectFolder(2, this)">
+            <span class="tab-color-mark" style="background:var(--neo-cyan);"></span>
+            <span>#03 MIRA.AI</span>
+          </div>
+          <div class="folder-tab" onclick="selectFolder(3, this)">
+            <span class="tab-color-mark" style="background:var(--neo-green);"></span>
+            <span>#04 SIEMENS</span>
+          </div>
+          <div class="folder-tab" onclick="selectFolder(4, this)">
+            <span class="tab-color-mark" style="background:var(--neo-orange);"></span>
+            <span>#05 CLAIMS.AI</span>
+          </div>
+        </div>
+
+        <!-- Manila Folder Body Card -->
+        <div class="folder-body-card">
+          <div class="folder-stamp" id="f-stamp">CONFIDENTIAL SPECIMEN // LIVE</div>
+
+          <div class="folder-content-grid">
+            <div class="folder-left-spec">
+              <span class="spec-header-code" id="f-code">ARCHIVE_ID: B2B-ECOSYSTEM-01</span>
+              <h2 class="spec-title" id="f-title">TaskSync — All-in-One Work Management Platform</h2>
+              <div class="spec-challenge-box" id="f-challenge">
+                <strong>Thách thức chính:</strong> Nhân sự thường xuyên gặp app fatigue khi phải chuyển đổi giữa 4-5 công cụ độc lập. Giải pháp là gom luồng công việc cấp thiết vào 1 trải nghiệm mobile trực quan.
+              </div>
+              <div class="viewport-metrics-row" style="margin-top: 8px;">
+                <div class="vp-metric-card" style="background:#FFF;">
+                  <div class="vp-metric-val" id="f-m1">+40%</div>
+                  <div class="vp-metric-lbl">Task Completion</div>
+                </div>
+                <div class="vp-metric-card" style="background:#FFF;">
+                  <div class="vp-metric-val" id="f-m2">-65%</div>
+                  <div class="vp-metric-lbl">App Switch Delay</div>
+                </div>
+              </div>
+              <button class="vp-cta-btn" style="background:var(--neo-yellow);">
+                <span>MỞ TẬP HỒ SƠ NÀY</span>
+                <span>↗</span>
+              </button>
+            </div>
+
+            <div class="folder-right-visual">
+              <img id="f-img" src="assets/tasksync/tasksync-home.png" alt="Dossier Visual">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         VIEW 3: HORIZONTAL RUNWAY / 3D PERSPECTIVE TRACK
+         ========================================================================= -->
+    <section class="view-section" id="view-3">
+      <div class="runway-viewport" id="runway-track">
+
+        <!-- Card 1 -->
+        <article class="runway-card">
+          <div class="runway-watermark">01</div>
+          <div class="runway-media-box">
+            <img src="assets/tasksync/tasksync-cover.png" alt="TaskSync">
+          </div>
+          <div class="runway-info">
+            <div>
+              <span class="vp-tag highlight" style="margin-bottom:8px; display:inline-block;">FLAGSHIP SHIPPED</span>
+              <h3 style="font-size:20px; font-weight:800; line-height:1.3;">TaskSync Platform</h3>
+              <p style="font-size:13.5px; color:#444; margin-top:6px;">Unified mobile-first workspace with GPS geofence check-in and fast multi-tenant switching.</p>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; border-top:1.5px dashed #000; padding-top:12px;">
+              <span style="font-family:var(--font-mono); font-weight:800; font-size:13px;">+40% EFFICIENCY</span>
+              <button class="style-btn active">Explore ↗</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="runway-card">
+          <div class="runway-watermark">02</div>
+          <div class="runway-media-box">
+            <img src="assets/saas.png" alt="Explora">
+          </div>
+          <div class="runway-info">
+            <div>
+              <span class="vp-tag" style="background:var(--neo-yellow); margin-bottom:8px; display:inline-block;">BIOTECH IDE</span>
+              <h3 style="font-size:20px; font-weight:800; line-height:1.3;">Explora Workspace</h3>
+              <p style="font-size:13.5px; color:#444; margin-top:6px;">Consolidated 9 legacy bioinformatics tools into 1 unified research IDE for cancer scientists.</p>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; border-top:1.5px dashed #000; padding-top:12px;">
+              <span style="font-family:var(--font-mono); font-weight:800; font-size:13px;">~$1.2M SAVED</span>
+              <button class="style-btn" style="background:var(--neo-yellow);">Explore ↗</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="runway-card">
+          <div class="runway-watermark">03</div>
+          <div class="runway-media-box">
+            <img src="assets/ecommerce.png" alt="Mira.ai">
+          </div>
+          <div class="runway-info">
+            <div>
+              <span class="vp-tag" style="background:var(--neo-pink); margin-bottom:8px; display:inline-block;">AI WEARABLE</span>
+              <h3 style="font-size:20px; font-weight:800; line-height:1.3;">Mira.ai Nutrition Twin</h3>
+              <p style="font-size:13.5px; color:#444; margin-top:6px;">Apple Watch HRV biological telemetry paired with an adaptive real-time nausea relief assistant.</p>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; border-top:1.5px dashed #000; padding-top:12px;">
+              <span style="font-family:var(--font-mono); font-weight:800; font-size:13px;">100% PREFERRED</span>
+              <button class="style-btn" style="background:var(--neo-pink);">Explore ↗</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="runway-card">
+          <div class="runway-watermark">04</div>
+          <div class="runway-media-box">
+            <img src="assets/design-system.png" alt="Siemens Manage">
+          </div>
+          <div class="runway-info">
+            <div>
+              <span class="vp-tag" style="background:var(--neo-green); margin-bottom:8px; display:inline-block;">SIEMENS B2B</span>
+              <h3 style="font-size:20px; font-weight:800; line-height:1.3;">Siemens Manage 3D</h3>
+              <p style="font-size:13.5px; color:#444; margin-top:6px;">Interactive sensor grouping & commissioning tool cutting setup time from 5 days to 2 days.</p>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; border-top:1.5px dashed #000; padding-top:12px;">
+              <span style="font-family:var(--font-mono); font-weight:800; font-size:13px;">5 DAYS → 2 DAYS</span>
+              <button class="style-btn" style="background:var(--neo-green);">Explore ↗</button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="runway-controls">
+        <button class="runway-nav-btn" onclick="scrollRunway(-400)">←</button>
+        <span style="font-family:var(--font-mono); font-weight:800; font-size:13px;">SCROLL OR DRAG RUNWAY</span>
+        <button class="runway-nav-btn" onclick="scrollRunway(400)">→</button>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         VIEW 4: ASYMMETRIC BENTO MOSAIC
+         ========================================================================= -->
+    <section class="view-section" id="view-4">
+      <div class="bento-mosaic-grid">
+
+        <!-- Flagship Hero Tile (Spans 8 cols) -->
+        <article class="bento-card bento-flagship">
+          <div class="os-bar" style="margin:-24px -24px 20px; border-radius:12px 12px 0 0;">
+            <div class="window-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <span class="os-bar-title">FLAGSHIP HERO SPECIMEN</span>
+            <span class="file-badge" style="background:var(--neo-cyan);">SHIPPED V1.0</span>
+          </div>
+
+          <div class="flagship-inner">
+            <div>
+              <span class="vp-tag" style="background:var(--neo-yellow); margin-bottom:10px; display:inline-block;">#01 · B2B ECOSYSTEM</span>
+              <h3 style="font-size:24px; font-weight:900; line-height:1.25; margin-bottom:10px;">TaskSync Platform</h3>
+              <p style="font-size:14px; color:#333; line-height:1.6; margin-bottom:16px;">Nền tảng quản lý công việc tích hợp team messaging, smart calendar và chấm công GPS geofencing trong một trải nghiệm mobile tinh gọn.</p>
+              
+              <div class="viewport-metrics-row" style="margin-bottom:16px;">
+                <div class="vp-metric-card" style="background:#FAF8F5;">
+                  <div class="vp-metric-val">+40%</div>
+                  <div class="vp-metric-lbl">Tốc độ Sprint</div>
+                </div>
+                <div class="vp-metric-card" style="background:#FAF8F5;">
+                  <div class="vp-metric-val">98%</div>
+                  <div class="vp-metric-lbl">GPS Đúng Giờ</div>
+                </div>
+              </div>
+
+              <button class="style-btn active">Read Case Study ↗</button>
+            </div>
+
+            <div class="flagship-img-box">
+              <img src="assets/tasksync/tasksync-cover.png" alt="TaskSync Cascade">
+            </div>
+          </div>
+        </article>
+
+        <!-- Metric Highlight Tile (Spans 4 cols) -->
+        <article class="bento-card bento-metric">
+          <div>
+            <span class="vp-tag" style="background:#FFF; margin-bottom:12px; display:inline-block;">#02 · BIOTECH ROI</span>
+            <h4 style="font-size:18px; font-weight:900;">Cellworks Explora</h4>
+            <div style="font-size:46px; font-weight:900; font-family:var(--font-mono); margin:14px 0 6px; letter-spacing:-0.03em;">
+              ~$1.2M
+            </div>
+            <p style="font-size:13px; font-weight:700;">Năng suất nghiên cứu phục hồi hàng năm khi gom 9 legacy tools về 1 IDE duy nhất.</p>
+          </div>
+          <button class="style-btn" style="background:#FFF; align-self:flex-start; margin-top:20px;">Xem Chi Tiết ↗</button>
+        </article>
+
+        <!-- Compact Tile 1 (Spans 4 cols) -->
+        <article class="bento-card bento-compact-1">
+          <div>
+            <span class="vp-tag" style="background:var(--neo-pink); margin-bottom:10px; display:inline-block;">#03 · AI WEARABLE</span>
+            <h4 style="font-size:18px; font-weight:900; margin-bottom:8px;">Mira.ai Pregnancy</h4>
+            <p style="font-size:13px; color:#444; line-height:1.5;">Trợ lý dinh dưỡng bio-digital twin kết hợp cảm biến HRV trên Apple Watch.</p>
+          </div>
+          <div style="background:#F4F1EA; border:1.5px solid #000; border-radius:8px; padding:12px; margin:16px 0; text-align:center;">
+            <img src="assets/ecommerce.png" alt="Mira Preview" style="max-height:110px; max-width:100%; object-fit:contain;">
+          </div>
+          <button class="style-btn" style="align-self:flex-start;">Explore Case ↗</button>
+        </article>
+
+        <!-- Compact Tile 2 (Spans 4 cols) -->
+        <article class="bento-card bento-compact-2">
+          <div>
+            <span class="vp-tag" style="background:var(--neo-green); margin-bottom:10px; display:inline-block;">#04 · FIELD COMMISSIONING</span>
+            <h4 style="font-size:18px; font-weight:900; margin-bottom:8px;">Siemens Manage 3D</h4>
+            <p style="font-size:13px; color:#444; line-height:1.5;">Giao diện floorplan kéo thả phân nhóm 1,000+ cảm biến tòa nhà thông minh.</p>
+          </div>
+          <div style="background:#F4F1EA; border:1.5px solid #000; border-radius:8px; padding:12px; margin:16px 0; text-align:center;">
+            <img src="assets/design-system.png" alt="Manage Preview" style="max-height:110px; max-width:100%; object-fit:contain;">
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-family:var(--font-mono); font-weight:800; font-size:12px;">5 DAYS → 2 DAYS</span>
+            <button class="style-btn">Explore ↗</button>
+          </div>
+        </article>
+
+        <!-- Compact Tile 3 (Spans 4 cols) -->
+        <article class="bento-card bento-compact-3">
+          <div>
+            <span class="vp-tag" style="background:var(--neo-orange); margin-bottom:10px; display:inline-block;">#05 · B2B PROTOTYPE</span>
+            <h4 style="font-size:18px; font-weight:900; margin-bottom:8px;">AI Claims Engine</h4>
+            <p style="font-size:13px; color:#444; line-height:1.5;">Thẩm định bồi thường bảo hiểm tự động hóa bằng AI đa phương thức.</p>
+          </div>
+          <div style="background:#F4F1EA; border:1.5px solid #000; border-radius:8px; padding:12px; margin:16px 0; text-align:center;">
+            <img src="assets/fintech.png" alt="Fintech Preview" style="max-height:110px; max-width:100%; object-fit:contain;">
+          </div>
+          <button class="style-btn" style="align-self:flex-start;">Explore Case ↗</button>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Style Switcher
+    const styleDescriptions = {
+      1: {
+        title: "💻 Style 1: The OS Desktop / Dual-Pane Studio",
+        desc: "Bàn làm việc hệ điều hành: Cột trái là danh mục file explorer 5 dự án với status badge, cột phải là màn hình điều khiển chính với các mockup tương tác, switch màn hình và chỉ số metric thời gian thực.",
+        tag: "TƯ DUY HỆ THỐNG / BA",
+        color: "var(--neo-cyan)"
+      },
+      2: {
+        title: "📁 Style 2: Interactive Dossier / Manila Archive",
+        desc: "Hồ sơ vật lý bảo mật dạng tab tai thỏ: Các folder xếp chồng lên nhau, bấm vào tab nào hồ sơ đó bật lên phía trước kèm mã số chuyên án và bảng thiết kế chi tiết.",
+        tag: "ĐỘC ĐÁO & VẬT LÝ",
+        color: "var(--neo-pink)"
+      },
+      3: {
+        title: "🚀 Style 3: Horizontal Runway / 3D Track",
+        desc: "Băng chuyền trượt ngang kiểu Awwwards: Thoát khỏi cuộn dọc truyền thống, dự án lướt ngang vô tận với số hiệu khổng lồ, góc nghiêng 3D và nút điều hướng 2 chiều.",
+        tag: "THỊ GIÁC & ĐIỆN ẢNH",
+        color: "var(--neo-yellow)"
+      },
+      4: {
+        title: "🍱 Style 4: Asymmetric Bento Mosaic",
+        desc: "Lưới Bento bất đối xứng: Tôn vinh dự án chủ lực TaskSync với diện tích gấp đôi, các dự án còn lại làm nổi bật chỉ số tài chính ($1.2M), mockup mini và tỉ lệ tối ưu hóa.",
+        tag: "HIỆN ĐẠI & RÕ NHỊP ĐIỆU",
+        color: "var(--neo-green)"
+      }
+    };
+
+    function switchStyle(num) {
+      document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.style-btn').forEach(b => b.classList.remove('active'));
+      
+      const targetView = document.getElementById(`view-${num}`);
+      if (targetView) targetView.classList.add('active');
+
+      const btn = document.querySelector(`.btn-style-${num}`);
+      if (btn) btn.classList.add('active');
+
+      const info = styleDescriptions[num];
+      document.getElementById('info-title').textContent = info.title;
+      document.getElementById('info-desc').textContent = info.desc;
+      const tagEl = document.getElementById('info-tag');
+      tagEl.textContent = info.tag;
+      tagEl.style.backgroundColor = info.color;
+    }
+
+    // Projects Data for Style 1 (Studio)
+    const studioData = [
+      {
+        title: "TaskSync — All-in-One Work Management & Team Collaboration",
+        desc: "Hợp nhất messaging, lịch biểu, chấm công GPS geofencing và chuyển đổi đa workspace (Multi-tenant) trong trải nghiệm mobile-first tinh gọn.",
+        tag1: "FLAGSHIP CASE STUDY",
+        tag2: "CLIENT: VERTEX SOLUTIONS",
+        tag3: "ROLE: LEAD PRODUCT DESIGNER",
+        tabs: [
+          { label: "✦ Overview", img: "assets/tasksync/tasksync-cover.png" },
+          { label: "📱 Home", img: "assets/tasksync/tasksync-home.png" },
+          { label: "📋 Tasks", img: "assets/tasksync/tasksync-tasks.png" },
+          { label: "📍 GPS Check-in", img: "assets/tasksync/tasksync-attendance.png" },
+          { label: "💬 Team Chat", img: "assets/tasksync/tasksync-chat.png" }
+        ],
+        metrics: [
+          { val: "+40%", lbl: "Tốc độ xử lý task" },
+          { val: "-65%", lbl: "Thời gian context switch" },
+          { val: "98%", lbl: "Chấm công GPS đúng giờ" }
+        ]
+      },
+      {
+        title: "Explora — Empowering Scientists to Deliver Faster Personalized Cancer Care",
+        desc: "Hệ thống IDE phân tích sinh học phân tử tập trung, tích hợp mô phỏng song song và tự động hóa theo dõi tiến trình thử nghiệm lâm sàng.",
+        tag1: "0 TO 1 PRODUCT",
+        tag2: "CLIENT: CELLWORKS BIOTECH",
+        tag3: "ROLE: FOUNDING DESIGNER",
+        tabs: [
+          { label: "🖥️ R&D Studio", img: "assets/saas.png" },
+          { label: "🔬 Parallel Sim", img: "assets/saas.png" }
+        ],
+        metrics: [
+          { val: "~$1.2M", lbl: "Năng suất phục hồi hàng năm" },
+          { val: "100%", lbl: "Tổ chức chuyển dịch sang dùng" },
+          { val: "9 → 1", lbl: "Số công cụ rời rạc được gom" }
+        ]
+      },
+      {
+        title: "Mira.ai — Innovating the Future of AI in Pregnancy Nutrition",
+        desc: "Trợ lý dinh dưỡng thai kỳ thế hệ mới kết hợp dữ liệu nhịp tim sinh trắc học trên Apple Watch và bio-digital twin thích ứng.",
+        tag1: "AI & IOT WEARABLE",
+        tag2: "RESEARCH PROJECT",
+        tag3: "ROLE: PRODUCT DESIGNER",
+        tabs: [
+          { label: "⌚ Wearable UX", img: "assets/ecommerce.png" },
+          { label: "🤰 Nutrition Lab", img: "assets/ecommerce.png" }
+        ],
+        metrics: [
+          { val: "15/15", lbl: "Độ tin cậy của testers" },
+          { val: "100%", lbl: "Đánh giá cao AI Context" },
+          { val: "~70%", lbl: "Giảm triệu chứng ốm nghén" }
+        ]
+      },
+      {
+        title: "Siemens Manage — Accelerating Field Operations with Intuitive Interaction",
+        desc: "Tái cấu trúc luồng phân nhóm và kiểm thử 1,000+ cảm biến tòa nhà thông minh, rút ngắn thời gian thiết lập từ 5 ngày xuống còn 2 ngày.",
+        tag1: "ENTERPRISE SAAS",
+        tag2: "SIEMENS LIGHTING",
+        tag3: "ROLE: PRODUCT DESIGNER",
+        tabs: [
+          { label: "🏢 3D Floorplan", img: "assets/design-system.png" },
+          { label: "⚡ 5D → 2D Flow", img: "assets/design-system.png" }
+        ],
+        metrics: [
+          { val: "5 → 2", lbl: "Số ngày bàn giao dự án" },
+          { val: "100%", lbl: "Độ chính xác phân nhóm" },
+          { val: "+25%", lbl: "Tối ưu không gian hiển thị" }
+        ]
+      },
+      {
+        title: "AI Consumer Research & Automated Claims Verification Engine",
+        desc: "Ứng dụng mobile thu thập dữ liệu chuyên gia vi mô (Micro-tasking) và engine thẩm định hồ sơ rủi ro hỗ trợ ra quyết định tài chính.",
+        tag1: "AI SPECIMEN",
+        tag2: "SEED STAGE B2B",
+        tag3: "ROLE: LEAD PROTOTYPER",
+        tabs: [
+          { label: "📱 Mobile App", img: "assets/fintech.png" },
+          { label: "📊 Claims Engine", img: "assets/saas.png" }
+        ],
+        metrics: [
+          { val: "10x", lbl: "Tốc độ thẩm định bồi thường" },
+          { val: "B2B", lbl: "Chuẩn bảo mật Enterprise" },
+          { val: "Seed", lbl: "Hoàn thiện demo gọi vốn" }
+        ]
+      }
+    ];
+
+    function selectStudioProject(idx, el) {
+      document.querySelectorAll('.project-file-item').forEach(i => i.classList.remove('active'));
+      el.classList.add('active');
+
+      const data = studioData[idx];
+      document.getElementById('s-title').textContent = data.title;
+      document.getElementById('s-desc').textContent = data.desc;
+      document.getElementById('s-tag-1').textContent = data.tag1;
+      document.getElementById('s-tag-2').textContent = data.tag2;
+      document.getElementById('s-tag-3').textContent = data.tag3;
+
+      // Update tabs
+      const tabsWrap = document.getElementById('s-tabs');
+      tabsWrap.innerHTML = data.tabs.map((t, ti) => `
+        <button class="screen-tab-btn ${ti === 0 ? 'active' : ''}" onclick="switchStudioScreen('${t.img}', this)">
+          ${t.label}
+        </button>
+      `).join('');
+
+      // Update image
+      document.getElementById('s-img').src = data.tabs[0].img;
+
+      // Update metrics
+      const metricsWrap = document.getElementById('s-metrics');
+      metricsWrap.innerHTML = data.metrics.map(m => `
+        <div class="vp-metric-card">
+          <div class="vp-metric-val">${m.val}</div>
+          <div class="vp-metric-lbl">${m.lbl}</div>
+        </div>
+      `).join('');
+    }
+
+    function switchStudioScreen(src, btn) {
+      document.querySelectorAll('.screen-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const img = document.getElementById('s-img');
+      img.style.opacity = '0';
+      setTimeout(() => {
+        img.src = src;
+        img.style.opacity = '1';
+      }, 150);
+    }
+
+    // Style 2: Dossier Switcher
+    const dossierData = [
+      {
+        code: "ARCHIVE_ID: B2B-ECOSYSTEM-01",
+        title: "TaskSync — All-in-One Work Management Platform",
+        challenge: "Nhân sự thường xuyên gặp app fatigue khi phải chuyển đổi giữa 4-5 công cụ độc lập. Giải pháp là gom luồng công việc cấp thiết vào 1 trải nghiệm mobile trực quan.",
+        img: "assets/tasksync/tasksync-home.png",
+        stamp: "CONFIDENTIAL SPECIMEN // LIVE",
+        m1: "+40%",
+        m2: "-65%"
+      },
+      {
+        code: "ARCHIVE_ID: BIOTECH-IDE-02",
+        title: "Explora — Personalized Cancer Therapy Workspace",
+        challenge: "Các nhà khoa học tốn hàng giờ chuyển đổi giữa 9 bảng tính và tool rời rạc. Explora hợp nhất dữ liệu vào 1 IDE đa luồng duy nhất.",
+        img: "assets/saas.png",
+        stamp: "CONFIDENTIAL SPECIMEN // SHIPPED",
+        m1: "~$1.2M",
+        m2: "9 → 1 Tools"
+      },
+      {
+        code: "ARCHIVE_ID: WEARABLE-AI-03",
+        title: "Mira.ai — Adaptive Pregnancy Nutrition Engine",
+        challenge: "Các ứng dụng thai kỳ hiện nay chỉ đếm tuần mà bỏ quên cơ thể người mẹ. Mira.ai theo dõi HRV trên Apple Watch để gợi ý thực đơn thích ứng theo thời gian thực.",
+        img: "assets/ecommerce.png",
+        stamp: "CONFIDENTIAL SPECIMEN // CONCEPT",
+        m1: "15/15",
+        m2: "100% Context"
+      },
+      {
+        code: "ARCHIVE_ID: SIEMENS-COMMISSIONING-04",
+        title: "Siemens Manage — Smart Building 3D Floorplan",
+        challenge: "Giao diện cũ là bức tường số liệu dày đặc đòi hỏi thao tác thủ công nhiều ngày. Hệ thống mới dùng thao tác kéo thả nhóm trực quan trên floorplan 3D.",
+        img: "assets/design-system.png",
+        stamp: "CONFIDENTIAL SPECIMEN // SHIPPED",
+        m1: "5D → 2D",
+        m2: "100% Acc"
+      },
+      {
+        code: "ARCHIVE_ID: FINTECH-CLAIMS-05",
+        title: "AI Automated Insurance Claim Processing",
+        challenge: "Cần xây dựng công cụ thẩm định tự động đa phương thức phục vụ thẩm định viên bảo hiểm với độ minh bạch tuyệt đối về chứng cứ.",
+        img: "assets/fintech.png",
+        stamp: "CONFIDENTIAL SPECIMEN // PROTO",
+        m1: "10x",
+        m2: "Seed Pitch"
+      }
+    ];
+
+    function selectFolder(idx, tab) {
+      document.querySelectorAll('.folder-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      const d = dossierData[idx];
+      document.getElementById('f-code').textContent = d.code;
+      document.getElementById('f-title').textContent = d.title;
+      document.getElementById('f-challenge').innerHTML = `<strong>Thách thức chính:</strong> ${d.challenge}`;
+      document.getElementById('f-stamp').textContent = d.stamp;
+      document.getElementById('f-m1').textContent = d.m1;
+      document.getElementById('f-m2').textContent = d.m2;
+      document.getElementById('f-img').src = d.img;
+    }
+
+    // Style 3: Runway Scroll Helper
+    function scrollRunway(offset) {
+      const track = document.getElementById('runway-track');
+      track.scrollBy({ left: offset, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>

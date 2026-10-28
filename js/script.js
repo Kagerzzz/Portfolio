@@ -1187,6 +1187,156 @@ function formatScreenLabel(label) {
   return label;
 }
 
+/* ==========================================================================
+   OS Desktop / Dual-Pane Studio Rendering Engine (Style 1 Flagship)
+   ========================================================================== */
+let currentStudioProjectIndex = 0;
+let currentStudioScreenIndex = 0;
+
+function getStudioFileMeta(p, index) {
+  const pid = (p.id || "").toLowerCase();
+  const num = String(index + 1).padStart(2, "0");
+  
+  if (pid.includes("tasksync")) {
+    return {
+      fileName: `${num}_TaskSync.app`,
+      badge: "LIVE SHIPPED",
+      badgeBg: "var(--neo-cyan)",
+      badgeColor: "#000000",
+      sub: "All-in-One Team & Work Management"
+    };
+  } else if (pid.includes("explora")) {
+    return {
+      fileName: `${num}_Explora.sys`,
+      badge: "B2B IDE",
+      badgeBg: "var(--neo-yellow)",
+      badgeColor: "#000000",
+      sub: "Biotech Cancer R&D Workspace"
+    };
+  } else if (pid.includes("mira")) {
+    return {
+      fileName: `${num}_MiraAI.lab`,
+      badge: "WEARABLE",
+      badgeBg: "var(--neo-pink)",
+      badgeColor: "#000000",
+      sub: "Pregnancy Wearable Nutrition Twin"
+    };
+  } else if (pid.includes("manage")) {
+    return {
+      fileName: `${num}_SiemensManage.cad`,
+      badge: "SHIPPED",
+      badgeBg: "var(--neo-green)",
+      badgeColor: "#000000",
+      sub: "3D Sensor Floorplan System"
+    };
+  } else if (pid.includes("claim") || pid.includes("fintech") || pid.includes("consumer")) {
+    return {
+      fileName: `${num}_AIClaims.b2b`,
+      badge: "PROTOTYPE",
+      badgeBg: "var(--neo-orange)",
+      badgeColor: "#000000",
+      sub: "Automated Policy Verification Engine"
+    };
+  } else {
+    return {
+      fileName: `${num}_${(p.id || "case").replace(/[^a-zA-Z0-9]/g, "")}.app`,
+      badge: "CASE",
+      badgeBg: "var(--bg-card)",
+      badgeColor: "var(--text-main)",
+      sub: (p.tags && p.tags[0]) || p.client || "Product Design Case"
+    };
+  }
+}
+
+function renderStudioSidebarItems() {
+  return activeProjects.map((p, idx) => {
+    const meta = getStudioFileMeta(p, idx);
+    const isActive = idx === currentStudioProjectIndex;
+    return `
+      <div class="studio-file-item ${isActive ? 'active' : ''}" data-index="${idx}" onclick="selectStudioProject(${idx})">
+        <div class="studio-file-top-row">
+          <span class="studio-file-name"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg> ${meta.fileName}</span>
+          <span class="studio-file-badge" style="background:${meta.badgeBg}; color:${meta.badgeColor};">${meta.badge}</span>
+        </div>
+        <div class="studio-file-sub">${meta.sub}</div>
+      </div>
+    `;
+  }).join("");
+}
+
+function renderStudioViewportHtml(p) {
+  if (!p) return "";
+  const isFlagship = (p.id || "").toLowerCase().includes("tasksync");
+  const screens = (p.peekScreens && p.peekScreens.length > 0)
+    ? p.peekScreens
+    : [{ label: "Overview", src: p.image_url || p.image, tag: "MAIN VIEW", desc: p.title }];
+  
+  if (currentStudioScreenIndex >= screens.length) {
+    currentStudioScreenIndex = 0;
+  }
+  const activeScreen = screens[currentStudioScreenIndex];
+
+  // Metrics HUD
+  const metricsHtml = (p.metrics && p.metrics.length > 0) ? `
+    <div class="studio-metrics-row">
+      ${p.metrics.map(m => `
+        <div class="studio-metric-card">
+          <div class="studio-metric-val">${m.val}</div>
+          <div class="studio-metric-lbl">${m.label}</div>
+        </div>
+      `).join("")}
+    </div>
+  ` : "";
+
+  // Screen Switcher Tabs
+  const screenTabsHtml = screens.length > 1 ? `
+    <div class="studio-screen-tabs" onclick="event.stopPropagation()">
+      ${screens.map((s, si) => `
+        <button type="button" class="studio-tab-btn ${si === currentStudioScreenIndex ? 'active' : ''}" onclick="switchStudioScreen(${si}, this, event)">
+          <span>${formatScreenLabel(s.label)}</span>
+        </button>
+      `).join("")}
+    </div>
+  ` : "";
+
+  return `
+    <div>
+      <div class="studio-vp-meta-row">
+        ${isFlagship ? '<span class="studio-vp-pill highlight">✦ FLAGSHIP CASE STUDY</span>' : ''}
+        <span class="studio-vp-pill">CLIENT: ${p.client || "Client"}</span>
+        <span class="studio-vp-pill">ROLE: ${p.role || "Product Designer"}</span>
+        <span class="studio-vp-pill">${p.year || "Shipped"}</span>
+      </div>
+
+      <h2 class="studio-vp-title">${p.title}</h2>
+      <p class="studio-vp-desc">${p.summary}</p>
+
+      <!-- Interactive Screen Stage -->
+      <div class="studio-screen-stage">
+        <div class="studio-screen-container" onclick="handleCardClick('${p.id}', event)" title="Click để mở chi tiết Case Study">
+          <img id="studio-screen-img" src="${activeScreen.src}" alt="${activeScreen.label || p.title}" class="studio-screen-img" loading="lazy">
+        </div>
+        ${screenTabsHtml}
+      </div>
+
+      <!-- Business & Design Impact Metrics HUD -->
+      ${metricsHtml}
+    </div>
+
+    <!-- Bottom Action Row -->
+    <div class="studio-action-row">
+      <div class="studio-tags-wrap">
+        ${(p.tags || []).map(t => `<span class="studio-tag-pill">${t}</span>`).join("")}
+      </div>
+
+      <button type="button" class="studio-cta-btn" onclick="handleCardClick('${p.id}', event)">
+        <span>EXPLORE CASE STUDY</span>
+        <span class="btn-arrow"><svg class="btn-arrow-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17l10-10M7 7h10v10"/></svg></span>
+      </button>
+    </div>
+  `;
+}
+
 function renderProjects() {
   const container = document.getElementById("projects-container");
   if (!container) return;
@@ -1196,189 +1346,108 @@ function renderProjects() {
     countBadge.textContent = `${String(activeProjects.length).padStart(2, "0")} CASE STUDIES ✦`;
   }
 
-  container.innerHTML = activeProjects.map((project, index) => {
-    const numStamp = (index + 1).toString().padStart(2, "0");
-    const themeClass = `card-theme-${index % 5}`;
-    const pid = (project.id || "").toLowerCase();
-    const imgSrc = project.image_url || project.image;
-    const isTaskSync = pid.includes("tasksync");
+  if (currentStudioProjectIndex >= activeProjects.length) {
+    currentStudioProjectIndex = 0;
+  }
 
-    // Status text mapping
-    let statusBadge = "FEATURED ✦";
-    const tagsLower = (project.tags || []).map(t => t.toLowerCase());
-    if (tagsLower.some(t => t.includes("shipped"))) statusBadge = `LIVE SHIPPED <svg class="tag-icon-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>`;
-    else if (tagsLower.some(t => t.includes("concept"))) statusBadge = "AI CONCEPT ✦";
-    else if (tagsLower.some(t => t.includes("prototype"))) statusBadge = `B2B PROTOTYPE <svg class="tag-icon-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>`;
+  const p = activeProjects[currentStudioProjectIndex];
+  if (!p) return;
 
-    // Peek screens data
-    const peekScreens = project.peekScreens || [
-      { label: "Overview", src: imgSrc, tag: "MAIN VIEW", desc: project.title }
-    ];
-    const initialPeek = peekScreens[0];
-
-    // Multi-Screen Interactive Stage
-    let mediaObjectHtml = "";
-
-    if (isTaskSync) {
-      // Flagship TaskSync: 3D Multi-Device Cascade with Fan-Out Layering
-      mediaObjectHtml = `
-      <div class="media-interactive-object tasksync-cascade-stage">
-        <!-- Floating Flagship Ribbon -->
-        <div class="stage-flagship-pill">✦ FLAGSHIP B2B CASE STUDY</div>
-
-        <!-- 3D Layered Phones Group -->
-        <div class="cascade-phones-group">
-          <!-- Left Flanking Phone (Fans out on card hover) -->
-          <div class="cascade-phone phone-fan-left" aria-hidden="true">
-            <div class="phone-speaker"></div>
-            <div class="phone-screen-viewport">
-              <img src="assets/tasksync/tasksync-tasks.png" alt="Tasks Kanban" loading="lazy">
-            </div>
-            <span class="phone-label-tab">TASKS</span>
-          </div>
-
-          <!-- Right Flanking Phone (Fans out on card hover) -->
-          <div class="cascade-phone phone-fan-right" aria-hidden="true">
-            <div class="phone-speaker"></div>
-            <div class="phone-screen-viewport">
-              <img src="assets/tasksync/tasksync-attendance.png" alt="GPS Attendance" loading="lazy">
-            </div>
-            <span class="phone-label-tab">GPS CHECK-IN</span>
-          </div>
-
-          <!-- Main Center Stage Phone (Interactive Active Screen) -->
-          <div class="cascade-phone phone-stage-main">
-            <div class="phone-speaker"></div>
-            <div class="phone-screen-viewport">
-              <img id="peek-img-${project.id}" src="${initialPeek.src}" alt="${project.title}" class="peek-main-screen" loading="lazy">
-              <div class="phone-screen-glare"></div>
-            </div>
-            <div class="phone-home-indicator"></div>
-          </div>
+  container.innerHTML = `
+    <div class="studio-window" id="studio-window">
+      <!-- Retro Window Top Bar -->
+      <div class="studio-os-bar">
+        <div class="studio-window-dots">
+          <span class="studio-dot dot-red"></span>
+          <span class="studio-dot dot-yellow"></span>
+          <span class="studio-dot dot-green"></span>
         </div>
-
-        <!-- HUD Telemetry Caption Strip -->
-        <div class="peek-hud-strip">
-          <span class="peek-hud-tag" id="peek-tag-${project.id}">${initialPeek.tag}</span>
-          <span class="peek-hud-desc" id="peek-desc-${project.id}">${initialPeek.desc}</span>
-        </div>
-
-        <!-- Quick-Peek Screen Switcher Tabs -->
-        <div class="screen-peek-pill-bar" onclick="event.stopPropagation()">
-          ${peekScreens.map((s, si) => `
-            <button type="button" class="peek-pill ${si === 0 ? 'active' : ''}" onclick="switchPeekScreen('${project.id}', ${si}, this, event)">
-              <span>${formatScreenLabel(s.label)}</span>
-            </button>
-          `).join("")}
-        </div>
-      </div>
-      `;
-    } else {
-      // General Projects: Elevated Device Viewport with Quick-View Switcher
-      mediaObjectHtml = `
-      <div class="media-interactive-object generic-peek-stage">
-        <div class="generic-stage-viewport">
-          <img id="peek-img-${project.id}" src="${initialPeek.src}" alt="${project.title}" class="project-img peek-main-screen" loading="lazy">
-          <div class="stage-hologram-seal">✦ CASE SPECIMEN</div>
-          <div class="viewport-hud-bracket br-tl"></div>
-          <div class="viewport-hud-bracket br-tr"></div>
-          <div class="viewport-hud-bracket br-bl"></div>
-          <div class="viewport-hud-bracket br-br"></div>
-        </div>
-
-        <!-- HUD Telemetry Caption Strip -->
-        <div class="peek-hud-strip">
-          <span class="peek-hud-tag" id="peek-tag-${project.id}">${initialPeek.tag}</span>
-          <span class="peek-hud-desc" id="peek-desc-${project.id}">${initialPeek.desc}</span>
-        </div>
-
-        <!-- Quick-Peek Screen Switcher Tabs -->
-        ${peekScreens.length > 1 ? `
-        <div class="screen-peek-pill-bar" onclick="event.stopPropagation()">
-          ${peekScreens.map((s, si) => `
-            <button type="button" class="peek-pill ${si === 0 ? 'active' : ''}" onclick="switchPeekScreen('${project.id}', ${si}, this, event)">
-              <span>${formatScreenLabel(s.label)}</span>
-            </button>
-          `).join("")}
-        </div>` : ''}
-      </div>
-      `;
-    }
-
-    // Impact Metrics HUD
-    const metricsHtml = (project.metrics && project.metrics.length > 0) ? `
-      <div class="project-metrics-hud">
-        ${project.metrics.map((m, mi) => `
-          <div class="metric-hud-chip metric-chip-${mi % 3}">
-            <div class="metric-chip-val">${m.val}</div>
-            <div class="metric-chip-lbl">${m.label}</div>
-          </div>
-        `).join("")}
-      </div>
-    ` : "";
-
-    return `
-    <article class="project-item ${themeClass} ${isTaskSync ? 'is-flagship-item' : ''}" id="${project.id}" onclick="handleCardClick('${project.id}', event)">
-      
-      <!-- Retro Window Bar -->
-      <div class="card-window-bar">
-        <div class="window-dots">
-          <span class="window-dot dot-red"></span>
-          <span class="window-dot dot-yellow"></span>
-          <span class="window-dot dot-green"></span>
-        </div>
-        <div class="window-slug">sanvi.design/case/${project.id}</div>
-        <div class="window-actions-group">
-          <span class="window-hint-peek">✦ QUICK PREVIEW UI</span>
-          <div class="window-status">${statusBadge}</div>
+        <div class="studio-os-slug">studio.exe // projects_explorer [workspace active]</div>
+        <div class="studio-os-status">
+          <span class="studio-status-pill" id="studio-status-pill">${String(activeProjects.length).padStart(2, "0")} CASES LOADED</span>
         </div>
       </div>
 
-      <!-- Card Main Body -->
-      <div class="project-card-body">
-        <div class="project-number-stamp">#${numStamp}</div>
-        
-        <!-- Interactive Multi-Screen Media Stage -->
-        <div class="project-media">
-          ${mediaObjectHtml}
-        </div>
-
-        <!-- Project Meta & Information -->
-        <div class="project-info-column">
-          <!-- Client & Role Credibility Strip -->
-          <div class="project-cred-strip">
-            <span class="cred-pill cred-client"><svg class="pill-icon-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v8h20v-8a2 2 0 0 0-2-2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg> ${project.client || "Client"}</span>
-            <span class="cred-pill cred-role">✦ ${project.role || "Product Designer"}</span>
-            <span class="cred-pill cred-year">${project.year || "Shipped"}</span>
+      <!-- Studio Dual-Pane Body -->
+      <div class="studio-body">
+        <!-- Left: Project Directory Explorer -->
+        <aside class="studio-sidebar" aria-label="Project Directory">
+          <div class="studio-sidebar-header">
+            <span>PROJECT DIRECTORY</span>
+            <span>TYPE</span>
           </div>
-
-          <!-- Product Title Headline -->
-          <h2 class="project-headline">${project.title}</h2>
-
-          <!-- Product Summary Text -->
-          <p class="project-summary-text">${project.summary}</p>
-
-          <!-- Business & Design Impact Metrics HUD -->
-          ${metricsHtml}
-
-          <!-- Footer with Tags & CTA Button -->
-          <div class="project-card-footer">
-            <div class="project-tags">
-              ${(project.tags || []).map(t => `<span class="tag-pill">${t}</span>`).join("")}
-            </div>
-
-            <button class="btn-read-case" onclick="event.stopPropagation(); handleCardClick('${project.id}', event)">
-              <span>explore case study</span>
-              <span class="btn-arrow"><svg class="btn-arrow-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17l10-10M7 7h10v10"/></svg></span>
-            </button>
+          <div class="studio-file-list" id="studio-file-list">
+            ${renderStudioSidebarItems()}
           </div>
-        </div>
+        </aside>
+
+        <!-- Right: Studio Live Viewport Stage -->
+        <main class="studio-viewport" id="studio-viewport" aria-live="polite">
+          ${renderStudioViewportHtml(p)}
+        </main>
       </div>
-
-    </article>
+    </div>
   `;
-  }).join("");
+
+  init3DParallaxTilt();
 }
+
+window.selectStudioProject = function(idx) {
+  if (idx < 0 || idx >= activeProjects.length) return;
+  currentStudioProjectIndex = idx;
+  currentStudioScreenIndex = 0;
+
+  // Update active file item in sidebar
+  document.querySelectorAll(".studio-file-item").forEach((el, i) => {
+    if (i === idx) {
+      el.classList.add("active");
+    } else {
+      el.classList.remove("active");
+    }
+  });
+
+  const vp = document.getElementById("studio-viewport");
+  if (vp) {
+    const p = activeProjects[idx];
+    vp.style.opacity = "0";
+    vp.style.transform = "translateY(5px)";
+    setTimeout(() => {
+      vp.innerHTML = renderStudioViewportHtml(p);
+      vp.style.transition = "opacity 0.18s ease, transform 0.18s ease";
+      vp.style.opacity = "1";
+      vp.style.transform = "translateY(0)";
+      init3DParallaxTilt();
+    }, 100);
+  }
+};
+
+window.switchStudioScreen = function(screenIndex, btn, event) {
+  if (event) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+  currentStudioScreenIndex = screenIndex;
+  document.querySelectorAll(".studio-tab-btn").forEach(b => b.classList.remove("active"));
+  if (btn) btn.classList.add("active");
+
+  const p = activeProjects[currentStudioProjectIndex];
+  if (!p) return;
+  const screens = (p.peekScreens && p.peekScreens.length > 0)
+    ? p.peekScreens
+    : [{ src: p.image_url || p.image }];
+  const s = screens[screenIndex];
+  if (!s) return;
+
+  const img = document.getElementById("studio-screen-img");
+  if (img) {
+    img.style.opacity = "0";
+    setTimeout(() => {
+      img.src = s.src;
+      img.alt = s.label || p.title;
+      img.style.opacity = "1";
+    }, 120);
+  }
+};
 
 function handleCardClick(id, event) {
   fireConfetti(event);
@@ -1387,6 +1456,30 @@ function handleCardClick(id, event) {
 
 /* 3D Parallax Mouse Tilt Animation for Unique Media Objects */
 function init3DParallaxTilt() {
+  const stage = document.querySelector(".studio-screen-container");
+  if (stage) {
+    stage.addEventListener("mousemove", (e) => {
+      const rect = stage.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -5;
+      const rotateY = ((x - centerX) / centerX) * 5;
+      const img = stage.querySelector(".studio-screen-img");
+      if (img) {
+        img.style.transform = `perspective(900px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale(1.025)`;
+      }
+    });
+
+    stage.addEventListener("mouseleave", () => {
+      const img = stage.querySelector(".studio-screen-img");
+      if (img) {
+        img.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)";
+      }
+    });
+  }
+
   const cards = document.querySelectorAll(".project-item");
   cards.forEach(card => {
     const object = card.querySelector(".media-interactive-object");
@@ -1396,16 +1489,12 @@ function init3DParallaxTilt() {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
-      
       const rotateX = ((y - centerY) / centerY) * -5;
       const rotateY = ((x - centerX) / centerX) * 5;
-      
       const shadowX = Math.round(-rotateY * 1.2 + 8);
       const shadowY = Math.round(rotateX * 1.2 + 8);
-      
       object.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale(1.025) translateY(-4px)`;
       object.style.boxShadow = `${shadowX}px ${shadowY}px 0px #000000`;
     });
