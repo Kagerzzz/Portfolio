@@ -4,12 +4,25 @@
  */
 
 // Hero Questions & Interactive Perspectives
+// Helper: Format tab label with SVG icon
+function getPerspectiveIcon(key) {
+  if (typeof Icons === 'undefined') return '';
+  switch (key) {
+    case 'who': return Icons.sparkle(13, 'pill-icon-svg', 2.5);
+    case 'care': return Icons.heart(13, 'pill-icon-svg', 2);
+    case 'believe': return Icons.star(13, 'pill-icon-svg', 2);
+    case 'cook': return Icons.zap(13, 'pill-icon-svg', 2);
+    case 'upto': return Icons.coffee(13, 'pill-icon-svg', 2);
+    default: return '';
+  }
+}
+
 const HERO_PERSPECTIVES = [
-  { key: "who", label: "✦ WHO I AM", text: "Chỉ là một product designer với niềm đam mê lớn dành cho phát triển sản phẩm.", theme: "who", color: "var(--neo-green)" },
-  { key: "care", label: "♥ WHAT I CARE ABOUT", text: "Tìm kiếm sự cân bằng giữa giá trị, thẩm mỹ, và tính hữu dụng.", theme: "care", color: "var(--neo-pink)" },
-  { key: "believe", label: "★ WHAT I BELIEVE IN", text: "Thấu hiểu người dùng trước khi tìm cách giải quyết vấn đề của họ.", theme: "believe", color: "var(--neo-yellow)" },
-  { key: "cook", label: "⚡ WHAT I CAN COOK", text: "Biến những ý tưởng thành trải nghiệm, rồi để trải nghiệm chạm tới người dùng.", theme: "cook", color: "var(--neo-orange)" },
-  { key: "upto", label: "☕ WHAT I'M UP TO", text: "Lang thang giữa thiết kế, công nghệ, khách hàng và những ý tưởng tạo nên giá trị.", theme: "upto", color: "var(--neo-cyan)" }
+  { key: "who", label: '<svg class="pill-icon-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg> WHO I AM', text: "Chỉ là một product designer với niềm đam mê lớn dành cho phát triển sản phẩm.", theme: "who", color: "var(--neo-green)" },
+  { key: "care", label: '<svg class="pill-icon-svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg> WHAT I CARE ABOUT', text: "Tìm kiếm sự cân bằng giữa giá trị, thẩm mỹ, và tính hữu dụng.", theme: "care", color: "var(--neo-pink)" },
+  { key: "believe", label: '<svg class="pill-icon-svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> WHAT I BELIEVE IN', text: "Thấu hiểu người dùng trước khi tìm cách giải quyết vấn đề của họ.", theme: "believe", color: "var(--neo-yellow)" },
+  { key: "cook", label: '<svg class="pill-icon-svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> WHAT I CAN COOK', text: "Biến những ý tưởng thành trải nghiệm, rồi để trải nghiệm chạm tới người dùng.", theme: "cook", color: "var(--neo-orange)" },
+  { key: "upto", label: '<svg class="pill-icon-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg> WHAT I\'M UP TO', text: "Lang thang giữa thiết kế, công nghệ, khách hàng và những ý tưởng tạo nên giá trị.", theme: "upto", color: "var(--neo-cyan)" }
 ];
 
 const HERO_TAB_DATA = {
@@ -37,11 +50,11 @@ const PROJECTS_DATA = [
       { val: "98%", label: "Check-in GPS đúng giờ" }
     ],
     peekScreens: [
-      { label: "✦ Overview", src: "assets/tasksync/tasksync-cover.png", tag: "FLAGSHIP ECOSYSTEM", desc: "Unified Mobile & Desktop Workspace" },
-      { label: "📱 Home", src: "assets/tasksync/tasksync-home.png", tag: "SCREEN 01", desc: "Today Task Queue & Multi-Tenant Switcher" },
-      { label: "📋 Tasks", src: "assets/tasksync/tasksync-tasks.png", tag: "SCREEN 02", desc: "Sprint & Priority Kanban Flow" },
-      { label: "📍 GPS Check-in", src: "assets/tasksync/tasksync-attendance.png", tag: "SCREEN 03", desc: "Geofenced 1-Touch GPS Attendance" },
-      { label: "💬 Team Chat", src: "assets/tasksync/tasksync-chat.png", tag: "SCREEN 04", desc: "Contextual Threads & Fast Approvals" }
+      { label: "Overview", src: "assets/tasksync/tasksync-cover.png", tag: "FLAGSHIP ECOSYSTEM", desc: "Unified Mobile & Desktop Workspace" },
+      { label: "Home", src: "assets/tasksync/tasksync-home.png", tag: "SCREEN 01", desc: "Today Task Queue & Multi-Tenant Switcher" },
+      { label: "Tasks", src: "assets/tasksync/tasksync-tasks.png", tag: "SCREEN 02", desc: "Sprint & Priority Kanban Flow" },
+      { label: "GPS Check-in", src: "assets/tasksync/tasksync-attendance.png", tag: "SCREEN 03", desc: "Geofenced 1-Touch GPS Attendance" },
+      { label: "Team Chat", src: "assets/tasksync/tasksync-chat.png", tag: "SCREEN 04", desc: "Contextual Threads & Fast Approvals" }
     ],
     overview: "TaskSync là giải pháp quản lý công việc all-in-one trên mobile, hợp nhất team messaging, lịch trình, chấm công GPS geofencing và chuyển đổi đa workspace (Multi-tenant) trong một trải nghiệm liền mạch.",
     challenge: "Nhân sự và team lead thường xuyên gặp tình trạng context switching khi phải chuyển qua lại giữa 4-5 tool độc lập (Slack để chat, Asana để nhận task, Google Calendar để xem lịch, web portal để chấm công và nộp đơn từ).",
@@ -51,7 +64,7 @@ const PROJECTS_DATA = [
         <div class="cs-badge-strip">
           <span class="cs-pill" style="background: var(--neo-yellow);">✦ FLAGSHIP CASE STUDY</span>
           <span class="cs-pill" style="background: var(--neo-cyan);">MOBILE APP &amp; WORKSPACE</span>
-          <span class="cs-pill" style="background: var(--neo-green);">SHIPPED V1.0 🚀</span>
+          <span class="cs-pill" style="background: var(--neo-green);">SHIPPED V1.0 <svg class="tag-icon-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></span>
         </div>
         <h1 class="cs-title">TaskSync — All-in-One Work Management &amp; Team Collaboration Platform</h1>
         <p class="cs-lead">Nền tảng all-in-one quản lý công việc và cộng tác nhóm, tích hợp messaging, video call, cloud docs, smart calendar cùng các module quản trị vận hành như OKRs, approval workflow và chấm công GPS.</p>
@@ -106,7 +119,7 @@ const PROJECTS_DATA = [
 
         <div class="cs-bento-2">
           <div class="cs-bento-card accent-pink">
-            <div class="cs-card-title"><span>👤</span> User Needs (Employees &amp; Team Leads)</div>
+            <div class="cs-card-title"><span class="card-bar-title"><svg class="ui-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span> User Needs (Employees &amp; Team Leads)</div>
             <ul class="cs-bullet-list">
               <li><strong>Giảm thiểu App Fatigue &amp; Context Switching:</strong> Không phải nhảy qua lại giữa 4-5 tool độc lập (Slack để chat, Asana để nhận task, Google Calendar để xem lịch, web portal nội bộ để chấm công).</li>
               <li><strong>Nắm bắt Daily Workflow nhanh chóng:</strong> Khu vực "Today Task" hiển thị ngay các cuộc họp ưu tiên, deadline trong ngày và timer đếm giờ làm việc chỉ trong một màn hình.</li>
@@ -115,7 +128,7 @@ const PROJECTS_DATA = [
             </ul>
           </div>
           <div class="cs-bento-card accent-cyan">
-            <div class="cs-card-title"><span>🏢</span> Business Goals (Vertex Solutions &amp; Enterprise Clients)</div>
+            <div class="cs-card-title"><span class="card-bar-title"><svg class="ui-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v8h20v-8a2 2 0 0 0-2-2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg></span> Business Goals (Vertex Solutions &amp; Enterprise Clients)</div>
             <ul class="cs-bullet-list">
               <li><strong>Tiết kiệm chi phí SaaS:</strong> Hợp nhất các phần mềm rời rạc vào một platform all-in-one, cắt giảm khoảng 35% chi phí bản quyền hàng năm cho doanh nghiệp.</li>
               <li><strong>Minh bạch hóa dữ liệu chấm công:</strong> Ứng dụng Geofencing GPS tại địa điểm văn phòng, giải quyết tình trạng quên check-in và giảm tải khâu đối soát timesheet cuối tháng cho HR.</li>
@@ -192,7 +205,7 @@ const PROJECTS_DATA = [
         </div>
 
         <div class="cs-callout-banner">
-          <div class="cs-callout-title">💡 Market Opportunity: Consumer-grade UX meets Enterprise Power</div>
+          <div class="cs-callout-title"><svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg> Market Opportunity: Consumer-grade UX meets Enterprise Power</div>
           <p style="margin: 0; font-size: 13.5px; line-height: 1.6;">Phần lớn phần mềm doanh nghiệp thường bị đánh giá là phức tạp và khó dùng trên mobile. TaskSync tập trung vào điểm giao thoa: mang lại trải nghiệm mượt mà, trực quan như một ứng dụng consumer nhưng vẫn đáp ứng đầy đủ yêu cầu quản trị và bảo mật của doanh nghiệp.</p>
         </div>
       </section>
@@ -367,11 +380,11 @@ const PROJECTS_DATA = [
 
         <div class="cs-bento-2">
           <div class="cs-bento-card accent-green">
-            <div class="cs-card-title"><span>📐</span> Card Component &amp; Mobile Ergonomics</div>
+            <div class="cs-card-title"><span class="card-bar-title"><svg class="ui-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg></span> Card Component &amp; Mobile Ergonomics</div>
             <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 0;">Card nền trắng với border-radius <code>14px</code>, viền mảnh <code>1px solid #EDF1F7</code> kết hợp đường viền đáy màu <code>2.5px</code> (Accent Bottom Border) để phân biệt trạng thái task (Blue: On Progress, Orange: To-do, Green: Done). Floating Bottom Nav (Pill Bar <code>36px</code>) được đặt cách mép đáy màn hình, tối ưu cho thao tác một tay.</p>
           </div>
           <div class="cs-bento-card accent-yellow">
-            <div class="cs-card-title"><span>🔤</span> Typography, Tab Navigation &amp; Status Badges</div>
+            <div class="cs-card-title"><span class="card-bar-title"><svg class="ui-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg></span> Typography, Tab Navigation &amp; Status Badges</div>
             <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 0;">Sử dụng system font SF Pro / Roboto với scale từ <code>11px</code> (caption/badge) đến <code>24px</code> (page title), độ tương phản đạt chuẩn WCAG AAA. Hệ thống tab chuyển đổi sử gạch chân active màu primary (<code>2px solid #3E79F7</code>), kết hợp badge con nhộng (<code>14px</code>) giúp quét thông tin nhanh và chính xác.</p>
           </div>
         </div>
@@ -679,7 +692,7 @@ const PROJECTS_DATA = [
 
         <div class="cs-bento-2">
           <div class="cs-bento-card accent-green">
-            <div class="cs-card-title"><span>🚀</span> Quantitative Impact</div>
+            <div class="cs-card-title"><span class="card-bar-title"><svg class="ui-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span> Quantitative Impact</div>
             <ul class="cs-bullet-list">
               <li><strong>+40% Tốc độ hoàn thành task trong Sprint:</strong> Giảm thời gian trễ hạn nhờ hiển thị trực quan hàng đợi Today Task ngay tại màn hình Home.</li>
               <li><strong>-65% Thời gian gián đoạn vì Context Switching:</strong> Tiết kiệm trung bình 45 phút/ngày cho mỗi nhân sự khi không phải liên tục chuyển đổi giữa nhiều phần mềm độc lập.</li>
@@ -688,7 +701,7 @@ const PROJECTS_DATA = [
             </ul>
           </div>
           <div class="cs-bento-card accent-pink">
-            <div class="cs-card-title"><span>💡</span> Design Reflection</div>
+            <div class="cs-card-title"><span class="card-bar-title"><svg class="ui-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg></span> Design Reflection</div>
             <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.6; margin: 0;">"Khi thiết kế một B2B product phục vụ cả nhân viên lẫn cấp quản lý trên mobile, thách thức lớn nhất là giải quyết Information Density (mật độ thông tin) mà không làm phức tạp hóa giao diện. Bằng cách ưu tiên luồng công việc cấp thiết nhất trong ngày (Today Task, Check-in/Check-out, Fast Approval) ngay tại màn hình chính và tối ưu Thumb Zone cho các tương tác 1 tay, TaskSync mang lại trải nghiệm gọn gàng, giảm cognitive load đáng kể cho người dùng cuối nhưng vẫn bảo đảm tính kỷ luật trong quản trị vận hành."</p>
           </div>
         </div>
@@ -710,8 +723,8 @@ const PROJECTS_DATA = [
       { val: "9 → 1", label: "Systems Consolidated" }
     ],
     peekScreens: [
-      { label: "🖥️ R&D Studio", src: "assets/saas.png", tag: "IDE WORKSPACE", desc: "Consolidated 9 Legacy Tools into 1 Studio" },
-      { label: "🔬 Parallel Sim", src: "assets/saas.png", tag: "SIMULATION REC", desc: "Parallel Simulation Plotting & Telemetry" }
+      { label: "R&D Studio", src: "assets/saas.png", tag: "IDE WORKSPACE", desc: "Consolidated 9 Legacy Tools into 1 Studio" },
+      { label: "Parallel Sim", src: "assets/saas.png", tag: "SIMULATION REC", desc: "Parallel Simulation Plotting & Telemetry" }
     ],
     overview: "Explora is a 0-to-1 unified R&D workspace built for Cellworks, a biotech company focused on curing cancer. Before Explora, scientists juggled 9+ legacy tools and spreadsheets.",
     challenge: "Scientists & engineers spent hours tool-hopping, waiting for legacy systems to process simulations, which created a massive productivity lag in cancer research.",
@@ -732,8 +745,8 @@ const PROJECTS_DATA = [
       { val: "~70%", label: "Pregnancies with Nausea" }
     ],
     peekScreens: [
-      { label: "⌚ Wearable UX", src: "assets/ecommerce.png", tag: "WEARABLE AI", desc: "Real-time Apple Watch & Bio-Digital Twin" },
-      { label: "🤰 Nutrition Lab", src: "assets/ecommerce.png", tag: "AI CONTEXT", desc: "Personalized Daily Nutrition & Nausea Relief" }
+      { label: "Wearable UX", src: "assets/ecommerce.png", tag: "WEARABLE AI", desc: "Real-time Apple Watch & Bio-Digital Twin" },
+      { label: "Nutrition Lab", src: "assets/ecommerce.png", tag: "AI CONTEXT", desc: "Personalized Daily Nutrition & Nausea Relief" }
     ],
     overview: "Mira.ai combines physiological sensing (HRV metrics) on the Apple Watch with a bio-digital twin in the mobile app to adapt recipes and provide real-time nausea relief.",
     challenge: "Most pregnancy apps count kicks and bump sizes but ignore the body carrying it — missing the daily realities of nausea, discomfort, and shifting nutrient needs.",
@@ -754,8 +767,8 @@ const PROJECTS_DATA = [
       { val: "+25%", label: "Screen Real Estate" }
     ],
     peekScreens: [
-      { label: "🏢 3D Floorplan", src: "assets/design-system.png", tag: "COMMISSIONING", desc: "1,000+ Sensor Mapping & Fast Grouping" },
-      { label: "⚡ 5D → 2D Flow", src: "assets/design-system.png", tag: "SYSTEM OPTIMIZATION", desc: "Cut Field Commissioning from 5 to 2 Days" }
+      { label: "3D Floorplan", src: "assets/design-system.png", tag: "COMMISSIONING", desc: "1,000+ Sensor Mapping & Fast Grouping" },
+      { label: "5D → 2D Flow", src: "assets/design-system.png", tag: "SYSTEM OPTIMIZATION", desc: "Cut Field Commissioning from 5 to 2 Days" }
     ],
     overview: "Manage is the primary interface for field engineers commissioning 1,000+ smart sensors across massive commercial building construction sites.",
     challenge: "The legacy interface was a 'wall of data' requiring click marathons and manual coordinate entries, taking 5 full days to commission a single building.",
@@ -776,7 +789,7 @@ const PROJECTS_DATA = [
       { val: "AI", label: "Driven Insights" }
     ],
     peekScreens: [
-      { label: "📱 Annotation App", src: "assets/fintech.png", tag: "AI SPECIMEN", desc: "High-Precision Micro-Tasking for Domain Experts" }
+      { label: "Annotation App", src: "assets/fintech.png", tag: "AI SPECIMEN", desc: "High-Precision Micro-Tasking for Domain Experts" }
     ],
     overview: "Mobile application enabling domain experts to participate in specialized AI model training and evaluation tasks.",
     challenge: "Creating an engaging consumer UX while collecting high-precision annotations from technical experts.",
@@ -797,7 +810,7 @@ const PROJECTS_DATA = [
       { val: "Seed", label: "Investor Pitch Ready" }
     ],
     peekScreens: [
-      { label: "📊 Claims Engine", src: "assets/saas.png", tag: "B2B PROTOTYPE", desc: "Multimodal AI Policy Verification & Settlement" }
+      { label: "Claims Engine", src: "assets/saas.png", tag: "B2B PROTOTYPE", desc: "Multimodal AI Policy Verification & Settlement" }
     ],
     overview: "A automated claims processing engine using multimodal AI models to inspect damage reports, verify policy terms, and draft settlement offers.",
     challenge: "Insurance adjusters needed full auditability for automated AI decisions.",
@@ -1006,7 +1019,7 @@ function initHeroTabs() {
     // Update topic badge
     if (badge) {
       badge.className = `hero-topic-pill topic-${current.theme}`;
-      badge.innerText = current.label;
+      badge.innerHTML = current.label;
     }
 
     // Animate text update
@@ -1127,6 +1140,53 @@ window.switchPeekScreen = function(projectId, screenIndex, btnElement, event) {
 };
 
 /* Render Projects Grid with Retro Window OS, Multi-Screen Depth, & HUD Metrics */
+
+// Universal Helper to format screen switcher tabs with clean SVG icons
+function formatScreenLabel(label) {
+  if (!label) return "";
+  if (label.includes("<svg")) return label;
+  
+  const iconMap = {
+    "✦": (typeof Icons !== 'undefined') ? Icons.sparkle(13, 'pill-icon-svg') : '<svg class="pill-icon-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>',
+    "📱": (typeof Icons !== 'undefined') ? Icons.smartphone(13, 'pill-icon-svg') : '<svg class="pill-icon-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>',
+    "📋": (typeof Icons !== 'undefined') ? Icons.clipboardCheck(13, 'pill-icon-svg') : '<svg class="pill-icon-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>',
+    "📍": (typeof Icons !== 'undefined') ? Icons.mapPin(13, 'pill-icon-svg') : '<svg class="pill-icon-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
+    "💬": (typeof Icons !== 'undefined') ? Icons.messageSquare(13, 'pill-icon-svg') : '<svg class="pill-icon-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+    "🖥️": (typeof Icons !== 'undefined') ? Icons.monitor(13, 'pill-icon-svg') : '<svg class="pill-icon-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
+    "🖥": (typeof Icons !== 'undefined') ? Icons.monitor(13, 'pill-icon-svg') : '<svg class="pill-icon-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
+    "🔬": (typeof Icons !== 'undefined') ? Icons.microscope(13, 'pill-icon-svg') : '<svg class="pill-icon-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 18h8"/><path d="M3 22h18"/><path d="m14 22-.5-4.5"/><path d="M9 14h2"/><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"/><path d="m12 6 3-3 3 3"/><path d="m10 18 4-4"/></svg>',
+    "⌚": (typeof Icons !== 'undefined') ? Icons.watch(13, 'pill-icon-svg') : '<svg class="pill-icon-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="7"/><polyline points="12 9 12 12 13.5 13.5"/><path d="M16.51 17.35l-.85 4.65H8.34l-.85-4.65"/><path d="M16.51 6.65l-.85-4.65H8.34l-.85 4.65"/></svg>',
+    "🤰": (typeof Icons !== 'undefined') ? Icons.heartPulse(13, 'pill-icon-svg') : '<svg class="pill-icon-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l1.5-3 2 6 1.5-3h6.28"/></svg>',
+    "🏢": (typeof Icons !== 'undefined') ? Icons.cuboid(13, 'pill-icon-svg') : '<svg class="pill-icon-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.12 6.4-6.05-4.06a2 2 0 0 0-2.14 0L6.88 6.4a2 2 0 0 0-1 1.73v8.74a2 2 0 0 0 1 1.73l6.05 4.06a2 2 0 0 0 2.14 0l6.05-4.06a2 2 0 0 0 1-1.73V8.13a2 2 0 0 0-1-1.73z"/><line x1="12" y1="22" x2="12" y2="12"/><polyline points="21 7 12 12 3 7"/></svg>',
+    "⚡": (typeof Icons !== 'undefined') ? Icons.zap(13, 'pill-icon-svg') : '<svg class="pill-icon-svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+    "📊": (typeof Icons !== 'undefined') ? Icons.barChart(13, 'pill-icon-svg') : '<svg class="pill-icon-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>'
+  };
+
+  for (const [emoji, svg] of Object.entries(iconMap)) {
+    if (label.startsWith(emoji)) {
+      return svg + ' ' + label.slice(emoji.length).trim();
+    }
+  }
+
+  // Fallback keyword matching for clean labels without emoji
+  const lower = label.toLowerCase();
+  if (lower.includes("home")) return iconMap["📱"] + " " + label;
+  if (lower.includes("task")) return iconMap["📋"] + " " + label;
+  if (lower.includes("gps") || lower.includes("check-in")) return iconMap["📍"] + " " + label;
+  if (lower.includes("chat")) return iconMap["💬"] + " " + label;
+  if (lower.includes("r&d") || lower.includes("studio")) return iconMap["🖥️"] + " " + label;
+  if (lower.includes("sim")) return iconMap["🔬"] + " " + label;
+  if (lower.includes("wearable")) return iconMap["⌚"] + " " + label;
+  if (lower.includes("nutrition")) return iconMap["🤰"] + " " + label;
+  if (lower.includes("floorplan") || lower.includes("3d")) return iconMap["🏢"] + " " + label;
+  if (lower.includes("flow")) return iconMap["⚡"] + " " + label;
+  if (lower.includes("annotation")) return iconMap["📱"] + " " + label;
+  if (lower.includes("claim")) return iconMap["📊"] + " " + label;
+  if (lower.includes("overview")) return iconMap["✦"] + " " + label;
+
+  return label;
+}
+
 function renderProjects() {
   const container = document.getElementById("projects-container");
   if (!container) return;
@@ -1146,9 +1206,9 @@ function renderProjects() {
     // Status text mapping
     let statusBadge = "FEATURED ✦";
     const tagsLower = (project.tags || []).map(t => t.toLowerCase());
-    if (tagsLower.some(t => t.includes("shipped"))) statusBadge = "LIVE SHIPPED 🚀";
+    if (tagsLower.some(t => t.includes("shipped"))) statusBadge = `LIVE SHIPPED <svg class="tag-icon-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>`;
     else if (tagsLower.some(t => t.includes("concept"))) statusBadge = "AI CONCEPT ✦";
-    else if (tagsLower.some(t => t.includes("prototype"))) statusBadge = "B2B PROTOTYPE 💡";
+    else if (tagsLower.some(t => t.includes("prototype"))) statusBadge = `B2B PROTOTYPE <svg class="tag-icon-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>`;
 
     // Peek screens data
     const peekScreens = project.peekScreens || [
@@ -1207,7 +1267,7 @@ function renderProjects() {
         <div class="screen-peek-pill-bar" onclick="event.stopPropagation()">
           ${peekScreens.map((s, si) => `
             <button type="button" class="peek-pill ${si === 0 ? 'active' : ''}" onclick="switchPeekScreen('${project.id}', ${si}, this, event)">
-              <span>${s.label}</span>
+              <span>${formatScreenLabel(s.label)}</span>
             </button>
           `).join("")}
         </div>
@@ -1237,7 +1297,7 @@ function renderProjects() {
         <div class="screen-peek-pill-bar" onclick="event.stopPropagation()">
           ${peekScreens.map((s, si) => `
             <button type="button" class="peek-pill ${si === 0 ? 'active' : ''}" onclick="switchPeekScreen('${project.id}', ${si}, this, event)">
-              <span>${s.label}</span>
+              <span>${formatScreenLabel(s.label)}</span>
             </button>
           `).join("")}
         </div>` : ''}
@@ -1287,7 +1347,7 @@ function renderProjects() {
         <div class="project-info-column">
           <!-- Client & Role Credibility Strip -->
           <div class="project-cred-strip">
-            <span class="cred-pill cred-client">🏢 ${project.client || "Client"}</span>
+            <span class="cred-pill cred-client"><svg class="pill-icon-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v8h20v-8a2 2 0 0 0-2-2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg> ${project.client || "Client"}</span>
             <span class="cred-pill cred-role">✦ ${project.role || "Product Designer"}</span>
             <span class="cred-pill cred-year">${project.year || "Shipped"}</span>
           </div>
@@ -1309,7 +1369,7 @@ function renderProjects() {
 
             <button class="btn-read-case" onclick="event.stopPropagation(); handleCardClick('${project.id}', event)">
               <span>explore case study</span>
-              <span class="btn-arrow">↗</span>
+              <span class="btn-arrow"><svg class="btn-arrow-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17l10-10M7 7h10v10"/></svg></span>
             </button>
           </div>
         </div>
@@ -1639,7 +1699,7 @@ function initCustomCursorAndBadge() {
     if (projectCard) {
       ring.classList.add("active-hover");
       badge.className = "floating-cursor-badge visible explore";
-      badge.innerHTML = "EXPLORE CASE ↗";
+      badge.innerHTML = 'EXPLORE CASE <svg class="btn-arrow-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l10-10M7 7h10v10"/></svg>';
     } else if (rotatingBadge) {
       ring.classList.add("active-hover");
       badge.className = "floating-cursor-badge visible pop";
@@ -1647,11 +1707,11 @@ function initCustomCursorAndBadge() {
     } else if (themeBtn) {
       ring.classList.add("active-hover");
       badge.className = "floating-cursor-badge visible";
-      badge.innerHTML = "SWITCH THEME ☼";
+      badge.innerHTML = 'SWITCH THEME <svg class="pill-icon-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
     } else if (sayHiBtn) {
       ring.classList.add("active-hover");
       badge.className = "floating-cursor-badge visible interactive";
-      badge.innerHTML = "SAY HELLO ✉";
+      badge.innerHTML = 'SAY HELLO <svg class="pill-icon-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>';
     } else if (heroTab) {
       ring.classList.add("active-hover");
       badge.className = "floating-cursor-badge visible interactive";
@@ -1659,7 +1719,7 @@ function initCustomCursorAndBadge() {
     } else if (moodDot) {
       ring.classList.add("active-hover");
       badge.className = "floating-cursor-badge visible";
-      badge.innerHTML = "CHANGE MOOD 🎨";
+      badge.innerHTML = 'CHANGE MOOD <svg class="pill-icon-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.563-2.512 5.563-5.563C22 6.5 17.5 2 12 2Z"/></svg>';
     } else if (generalInteractive) {
       ring.classList.add("active-hover");
       badge.classList.remove("visible");
@@ -1838,7 +1898,7 @@ async function handleContactSubmit(event) {
       window.open(gmailUrl, "_blank");
       
       statusEl.className = "contact-status-msg success";
-      statusEl.innerHTML = `📬 Đã mở khung soạn thư Gmail gửi tới <strong>thanhieu.work@gmail.com</strong>! Bạn chỉ cần nhấn nút Gửi (Send) trên Gmail là xong.<br><small style="color:#222; font-size:11px; display:inline-block; margin-top:6px;">✦ Tip: Chỉ cần dán Access Key từ Web3Forms vào script.js để kích hoạt gửi ngầm 100%.</small>`;
+      statusEl.innerHTML = `<svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 13-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 13"/><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m16 19 2 2 4-4"/></svg> Đã mở khung soạn thư Gmail gửi tới <strong>thanhieu.work@gmail.com</strong>! Bạn chỉ cần nhấn nút Gửi (Send) trên Gmail là xong.<br><small style="color:#222; font-size:11px; display:inline-block; margin-top:6px;">✦ Tip: Chỉ cần dán Access Key từ Web3Forms vào script.js để kích hoạt gửi ngầm 100%.</small>`;
       statusEl.classList.remove("hidden");
       document.getElementById("contact-form").reset();
       fireConfetti(event);
@@ -1865,7 +1925,7 @@ async function handleContactSubmit(event) {
     const data = await response.json();
     if (data.success) {
       statusEl.className = "contact-status-msg success";
-      statusEl.innerHTML = "🎉 Cảm ơn bạn! Tin nhắn đã được gửi trực tiếp đến hộp thư thanhieu.work@gmail.com của Thân Hiếu. Mình sẽ phản hồi bạn sớm nhất!";
+      statusEl.innerHTML = `<svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M3 5h4"/><path d="M19 17v4"/><path d="M17 19h4"/></svg> Cảm ơn bạn! Tin nhắn đã được gửi trực tiếp đến hộp thư thanhieu.work@gmail.com của Thân Hiếu. Mình sẽ phản hồi bạn sớm nhất!`;
       statusEl.classList.remove("hidden");
       document.getElementById("contact-form").reset();
       fireConfetti(event);
@@ -1879,7 +1939,7 @@ async function handleContactSubmit(event) {
   } catch (error) {
     statusEl.className = "contact-status-msg warning";
     const mailtoUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=thanhieu.work@gmail.com&su=${encodeURIComponent(`[Portfolio] Tin nhắn từ ${name}`)}&body=${encodeURIComponent(`${message}\n\n---\nNgười gửi: ${name}\nEmail: ${email}`)}`;
-    statusEl.innerHTML = `⚠️ Đang tạm ngưng kết nối nền. <a href="${mailtoUrl}" target="_blank" style="text-decoration:underline; font-weight:800; color:#000;">Bấm vào đây để mở và gửi ngay qua Gmail của bạn ↗</a>`;
+    statusEl.innerHTML = `<svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Đang tạm ngưng kết nối nền. <a href="${mailtoUrl}" target="_blank" style="text-decoration:underline; font-weight:800; color:#000;">Bấm vào đây để mở và gửi ngay qua Gmail của bạn <svg class="btn-arrow-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l10-10M7 7h10v10"/></svg></a>`;
     statusEl.classList.remove("hidden");
   } finally {
     submitBtn.disabled = false;

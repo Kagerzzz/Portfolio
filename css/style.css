@@ -1065,11 +1065,86 @@ button {
   color: var(--text-muted);
 }
 
-.contact-icon {
-  font-size: 15px;
-  width: 20px;
-  text-align: center;
+/* Universal SVG Icon Utilities */
+.ui-icon {
+  display: inline-block;
+  vertical-align: -0.15em;
+  stroke: currentColor;
   flex-shrink: 0;
+}
+
+.job-company-icon {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  vertical-align: -2px;
+  margin-right: 5px;
+  stroke: currentColor;
+}
+
+.btn-icon-svg {
+  display: inline-block;
+  vertical-align: -2px;
+  stroke: currentColor;
+  margin-right: 6px;
+}
+
+.btn-arrow-svg {
+  display: inline-block;
+  vertical-align: -1px;
+  stroke: currentColor;
+  transition: transform 0.15s ease;
+}
+
+.social-icon-svg {
+  display: inline-block;
+  vertical-align: -2.5px;
+  stroke: currentColor;
+  margin-right: 6px;
+}
+
+.pill-icon-svg {
+  display: inline-block;
+  vertical-align: -1.5px;
+  margin-right: 5px;
+  stroke: currentColor;
+}
+
+.tag-icon-svg {
+  display: inline-block;
+  vertical-align: -1.5px;
+  margin-left: 4px;
+  stroke: currentColor;
+}
+
+.card-bar-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card-bar-title .ui-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.contact-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  background: var(--bg-card-alt);
+  border: 1.5px solid var(--border-color);
+  box-shadow: 1px 1px 0px var(--border-color);
+  flex-shrink: 0;
+}
+
+.contact-icon .ui-icon {
+  width: 13px;
+  height: 13px;
+  stroke: var(--text-main);
 }
 
 .contact-val {

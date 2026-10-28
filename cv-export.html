@@ -263,12 +263,61 @@
       color: #111111;
     }
 
-    .contact-icon {
-      font-size: 13px;
-      width: 18px;
-      text-align: center;
+
+    /* Universal SVG Icon Utilities */
+    .ui-icon {
+      display: inline-block;
+      vertical-align: -0.15em;
+      stroke: currentColor;
       flex-shrink: 0;
     }
+
+    .job-company-icon {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      vertical-align: -1.5px;
+      margin-right: 4px;
+      stroke: currentColor;
+    }
+
+    .btn-icon-svg {
+      display: inline-block;
+      vertical-align: -2px;
+      stroke: currentColor;
+      margin-right: 6px;
+    }
+
+    .card-bar-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .card-bar-title .ui-icon {
+      width: 12px;
+      height: 12px;
+    }
+
+    .contact-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 3px;
+      background: #EDEAE1;
+      border: 1px solid #000000;
+      box-shadow: 1px 1px 0px #000000;
+      flex-shrink: 0;
+    }
+
+    .contact-icon .ui-icon {
+      width: 11px;
+      height: 11px;
+      stroke: #000000;
+    }
+
 
     .contact-val {
       font-weight: 700;
@@ -506,9 +555,9 @@
 
   <!-- Screen Actions (hidden when printing) -->
   <div class="screen-actions">
-    <button class="btn-neo" onclick="window.print()">🖨️ In hoặc Lưu PDF</button>
-    <a href="assets/CV_ThanHieu_Neubrutalism.pdf?v=20261005f" download="CV_ThanHieu_ProductDesigner_Neubrutalism.pdf" class="btn-neo" style="background: #00F5D4;">📥 Tải File PDF</a>
-    <a href="index.html#cv" class="btn-neo" style="background: #FFFFFF;">← Về Portfolio</a>
+    <button class="btn-neo" onclick="window.print()"><svg class="btn-icon-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect width="12" height="8" x="6" y="14"></rect></svg> In hoặc Lưu PDF</button>
+    <a href="assets/CV_ThanHieu_Neubrutalism.pdf?v=20261005f" download="CV_ThanHieu_ProductDesigner_Neubrutalism.pdf" class="btn-neo" style="background: #00F5D4;"><svg class="btn-icon-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> Tải File PDF</a>
+    <a href="index.html#cv" class="btn-neo" style="background: #FFFFFF;"><svg class="btn-icon-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Về Portfolio</a>
   </div>
 
   <div class="cv-window">
@@ -554,28 +603,28 @@
         <!-- Contact Info Card (Clean & Easy to Read) -->
         <section class="card-neo">
           <div class="card-bar">
-            <span>📍 THÔNG TIN LIÊN HỆ</span>
+            <span class="card-bar-title"><svg class="ui-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> THÔNG TIN LIÊN HỆ</span>
             <span>contact.info</span>
           </div>
           <div class="contact-list">
             <div class="contact-row">
-              <span class="contact-icon">🎂</span>
+              <span class="contact-icon"><svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"/><path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1"/><path d="M2 21h20"/><path d="M7 8v3"/><path d="M12 8v3"/><path d="M17 8v3"/><path d="M7 4h.01"/><path d="M12 4h.01"/><path d="M17 4h.01"/></svg></span>
               <span class="contact-val">13/03/2001</span>
             </div>
             <div class="contact-row">
-              <span class="contact-icon">📱</span>
+              <span class="contact-icon"><svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg></span>
               <span class="contact-val"><a href="tel:+84869183692">+84 869 183 692</a></span>
             </div>
             <div class="contact-row">
-              <span class="contact-icon">✉️</span>
+              <span class="contact-icon"><svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
               <span class="contact-val"><a href="mailto:thanhieu.work@gmail.com">thanhieu.work@gmail.com</a></span>
             </div>
             <div class="contact-row">
-              <span class="contact-icon">📍</span>
+              <span class="contact-icon"><svg class="ui-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
               <span class="contact-val">Hoàng Mai, Hà Nội</span>
             </div>
             <div class="contact-row">
-              <span class="contact-icon">🔗</span>
+              <span class="contact-icon"><svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
               <span class="contact-val"><a href="https://bit.ly/hieuthanz" target="_blank">bit.ly/hieuthanz</a></span>
             </div>
           </div>
@@ -584,7 +633,7 @@
         <!-- Education Card -->
         <section class="card-neo">
           <div class="card-bar">
-            <span>🎓 HỌC VẤN & ĐÀO TẠO</span>
+            <span class="card-bar-title"><svg class="ui-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg> HỌC VẤN & ĐÀO TẠO</span>
             <span>education.log</span>
           </div>
           <div class="edu-box">
@@ -604,7 +653,7 @@
         <!-- Skills & Stack Card -->
         <section class="card-neo">
           <div class="card-bar">
-            <span>🛠️ CÔNG CỤ & KỸ NĂNG</span>
+            <span class="card-bar-title"><svg class="ui-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> CÔNG CỤ & KỸ NĂNG</span>
             <span>skills.stack</span>
           </div>
           <div class="tools-box">
@@ -624,7 +673,7 @@
       <section class="col-right">
         <div class="card-neo exp-column">
           <div class="card-bar">
-            <span>💼 KINH NGHIỆM LÀM VIỆC</span>
+            <span class="card-bar-title"><svg class="ui-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> KINH NGHIỆM LÀM VIỆC</span>
             <span>timeline.log</span>
           </div>
           <div class="exp-list">
@@ -633,7 +682,7 @@
               <div class="job-top-bar">
                 <div>
                   <div class="job-role-text">Product Designer & BA</div>
-                  <div class="job-company-text">🏢 SandboxVN Company <span class="job-domain-tag">CRM / ERP</span></div>
+                  <div class="job-company-text"><svg class="job-company-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v8h20v-8a2 2 0 0 0-2-2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>SandboxVN Company <span class="job-domain-tag">CRM / ERP</span></div>
                 </div>
                 <span class="job-pill active">03/2025 — NOW · MIDDLE</span>
               </div>
@@ -650,7 +699,7 @@
               <div class="job-top-bar">
                 <div>
                   <div class="job-role-text">UI/UX Designer</div>
-                  <div class="job-company-text">🏢 VGS Software Company <span class="job-domain-tag">CRM</span></div>
+                  <div class="job-company-text"><svg class="job-company-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v8h20v-8a2 2 0 0 0-2-2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>VGS Software Company <span class="job-domain-tag">CRM</span></div>
                 </div>
                 <span class="job-pill">05/2024 — 02/2025 · JUNIOR</span>
               </div>
@@ -665,7 +714,7 @@
               <div class="job-top-bar">
                 <div>
                   <div class="job-role-text">UI/UX Designer</div>
-                  <div class="job-company-text">🏢 NovaTech Solutions <span class="job-domain-tag">E-COM</span></div>
+                  <div class="job-company-text"><svg class="job-company-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v8h20v-8a2 2 0 0 0-2-2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>NovaTech Solutions <span class="job-domain-tag">E-COM</span></div>
                 </div>
                 <span class="job-pill">03/2023 — 05/2024 · FRESHER</span>
               </div>
@@ -680,7 +729,7 @@
               <div class="job-top-bar">
                 <div>
                   <div class="job-role-text">Graphic Designer</div>
-                  <div class="job-company-text">🏢 Global Printing CO.,LTD</div>
+                  <div class="job-company-text"><svg class="job-company-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v8h20v-8a2 2 0 0 0-2-2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>Global Printing CO.,LTD</div>
                 </div>
                 <span class="job-pill">11/2021 — 02/2023 · JUNIOR</span>
               </div>
