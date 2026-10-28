@@ -774,27 +774,7 @@ const PROJECTS_DATA = [
     challenge: "The legacy interface was a 'wall of data' requiring click marathons and manual coordinate entries, taking 5 full days to commission a single building.",
     solution: "I redesigned the core workflow with direct drag-to-group selection, sticky instruction strips, and a collapsible high-density floor plan interface."
   },
-  {
-    id: "ai-consumer-research",
-    title: "AI Consumer Research Platform — Expert Data Collection App",
-    client: "Co-led with 2 Founders",
-    role: "Product Design",
-    year: "Consumer ∙ Shipped",
-    tags: ["Co-led with 2 Founders", "Consumer-facing", "AI Platform", "Product Design", "Shipped"],
-    summary: "I envisioned the MVP mobile app screens to enable experts to participate in AI-driven research.",
-    image: "assets/fintech.png",
-    metrics: [
-      { val: "2", label: "Founders Co-led" },
-      { val: "MVP", label: "Shipped to App Store" },
-      { val: "AI", label: "Driven Insights" }
-    ],
-    peekScreens: [
-      { label: "Annotation App", src: "assets/fintech.png", tag: "AI SPECIMEN", desc: "High-Precision Micro-Tasking for Domain Experts" }
-    ],
-    overview: "Mobile application enabling domain experts to participate in specialized AI model training and evaluation tasks.",
-    challenge: "Creating an engaging consumer UX while collecting high-precision annotations from technical experts.",
-    solution: "Streamlined micro-tasking interface with instant visual feedback and gamified progress tracking."
-  },
+  
   {
     id: "ai-insurance-claims",
     title: "AI-Native Insurance Claim Management — B2B Prototype",
@@ -1188,154 +1168,9 @@ function formatScreenLabel(label) {
 }
 
 /* ==========================================================================
-   OS Desktop / Dual-Pane Studio Rendering Engine (Style 1 Flagship)
+   Bento Mosaic Rendering Engine (Style 4 Flagship — Exactly 5 Frames)
    ========================================================================== */
-let currentStudioProjectIndex = 0;
-let currentStudioScreenIndex = 0;
-
-function getStudioFileMeta(p, index) {
-  const pid = (p.id || "").toLowerCase();
-  const num = String(index + 1).padStart(2, "0");
-  
-  if (pid.includes("tasksync")) {
-    return {
-      fileName: `${num}_TaskSync.app`,
-      badge: "LIVE SHIPPED",
-      badgeBg: "var(--neo-cyan)",
-      badgeColor: "#000000",
-      sub: "All-in-One Team & Work Management"
-    };
-  } else if (pid.includes("explora")) {
-    return {
-      fileName: `${num}_Explora.sys`,
-      badge: "B2B IDE",
-      badgeBg: "var(--neo-yellow)",
-      badgeColor: "#000000",
-      sub: "Biotech Cancer R&D Workspace"
-    };
-  } else if (pid.includes("mira")) {
-    return {
-      fileName: `${num}_MiraAI.lab`,
-      badge: "WEARABLE",
-      badgeBg: "var(--neo-pink)",
-      badgeColor: "#000000",
-      sub: "Pregnancy Wearable Nutrition Twin"
-    };
-  } else if (pid.includes("manage")) {
-    return {
-      fileName: `${num}_SiemensManage.cad`,
-      badge: "SHIPPED",
-      badgeBg: "var(--neo-green)",
-      badgeColor: "#000000",
-      sub: "3D Sensor Floorplan System"
-    };
-  } else if (pid.includes("claim") || pid.includes("fintech") || pid.includes("consumer")) {
-    return {
-      fileName: `${num}_AIClaims.b2b`,
-      badge: "PROTOTYPE",
-      badgeBg: "var(--neo-orange)",
-      badgeColor: "#000000",
-      sub: "Automated Policy Verification Engine"
-    };
-  } else {
-    return {
-      fileName: `${num}_${(p.id || "case").replace(/[^a-zA-Z0-9]/g, "")}.app`,
-      badge: "CASE",
-      badgeBg: "var(--bg-card)",
-      badgeColor: "var(--text-main)",
-      sub: (p.tags && p.tags[0]) || p.client || "Product Design Case"
-    };
-  }
-}
-
-function renderStudioSidebarItems() {
-  return activeProjects.map((p, idx) => {
-    const meta = getStudioFileMeta(p, idx);
-    const isActive = idx === currentStudioProjectIndex;
-    return `
-      <div class="studio-file-item ${isActive ? 'active' : ''}" data-index="${idx}" onclick="selectStudioProject(${idx})">
-        <div class="studio-file-top-row">
-          <span class="studio-file-name"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg> ${meta.fileName}</span>
-          <span class="studio-file-badge" style="background:${meta.badgeBg}; color:${meta.badgeColor};">${meta.badge}</span>
-        </div>
-        <div class="studio-file-sub">${meta.sub}</div>
-      </div>
-    `;
-  }).join("");
-}
-
-function renderStudioViewportHtml(p) {
-  if (!p) return "";
-  const isFlagship = (p.id || "").toLowerCase().includes("tasksync");
-  const screens = (p.peekScreens && p.peekScreens.length > 0)
-    ? p.peekScreens
-    : [{ label: "Overview", src: p.image_url || p.image, tag: "MAIN VIEW", desc: p.title }];
-  
-  if (currentStudioScreenIndex >= screens.length) {
-    currentStudioScreenIndex = 0;
-  }
-  const activeScreen = screens[currentStudioScreenIndex];
-
-  // Metrics HUD
-  const metricsHtml = (p.metrics && p.metrics.length > 0) ? `
-    <div class="studio-metrics-row">
-      ${p.metrics.map(m => `
-        <div class="studio-metric-card">
-          <div class="studio-metric-val">${m.val}</div>
-          <div class="studio-metric-lbl">${m.label}</div>
-        </div>
-      `).join("")}
-    </div>
-  ` : "";
-
-  // Screen Switcher Tabs
-  const screenTabsHtml = screens.length > 1 ? `
-    <div class="studio-screen-tabs" onclick="event.stopPropagation()">
-      ${screens.map((s, si) => `
-        <button type="button" class="studio-tab-btn ${si === currentStudioScreenIndex ? 'active' : ''}" onclick="switchStudioScreen(${si}, this, event)">
-          <span>${formatScreenLabel(s.label)}</span>
-        </button>
-      `).join("")}
-    </div>
-  ` : "";
-
-  return `
-    <div>
-      <div class="studio-vp-meta-row">
-        ${isFlagship ? '<span class="studio-vp-pill highlight">✦ FLAGSHIP CASE STUDY</span>' : ''}
-        <span class="studio-vp-pill">CLIENT: ${p.client || "Client"}</span>
-        <span class="studio-vp-pill">ROLE: ${p.role || "Product Designer"}</span>
-        <span class="studio-vp-pill">${p.year || "Shipped"}</span>
-      </div>
-
-      <h2 class="studio-vp-title">${p.title}</h2>
-      <p class="studio-vp-desc">${p.summary}</p>
-
-      <!-- Interactive Screen Stage -->
-      <div class="studio-screen-stage">
-        <div class="studio-screen-container" onclick="handleCardClick('${p.id}', event)" title="Click để mở chi tiết Case Study">
-          <img id="studio-screen-img" src="${activeScreen.src}" alt="${activeScreen.label || p.title}" class="studio-screen-img" loading="lazy">
-        </div>
-        ${screenTabsHtml}
-      </div>
-
-      <!-- Business & Design Impact Metrics HUD -->
-      ${metricsHtml}
-    </div>
-
-    <!-- Bottom Action Row -->
-    <div class="studio-action-row">
-      <div class="studio-tags-wrap">
-        ${(p.tags || []).map(t => `<span class="studio-tag-pill">${t}</span>`).join("")}
-      </div>
-
-      <button type="button" class="studio-cta-btn" onclick="handleCardClick('${p.id}', event)">
-        <span>EXPLORE CASE STUDY</span>
-        <span class="btn-arrow"><svg class="btn-arrow-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17l10-10M7 7h10v10"/></svg></span>
-      </button>
-    </div>
-  `;
-}
+let currentFlagshipScreenIndex = 0;
 
 function renderProjects() {
   const container = document.getElementById("projects-container");
@@ -1343,107 +1178,194 @@ function renderProjects() {
 
   const countBadge = document.getElementById("work-count-badge");
   if (countBadge) {
-    countBadge.textContent = `${String(activeProjects.length).padStart(2, "0")} CASE STUDIES ✦`;
+    countBadge.textContent = "05 CASE STUDIES ✦";
   }
 
-  if (currentStudioProjectIndex >= activeProjects.length) {
-    currentStudioProjectIndex = 0;
-  }
+  // Find the 5 projects by id or index
+  const tasksync = activeProjects.find(p => (p.id || '').toLowerCase().includes('tasksync')) || activeProjects[0];
+  const explora = activeProjects.find(p => (p.id || '').toLowerCase().includes('explora')) || activeProjects[1];
+  const miraai = activeProjects.find(p => (p.id || '').toLowerCase().includes('mira')) || activeProjects[2];
+  const manage = activeProjects.find(p => (p.id || '').toLowerCase().includes('manage')) || activeProjects[3];
+  const claims = activeProjects.find(p => (p.id || '').toLowerCase().includes('claim') || (p.id || '').toLowerCase().includes('fintech')) || activeProjects[4];
 
-  const p = activeProjects[currentStudioProjectIndex];
-  if (!p) return;
+  // Flagship screen tabs data
+  const flagshipScreens = (tasksync && tasksync.peekScreens && tasksync.peekScreens.length > 0)
+    ? tasksync.peekScreens
+    : [
+        { label: "Overview", src: "assets/tasksync/tasksync-cover.png" },
+        { label: "Home", src: "assets/tasksync/tasksync-home.png" },
+        { label: "Tasks", src: "assets/tasksync/tasksync-tasks.png" },
+        { label: "GPS Check-in", src: "assets/tasksync/tasksync-attendance.png" },
+        { label: "Team Chat", src: "assets/tasksync/tasksync-chat.png" }
+      ];
+
+  const activeFlagshipScreen = flagshipScreens[currentFlagshipScreenIndex] || flagshipScreens[0];
 
   container.innerHTML = `
-    <div class="studio-window" id="studio-window">
-      <!-- Retro Window Top Bar -->
-      <div class="studio-os-bar">
-        <div class="studio-window-dots">
-          <span class="studio-dot dot-red"></span>
-          <span class="studio-dot dot-yellow"></span>
-          <span class="studio-dot dot-green"></span>
-        </div>
-        <div class="studio-os-slug">studio.exe // projects_explorer [workspace active]</div>
-        <div class="studio-os-status">
-          <span class="studio-status-pill" id="studio-status-pill">${String(activeProjects.length).padStart(2, "0")} CASES LOADED</span>
-        </div>
-      </div>
+    <div class="bento-mosaic-grid" id="bento-mosaic-grid">
 
-      <!-- Studio Dual-Pane Body -->
-      <div class="studio-body">
-        <!-- Left: Project Directory Explorer -->
-        <aside class="studio-sidebar" aria-label="Project Directory">
-          <div class="studio-sidebar-header">
-            <span>PROJECT DIRECTORY</span>
-            <span>TYPE</span>
+      <!-- FRAME 1: FLAGSHIP HERO SPECIMEN (Spans 8 cols) -->
+      <article class="bento-card bento-flagship" id="bento-flagship" onclick="handleCardClick('${tasksync ? tasksync.id : 'tasksync'}', event)">
+        <!-- Retro OS Top Bar -->
+        <div class="bento-flagship-os-bar">
+          <div class="bento-flagship-dots">
+            <span class="bento-dot dot-red"></span>
+            <span class="bento-dot dot-yellow"></span>
+            <span class="bento-dot dot-green"></span>
           </div>
-          <div class="studio-file-list" id="studio-file-list">
-            ${renderStudioSidebarItems()}
-          </div>
-        </aside>
+          <span class="bento-flagship-slug">tasksync.app // flagship_ecosystem</span>
+          <span class="bento-flagship-badge">LIVE SHIPPED V1.0</span>
+        </div>
 
-        <!-- Right: Studio Live Viewport Stage -->
-        <main class="studio-viewport" id="studio-viewport" aria-live="polite">
-          ${renderStudioViewportHtml(p)}
-        </main>
-      </div>
+        <div class="bento-flagship-body">
+          <div class="flagship-inner">
+            <!-- Left Info Column -->
+            <div>
+              <span class="bento-tag" style="background:var(--neo-yellow);">#01 · B2B ECOSYSTEM</span>
+              <h3 class="bento-title" style="font-size:1.75rem; margin-bottom:10px;">${tasksync ? tasksync.title : 'TaskSync — All-in-One Work Platform'}</h3>
+              <p class="bento-desc" style="font-size:14px; margin-bottom:18px;">${tasksync ? tasksync.summary : 'Nền tảng quản lý công việc tích hợp team messaging, smart calendar và chấm công GPS geofencing trong một trải nghiệm mobile tinh gọn.'}</p>
+              
+              <!-- 2 Metric Cards -->
+              <div class="bento-metrics-mini">
+                <div class="bento-metric-mini-chip">
+                  <div class="bento-metric-mini-val">+40%</div>
+                  <div class="bento-metric-mini-lbl">Tốc độ xử lý task</div>
+                </div>
+                <div class="bento-metric-mini-chip">
+                  <div class="bento-metric-mini-val">98%</div>
+                  <div class="bento-metric-mini-lbl">Check-in GPS đúng giờ</div>
+                </div>
+              </div>
+
+              <button type="button" class="bento-cta-btn" style="background:var(--neo-yellow); padding:10px 20px; font-size:12.5px;" onclick="event.stopPropagation(); handleCardClick('${tasksync ? tasksync.id : 'tasksync'}', event)">
+                <span>Read Case Study</span>
+                <span class="btn-arrow"><svg class="btn-arrow-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17l10-10M7 7h10v10"/></svg></span>
+              </button>
+            </div>
+
+            <!-- Right Visual Stage with Screen Switcher -->
+            <div class="flagship-img-box" onclick="event.stopPropagation()">
+              <img id="bento-flagship-img" src="${activeFlagshipScreen.src}" alt="${activeFlagshipScreen.label || 'TaskSync'}" loading="lazy">
+              
+              <!-- Screen Switcher Tabs -->
+              <div class="flagship-tabs-bar">
+                ${flagshipScreens.map((s, si) => `
+                  <button type="button" class="flagship-tab-pill ${si === currentFlagshipScreenIndex ? 'active' : ''}" onclick="switchBentoScreen(${si}, this, event)">
+                    <span>${formatScreenLabel(s.label)}</span>
+                  </button>
+                `).join("")}
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- FRAME 2: METRIC HIGHLIGHT TILE (Spans 4 cols — Explora Biotech ROI) -->
+      <article class="bento-card bento-metric" onclick="handleCardClick('${explora ? explora.id : 'explora'}', event)">
+        <div>
+          <span class="bento-tag" style="background:#FFFFFF;">#02 · BIOTECH ROI</span>
+          <h4 class="bento-title" style="font-size:1.45rem; margin-top:4px;">${explora ? explora.title : 'Cellworks Explora Workspace'}</h4>
+          <div class="bento-metric-val">~$1.2M</div>
+          <p class="bento-metric-desc">${explora ? explora.summary : 'Năng suất nghiên cứu phục hồi hàng năm khi gom 9 legacy tools về 1 IDE duy nhất.'}</p>
+        </div>
+        <div class="bento-footer-row" style="border-top-color:rgba(0,0,0,0.3);">
+          <span class="bento-stat-chip" style="color:#000; font-weight:800;">100% Adoption · 9 → 1 Tools</span>
+          <button type="button" class="bento-cta-btn" onclick="event.stopPropagation(); handleCardClick('${explora ? explora.id : 'explora'}', event)">
+            <span>Xem Chi Tiết ↗</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- FRAME 3: COMPACT TILE 1 (Spans 4 cols — Mira.ai Wearable) -->
+      <article class="bento-card bento-compact-1" onclick="handleCardClick('${miraai ? miraai.id : 'miraai'}', event)">
+        <div>
+          <span class="bento-tag" style="background:var(--neo-pink);">#03 · AI WEARABLE</span>
+          <h4 class="bento-title">${miraai ? miraai.title : 'Mira.ai Pregnancy'}</h4>
+          <p class="bento-desc">${miraai ? miraai.summary : 'Trợ lý dinh dưỡng bio-digital twin kết hợp cảm biến HRV trên Apple Watch.'}</p>
+        </div>
+        <div class="bento-visual-box">
+          <img src="${miraai && (miraai.image_url || miraai.image) ? (miraai.image_url || miraai.image) : 'assets/ecommerce.png'}" alt="Mira Preview" loading="lazy">
+        </div>
+        <div class="bento-footer-row">
+          <span class="bento-stat-chip">15/15 Testers · ~70% Relief</span>
+          <button type="button" class="bento-cta-btn" onclick="event.stopPropagation(); handleCardClick('${miraai ? miraai.id : 'miraai'}', event)">
+            <span>Explore Case ↗</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- FRAME 4: COMPACT TILE 2 (Spans 4 cols — Siemens Manage 3D) -->
+      <article class="bento-card bento-compact-2" onclick="handleCardClick('${manage ? manage.id : 'manage'}', event)">
+        <div>
+          <span class="bento-tag" style="background:var(--neo-green);">#04 · FIELD COMMISSIONING</span>
+          <h4 class="bento-title">${manage ? manage.title : 'Siemens Manage 3D'}</h4>
+          <p class="bento-desc">${manage ? manage.summary : 'Giao diện floorplan kéo thả phân nhóm 1,000+ cảm biến tòa nhà thông minh.'}</p>
+        </div>
+        <div class="bento-visual-box">
+          <img src="${manage && (manage.image_url || manage.image) ? (manage.image_url || manage.image) : 'assets/design-system.png'}" alt="Manage Preview" loading="lazy">
+        </div>
+        <div class="bento-footer-row">
+          <span class="bento-stat-chip">5 DAYS → 2 DAYS</span>
+          <button type="button" class="bento-cta-btn" onclick="event.stopPropagation(); handleCardClick('${manage ? manage.id : 'manage'}', event)">
+            <span>Explore ↗</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- FRAME 5: COMPACT TILE 3 (Spans 4 cols — AI Claims Engine) -->
+      <article class="bento-card bento-compact-3" onclick="handleCardClick('${claims ? claims.id : 'ai-insurance-claims'}', event)">
+        <div>
+          <span class="bento-tag" style="background:var(--neo-orange);">#05 · B2B PROTOTYPE</span>
+          <h4 class="bento-title">${claims ? claims.title : 'AI Claims Engine'}</h4>
+          <p class="bento-desc">${claims ? claims.summary : 'Thẩm định bồi thường bảo hiểm tự động hóa bằng AI đa phương thức.'}</p>
+        </div>
+        <div class="bento-visual-box">
+          <img src="${claims && (claims.image_url || claims.image) ? (claims.image_url || claims.image) : 'assets/fintech.png'}" alt="Fintech Preview" loading="lazy">
+        </div>
+        <div class="bento-footer-row">
+          <span class="bento-stat-chip">10x Faster Processing</span>
+          <button type="button" class="bento-cta-btn" onclick="event.stopPropagation(); handleCardClick('${claims ? claims.id : 'ai-insurance-claims'}', event)">
+            <span>Explore Case ↗</span>
+          </button>
+        </div>
+      </article>
+
     </div>
   `;
 
   init3DParallaxTilt();
 }
 
-window.selectStudioProject = function(idx) {
-  if (idx < 0 || idx >= activeProjects.length) return;
-  currentStudioProjectIndex = idx;
-  currentStudioScreenIndex = 0;
-
-  // Update active file item in sidebar
-  document.querySelectorAll(".studio-file-item").forEach((el, i) => {
-    if (i === idx) {
-      el.classList.add("active");
-    } else {
-      el.classList.remove("active");
-    }
-  });
-
-  const vp = document.getElementById("studio-viewport");
-  if (vp) {
-    const p = activeProjects[idx];
-    vp.style.opacity = "0";
-    vp.style.transform = "translateY(5px)";
-    setTimeout(() => {
-      vp.innerHTML = renderStudioViewportHtml(p);
-      vp.style.transition = "opacity 0.18s ease, transform 0.18s ease";
-      vp.style.opacity = "1";
-      vp.style.transform = "translateY(0)";
-      init3DParallaxTilt();
-    }, 100);
-  }
-};
-
-window.switchStudioScreen = function(screenIndex, btn, event) {
+window.switchBentoScreen = function(screenIndex, btn, event) {
   if (event) {
     event.stopPropagation();
     event.preventDefault();
   }
-  currentStudioScreenIndex = screenIndex;
-  document.querySelectorAll(".studio-tab-btn").forEach(b => b.classList.remove("active"));
+  currentFlagshipScreenIndex = screenIndex;
+  document.querySelectorAll(".flagship-tab-pill").forEach(b => b.classList.remove("active"));
   if (btn) btn.classList.add("active");
 
-  const p = activeProjects[currentStudioProjectIndex];
-  if (!p) return;
-  const screens = (p.peekScreens && p.peekScreens.length > 0)
-    ? p.peekScreens
-    : [{ src: p.image_url || p.image }];
+  const tasksync = activeProjects.find(p => (p.id || '').toLowerCase().includes('tasksync')) || activeProjects[0];
+  if (!tasksync) return;
+  const screens = (tasksync.peekScreens && tasksync.peekScreens.length > 0)
+    ? tasksync.peekScreens
+    : [
+        { label: "Overview", src: "assets/tasksync/tasksync-cover.png" },
+        { label: "Home", src: "assets/tasksync/tasksync-home.png" },
+        { label: "Tasks", src: "assets/tasksync/tasksync-tasks.png" },
+        { label: "GPS Check-in", src: "assets/tasksync/tasksync-attendance.png" },
+        { label: "Team Chat", src: "assets/tasksync/tasksync-chat.png" }
+      ];
+
   const s = screens[screenIndex];
   if (!s) return;
 
-  const img = document.getElementById("studio-screen-img");
+  const img = document.getElementById("bento-flagship-img");
   if (img) {
     img.style.opacity = "0";
     setTimeout(() => {
       img.src = s.src;
-      img.alt = s.label || p.title;
+      img.alt = s.label || tasksync.title;
       img.style.opacity = "1";
     }, 120);
   }
