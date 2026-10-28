@@ -1168,10 +1168,8 @@ function formatScreenLabel(label) {
 }
 
 /* ==========================================================================
-   Bento Mosaic Rendering Engine (Style 4 Flagship — Exactly 5 Frames)
+   Bento Mosaic Rendering Engine (EXACT 1:1 Demo Match — 5 Compact Frames)
    ========================================================================== */
-let currentFlagshipScreenIndex = 0;
-
 function renderProjects() {
   const container = document.getElementById("projects-container");
   if (!container) return;
@@ -1181,153 +1179,100 @@ function renderProjects() {
     countBadge.textContent = "05 CASE STUDIES ✦";
   }
 
-  // Find the 5 projects by id or index
-  const tasksync = activeProjects.find(p => (p.id || '').toLowerCase().includes('tasksync')) || activeProjects[0];
-  const explora = activeProjects.find(p => (p.id || '').toLowerCase().includes('explora')) || activeProjects[1];
-  const miraai = activeProjects.find(p => (p.id || '').toLowerCase().includes('mira')) || activeProjects[2];
-  const manage = activeProjects.find(p => (p.id || '').toLowerCase().includes('manage')) || activeProjects[3];
-  const claims = activeProjects.find(p => (p.id || '').toLowerCase().includes('claim') || (p.id || '').toLowerCase().includes('fintech')) || activeProjects[4];
-
-  // Flagship screen tabs data
-  const flagshipScreens = (tasksync && tasksync.peekScreens && tasksync.peekScreens.length > 0)
-    ? tasksync.peekScreens
-    : [
-        { label: "Overview", src: "assets/tasksync/tasksync-cover.png" },
-        { label: "Home", src: "assets/tasksync/tasksync-home.png" },
-        { label: "Tasks", src: "assets/tasksync/tasksync-tasks.png" },
-        { label: "GPS Check-in", src: "assets/tasksync/tasksync-attendance.png" },
-        { label: "Team Chat", src: "assets/tasksync/tasksync-chat.png" }
-      ];
-
-  const activeFlagshipScreen = flagshipScreens[currentFlagshipScreenIndex] || flagshipScreens[0];
-
   container.innerHTML = `
     <div class="bento-mosaic-grid" id="bento-mosaic-grid">
 
-      <!-- FRAME 1: FLAGSHIP HERO SPECIMEN (Spans 8 cols) -->
-      <article class="bento-card bento-flagship" id="bento-flagship" onclick="handleCardClick('${tasksync ? tasksync.id : 'tasksync'}', event)">
-        <!-- Retro OS Top Bar -->
-        <div class="bento-flagship-os-bar">
-          <div class="bento-flagship-dots">
-            <span class="bento-dot dot-red"></span>
-            <span class="bento-dot dot-yellow"></span>
-            <span class="bento-dot dot-green"></span>
+      <!-- Flagship Hero Tile (Spans 8 cols) -->
+      <article class="bento-card bento-flagship" onclick="handleCardClick('tasksync', event)">
+        <div class="os-bar" style="margin:-24px -24px 20px; border-radius:12px 12px 0 0;">
+          <div class="window-dots">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
           </div>
-          <span class="bento-flagship-slug">tasksync.app // flagship_ecosystem</span>
-          <span class="bento-flagship-badge">LIVE SHIPPED V1.0</span>
+          <span class="os-bar-title">FLAGSHIP HERO SPECIMEN</span>
+          <span class="file-badge" style="background:var(--neo-cyan); color:#000;">SHIPPED V1.0</span>
         </div>
 
-        <div class="bento-flagship-body">
-          <div class="flagship-inner">
-            <!-- Left Info Column -->
-            <div>
-              <span class="bento-tag" style="background:var(--neo-yellow);">#01 · B2B ECOSYSTEM</span>
-              <h3 class="bento-title" style="font-size:1.75rem; margin-bottom:10px;">${tasksync ? tasksync.title : 'TaskSync — All-in-One Work Platform'}</h3>
-              <p class="bento-desc" style="font-size:14px; margin-bottom:18px;">${tasksync ? tasksync.summary : 'Nền tảng quản lý công việc tích hợp team messaging, smart calendar và chấm công GPS geofencing trong một trải nghiệm mobile tinh gọn.'}</p>
-              
-              <!-- 2 Metric Cards -->
-              <div class="bento-metrics-mini">
-                <div class="bento-metric-mini-chip">
-                  <div class="bento-metric-mini-val">+40%</div>
-                  <div class="bento-metric-mini-lbl">Tốc độ xử lý task</div>
-                </div>
-                <div class="bento-metric-mini-chip">
-                  <div class="bento-metric-mini-val">98%</div>
-                  <div class="bento-metric-mini-lbl">Check-in GPS đúng giờ</div>
-                </div>
+        <div class="flagship-inner">
+          <div>
+            <span class="vp-tag" style="background:var(--neo-yellow); color:#000; margin-bottom:10px; display:inline-block;">#01 · B2B ECOSYSTEM</span>
+            <h3 style="font-size:24px; font-weight:900; line-height:1.25; margin-bottom:10px; color:var(--text-main);">TaskSync Platform</h3>
+            <p style="font-size:14px; color:var(--text-muted); line-height:1.6; margin-bottom:16px;">Nền tảng quản lý công việc tích hợp team messaging, smart calendar và chấm công GPS geofencing trong một trải nghiệm mobile tinh gọn.</p>
+            
+            <div class="viewport-metrics-row" style="margin-bottom:16px;">
+              <div class="vp-metric-card" style="background:#FAF8F5;">
+                <div class="vp-metric-val">+40%</div>
+                <div class="vp-metric-lbl">Tốc độ Sprint</div>
               </div>
-
-              <button type="button" class="bento-cta-btn" style="background:var(--neo-yellow); padding:10px 20px; font-size:12.5px;" onclick="event.stopPropagation(); handleCardClick('${tasksync ? tasksync.id : 'tasksync'}', event)">
-                <span>Read Case Study</span>
-                <span class="btn-arrow"><svg class="btn-arrow-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17l10-10M7 7h10v10"/></svg></span>
-              </button>
-            </div>
-
-            <!-- Right Visual Stage with Screen Switcher -->
-            <div class="flagship-img-box" onclick="event.stopPropagation()">
-              <img id="bento-flagship-img" src="${activeFlagshipScreen.src}" alt="${activeFlagshipScreen.label || 'TaskSync'}" loading="lazy">
-              
-              <!-- Screen Switcher Tabs -->
-              <div class="flagship-tabs-bar">
-                ${flagshipScreens.map((s, si) => `
-                  <button type="button" class="flagship-tab-pill ${si === currentFlagshipScreenIndex ? 'active' : ''}" onclick="switchBentoScreen(${si}, this, event)">
-                    <span>${formatScreenLabel(s.label)}</span>
-                  </button>
-                `).join("")}
+              <div class="vp-metric-card" style="background:#FAF8F5;">
+                <div class="vp-metric-val">98%</div>
+                <div class="vp-metric-lbl">GPS Đúng Giờ</div>
               </div>
             </div>
+
+            <button type="button" class="style-btn active" onclick="event.stopPropagation(); handleCardClick('tasksync', event)">Read Case Study ↗</button>
+          </div>
+
+          <div class="flagship-img-box">
+            <img src="assets/tasksync/tasksync-cover.png" alt="TaskSync Cascade" loading="lazy">
           </div>
         </div>
       </article>
 
-      <!-- FRAME 2: METRIC HIGHLIGHT TILE (Spans 4 cols — Explora Biotech ROI) -->
-      <article class="bento-card bento-metric" onclick="handleCardClick('${explora ? explora.id : 'explora'}', event)">
+      <!-- Metric Highlight Tile (Spans 4 cols) -->
+      <article class="bento-card bento-metric" onclick="handleCardClick('explora', event)">
         <div>
-          <span class="bento-tag" style="background:#FFFFFF;">#02 · BIOTECH ROI</span>
-          <h4 class="bento-title" style="font-size:1.45rem; margin-top:4px;">${explora ? explora.title : 'Cellworks Explora Workspace'}</h4>
-          <div class="bento-metric-val">~$1.2M</div>
-          <p class="bento-metric-desc">${explora ? explora.summary : 'Năng suất nghiên cứu phục hồi hàng năm khi gom 9 legacy tools về 1 IDE duy nhất.'}</p>
+          <span class="vp-tag" style="background:#FFF; color:#000; margin-bottom:12px; display:inline-block;">#02 · BIOTECH ROI</span>
+          <h4 style="font-size:18px; font-weight:900; color:#000;">Cellworks Explora</h4>
+          <div style="font-size:46px; font-weight:900; font-family:var(--font-mono); margin:14px 0 6px; letter-spacing:-0.03em; color:#000;">
+            ~$1.2M
+          </div>
+          <p style="font-size:13px; font-weight:700; color:#000; line-height:1.5;">Năng suất nghiên cứu phục hồi hàng năm khi gom 9 legacy tools về 1 IDE duy nhất.</p>
         </div>
-        <div class="bento-footer-row" style="border-top-color:rgba(0,0,0,0.3);">
-          <span class="bento-stat-chip" style="color:#000; font-weight:800;">100% Adoption · 9 → 1 Tools</span>
-          <button type="button" class="bento-cta-btn" onclick="event.stopPropagation(); handleCardClick('${explora ? explora.id : 'explora'}', event)">
-            <span>Xem Chi Tiết ↗</span>
-          </button>
+        <button type="button" class="style-btn" style="background:#FFF; color:#000; align-self:flex-start; margin-top:20px;" onclick="event.stopPropagation(); handleCardClick('explora', event)">Xem Chi Tiết ↗</button>
+      </article>
+
+      <!-- Compact Tile 1 (Spans 4 cols) -->
+      <article class="bento-card bento-compact-1" onclick="handleCardClick('miraai', event)">
+        <div>
+          <span class="vp-tag" style="background:var(--neo-pink); color:#000; margin-bottom:10px; display:inline-block;">#03 · AI WEARABLE</span>
+          <h4 style="font-size:18px; font-weight:900; margin-bottom:8px; color:var(--text-main);">Mira.ai Pregnancy</h4>
+          <p style="font-size:13px; color:var(--text-muted); line-height:1.5;">Trợ lý dinh dưỡng bio-digital twin kết hợp cảm biến HRV trên Apple Watch.</p>
+        </div>
+        <div style="background:#F4F1EA; border:1.5px solid #000000; border-radius:8px; padding:12px; margin:16px 0; text-align:center;">
+          <img src="assets/ecommerce.png" alt="Mira Preview" style="max-height:110px; max-width:100%; object-fit:contain;" loading="lazy">
+        </div>
+        <button type="button" class="style-btn" style="align-self:flex-start;" onclick="event.stopPropagation(); handleCardClick('miraai', event)">Explore Case ↗</button>
+      </article>
+
+      <!-- Compact Tile 2 (Spans 4 cols) -->
+      <article class="bento-card bento-compact-2" onclick="handleCardClick('manage', event)">
+        <div>
+          <span class="vp-tag" style="background:var(--neo-green); color:#000; margin-bottom:10px; display:inline-block;">#04 · FIELD COMMISSIONING</span>
+          <h4 style="font-size:18px; font-weight:900; margin-bottom:8px; color:var(--text-main);">Siemens Manage 3D</h4>
+          <p style="font-size:13px; color:var(--text-muted); line-height:1.5;">Giao diện floorplan kéo thả phân nhóm 1,000+ cảm biến tòa nhà thông minh.</p>
+        </div>
+        <div style="background:#F4F1EA; border:1.5px solid #000000; border-radius:8px; padding:12px; margin:16px 0; text-align:center;">
+          <img src="assets/design-system.png" alt="Manage Preview" style="max-height:110px; max-width:100%; object-fit:contain;" loading="lazy">
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-family:var(--font-mono); font-weight:800; font-size:12px; color:var(--text-dim);">5 DAYS → 2 DAYS</span>
+          <button type="button" class="style-btn" onclick="event.stopPropagation(); handleCardClick('manage', event)">Explore ↗</button>
         </div>
       </article>
 
-      <!-- FRAME 3: COMPACT TILE 1 (Spans 4 cols — Mira.ai Wearable) -->
-      <article class="bento-card bento-compact-1" onclick="handleCardClick('${miraai ? miraai.id : 'miraai'}', event)">
+      <!-- Compact Tile 3 (Spans 4 cols) -->
+      <article class="bento-card bento-compact-3" onclick="handleCardClick('ai-insurance-claims', event)">
         <div>
-          <span class="bento-tag" style="background:var(--neo-pink);">#03 · AI WEARABLE</span>
-          <h4 class="bento-title">${miraai ? miraai.title : 'Mira.ai Pregnancy'}</h4>
-          <p class="bento-desc">${miraai ? miraai.summary : 'Trợ lý dinh dưỡng bio-digital twin kết hợp cảm biến HRV trên Apple Watch.'}</p>
+          <span class="vp-tag" style="background:var(--neo-orange); color:#000; margin-bottom:10px; display:inline-block;">#05 · B2B PROTOTYPE</span>
+          <h4 style="font-size:18px; font-weight:900; margin-bottom:8px; color:var(--text-main);">AI Claims Engine</h4>
+          <p style="font-size:13px; color:var(--text-muted); line-height:1.5;">Thẩm định bồi thường bảo hiểm tự động hóa bằng AI đa phương thức.</p>
         </div>
-        <div class="bento-visual-box">
-          <img src="${miraai && (miraai.image_url || miraai.image) ? (miraai.image_url || miraai.image) : 'assets/ecommerce.png'}" alt="Mira Preview" loading="lazy">
+        <div style="background:#F4F1EA; border:1.5px solid #000000; border-radius:8px; padding:12px; margin:16px 0; text-align:center;">
+          <img src="assets/fintech.png" alt="Fintech Preview" style="max-height:110px; max-width:100%; object-fit:contain;" loading="lazy">
         </div>
-        <div class="bento-footer-row">
-          <span class="bento-stat-chip">15/15 Testers · ~70% Relief</span>
-          <button type="button" class="bento-cta-btn" onclick="event.stopPropagation(); handleCardClick('${miraai ? miraai.id : 'miraai'}', event)">
-            <span>Explore Case ↗</span>
-          </button>
-        </div>
-      </article>
-
-      <!-- FRAME 4: COMPACT TILE 2 (Spans 4 cols — Siemens Manage 3D) -->
-      <article class="bento-card bento-compact-2" onclick="handleCardClick('${manage ? manage.id : 'manage'}', event)">
-        <div>
-          <span class="bento-tag" style="background:var(--neo-green);">#04 · FIELD COMMISSIONING</span>
-          <h4 class="bento-title">${manage ? manage.title : 'Siemens Manage 3D'}</h4>
-          <p class="bento-desc">${manage ? manage.summary : 'Giao diện floorplan kéo thả phân nhóm 1,000+ cảm biến tòa nhà thông minh.'}</p>
-        </div>
-        <div class="bento-visual-box">
-          <img src="${manage && (manage.image_url || manage.image) ? (manage.image_url || manage.image) : 'assets/design-system.png'}" alt="Manage Preview" loading="lazy">
-        </div>
-        <div class="bento-footer-row">
-          <span class="bento-stat-chip">5 DAYS → 2 DAYS</span>
-          <button type="button" class="bento-cta-btn" onclick="event.stopPropagation(); handleCardClick('${manage ? manage.id : 'manage'}', event)">
-            <span>Explore ↗</span>
-          </button>
-        </div>
-      </article>
-
-      <!-- FRAME 5: COMPACT TILE 3 (Spans 4 cols — AI Claims Engine) -->
-      <article class="bento-card bento-compact-3" onclick="handleCardClick('${claims ? claims.id : 'ai-insurance-claims'}', event)">
-        <div>
-          <span class="bento-tag" style="background:var(--neo-orange);">#05 · B2B PROTOTYPE</span>
-          <h4 class="bento-title">${claims ? claims.title : 'AI Claims Engine'}</h4>
-          <p class="bento-desc">${claims ? claims.summary : 'Thẩm định bồi thường bảo hiểm tự động hóa bằng AI đa phương thức.'}</p>
-        </div>
-        <div class="bento-visual-box">
-          <img src="${claims && (claims.image_url || claims.image) ? (claims.image_url || claims.image) : 'assets/fintech.png'}" alt="Fintech Preview" loading="lazy">
-        </div>
-        <div class="bento-footer-row">
-          <span class="bento-stat-chip">10x Faster Processing</span>
-          <button type="button" class="bento-cta-btn" onclick="event.stopPropagation(); handleCardClick('${claims ? claims.id : 'ai-insurance-claims'}', event)">
-            <span>Explore Case ↗</span>
-          </button>
-        </div>
+        <button type="button" class="style-btn" style="align-self:flex-start;" onclick="event.stopPropagation(); handleCardClick('ai-insurance-claims', event)">Explore Case ↗</button>
       </article>
 
     </div>
@@ -1335,41 +1280,6 @@ function renderProjects() {
 
   init3DParallaxTilt();
 }
-
-window.switchBentoScreen = function(screenIndex, btn, event) {
-  if (event) {
-    event.stopPropagation();
-    event.preventDefault();
-  }
-  currentFlagshipScreenIndex = screenIndex;
-  document.querySelectorAll(".flagship-tab-pill").forEach(b => b.classList.remove("active"));
-  if (btn) btn.classList.add("active");
-
-  const tasksync = activeProjects.find(p => (p.id || '').toLowerCase().includes('tasksync')) || activeProjects[0];
-  if (!tasksync) return;
-  const screens = (tasksync.peekScreens && tasksync.peekScreens.length > 0)
-    ? tasksync.peekScreens
-    : [
-        { label: "Overview", src: "assets/tasksync/tasksync-cover.png" },
-        { label: "Home", src: "assets/tasksync/tasksync-home.png" },
-        { label: "Tasks", src: "assets/tasksync/tasksync-tasks.png" },
-        { label: "GPS Check-in", src: "assets/tasksync/tasksync-attendance.png" },
-        { label: "Team Chat", src: "assets/tasksync/tasksync-chat.png" }
-      ];
-
-  const s = screens[screenIndex];
-  if (!s) return;
-
-  const img = document.getElementById("bento-flagship-img");
-  if (img) {
-    img.style.opacity = "0";
-    setTimeout(() => {
-      img.src = s.src;
-      img.alt = s.label || tasksync.title;
-      img.style.opacity = "1";
-    }, 120);
-  }
-};
 
 function handleCardClick(id, event) {
   fireConfetti(event);
