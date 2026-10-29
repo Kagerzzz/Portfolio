@@ -1281,9 +1281,14 @@ function renderProjects() {
   init3DParallaxTilt();
 }
 
+let activeFullscreenProjectId = null;
+let lastClickedCardElement = null;
+
 function handleCardClick(id, event) {
-  fireConfetti(event);
-  openCaseStudyModal(id);
+  if (event) {
+    event.stopPropagation();
+  }
+  openCaseStudyFullscreen(id, event);
 }
 
 /* 3D Parallax Mouse Tilt Animation for Unique Media Objects */
@@ -1700,49 +1705,148 @@ function getStarterDocContent(p) {
   `;
 }
 
-/* Modal Case Study - 100% Free-Form Custom Doc Canvas */
-function openCaseStudyModal(id) {
+/* ==========================================================================
+   Full-Screen Case Study Detail Canvas & Zoom Animation Engine
+   ========================================================================== */
+function openCaseStudyFullscreen(id, event) {
   const p = activeProjects.find(item => item.id === id) || PROJECTS_DATA.find(item => item.id === id);
   if (!p) return;
 
-  const modal = document.getElementById("case-study-modal");
-  const content = document.getElementById("modal-content-target");
+  const fullscreen = document.getElementById("case-study-fullscreen");
+  const content = document.getElementById("cs-fullscreen-content");
+  const scrollWrap = document.getElementById("cs-fullscreen-scroll-wrap");
+  const caseBadge = document.getElementById("nav-case-study-pill");
+  if (!fullscreen || !content) return;
 
+  activeFullscreenProjectId = id;
+
+  // Set project title in badge if available
+  if (caseBadge) {
+    const shortName = p.title.split('—')[0].trim();
+    caseBadge.textContent = `✦ ${shortName}`;
+  }
+
+  // Populate content
   const docHtml = (p.content && p.content.trim()) ? p.content : getStarterDocContent(p);
+  content.innerHTML = docHtml;
 
-  content.innerHTML = `
-    <div class="case-study-doc-content">
-      ${docHtml}
-    </div>
-  `;
+  // Determine origin coordinates for zoom animation
+  let originX = window.innerWidth / 2;
+  let originY = window.innerHeight / 2;
 
-  modal.classList.add("active");
+  // Locate the clicked card element
+  let card = null;
+  if (event && event.target) {
+    card = event.target.closest('.bento-card') || event.target.closest('article');
+  }
+  if (!card) {
+    card = document.getElementById(id) || document.querySelector(`.bento-card[onclick*="${id}"]`);
+  }
+
+  if (card) {
+    lastClickedCardElement = card;
+    const rect = card.getBoundingClientRect();
+    originX = rect.left + rect.width / 2;
+    originY = rect.top + rect.height / 2;
+  } else if (event && event.clientX && event.clientY) {
+    originX = event.clientX;
+    originY = event.clientY;
+  }
+
+  // Set transform origin on fullscreen canvas
+  fullscreen.style.transformOrigin = `${originX}px ${originY}px`;
+
+  fullscreen.style.visibility = 'visible';
+  // Start scaled down at origin with no transition
+  fullscreen.style.transition = "none";
+  fullscreen.classList.remove("is-open");
+  fullscreen.style.transform = "scale(0.2)";
+  fullscreen.style.opacity = "0";
+
+  // Reset scroll position to top
+  if (scrollWrap) scrollWrap.scrollTop = 0;
+
+  // Force reflow
+  void fullscreen.offsetWidth;
+
+  // Animate zoom-in to full screen
+  fullscreen.style.transition = "transform 0.44s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease";
+  fullscreen.classList.add("is-open");
+  fullscreen.style.transform = "scale(1) translate3d(0, 0, 0)";
+  fullscreen.style.opacity = "1";
+
+  // Lock body scroll and activate nav case study bar
+  document.body.classList.add("in-case-study-mode");
   document.body.style.overflow = "hidden";
-  fireConfetti();
+
+  // Launch confetti
+  fireConfetti(event);
 }
 
-function initModalEvents() {
-  const modal = document.getElementById("case-study-modal");
-  const closeBtn = document.getElementById("modal-close-btn");
-
-  if (closeBtn) closeBtn.addEventListener("click", closeModal);
-  if (modal) {
-    modal.addEventListener("click", e => {
-      if (e.target === modal) closeModal();
-    });
+function closeCaseStudyFullscreen(event) {
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
   }
-  document.addEventListener("keydown", e => {
-    if (e.key === "Escape") {
-      if (modal && modal.classList.contains("active")) closeModal();
-      closeContactModal();
+
+  const fullscreen = document.getElementById("case-study-fullscreen");
+  if (!fullscreen || !fullscreen.classList.contains("is-open")) return;
+
+  // Re-calculate transform origin based on the card's current viewport position
+  if (lastClickedCardElement) {
+    const rect = lastClickedCardElement.getBoundingClientRect();
+    fullscreen.style.transformOrigin = `${rect.left + rect.width / 2}px ${rect.top + rect.height / 2}px`;
+  }
+
+  // Smooth zoom-out animation back to card
+  fullscreen.style.transition = "transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.26s ease";
+  fullscreen.style.transform = "scale(0.2)";
+  fullscreen.style.opacity = "0";
+  fullscreen.classList.remove("is-open");
+
+  // Restore navigation and scroll
+  document.body.classList.remove("in-case-study-mode");
+  document.body.style.overflow = "";
+
+  setTimeout(() => {
+    if (!fullscreen.classList.contains("is-open")) {
+      fullscreen.style.visibility = "hidden";
+      const content = document.getElementById("cs-fullscreen-content");
+      if (content) content.innerHTML = "";
     }
-  });
+  }, 360);
+}
+
+// Backwards-compatible aliases
+function openCaseStudyModal(id) {
+  openCaseStudyFullscreen(id);
 }
 
 function closeModal() {
-  const modal = document.getElementById("case-study-modal");
-  if (modal) modal.classList.remove("active");
-  document.body.style.overflow = "";
+  closeCaseStudyFullscreen();
+}
+
+function initModalEvents() {
+  // Navigation brand link returns to home if in case study
+  const brand = document.querySelector(".nav-brand");
+  if (brand) {
+    brand.addEventListener("click", (e) => {
+      if (document.body.classList.contains("in-case-study-mode")) {
+        e.preventDefault();
+        closeCaseStudyFullscreen(e);
+      }
+    });
+  }
+
+  // Global escape key handler
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      if (document.body.classList.contains("in-case-study-mode")) {
+        closeCaseStudyFullscreen(e);
+      }
+      closeContactModal();
+    }
+  });
 }
 
 /* ==========================================================================

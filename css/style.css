@@ -156,7 +156,7 @@ button {
   top: 24px;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: 200;
   display: flex;
   justify-content: center;
   pointer-events: none;
@@ -5715,3 +5715,212 @@ button {
   }
 }
 
+
+
+/* ==========================================================================
+   Full-Screen Case Study Detail View with Zoom Animation (Replaces Popup)
+   ========================================================================== */
+.case-study-fullscreen {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 150;
+  background-color: var(--bg-main);
+  background-image: radial-gradient(var(--border-color) 0.85px, transparent 0.85px);
+  background-size: 24px 24px;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: scale(0.25);
+  will-change: transform, opacity;
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1), 
+              opacity 0.32s ease, 
+              visibility 0.42s step-end;
+}
+
+.case-study-fullscreen.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: scale(1) translate3d(0, 0, 0);
+  transition: transform 0.44s cubic-bezier(0.16, 1, 0.3, 1), 
+              opacity 0.28s ease, 
+              visibility 0s;
+}
+
+.cs-fullscreen-scroll-wrap {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-top: 104px;
+  padding-bottom: 80px;
+}
+
+.cs-fullscreen-container {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+}
+
+.cs-fullscreen-close-btn {
+  position: absolute;
+  top: -12px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--neo-pink);
+  border: var(--border-neo);
+  color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-neo-xs);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  z-index: 10;
+}
+
+.cs-fullscreen-close-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: var(--shadow-neo-sm);
+  background: var(--neo-yellow);
+}
+
+.cs-fullscreen-close-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: none;
+}
+
+.cs-fullscreen-footer {
+  margin-top: 60px;
+  padding: 40px 0 50px;
+  border-top: 2.5px dashed var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.cs-bottom-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 28px;
+  background: var(--neo-yellow);
+  color: #000000;
+  border: var(--border-neo);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  box-shadow: var(--shadow-neo-sm);
+  cursor: pointer;
+  transition: var(--spring-transition);
+}
+
+.cs-bottom-back-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-neo-md);
+  background: var(--neo-pink);
+}
+
+.cs-bottom-back-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: var(--shadow-neo-xs);
+}
+
+.cs-bottom-hint {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+/* Nav Bar in Case Study Mode */
+.nav-case-study-bar {
+  display: none;
+  align-items: center;
+  gap: 10px;
+}
+
+body.in-case-study-mode .nav-links {
+  display: none !important;
+}
+
+body.in-case-study-mode .nav-case-study-bar {
+  display: flex !important;
+}
+
+.nav-back-home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: var(--neo-yellow);
+  color: #000000 !important;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  box-shadow: 2px 2px 0px var(--border-color);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.nav-back-home-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px var(--border-color);
+  background: var(--neo-pink);
+}
+
+.nav-back-home-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0px var(--border-color);
+}
+
+.nav-case-study-pill {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 10px;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-pill);
+  background: var(--bg-card-alt);
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .cs-fullscreen-scroll-wrap {
+    padding-top: 86px;
+    padding-bottom: 60px;
+  }
+  .cs-fullscreen-container {
+    padding: 0 16px;
+  }
+  .cs-fullscreen-close-btn {
+    top: -6px;
+    right: 14px;
+    width: 38px;
+    height: 38px;
+  }
+  .nav-case-study-pill {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  body.in-case-study-mode .nav-brand {
+    display: none;
+  }
+}
