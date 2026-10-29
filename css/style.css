@@ -5844,7 +5844,8 @@ button {
 }
 
 /* In Case Study Mode: Hide top header navigation bar completely */
-body.in-case-study-mode .header {
+body.in-case-study-mode .header,
+body.in-all-projects-mode .header {
   display: none !important;
 }
 
@@ -5911,5 +5912,375 @@ body.in-case-study-mode .header {
     right: 14px;
     width: 38px;
     height: 38px;
+  }
+}
+
+
+/* ==========================================================================
+   "Xem Tất Cả" Button on Home Page & All Projects Rectangular Gallery
+   ========================================================================== */
+.work-all-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: var(--neo-yellow);
+  color: #000000 !important;
+  border: var(--border-neo);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-neo-xs);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: var(--spring-transition);
+  text-decoration: none;
+}
+
+.work-all-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-neo-sm);
+  background: var(--neo-pink);
+}
+
+.work-all-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: none;
+}
+
+.work-all-btn .all-btn-icon {
+  font-size: 12px;
+}
+
+.work-all-btn .all-btn-count {
+  background: #000000;
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 900;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+}
+
+.work-all-btn .btn-arrow-svg {
+  transition: transform 0.15s ease;
+}
+
+.work-all-btn:hover .btn-arrow-svg {
+  transform: translate(2px, -2px);
+}
+
+/* All Projects Fullscreen Container */
+.all-projects-container {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.all-projects-header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 36px;
+  padding-bottom: 24px;
+  border-bottom: 2px dashed var(--border-color);
+}
+
+.all-projects-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 800;
+  padding: 4px 14px;
+  background: var(--neo-yellow);
+  color: #000000;
+  border: var(--border-neo);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-neo-xs);
+  margin-bottom: 14px;
+  letter-spacing: 0.06em;
+}
+
+.all-projects-title {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+
+.all-projects-desc {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* Rectangular Cards Grid */
+.rectangular-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  margin-bottom: 20px;
+}
+
+.rect-project-card {
+  background: var(--bg-card);
+  border: var(--border-neo);
+  border-radius: 14px;
+  box-shadow: var(--shadow-neo-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease;
+  position: relative;
+}
+
+.rect-project-card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: var(--shadow-neo-lg);
+}
+
+.rect-project-card:active {
+  transform: translate(1px, 1px);
+  box-shadow: var(--shadow-neo-xs);
+}
+
+/* Card OS Header Bar */
+.rect-card-os-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: var(--bg-surface);
+  border-bottom: var(--border-neo);
+  user-select: none;
+}
+
+.rect-card-meta-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rect-num-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+}
+
+.rect-status-pill {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 900;
+  padding: 2px 8px;
+  border: 1.5px solid #000000;
+  border-radius: var(--radius-pill);
+  box-shadow: 1.5px 1.5px 0px #000000;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Rectangular Media Box */
+.rect-card-media-box {
+  width: 100%;
+  height: 220px;
+  background: #F4F1EA;
+  border-bottom: var(--border-neo);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[data-theme="dark"] .rect-card-media-box {
+  background: #18191E;
+}
+
+.rect-card-media-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rect-project-card:hover .rect-card-media-box img {
+  transform: scale(1.04);
+}
+
+.rect-media-overlay {
+  position: absolute;
+  inset: 0;
+  padding: 12px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, 0.45) 100%);
+}
+
+.rect-client-badge {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 800;
+  padding: 3px 9px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #000000;
+  border: 1.5px solid #000000;
+  border-radius: var(--radius-pill);
+  box-shadow: 1.5px 1.5px 0px #000000;
+}
+
+.rect-hover-hint {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 10px;
+  background: var(--neo-yellow);
+  color: #000000;
+  border: 1.5px solid #000000;
+  border-radius: var(--radius-pill);
+  box-shadow: 1.5px 1.5px 0px #000000;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: all 0.2s ease;
+}
+
+.rect-project-card:hover .rect-hover-hint {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Card Body */
+.rect-card-body {
+  padding: 22px 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.rect-tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.rect-tag-pill {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 800;
+  padding: 2px 8px;
+  background: var(--bg-surface);
+  color: var(--text-dim);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-pill);
+}
+
+.rect-card-title {
+  font-size: 19px;
+  font-weight: 900;
+  line-height: 1.35;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.rect-card-summary {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--text-muted);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Metrics Row */
+.rect-metrics-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+
+.rect-metric-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px;
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border-color);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.rect-metric-val {
+  font-weight: 900;
+  color: var(--text-main);
+}
+
+.rect-metric-lbl {
+  color: var(--text-dim);
+  font-size: 10.5px;
+}
+
+/* Card Footer Action */
+.rect-card-footer {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1.5px dashed var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.rect-card-role-year {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text-dim);
+}
+
+.rect-card-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background: var(--neo-yellow);
+  color: #000000 !important;
+  border: var(--border-neo);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 800;
+  box-shadow: 2px 2px 0px var(--border-color);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.rect-project-card:hover .rect-card-cta-btn {
+  background: var(--neo-pink);
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px var(--border-color);
+}
+
+.rect-card-cta-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 860px) {
+  .rectangular-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .all-projects-title {
+    font-size: 1.8rem;
   }
 }

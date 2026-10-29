@@ -795,6 +795,28 @@ const PROJECTS_DATA = [
     overview: "A automated claims processing engine using multimodal AI models to inspect damage reports, verify policy terms, and draft settlement offers.",
     challenge: "Insurance adjusters needed full auditability for automated AI decisions.",
     solution: "Designed a side-by-side human-in-the-loop dashboard highlighting evidence sources and risk confidence scores."
+  },
+
+  {
+    id: "ai-consumer-research",
+    title: "AI Consumer Research Platform — Expert Data Collection App",
+    client: "Co-led with 2 Founders",
+    role: "Product Design",
+    year: "Consumer ∙ Shipped",
+    tags: ["Co-led with 2 Founders", "Consumer-facing", "AI Platform", "Product Design", "Shipped"],
+    summary: "Envisioned and designed the MVP mobile app screens to enable domain experts to participate in high-precision AI-driven research micro-tasking.",
+    image: "assets/fintech.png",
+    metrics: [
+      { val: "2", label: "Founders Co-led" },
+      { val: "MVP", label: "Shipped to App Store" },
+      { val: "AI", label: "Driven Insights" }
+    ],
+    peekScreens: [
+      { label: "Annotation App", src: "assets/fintech.png", tag: "AI SPECIMEN", desc: "High-Precision Micro-Tasking for Domain Experts" }
+    ],
+    overview: "Mobile application enabling domain experts to participate in specialized AI model training and evaluation tasks.",
+    challenge: "Creating an engaging consumer UX while collecting high-precision annotations from technical experts.",
+    solution: "Streamlined micro-tasking interface with instant visual feedback and gamified progress tracking."
   }
 ];
 
@@ -807,6 +829,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initLiveClocks();
   initHeroTabs();
   renderProjects();
+  renderAllProjectsGrid();
   initModalEvents();
   initCursorTrailEngine();
   initCustomCursorAndBadge();
@@ -847,6 +870,7 @@ async function loadProjectsFromBlob() {
       activeProjects = [...localFlagships, ...blobProjects];
       
       renderProjects();
+      renderAllProjectsGrid();
       init3DParallaxTilt();
       console.log('✅ [Vercel Blob] Đã load thành công', activeProjects.length, 'dự án!');
     }
@@ -1174,9 +1198,12 @@ function renderProjects() {
   const container = document.getElementById("projects-container");
   if (!container) return;
 
-  const countBadge = document.getElementById("work-count-badge");
+    const countBadge = document.getElementById("work-count-badge");
   if (countBadge) {
-    countBadge.textContent = "05 CASE STUDIES ✦";
+    const countSpan = countBadge.querySelector(".all-btn-count");
+    if (countSpan) {
+      countSpan.textContent = `(${String(PROJECTS_DATA.length).padStart(2, "0")})`;
+    }
   }
 
   container.innerHTML = `
@@ -1706,6 +1733,173 @@ function getStarterDocContent(p) {
 }
 
 /* ==========================================================================
+   Full-Screen All Projects Archive & Rectangular Cards Engine
+   ========================================================================== */
+let lastClickedAllProjectsTrigger = null;
+
+function renderAllProjectsGrid() {
+  const grid = document.getElementById("all-projects-grid");
+  if (!grid) return;
+
+  const statusThemes = {
+    tasksync: { text: "LIVE SHIPPED", bg: "var(--neo-cyan)" },
+    explora: { text: "BIOTECH ROI", bg: "var(--neo-yellow)" },
+    miraai: { text: "AI WEARABLE", bg: "var(--neo-pink)" },
+    manage: { text: "FIELD COMMISSIONING", bg: "var(--neo-green)" },
+    "ai-insurance-claims": { text: "B2B PROTOTYPE", bg: "var(--neo-orange)" },
+    "ai-consumer-research": { text: "AI SPECIMEN", bg: "var(--neo-purple)" }
+  };
+
+  grid.innerHTML = PROJECTS_DATA.map((p, idx) => {
+    const num = String(idx + 1).padStart(2, "0");
+    const theme = statusThemes[p.id] || { text: "CASE STUDY", bg: "var(--neo-yellow)" };
+    const imgSrc = p.image_url || p.image || "assets/tasksync/tasksync-cover.png";
+
+    const metricsHtml = (p.metrics && p.metrics.length) ? `
+      <div class="rect-metrics-row">
+        ${p.metrics.slice(0, 3).map(m => `
+          <div class="rect-metric-item">
+            <span class="rect-metric-val">${m.val}</span>
+            <span class="rect-metric-lbl">${m.label}</span>
+          </div>
+        `).join("")}
+      </div>
+    ` : "";
+
+    const tagsHtml = (p.tags && p.tags.length) ? `
+      <div class="rect-tags-list">
+        ${p.tags.slice(0, 3).map(t => `<span class="rect-tag-pill">${t}</span>`).join("")}
+      </div>
+    ` : "";
+
+    return `
+      <article class="rect-project-card" id="rect-card-${p.id}" onclick="handleRectCardClick('${p.id}', event)">
+        <div class="rect-card-os-bar">
+          <div class="window-dots">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+          </div>
+          <div class="rect-card-meta-tags">
+            <span class="rect-num-tag">#${num}</span>
+            <span class="rect-status-pill" style="background:${theme.bg}; color:#000;">${theme.text}</span>
+          </div>
+        </div>
+
+        <div class="rect-card-media-box">
+          <img src="${imgSrc}" alt="${p.title}" loading="lazy">
+          <div class="rect-media-overlay">
+            <span class="rect-client-badge">${p.client || 'Featured Work'}</span>
+            <span class="rect-hover-hint">Xem chi tiết ↗</span>
+          </div>
+        </div>
+
+        <div class="rect-card-body">
+          ${tagsHtml}
+          <h3 class="rect-card-title">${p.title}</h3>
+          <p class="rect-card-summary">${p.summary || p.overview || ""}</p>
+          ${metricsHtml}
+
+          <div class="rect-card-footer">
+            <span class="rect-card-role-year">${p.role || 'Product Designer'} ∙ ${p.year || 'Shipped'}</span>
+            <button type="button" class="rect-card-cta-btn" onclick="event.stopPropagation(); handleRectCardClick('${p.id}', event)">
+              <span>Xem Case Study</span>
+              <svg class="btn-arrow-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17l10-10M7 7h10v10"/></svg>
+            </button>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join("");
+}
+
+function openAllProjectsView(event) {
+  if (event) {
+    event.stopPropagation();
+  }
+
+  const fullscreen = document.getElementById("all-projects-fullscreen");
+  const scrollWrap = document.getElementById("all-projects-scroll-wrap");
+  if (!fullscreen) return;
+
+  renderAllProjectsGrid();
+
+  let originX = window.innerWidth / 2;
+  let originY = window.innerHeight / 2;
+
+  let btn = null;
+  if (event && event.target) {
+    btn = event.target.closest('#work-count-badge') || event.target.closest('button');
+  }
+  if (!btn) {
+    btn = document.getElementById("work-count-badge");
+  }
+
+  if (btn) {
+    lastClickedAllProjectsTrigger = btn;
+    const rect = btn.getBoundingClientRect();
+    originX = rect.left + rect.width / 2;
+    originY = rect.top + rect.height / 2;
+  }
+
+  fullscreen.style.transformOrigin = `${originX}px ${originY}px`;
+  fullscreen.style.visibility = 'visible';
+  fullscreen.style.transition = "none";
+  fullscreen.classList.remove("is-open");
+  fullscreen.style.transform = "scale(0.2)";
+  fullscreen.style.opacity = "0";
+
+  if (scrollWrap) scrollWrap.scrollTop = 0;
+  void fullscreen.offsetWidth;
+
+  fullscreen.style.transition = "transform 0.44s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease";
+  fullscreen.classList.add("is-open");
+  fullscreen.style.transform = "scale(1) translate3d(0, 0, 0)";
+  fullscreen.style.opacity = "1";
+
+  document.body.classList.add("in-all-projects-mode");
+  document.body.style.overflow = "hidden";
+
+  fireConfetti(event);
+}
+
+function closeAllProjectsView(event) {
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  const fullscreen = document.getElementById("all-projects-fullscreen");
+  if (!fullscreen || !fullscreen.classList.contains("is-open")) return;
+
+  if (lastClickedAllProjectsTrigger) {
+    const rect = lastClickedAllProjectsTrigger.getBoundingClientRect();
+    fullscreen.style.transformOrigin = `${rect.left + rect.width / 2}px ${rect.top + rect.height / 2}px`;
+  }
+
+  fullscreen.style.transition = "transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.26s ease";
+  fullscreen.style.transform = "scale(0.2)";
+  fullscreen.style.opacity = "0";
+  fullscreen.classList.remove("is-open");
+
+  document.body.classList.remove("in-all-projects-mode");
+  document.body.style.overflow = "";
+
+  setTimeout(() => {
+    if (!fullscreen.classList.contains("is-open")) {
+      fullscreen.style.visibility = "hidden";
+    }
+  }, 360);
+}
+
+function handleRectCardClick(id, event) {
+  if (event) {
+    event.stopPropagation();
+  }
+  openCaseStudyFullscreen(id, event);
+}
+
+/* ==========================================================================
    Full-Screen Case Study Detail Canvas & Zoom Animation Engine
    ========================================================================== */
 function openCaseStudyFullscreen(id, event) {
@@ -1718,6 +1912,17 @@ function openCaseStudyFullscreen(id, event) {
   if (!fullscreen || !content) return;
 
   activeFullscreenProjectId = id;
+
+  // Set back button label based on where user entered
+  const backBtnSpan = fullscreen.querySelector(".cs-floating-back-btn span");
+  if (backBtnSpan) {
+    if (document.body.classList.contains("in-all-projects-mode")) {
+      backBtnSpan.textContent = "TẤT CẢ DỰ ÁN";
+    } else {
+      backBtnSpan.textContent = "VỀ TRANG CHỦ";
+    }
+  }
+
   // Populate content
   const docHtml = (p.content && p.content.trim()) ? p.content : getStarterDocContent(p);
   content.innerHTML = docHtml;
@@ -1726,13 +1931,13 @@ function openCaseStudyFullscreen(id, event) {
   let originX = window.innerWidth / 2;
   let originY = window.innerHeight / 2;
 
-  // Locate the clicked card element
+  // Locate the clicked card element (supports both Bento and Rectangular cards)
   let card = null;
   if (event && event.target) {
-    card = event.target.closest('.bento-card') || event.target.closest('article');
+    card = event.target.closest('.rect-project-card') || event.target.closest('.bento-card') || event.target.closest('article');
   }
   if (!card) {
-    card = document.getElementById(id) || document.querySelector(`.bento-card[onclick*="${id}"]`);
+    card = document.getElementById(`rect-card-${id}`) || document.getElementById(id) || document.querySelector(`[onclick*="${id}"]`);
   }
 
   if (card) {
@@ -1745,33 +1950,24 @@ function openCaseStudyFullscreen(id, event) {
     originY = event.clientY;
   }
 
-  // Set transform origin on fullscreen canvas
   fullscreen.style.transformOrigin = `${originX}px ${originY}px`;
-
   fullscreen.style.visibility = 'visible';
-  // Start scaled down at origin with no transition
   fullscreen.style.transition = "none";
   fullscreen.classList.remove("is-open");
   fullscreen.style.transform = "scale(0.2)";
   fullscreen.style.opacity = "0";
 
-  // Reset scroll position to top
   if (scrollWrap) scrollWrap.scrollTop = 0;
-
-  // Force reflow
   void fullscreen.offsetWidth;
 
-  // Animate zoom-in to full screen
   fullscreen.style.transition = "transform 0.44s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease";
   fullscreen.classList.add("is-open");
   fullscreen.style.transform = "scale(1) translate3d(0, 0, 0)";
   fullscreen.style.opacity = "1";
 
-  // Lock body scroll and activate nav case study bar
   document.body.classList.add("in-case-study-mode");
   document.body.style.overflow = "hidden";
 
-  // Launch confetti
   fireConfetti(event);
 }
 
@@ -1784,21 +1980,22 @@ function closeCaseStudyFullscreen(event) {
   const fullscreen = document.getElementById("case-study-fullscreen");
   if (!fullscreen || !fullscreen.classList.contains("is-open")) return;
 
-  // Re-calculate transform origin based on the card's current viewport position
   if (lastClickedCardElement) {
     const rect = lastClickedCardElement.getBoundingClientRect();
     fullscreen.style.transformOrigin = `${rect.left + rect.width / 2}px ${rect.top + rect.height / 2}px`;
   }
 
-  // Smooth zoom-out animation back to card
   fullscreen.style.transition = "transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.26s ease";
   fullscreen.style.transform = "scale(0.2)";
   fullscreen.style.opacity = "0";
   fullscreen.classList.remove("is-open");
 
-  // Restore navigation and scroll
   document.body.classList.remove("in-case-study-mode");
-  document.body.style.overflow = "";
+  if (!document.body.classList.contains("in-all-projects-mode")) {
+    document.body.style.overflow = "";
+  } else {
+    document.body.style.overflow = "hidden";
+  }
 
   setTimeout(() => {
     if (!fullscreen.classList.contains("is-open")) {
@@ -1819,22 +2016,27 @@ function closeModal() {
 }
 
 function initModalEvents() {
-  // Navigation brand link returns to home if in case study
   const brand = document.querySelector(".nav-brand");
   if (brand) {
     brand.addEventListener("click", (e) => {
       if (document.body.classList.contains("in-case-study-mode")) {
         e.preventDefault();
         closeCaseStudyFullscreen(e);
+      } else if (document.body.classList.contains("in-all-projects-mode")) {
+        e.preventDefault();
+        closeAllProjectsView(e);
       }
     });
   }
 
-  // Global escape key handler
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-      if (document.body.classList.contains("in-case-study-mode")) {
+      const cs = document.getElementById("case-study-fullscreen");
+      const allView = document.getElementById("all-projects-fullscreen");
+      if (cs && cs.classList.contains("is-open")) {
         closeCaseStudyFullscreen(e);
+      } else if (allView && allView.classList.contains("is-open")) {
+        closeAllProjectsView(e);
       }
       closeContactModal();
     }
