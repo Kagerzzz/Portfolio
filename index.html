@@ -44,15 +44,6 @@
         <li><a href="#story" class="nav-link">story</a></li>
       </ul>
 
-      <!-- Active in Case Study Fullscreen: Back to Home Bar -->
-      <div class="nav-case-study-bar" id="nav-case-study-bar">
-        <button type="button" id="nav-back-home-btn" class="nav-back-home-btn" onclick="closeCaseStudyFullscreen(event)">
-          <svg class="btn-arrow-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
-          <span>VỀ TRANG CHỦ</span>
-        </button>
-        <span class="nav-case-study-pill" id="nav-case-study-pill">✦ CASE STUDY</span>
-      </div>
-
       <div class="nav-actions">
         <button id="theme-toggle" class="btn-icon" title="Toggle Light/Dark Theme">
           <span id="theme-icon"></span>
@@ -426,6 +417,11 @@
 
   <!-- Full-Screen Case Study Detail Canvas with Zoom Animation -->
   <div id="case-study-fullscreen" class="case-study-fullscreen" role="dialog" aria-modal="true" aria-label="Project Case Study Detail">
+    <!-- Floating Back to Home Button -->
+    <button type="button" class="cs-floating-back-btn" onclick="closeCaseStudyFullscreen(event)" aria-label="Về trang chủ" title="Về trang chủ (Esc)">
+      <svg class="btn-arrow-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      <span>VỀ TRANG CHỦ</span>
+    </button>
     <div class="cs-fullscreen-scroll-wrap" id="cs-fullscreen-scroll-wrap">
       <div class="cs-fullscreen-container">
         <!-- Close floating button for accessibility -->
@@ -444,7 +440,7 @@
             <svg class="btn-arrow-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
             <span>QUAY LẠI TRANG CHỦ</span>
           </button>
-          <div class="cs-bottom-hint">Mẹo: Bạn cũng có thể bấm nút trên Navigation Bar hoặc phím [Esc]</div>
+          <div class="cs-bottom-hint">Mẹo: Bạn cũng có thể bấm nút [VỀ TRANG CHỦ] ở góc trên hoặc phím [Esc]</div>
         </div>
       </div>
     </div>

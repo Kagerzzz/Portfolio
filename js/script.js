@@ -1715,17 +1715,9 @@ function openCaseStudyFullscreen(id, event) {
   const fullscreen = document.getElementById("case-study-fullscreen");
   const content = document.getElementById("cs-fullscreen-content");
   const scrollWrap = document.getElementById("cs-fullscreen-scroll-wrap");
-  const caseBadge = document.getElementById("nav-case-study-pill");
   if (!fullscreen || !content) return;
 
   activeFullscreenProjectId = id;
-
-  // Set project title in badge if available
-  if (caseBadge) {
-    const shortName = p.title.split('—')[0].trim();
-    caseBadge.textContent = `✦ ${shortName}`;
-  }
-
   // Populate content
   const docHtml = (p.content && p.content.trim()) ? p.content : getStarterDocContent(p);
   content.innerHTML = docHtml;

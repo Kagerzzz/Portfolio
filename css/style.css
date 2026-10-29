@@ -5756,7 +5756,7 @@ button {
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
-  padding-top: 104px;
+  padding-top: 84px;
   padding-bottom: 80px;
 }
 
@@ -5843,84 +5843,73 @@ button {
   color: var(--text-dim);
 }
 
-/* Nav Bar in Case Study Mode */
-.nav-case-study-bar {
-  display: none;
-  align-items: center;
-  gap: 10px;
-}
-
-body.in-case-study-mode .nav-links {
+/* In Case Study Mode: Hide top header navigation bar completely */
+body.in-case-study-mode .header {
   display: none !important;
 }
 
-body.in-case-study-mode .nav-case-study-bar {
-  display: flex !important;
-}
-
-.nav-back-home-btn {
+/* Floating Back to Home Button inside Case Study Detail */
+.cs-floating-back-btn {
+  position: fixed;
+  top: 24px;
+  left: 28px;
+  z-index: 160;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 16px;
+  padding: 10px 20px;
   background: var(--neo-yellow);
   color: #000000 !important;
-  border: 2px solid var(--border-color);
+  border: var(--border-neo);
   border-radius: var(--radius-pill);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 800;
-  letter-spacing: 0.04em;
-  box-shadow: 2px 2px 0px var(--border-color);
+  letter-spacing: 0.05em;
+  box-shadow: var(--shadow-neo-sm);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
 }
 
-.nav-back-home-btn:hover {
-  transform: translate(-1px, -1px);
-  box-shadow: 3px 3px 0px var(--border-color);
+.cs-floating-back-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-neo-md);
   background: var(--neo-pink);
 }
 
-.nav-back-home-btn:active {
+.cs-floating-back-btn:active {
   transform: translate(1px, 1px);
-  box-shadow: 1px 1px 0px var(--border-color);
+  box-shadow: var(--shadow-neo-xs);
 }
 
-.nav-case-study-pill {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 800;
-  padding: 3px 10px;
-  border: 1.5px solid var(--border-color);
-  border-radius: var(--radius-pill);
-  background: var(--bg-card-alt);
-  color: var(--text-dim);
-  letter-spacing: 0.04em;
-  white-space: nowrap;
+.cs-floating-back-btn .btn-arrow-svg {
+  transition: transform 0.15s ease;
+}
+
+.cs-floating-back-btn:hover .btn-arrow-svg {
+  transform: translateX(-3px);
 }
 
 @media (max-width: 768px) {
   .cs-fullscreen-scroll-wrap {
-    padding-top: 86px;
+    padding-top: 76px;
     padding-bottom: 60px;
   }
   .cs-fullscreen-container {
     padding: 0 16px;
+  }
+  .cs-floating-back-btn {
+    top: 16px;
+    left: 16px;
+    padding: 8px 14px;
+    font-size: 11.5px;
+    gap: 6px;
   }
   .cs-fullscreen-close-btn {
     top: -6px;
     right: 14px;
     width: 38px;
     height: 38px;
-  }
-  .nav-case-study-pill {
-    display: none;
-  }
-}
-
-@media (max-width: 480px) {
-  body.in-case-study-mode .nav-brand {
-    display: none;
   }
 }
