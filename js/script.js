@@ -1192,13 +1192,113 @@ function formatScreenLabel(label) {
 }
 
 /* ==========================================================================
-   Bento Mosaic Rendering Engine (EXACT 1:1 Demo Match — 5 Compact Frames)
+   STYLE 2: INTERACTIVE DOSSIER / MANILA ARCHIVE ENGINE
    ========================================================================== */
+let currentDossierIndex = 0;
+
+const DOSSIER_PROJECTS = [
+  {
+    id: "tasksync",
+    code: "ARCHIVE_ID: B2B-ECOSYSTEM-01",
+    tabLabel: "#01 TASKSYNC",
+    tabColor: "var(--neo-yellow)",
+    stamp: "CONFIDENTIAL // LIVE SHIPPED",
+    stampBg: "var(--neo-cyan)",
+    title: "TaskSync — All-in-One Work Management Platform",
+    challenge: "Nhân sự thường xuyên gặp app fatigue khi phải chuyển đổi giữa 4-5 công cụ độc lập. Giải pháp là gom messaging, smart calendar, OKRs và chấm công GPS vào 1 trải nghiệm mobile tinh gọn.",
+    img: "assets/tasksync/tasksync-cover.png",
+    metrics: [
+      { val: "+40%", label: "Tốc độ Sprint" },
+      { val: "-65%", label: "Context Switching" },
+      { val: "98%", label: "GPS Đúng Giờ" }
+    ],
+    tags: ["Mobile App", "Work Management", "Product Strategy", "Shipped"]
+  },
+  {
+    id: "explora",
+    code: "ARCHIVE_ID: BIOTECH-IDE-02",
+    tabLabel: "#02 EXPLORA",
+    tabColor: "var(--neo-pink)",
+    stamp: "CLASSIFIED // BIOTECH ROI",
+    stampBg: "var(--neo-yellow)",
+    title: "Cellworks Explora — Computational Biotech IDE",
+    challenge: "Các nhà khoa học tốn hàng giờ chuyển đổi giữa 9 bảng tính và legacy tool rời rạc. Explora hợp nhất toàn bộ dữ liệu vào 1 IDE sinh học phân tử đa luồng duy nhất.",
+    img: "assets/saas.png",
+    metrics: [
+      { val: "~$1.2M", label: "ROI Hàng Năm" },
+      { val: "9 → 1", label: "Legacy IDE" },
+      { val: "+300%", label: "Năng Suất R&D" }
+    ],
+    tags: ["Enterprise / SaaS", "Biotech IDE", "Design System", "Shipped"]
+  },
+  {
+    id: "miraai",
+    code: "ARCHIVE_ID: WEARABLE-AI-03",
+    tabLabel: "#03 MIRA.AI",
+    tabColor: "var(--neo-cyan)",
+    stamp: "CONFIDENTIAL // AI WEARABLE",
+    stampBg: "var(--neo-pink)",
+    title: "Mira.ai — Adaptive Pregnancy Nutrition Engine",
+    challenge: "Các ứng dụng thai kỳ hiện nay chỉ đếm tuần mà bỏ quên cơ thể người mẹ. Mira.ai theo dõi cảm biến HRV trên Apple Watch để gợi ý dinh dưỡng thích ứng theo thời gian thực.",
+    img: "assets/ecommerce.png",
+    metrics: [
+      { val: "+55%", label: "User Engagement" },
+      { val: "4.9★", label: "App Store Rating" },
+      { val: "15/15", label: "High-Risk Safe" }
+    ],
+    tags: ["Consumer Mobile", "AI Wearable", "Bio-Digital Twin", "Shipped"]
+  },
+  {
+    id: "manage",
+    code: "ARCHIVE_ID: SIEMENS-COMMISSIONING-04",
+    tabLabel: "#04 SIEMENS",
+    tabColor: "var(--neo-green)",
+    stamp: "CONFIDENTIAL // SHIPPED",
+    stampBg: "var(--neo-green)",
+    title: "Siemens Manage 3D — Field Commissioning Terminal",
+    challenge: "Giao diện cũ là bức tường số liệu dày đặc đòi hỏi thao tác thủ công nhiều ngày. Hệ thống mới dùng thao tác kéo thả nhóm trực quan trên floorplan 3D thông minh.",
+    img: "assets/design-system.png",
+    metrics: [
+      { val: "5D → 2D", label: "Thời Gian Setup" },
+      { val: "100%", label: "Độ Chính Xác" },
+      { val: "+25%", label: "Real Estate" }
+    ],
+    tags: ["Enterprise / SaaS", "Interaction Design", "Smart Sensors", "Shipped"]
+  },
+  {
+    id: "ai-insurance-claims",
+    code: "ARCHIVE_ID: FINTECH-CLAIMS-05",
+    tabLabel: "#05 CLAIMS.AI",
+    tabColor: "var(--neo-orange)",
+    stamp: "TOP SECRET // B2B PROTOTYPE",
+    stampBg: "var(--neo-orange)",
+    title: "AI Automated Insurance Claim Processing",
+    challenge: "Cần xây dựng công cụ thẩm định tự động đa phương thức phục vụ thẩm định viên bảo hiểm với độ minh bạch tuyệt đối về chứng cứ và bảng điểm rủi ro.",
+    img: "assets/fintech.png",
+    metrics: [
+      { val: "10x", label: "Thẩm Định Nhanh" },
+      { val: "B2B", label: "Enterprise Ready" },
+      { val: "Seed", label: "Pitch Ready" }
+    ],
+    tags: ["AI-Native", "B2B Platform", "Investor Prototype"]
+  }
+];
+
+function selectDossierFolder(index, event) {
+  if (event) {
+    event.stopPropagation();
+  }
+  if (index < 0) index = DOSSIER_PROJECTS.length - 1;
+  if (index >= DOSSIER_PROJECTS.length) index = 0;
+  currentDossierIndex = index;
+  renderProjects();
+}
+
 function renderProjects() {
   const container = document.getElementById("projects-container");
   if (!container) return;
 
-    const countBadge = document.getElementById("work-count-badge");
+  const countBadge = document.getElementById("work-count-badge");
   if (countBadge) {
     const countSpan = countBadge.querySelector(".all-btn-count");
     if (countSpan) {
@@ -1206,106 +1306,83 @@ function renderProjects() {
     }
   }
 
+  const d = DOSSIER_PROJECTS[currentDossierIndex];
+
+  // Render Folder Tabs
+  const tabsHtml = DOSSIER_PROJECTS.map((item, idx) => {
+    const isActive = idx === currentDossierIndex ? "active" : "";
+    return `
+      <div class="folder-tab ${isActive}" onclick="selectDossierFolder(${idx}, event)" role="tab" aria-selected="${idx === currentDossierIndex}">
+        <span class="tab-color-mark" style="background:${item.tabColor};"></span>
+        <span>📁 ${item.tabLabel}</span>
+      </div>
+    `;
+  }).join("");
+
+  // Render Metrics
+  const metricsHtml = d.metrics.map(m => `
+    <div class="folder-metric-card">
+      <div class="folder-metric-val">${m.val}</div>
+      <div class="folder-metric-lbl">${m.label}</div>
+    </div>
+  `).join("");
+
+  // Render Tags
+  const tagsHtml = d.tags.map(t => `<span class="spec-tag-pill">${t}</span>`).join("");
+
   container.innerHTML = `
-    <div class="bento-mosaic-grid" id="bento-mosaic-grid">
+    <div class="dossier-wrap" id="dossier-wrap">
+      <!-- Physical Manila Folder Tabs -->
+      <div class="folder-tabs-header" role="tablist">
+        ${tabsHtml}
+      </div>
 
-      <!-- Flagship Hero Tile (Spans 8 cols) -->
-      <article class="bento-card bento-flagship" onclick="handleCardClick('tasksync', event)">
-        <div class="os-bar" style="margin:-24px -24px 20px; border-radius:12px 12px 0 0;">
-          <div class="window-dots">
-            <span class="dot dot-red"></span>
-            <span class="dot dot-yellow"></span>
-            <span class="dot dot-green"></span>
-          </div>
-          <span class="os-bar-title">FLAGSHIP HERO SPECIMEN</span>
-          <span class="file-badge" style="background:var(--neo-cyan); color:#000;">SHIPPED V1.0</span>
-        </div>
+      <!-- Manila Folder Body Card -->
+      <article class="folder-body-card" id="dossier-folder-body">
+        <div class="folder-stamp" style="background:${d.stampBg};">${d.stamp}</div>
 
-        <div class="flagship-inner">
-          <div>
-            <span class="vp-tag" style="background:var(--neo-yellow); color:#000; margin-bottom:10px; display:inline-block;">#01 · B2B ECOSYSTEM</span>
-            <h3 style="font-size:24px; font-weight:900; line-height:1.25; margin-bottom:10px; color:var(--text-main);">TaskSync Platform</h3>
-            <p style="font-size:14px; color:var(--text-muted); line-height:1.6; margin-bottom:16px;">Nền tảng quản lý công việc tích hợp team messaging, smart calendar và chấm công GPS geofencing trong một trải nghiệm mobile tinh gọn.</p>
-            
-            <div class="viewport-metrics-row" style="margin-bottom:16px;">
-              <div class="vp-metric-card" style="background:#FAF8F5;">
-                <div class="vp-metric-val">+40%</div>
-                <div class="vp-metric-lbl">Tốc độ Sprint</div>
-              </div>
-              <div class="vp-metric-card" style="background:#FAF8F5;">
-                <div class="vp-metric-val">98%</div>
-                <div class="vp-metric-lbl">GPS Đúng Giờ</div>
-              </div>
+        <div class="folder-content-grid">
+          <!-- Left Column: Specs, Challenge & Actions -->
+          <div class="folder-left-spec">
+            <span class="spec-header-code">${d.code}</span>
+            <h3 class="spec-title">${d.title}</h3>
+            <div class="spec-tags-row">${tagsHtml}</div>
+
+            <div class="spec-challenge-box">
+              <strong>Thách thức chính:</strong> ${d.challenge}
             </div>
 
-            <button type="button" class="style-btn active" onclick="event.stopPropagation(); handleCardClick('tasksync', event)">Read Case Study ↗</button>
+            <div class="folder-metrics-row">
+              ${metricsHtml}
+            </div>
+
+            <div class="folder-actions-row">
+              <button type="button" class="folder-open-cta" onclick="handleCardClick('${d.id}', event)">
+                <span>MỞ HỒ SƠ CASE STUDY</span>
+                <svg class="btn-arrow-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17l10-10M7 7h10v10"/></svg>
+              </button>
+
+              <div class="folder-nav-btns">
+                <button type="button" class="folder-nav-btn" onclick="selectDossierFolder(${currentDossierIndex - 1}, event)" aria-label="Folder trước" title="Folder trước">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                </button>
+                <button type="button" class="folder-nav-btn" onclick="selectDossierFolder(${currentDossierIndex + 1}, event)" aria-label="Folder sau" title="Folder sau">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                </button>
+              </div>
+            </div>
           </div>
 
-          <div class="flagship-img-box">
-            <img src="assets/tasksync/tasksync-cover.png" alt="TaskSync Cascade" loading="lazy">
+          <!-- Right Column: Evidence Visual Plate -->
+          <div class="folder-right-visual" onclick="handleCardClick('${d.id}', event)" title="Bấm để mở Case Study chi tiết">
+            <div class="folder-paper-clip"></div>
+            <img src="${d.img}" alt="${d.title}" loading="lazy">
+            <div class="folder-evidence-tag">EVIDENCE SPECIMEN ✦ BẤM ĐỂ PHÓNG TO ↗</div>
           </div>
         </div>
       </article>
-
-      <!-- Metric Highlight Tile (Spans 4 cols) -->
-      <article class="bento-card bento-metric" onclick="handleCardClick('explora', event)">
-        <div>
-          <span class="vp-tag" style="background:#FFF; color:#000; margin-bottom:12px; display:inline-block;">#02 · BIOTECH ROI</span>
-          <h4 style="font-size:18px; font-weight:900; color:#000;">Cellworks Explora</h4>
-          <div style="font-size:46px; font-weight:900; font-family:var(--font-mono); margin:14px 0 6px; letter-spacing:-0.03em; color:#000;">
-            ~$1.2M
-          </div>
-          <p style="font-size:13px; font-weight:700; color:#000; line-height:1.5;">Năng suất nghiên cứu phục hồi hàng năm khi gom 9 legacy tools về 1 IDE duy nhất.</p>
-        </div>
-        <button type="button" class="style-btn" style="background:#FFF; color:#000; align-self:flex-start; margin-top:20px;" onclick="event.stopPropagation(); handleCardClick('explora', event)">Xem Chi Tiết ↗</button>
-      </article>
-
-      <!-- Compact Tile 1 (Spans 4 cols) -->
-      <article class="bento-card bento-compact-1" onclick="handleCardClick('miraai', event)">
-        <div>
-          <span class="vp-tag" style="background:var(--neo-pink); color:#000; margin-bottom:10px; display:inline-block;">#03 · AI WEARABLE</span>
-          <h4 style="font-size:18px; font-weight:900; margin-bottom:8px; color:var(--text-main);">Mira.ai Pregnancy</h4>
-          <p style="font-size:13px; color:var(--text-muted); line-height:1.5;">Trợ lý dinh dưỡng bio-digital twin kết hợp cảm biến HRV trên Apple Watch.</p>
-        </div>
-        <div style="background:#F4F1EA; border:1.5px solid #000000; border-radius:8px; padding:12px; margin:16px 0; text-align:center;">
-          <img src="assets/ecommerce.png" alt="Mira Preview" style="max-height:110px; max-width:100%; object-fit:contain;" loading="lazy">
-        </div>
-        <button type="button" class="style-btn" style="align-self:flex-start;" onclick="event.stopPropagation(); handleCardClick('miraai', event)">Explore Case ↗</button>
-      </article>
-
-      <!-- Compact Tile 2 (Spans 4 cols) -->
-      <article class="bento-card bento-compact-2" onclick="handleCardClick('manage', event)">
-        <div>
-          <span class="vp-tag" style="background:var(--neo-green); color:#000; margin-bottom:10px; display:inline-block;">#04 · FIELD COMMISSIONING</span>
-          <h4 style="font-size:18px; font-weight:900; margin-bottom:8px; color:var(--text-main);">Siemens Manage 3D</h4>
-          <p style="font-size:13px; color:var(--text-muted); line-height:1.5;">Giao diện floorplan kéo thả phân nhóm 1,000+ cảm biến tòa nhà thông minh.</p>
-        </div>
-        <div style="background:#F4F1EA; border:1.5px solid #000000; border-radius:8px; padding:12px; margin:16px 0; text-align:center;">
-          <img src="assets/design-system.png" alt="Manage Preview" style="max-height:110px; max-width:100%; object-fit:contain;" loading="lazy">
-        </div>
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <span style="font-family:var(--font-mono); font-weight:800; font-size:12px; color:var(--text-dim);">5 DAYS → 2 DAYS</span>
-          <button type="button" class="style-btn" onclick="event.stopPropagation(); handleCardClick('manage', event)">Explore ↗</button>
-        </div>
-      </article>
-
-      <!-- Compact Tile 3 (Spans 4 cols) -->
-      <article class="bento-card bento-compact-3" onclick="handleCardClick('ai-insurance-claims', event)">
-        <div>
-          <span class="vp-tag" style="background:var(--neo-orange); color:#000; margin-bottom:10px; display:inline-block;">#05 · B2B PROTOTYPE</span>
-          <h4 style="font-size:18px; font-weight:900; margin-bottom:8px; color:var(--text-main);">AI Claims Engine</h4>
-          <p style="font-size:13px; color:var(--text-muted); line-height:1.5;">Thẩm định bồi thường bảo hiểm tự động hóa bằng AI đa phương thức.</p>
-        </div>
-        <div style="background:#F4F1EA; border:1.5px solid #000000; border-radius:8px; padding:12px; margin:16px 0; text-align:center;">
-          <img src="assets/fintech.png" alt="Fintech Preview" style="max-height:110px; max-width:100%; object-fit:contain;" loading="lazy">
-        </div>
-        <button type="button" class="style-btn" style="align-self:flex-start;" onclick="event.stopPropagation(); handleCardClick('ai-insurance-claims', event)">Explore Case ↗</button>
-      </article>
-
     </div>
   `;
-
-  init3DParallaxTilt();
 }
 
 let activeFullscreenProjectId = null;
@@ -1934,10 +2011,10 @@ function openCaseStudyFullscreen(id, event) {
   // Locate the clicked card element (supports both Bento and Rectangular cards)
   let card = null;
   if (event && event.target) {
-    card = event.target.closest('.rect-project-card') || event.target.closest('.bento-card') || event.target.closest('article');
+    card = event.target.closest('.folder-body-card') || event.target.closest('.folder-right-visual') || event.target.closest('.rect-project-card') || event.target.closest('.bento-card') || event.target.closest('article');
   }
   if (!card) {
-    card = document.getElementById(`rect-card-${id}`) || document.getElementById(id) || document.querySelector(`[onclick*="${id}"]`);
+    card = document.getElementById('dossier-folder-body') || document.getElementById(`rect-card-${id}`) || document.getElementById(id) || document.querySelector(`[onclick*="${id}"]`);
   }
 
   if (card) {
