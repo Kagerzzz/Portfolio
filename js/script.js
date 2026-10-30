@@ -1326,8 +1326,6 @@ function renderStudioViewportHtml(p) {
       <!-- Interactive Screen Stage -->
       <div class="studio-screen-stage">
         <div class="studio-screen-container" onclick="handleCardClick('${p.id}', event)" title="Click để mở chi tiết Case Study">
-          <div class="studio-screen-glare" id="studio-screen-glare"></div>
-          <div class="studio-screen-scanline" id="studio-screen-scanline"></div>
           <img id="studio-screen-img" src="${activeScreen.src}" alt="${activeScreen.label || p.title}" class="studio-screen-img" loading="lazy">
         </div>
         ${screenTabsHtml}
@@ -1449,14 +1447,6 @@ window.selectStudioProject = function(idx) {
       void vp.offsetWidth; // force reflow
       vp.classList.add("studio-vp-animate-enter");
 
-      // Trigger scanline on project switch
-      const scanline = document.getElementById("studio-screen-scanline");
-      if (scanline) {
-        scanline.classList.remove("scanning");
-        void scanline.offsetWidth;
-        scanline.classList.add("scanning");
-      }
-
       init3DParallaxTilt();
     }, 110);
   }
@@ -1480,24 +1470,13 @@ window.switchStudioScreen = function(screenIndex, btn, event) {
   if (!s) return;
 
   const img = document.getElementById("studio-screen-img");
-  const scanline = document.getElementById("studio-screen-scanline");
-
   if (img) {
-    img.classList.remove("switching-in");
-    img.classList.add("switching-out");
-
-    if (scanline) {
-      scanline.classList.remove("scanning");
-      void scanline.offsetWidth;
-      scanline.classList.add("scanning");
-    }
-
+    img.style.opacity = "0";
     setTimeout(() => {
       img.src = s.src;
       img.alt = s.label || p.title;
-      img.classList.remove("switching-out");
-      img.classList.add("switching-in");
-    }, 110);
+      img.style.opacity = "1";
+    }, 100);
   }
 };
 
@@ -1511,11 +1490,10 @@ function handleCardClick(id, event) {
   openCaseStudyFullscreen(id, event);
 }
 
-/* 3D Parallax Mouse Tilt Animation with Dynamic Glass Glare Tracking */
+/* 3D Parallax Mouse Tilt Animation */
 function init3DParallaxTilt() {
   const stage = document.querySelector(".studio-screen-container");
   if (stage) {
-    const glare = stage.querySelector(".studio-screen-glare");
     const img = stage.querySelector(".studio-screen-img");
 
     stage.addEventListener("mousemove", (e) => {
@@ -1524,25 +1502,17 @@ function init3DParallaxTilt() {
       const y = e.clientY - rect.top;
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
-      const rotateX = ((y - centerY) / centerY) * -6;
-      const rotateY = ((x - centerX) / centerX) * 6;
+      const rotateX = ((y - centerY) / centerY) * -5;
+      const rotateY = ((x - centerX) / centerX) * 5;
 
-      if (img && !img.classList.contains("switching-out")) {
-        img.style.transform = `perspective(850px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale(1.03)`;
-      }
-
-      if (glare) {
-        glare.style.opacity = "1";
-        glare.style.background = `radial-gradient(circle 220px at ${x}px ${y}px, rgba(255, 255, 255, 0.22) 0%, transparent 75%)`;
+      if (img) {
+        img.style.transform = `perspective(900px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale(1.025)`;
       }
     });
 
     stage.addEventListener("mouseleave", () => {
       if (img) {
-        img.style.transform = "perspective(850px) rotateX(0deg) rotateY(0deg) scale(1)";
-      }
-      if (glare) {
-        glare.style.opacity = "0";
+        img.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)";
       }
     });
   }
