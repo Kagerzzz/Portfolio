@@ -1267,7 +1267,7 @@ function renderStudioSidebarItems() {
     return `
       <div class="studio-file-item ${isActive ? 'active' : ''}" data-index="${idx}" onclick="selectStudioProject(${idx})">
         <div class="studio-file-top-row">
-          <span class="studio-file-name"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg> ${meta.fileName}</span>
+          <span class="studio-file-name"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg> ${meta.fileName} <span class="studio-status-dot"></span></span>
           <span class="studio-file-badge" style="background:${meta.badgeBg}; color:${meta.badgeColor};">${meta.badge}</span>
         </div>
         <div class="studio-file-sub">${meta.sub}</div>
@@ -1326,6 +1326,8 @@ function renderStudioViewportHtml(p) {
       <!-- Interactive Screen Stage -->
       <div class="studio-screen-stage">
         <div class="studio-screen-container" onclick="handleCardClick('${p.id}', event)" title="Click để mở chi tiết Case Study">
+          <div class="studio-screen-glare" id="studio-screen-glare"></div>
+          <div class="studio-screen-scanline" id="studio-screen-scanline"></div>
           <img id="studio-screen-img" src="${activeScreen.src}" alt="${activeScreen.label || p.title}" class="studio-screen-img" loading="lazy">
         </div>
         ${screenTabsHtml}
@@ -1421,18 +1423,42 @@ window.selectStudioProject = function(idx) {
     }
   });
 
+  const p = activeProjects[idx];
+  const meta = getStudioFileMeta(p, idx);
+
+  // Update OS slug bar
+  const slug = document.querySelector(".studio-os-slug");
+  if (slug) {
+    slug.textContent = `studio.exe // projects_explorer [${meta.fileName} active]`;
+  }
+
   const vp = document.getElementById("studio-viewport");
   if (vp) {
-    const p = activeProjects[idx];
+    vp.classList.remove("studio-vp-animate-enter");
+    vp.style.transition = "opacity 0.14s ease, transform 0.14s ease, filter 0.14s ease";
     vp.style.opacity = "0";
-    vp.style.transform = "translateY(5px)";
+    vp.style.transform = "translateY(8px)";
+    vp.style.filter = "blur(2px)";
+
     setTimeout(() => {
       vp.innerHTML = renderStudioViewportHtml(p);
-      vp.style.transition = "opacity 0.18s ease, transform 0.18s ease";
+      vp.style.transition = "none";
       vp.style.opacity = "1";
       vp.style.transform = "translateY(0)";
+      vp.style.filter = "none";
+      void vp.offsetWidth; // force reflow
+      vp.classList.add("studio-vp-animate-enter");
+
+      // Trigger scanline on project switch
+      const scanline = document.getElementById("studio-screen-scanline");
+      if (scanline) {
+        scanline.classList.remove("scanning");
+        void scanline.offsetWidth;
+        scanline.classList.add("scanning");
+      }
+
       init3DParallaxTilt();
-    }, 100);
+    }, 110);
   }
 };
 
@@ -1454,13 +1480,24 @@ window.switchStudioScreen = function(screenIndex, btn, event) {
   if (!s) return;
 
   const img = document.getElementById("studio-screen-img");
+  const scanline = document.getElementById("studio-screen-scanline");
+
   if (img) {
-    img.style.opacity = "0";
+    img.classList.remove("switching-in");
+    img.classList.add("switching-out");
+
+    if (scanline) {
+      scanline.classList.remove("scanning");
+      void scanline.offsetWidth;
+      scanline.classList.add("scanning");
+    }
+
     setTimeout(() => {
       img.src = s.src;
       img.alt = s.label || p.title;
-      img.style.opacity = "1";
-    }, 120);
+      img.classList.remove("switching-out");
+      img.classList.add("switching-in");
+    }, 110);
   }
 };
 
@@ -1474,28 +1511,38 @@ function handleCardClick(id, event) {
   openCaseStudyFullscreen(id, event);
 }
 
-/* 3D Parallax Mouse Tilt Animation for Unique Media Objects */
+/* 3D Parallax Mouse Tilt Animation with Dynamic Glass Glare Tracking */
 function init3DParallaxTilt() {
   const stage = document.querySelector(".studio-screen-container");
   if (stage) {
+    const glare = stage.querySelector(".studio-screen-glare");
+    const img = stage.querySelector(".studio-screen-img");
+
     stage.addEventListener("mousemove", (e) => {
       const rect = stage.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
-      const rotateX = ((y - centerY) / centerY) * -5;
-      const rotateY = ((x - centerX) / centerX) * 5;
-      const img = stage.querySelector(".studio-screen-img");
-      if (img) {
-        img.style.transform = `perspective(900px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale(1.025)`;
+      const rotateX = ((y - centerY) / centerY) * -6;
+      const rotateY = ((x - centerX) / centerX) * 6;
+
+      if (img && !img.classList.contains("switching-out")) {
+        img.style.transform = `perspective(850px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale(1.03)`;
+      }
+
+      if (glare) {
+        glare.style.opacity = "1";
+        glare.style.background = `radial-gradient(circle 220px at ${x}px ${y}px, rgba(255, 255, 255, 0.22) 0%, transparent 75%)`;
       }
     });
 
     stage.addEventListener("mouseleave", () => {
-      const img = stage.querySelector(".studio-screen-img");
       if (img) {
-        img.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)";
+        img.style.transform = "perspective(850px) rotateX(0deg) rotateY(0deg) scale(1)";
+      }
+      if (glare) {
+        glare.style.opacity = "0";
       }
     });
   }

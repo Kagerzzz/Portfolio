@@ -6678,3 +6678,178 @@ body.in-all-projects-mode .header {
     font-size: 12px;
   }
 }
+
+
+/* ==========================================================================
+   OS Desktop Studio: Advanced Interactive Animations & Glare Transitions
+   ========================================================================== */
+
+/* Active LED pulse on sidebar file */
+.studio-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #00F5D4;
+  border: 1px solid #000;
+  display: none;
+  margin-left: auto;
+  box-shadow: 0 0 6px #00F5D4;
+  animation: studioPulseDot 1.4s infinite;
+}
+
+.studio-file-item.active .studio-status-dot {
+  display: inline-block;
+}
+
+@keyframes studioPulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.75); }
+}
+
+/* Staggered Viewport Entrance Cascade */
+.studio-viewport.studio-vp-animate-enter .studio-vp-meta-row {
+  animation: studioVpSlideDown 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.studio-viewport.studio-vp-animate-enter .studio-vp-title {
+  animation: studioVpFadeUp 0.36s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+}
+
+.studio-viewport.studio-vp-animate-enter .studio-vp-desc {
+  animation: studioVpFadeUp 0.38s cubic-bezier(0.16, 1, 0.3, 1) 0.09s both;
+}
+
+.studio-viewport.studio-vp-animate-enter .studio-screen-stage {
+  animation: studioVpScaleUp 0.42s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
+}
+
+.studio-viewport.studio-vp-animate-enter .studio-metric-card:nth-child(1) {
+  animation: studioVpBounceIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.16s both;
+}
+
+.studio-viewport.studio-vp-animate-enter .studio-metric-card:nth-child(2) {
+  animation: studioVpBounceIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.20s both;
+}
+
+.studio-viewport.studio-vp-animate-enter .studio-metric-card:nth-child(3) {
+  animation: studioVpBounceIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.24s both;
+}
+
+.studio-viewport.studio-vp-animate-enter .studio-action-row {
+  animation: studioVpFadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.24s both;
+}
+
+@keyframes studioVpSlideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes studioVpFadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes studioVpScaleUp {
+  from { opacity: 0; transform: scale(0.97) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes studioVpBounceIn {
+  from { opacity: 0; transform: scale(0.88); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Screen Mockup Container with Glare & CRT Scanline */
+.studio-screen-container {
+  perspective: 1000px;
+}
+
+.studio-screen-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 8px;
+  background: radial-gradient(circle 200px at 50% 50%, rgba(255, 255, 255, 0.25) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  mix-blend-mode: overlay;
+  z-index: 5;
+}
+
+.studio-screen-container:hover .studio-screen-glare {
+  opacity: 1;
+}
+
+.studio-screen-scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.85), transparent);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.studio-screen-scanline.scanning {
+  animation: studioCrtScan 0.48s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes studioCrtScan {
+  0% { top: 0%; opacity: 0.9; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* Image Screen Transition States */
+.studio-screen-img {
+  will-change: transform, opacity, filter;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.22s ease, filter 0.22s ease;
+}
+
+.studio-screen-img.switching-out {
+  opacity: 0 !important;
+  transform: scale(0.95) translateY(6px) !important;
+  filter: blur(4px) !important;
+}
+
+.studio-screen-img.switching-in {
+  opacity: 1 !important;
+  transform: scale(1) translateY(0) !important;
+  filter: blur(0) !important;
+}
+
+/* Interactive Metric Card Hover Glow */
+.studio-metric-card {
+  transition: transform 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.studio-metric-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: var(--shadow-neo-sm);
+  border-color: var(--neo-yellow);
+}
+
+/* Shimmer on Explore CTA Button */
+.studio-cta-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.studio-cta-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: skewX(-22deg);
+  transition: none;
+}
+
+.studio-cta-btn:hover::before {
+  left: 200%;
+  transition: left 0.75s ease;
+}
