@@ -1192,106 +1192,161 @@ function formatScreenLabel(label) {
 }
 
 /* ==========================================================================
-   STYLE 2: INTERACTIVE DOSSIER / MANILA ARCHIVE ENGINE
+   OS Desktop / Dual-Pane Studio Rendering Engine (Style 1 Flagship)
    ========================================================================== */
-let currentDossierIndex = 0;
+let currentStudioProjectIndex = 0;
+let currentStudioScreenIndex = 0;
 
-const DOSSIER_PROJECTS = [
-  {
-    id: "tasksync",
-    code: "ARCHIVE_ID: B2B-ECOSYSTEM-01",
-    tabLabel: "#01 TASKSYNC",
-    tabColor: "var(--neo-yellow)",
-    stamp: "CONFIDENTIAL // LIVE SHIPPED",
-    stampBg: "var(--neo-cyan)",
-    title: "TaskSync — All-in-One Work Management Platform",
-    challenge: "Nhân sự thường xuyên gặp app fatigue khi phải chuyển đổi giữa 4-5 công cụ độc lập. Giải pháp là gom messaging, smart calendar, OKRs và chấm công GPS vào 1 trải nghiệm mobile tinh gọn.",
-    img: "assets/tasksync/tasksync-cover.png",
-    metrics: [
-      { val: "+40%", label: "Tốc độ Sprint" },
-      { val: "-65%", label: "Context Switching" },
-      { val: "98%", label: "GPS Đúng Giờ" }
-    ],
-    tags: ["Mobile App", "Work Management", "Product Strategy", "Shipped"]
-  },
-  {
-    id: "explora",
-    code: "ARCHIVE_ID: BIOTECH-IDE-02",
-    tabLabel: "#02 EXPLORA",
-    tabColor: "var(--neo-pink)",
-    stamp: "CLASSIFIED // BIOTECH ROI",
-    stampBg: "var(--neo-yellow)",
-    title: "Cellworks Explora — Computational Biotech IDE",
-    challenge: "Các nhà khoa học tốn hàng giờ chuyển đổi giữa 9 bảng tính và legacy tool rời rạc. Explora hợp nhất toàn bộ dữ liệu vào 1 IDE sinh học phân tử đa luồng duy nhất.",
-    img: "assets/saas.png",
-    metrics: [
-      { val: "~$1.2M", label: "ROI Hàng Năm" },
-      { val: "9 → 1", label: "Legacy IDE" },
-      { val: "+300%", label: "Năng Suất R&D" }
-    ],
-    tags: ["Enterprise / SaaS", "Biotech IDE", "Design System", "Shipped"]
-  },
-  {
-    id: "miraai",
-    code: "ARCHIVE_ID: WEARABLE-AI-03",
-    tabLabel: "#03 MIRA.AI",
-    tabColor: "var(--neo-cyan)",
-    stamp: "CONFIDENTIAL // AI WEARABLE",
-    stampBg: "var(--neo-pink)",
-    title: "Mira.ai — Adaptive Pregnancy Nutrition Engine",
-    challenge: "Các ứng dụng thai kỳ hiện nay chỉ đếm tuần mà bỏ quên cơ thể người mẹ. Mira.ai theo dõi cảm biến HRV trên Apple Watch để gợi ý dinh dưỡng thích ứng theo thời gian thực.",
-    img: "assets/ecommerce.png",
-    metrics: [
-      { val: "+55%", label: "User Engagement" },
-      { val: "4.9★", label: "App Store Rating" },
-      { val: "15/15", label: "High-Risk Safe" }
-    ],
-    tags: ["Consumer Mobile", "AI Wearable", "Bio-Digital Twin", "Shipped"]
-  },
-  {
-    id: "manage",
-    code: "ARCHIVE_ID: SIEMENS-COMMISSIONING-04",
-    tabLabel: "#04 SIEMENS",
-    tabColor: "var(--neo-green)",
-    stamp: "CONFIDENTIAL // SHIPPED",
-    stampBg: "var(--neo-green)",
-    title: "Siemens Manage 3D — Field Commissioning Terminal",
-    challenge: "Giao diện cũ là bức tường số liệu dày đặc đòi hỏi thao tác thủ công nhiều ngày. Hệ thống mới dùng thao tác kéo thả nhóm trực quan trên floorplan 3D thông minh.",
-    img: "assets/design-system.png",
-    metrics: [
-      { val: "5D → 2D", label: "Thời Gian Setup" },
-      { val: "100%", label: "Độ Chính Xác" },
-      { val: "+25%", label: "Real Estate" }
-    ],
-    tags: ["Enterprise / SaaS", "Interaction Design", "Smart Sensors", "Shipped"]
-  },
-  {
-    id: "ai-insurance-claims",
-    code: "ARCHIVE_ID: FINTECH-CLAIMS-05",
-    tabLabel: "#05 CLAIMS.AI",
-    tabColor: "var(--neo-orange)",
-    stamp: "TOP SECRET // B2B PROTOTYPE",
-    stampBg: "var(--neo-orange)",
-    title: "AI Automated Insurance Claim Processing",
-    challenge: "Cần xây dựng công cụ thẩm định tự động đa phương thức phục vụ thẩm định viên bảo hiểm với độ minh bạch tuyệt đối về chứng cứ và bảng điểm rủi ro.",
-    img: "assets/fintech.png",
-    metrics: [
-      { val: "10x", label: "Thẩm Định Nhanh" },
-      { val: "B2B", label: "Enterprise Ready" },
-      { val: "Seed", label: "Pitch Ready" }
-    ],
-    tags: ["AI-Native", "B2B Platform", "Investor Prototype"]
+function getStudioFileMeta(p, index) {
+  const pid = (p.id || "").toLowerCase();
+  const num = String(index + 1).padStart(2, "0");
+  
+  if (pid.includes("tasksync")) {
+    return {
+      fileName: `${num}_TaskSync.app`,
+      badge: "LIVE SHIPPED",
+      badgeBg: "var(--neo-cyan)",
+      badgeColor: "#000000",
+      sub: "All-in-One Team & Work Management"
+    };
+  } else if (pid.includes("explora")) {
+    return {
+      fileName: `${num}_Explora.sys`,
+      badge: "B2B IDE",
+      badgeBg: "var(--neo-yellow)",
+      badgeColor: "#000000",
+      sub: "Biotech Cancer R&D Workspace"
+    };
+  } else if (pid.includes("mira")) {
+    return {
+      fileName: `${num}_MiraAI.lab`,
+      badge: "WEARABLE",
+      badgeBg: "var(--neo-pink)",
+      badgeColor: "#000000",
+      sub: "Pregnancy Wearable Nutrition Twin"
+    };
+  } else if (pid.includes("manage")) {
+    return {
+      fileName: `${num}_SiemensManage.cad`,
+      badge: "SHIPPED",
+      badgeBg: "var(--neo-green)",
+      badgeColor: "#000000",
+      sub: "3D Sensor Floorplan System"
+    };
+  } else if (pid.includes("claim") || pid.includes("insurance")) {
+    return {
+      fileName: `${num}_AIClaims.b2b`,
+      badge: "PROTOTYPE",
+      badgeBg: "var(--neo-orange)",
+      badgeColor: "#000000",
+      sub: "Automated Policy Verification Engine"
+    };
+  } else if (pid.includes("consumer") || pid.includes("research")) {
+    return {
+      fileName: `${num}_AIResearch.app`,
+      badge: "AI SPECIMEN",
+      badgeBg: "var(--neo-purple)",
+      badgeColor: "#000000",
+      sub: "Expert Data Collection Platform"
+    };
+  } else {
+    return {
+      fileName: `${num}_${(p.id || "case").replace(/[^a-zA-Z0-9]/g, "")}.app`,
+      badge: "CASE",
+      badgeBg: "var(--bg-card)",
+      badgeColor: "var(--text-main)",
+      sub: (p.tags && p.tags[0]) || p.client || "Product Design Case"
+    };
   }
-];
+}
 
-function selectDossierFolder(index, event) {
-  if (event) {
-    event.stopPropagation();
+function renderStudioSidebarItems() {
+  return activeProjects.map((p, idx) => {
+    const meta = getStudioFileMeta(p, idx);
+    const isActive = idx === currentStudioProjectIndex;
+    return `
+      <div class="studio-file-item ${isActive ? 'active' : ''}" data-index="${idx}" onclick="selectStudioProject(${idx})">
+        <div class="studio-file-top-row">
+          <span class="studio-file-name"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg> ${meta.fileName}</span>
+          <span class="studio-file-badge" style="background:${meta.badgeBg}; color:${meta.badgeColor};">${meta.badge}</span>
+        </div>
+        <div class="studio-file-sub">${meta.sub}</div>
+      </div>
+    `;
+  }).join("");
+}
+
+function renderStudioViewportHtml(p) {
+  if (!p) return "";
+  const isFlagship = (p.id || "").toLowerCase().includes("tasksync");
+  const screens = (p.peekScreens && p.peekScreens.length > 0)
+    ? p.peekScreens
+    : [{ label: "Overview", src: p.image_url || p.image, tag: "MAIN VIEW", desc: p.title }];
+  
+  if (currentStudioScreenIndex >= screens.length) {
+    currentStudioScreenIndex = 0;
   }
-  if (index < 0) index = DOSSIER_PROJECTS.length - 1;
-  if (index >= DOSSIER_PROJECTS.length) index = 0;
-  currentDossierIndex = index;
-  renderProjects();
+  const activeScreen = screens[currentStudioScreenIndex];
+
+  // Metrics HUD
+  const metricsHtml = (p.metrics && p.metrics.length > 0) ? `
+    <div class="studio-metrics-row">
+      ${p.metrics.map(m => `
+        <div class="studio-metric-card">
+          <div class="studio-metric-val">${m.val}</div>
+          <div class="studio-metric-lbl">${m.label}</div>
+        </div>
+      `).join("")}
+    </div>
+  ` : "";
+
+  // Screen Switcher Tabs
+  const screenTabsHtml = screens.length > 1 ? `
+    <div class="studio-screen-tabs" onclick="event.stopPropagation()">
+      ${screens.map((s, si) => `
+        <button type="button" class="studio-tab-btn ${si === currentStudioScreenIndex ? 'active' : ''}" onclick="switchStudioScreen(${si}, this, event)">
+          <span>${formatScreenLabel(s.label)}</span>
+        </button>
+      `).join("")}
+    </div>
+  ` : "";
+
+  return `
+    <div>
+      <div class="studio-vp-meta-row">
+        ${isFlagship ? '<span class="studio-vp-pill highlight">✦ FLAGSHIP CASE STUDY</span>' : ''}
+        <span class="studio-vp-pill">CLIENT: ${p.client || "Client"}</span>
+        <span class="studio-vp-pill">ROLE: ${p.role || "Product Designer"}</span>
+        <span class="studio-vp-pill">${p.year || "Shipped"}</span>
+      </div>
+
+      <h2 class="studio-vp-title">${p.title}</h2>
+      <p class="studio-vp-desc">${p.summary}</p>
+
+      <!-- Interactive Screen Stage -->
+      <div class="studio-screen-stage">
+        <div class="studio-screen-container" onclick="handleCardClick('${p.id}', event)" title="Click để mở chi tiết Case Study">
+          <img id="studio-screen-img" src="${activeScreen.src}" alt="${activeScreen.label || p.title}" class="studio-screen-img" loading="lazy">
+        </div>
+        ${screenTabsHtml}
+      </div>
+
+      <!-- Business & Design Impact Metrics HUD -->
+      ${metricsHtml}
+    </div>
+
+    <!-- Bottom Action Row -->
+    <div class="studio-action-row">
+      <div class="studio-tags-wrap">
+        ${(p.tags || []).map(t => `<span class="studio-tag-pill">${t}</span>`).join("")}
+      </div>
+
+      <button type="button" class="studio-cta-btn" onclick="handleCardClick('${p.id}', event)">
+        <span>EXPLORE CASE STUDY</span>
+        <span class="btn-arrow"><svg class="btn-arrow-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17l10-10M7 7h10v10"/></svg></span>
+      </button>
+    </div>
+  `;
 }
 
 function renderProjects() {
@@ -1302,88 +1357,112 @@ function renderProjects() {
   if (countBadge) {
     const countSpan = countBadge.querySelector(".all-btn-count");
     if (countSpan) {
-      countSpan.textContent = `(${String(PROJECTS_DATA.length).padStart(2, "0")})`;
+      countSpan.textContent = `(${String(activeProjects.length).padStart(2, "0")})`;
     }
   }
 
-  const d = DOSSIER_PROJECTS[currentDossierIndex];
+  if (currentStudioProjectIndex >= activeProjects.length) {
+    currentStudioProjectIndex = 0;
+  }
 
-  // Render Folder Tabs
-  const tabsHtml = DOSSIER_PROJECTS.map((item, idx) => {
-    const isActive = idx === currentDossierIndex ? "active" : "";
-    return `
-      <div class="folder-tab ${isActive}" onclick="selectDossierFolder(${idx}, event)" role="tab" aria-selected="${idx === currentDossierIndex}">
-        <span class="tab-color-mark" style="background:${item.tabColor};"></span>
-        <span>📁 ${item.tabLabel}</span>
-      </div>
-    `;
-  }).join("");
-
-  // Render Metrics
-  const metricsHtml = d.metrics.map(m => `
-    <div class="folder-metric-card">
-      <div class="folder-metric-val">${m.val}</div>
-      <div class="folder-metric-lbl">${m.label}</div>
-    </div>
-  `).join("");
-
-  // Render Tags
-  const tagsHtml = d.tags.map(t => `<span class="spec-tag-pill">${t}</span>`).join("");
+  const p = activeProjects[currentStudioProjectIndex];
+  if (!p) return;
 
   container.innerHTML = `
-    <div class="dossier-wrap" id="dossier-wrap">
-      <!-- Physical Manila Folder Tabs -->
-      <div class="folder-tabs-header" role="tablist">
-        ${tabsHtml}
+    <div class="studio-window" id="studio-window">
+      <!-- Retro Window Top Bar -->
+      <div class="studio-os-bar">
+        <div class="studio-window-dots">
+          <span class="studio-dot dot-red"></span>
+          <span class="studio-dot dot-yellow"></span>
+          <span class="studio-dot dot-green"></span>
+        </div>
+        <div class="studio-os-slug">studio.exe // projects_explorer [workspace active]</div>
+        <div class="studio-os-status">
+          <span class="studio-status-pill" id="studio-status-pill">${String(activeProjects.length).padStart(2, "0")} CASES LOADED</span>
+        </div>
       </div>
 
-      <!-- Manila Folder Body Card -->
-      <article class="folder-body-card" id="dossier-folder-body">
-        <div class="folder-stamp" style="background:${d.stampBg};">${d.stamp}</div>
-
-        <div class="folder-content-grid">
-          <!-- Left Column: Specs, Challenge & Actions -->
-          <div class="folder-left-spec">
-            <span class="spec-header-code">${d.code}</span>
-            <h3 class="spec-title">${d.title}</h3>
-            <div class="spec-tags-row">${tagsHtml}</div>
-
-            <div class="spec-challenge-box">
-              <strong>Thách thức chính:</strong> ${d.challenge}
-            </div>
-
-            <div class="folder-metrics-row">
-              ${metricsHtml}
-            </div>
-
-            <div class="folder-actions-row">
-              <button type="button" class="folder-open-cta" onclick="handleCardClick('${d.id}', event)">
-                <span>MỞ HỒ SƠ CASE STUDY</span>
-                <svg class="btn-arrow-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17l10-10M7 7h10v10"/></svg>
-              </button>
-
-              <div class="folder-nav-btns">
-                <button type="button" class="folder-nav-btn" onclick="selectDossierFolder(${currentDossierIndex - 1}, event)" aria-label="Folder trước" title="Folder trước">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-                </button>
-                <button type="button" class="folder-nav-btn" onclick="selectDossierFolder(${currentDossierIndex + 1}, event)" aria-label="Folder sau" title="Folder sau">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                </button>
-              </div>
-            </div>
+      <!-- Studio Dual-Pane Body -->
+      <div class="studio-body">
+        <!-- Left: Project Directory Explorer -->
+        <aside class="studio-sidebar" aria-label="Project Directory">
+          <div class="studio-sidebar-header">
+            <span>PROJECT DIRECTORY</span>
+            <span>TYPE</span>
           </div>
-
-          <!-- Right Column: Evidence Visual Plate -->
-          <div class="folder-right-visual" onclick="handleCardClick('${d.id}', event)" title="Bấm để mở Case Study chi tiết">
-            <div class="folder-paper-clip"></div>
-            <img src="${d.img}" alt="${d.title}" loading="lazy">
-            <div class="folder-evidence-tag">EVIDENCE SPECIMEN ✦ BẤM ĐỂ PHÓNG TO ↗</div>
+          <div class="studio-file-list" id="studio-file-list">
+            ${renderStudioSidebarItems()}
           </div>
-        </div>
-      </article>
+        </aside>
+
+        <!-- Right: Studio Live Viewport Stage -->
+        <main class="studio-viewport" id="studio-viewport" aria-live="polite">
+          ${renderStudioViewportHtml(p)}
+        </main>
+      </div>
     </div>
   `;
+
+  init3DParallaxTilt();
 }
+
+window.selectStudioProject = function(idx) {
+  if (idx < 0 || idx >= activeProjects.length) return;
+  currentStudioProjectIndex = idx;
+  currentStudioScreenIndex = 0;
+
+  // Update active file item in sidebar
+  document.querySelectorAll(".studio-file-item").forEach((el, i) => {
+    if (i === idx) {
+      el.classList.add("active");
+    } else {
+      el.classList.remove("active");
+    }
+  });
+
+  const vp = document.getElementById("studio-viewport");
+  if (vp) {
+    const p = activeProjects[idx];
+    vp.style.opacity = "0";
+    vp.style.transform = "translateY(5px)";
+    setTimeout(() => {
+      vp.innerHTML = renderStudioViewportHtml(p);
+      vp.style.transition = "opacity 0.18s ease, transform 0.18s ease";
+      vp.style.opacity = "1";
+      vp.style.transform = "translateY(0)";
+      init3DParallaxTilt();
+    }, 100);
+  }
+};
+
+window.switchStudioScreen = function(screenIndex, btn, event) {
+  if (event) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+  currentStudioScreenIndex = screenIndex;
+  document.querySelectorAll(".studio-tab-btn").forEach(b => b.classList.remove("active"));
+  if (btn) btn.classList.add("active");
+
+  const p = activeProjects[currentStudioProjectIndex];
+  if (!p) return;
+  const screens = (p.peekScreens && p.peekScreens.length > 0)
+    ? p.peekScreens
+    : [{ src: p.image_url || p.image }];
+  const s = screens[screenIndex];
+  if (!s) return;
+
+  const img = document.getElementById("studio-screen-img");
+  if (img) {
+    img.style.opacity = "0";
+    setTimeout(() => {
+      img.src = s.src;
+      img.alt = s.label || p.title;
+      img.style.opacity = "1";
+    }, 120);
+  }
+};
 
 let activeFullscreenProjectId = null;
 let lastClickedCardElement = null;
@@ -2011,10 +2090,10 @@ function openCaseStudyFullscreen(id, event) {
   // Locate the clicked card element (supports both Bento and Rectangular cards)
   let card = null;
   if (event && event.target) {
-    card = event.target.closest('.folder-body-card') || event.target.closest('.folder-right-visual') || event.target.closest('.rect-project-card') || event.target.closest('.bento-card') || event.target.closest('article');
+    card = event.target.closest('.studio-screen-container') || event.target.closest('.studio-window') || event.target.closest('.folder-body-card') || event.target.closest('.rect-project-card') || event.target.closest('.bento-card') || event.target.closest('article');
   }
   if (!card) {
-    card = document.getElementById('dossier-folder-body') || document.getElementById(`rect-card-${id}`) || document.getElementById(id) || document.querySelector(`[onclick*="${id}"]`);
+    card = document.getElementById('studio-window') || document.getElementById('dossier-folder-body') || document.getElementById(`rect-card-${id}`) || document.getElementById(id) || document.querySelector(`[onclick*="${id}"]`);
   }
 
   if (card) {
